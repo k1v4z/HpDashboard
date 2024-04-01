@@ -1,9 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
-//const router = require('./route/web');
+const router = require('./route/web/web');
 const setViewEngine = require('./config/ViewEngine');
-////const bodyParser = require('body-parser');
+const bodyParser = require('body-parser');
 
 //const cookieParser = require('cookie-parser');
 const app = express()
@@ -21,15 +21,10 @@ setViewEngine(app);
 //app.use(bodyParser.json());
 //app.use(bodyParser.urlencoded({ extended: true }));
 
-//app.use(router);
+app.use(router);
 // app.use((req, res) => {
 //     res.send('404 NOT Found');
 // })
-
-
-app.get('/', (req, res) => {
-    res.send('hello');
-});
 
 app.listen(port, localhost, () => {
     console.log(`http://${localhost}:${port}`);
