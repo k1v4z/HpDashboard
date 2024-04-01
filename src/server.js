@@ -2,7 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 //const router = require('./route/web');
-//const setViewEngine = require('./config/ViewEngine');
+const setViewEngine = require('./config/ViewEngine');
 ////const bodyParser = require('body-parser');
 
 //const cookieParser = require('cookie-parser');
@@ -14,7 +14,7 @@ const localhost = process.env.HOST;
 //app.use(cookieParser());
 
 //config view engine
-//setViewEngine(app);
+setViewEngine(app);
 //initApiRoute(app);
 
 //config req.body
@@ -29,7 +29,8 @@ const localhost = process.env.HOST;
 
 app.get('/', (req, res) => {
     res.send('hello');
-})
+});
+
 app.listen(port, localhost, () => {
     console.log(`http://${localhost}:${port}`);
 })
