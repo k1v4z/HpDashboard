@@ -1,4 +1,4 @@
-const { sequelize_sqlserver } = require('../../config/Sequelize');
+const { sequelize_mysql } = require('../../config/Sequelize');
 const { DataTypes } = require('sequelize');
 
 // Define model for employee table
