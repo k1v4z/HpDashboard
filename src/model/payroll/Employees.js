@@ -43,4 +43,4 @@ const Employee = sequelize_mysql.define('employee', {
     });
 
 
-module.exports = PayRate;
+module.exports = Employee;
