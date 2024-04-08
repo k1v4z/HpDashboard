@@ -6,7 +6,6 @@ const Personal = sequelize_sqlserver.define('Personal', {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-
     First_Name: DataTypes.STRING,
     Middle_Initial: DataTypes.STRING,
     Address1: DataTypes.STRING,
@@ -23,6 +22,6 @@ const Personal = sequelize_sqlserver.define('Personal', {
     Shareholder_Status: DataTypes.BOOLEAN,
     Benefit_Plans: DataTypes.INTEGER,
     Ethnicity: DataTypes.STRING
-}, { sequelize_sqlserver, modelName: 'Personal', tableName: 'Personals' });
+}, { sequelize_sqlserver, modelName: 'Personal', tableName: 'Personal' });
 
 module.exports = Personal
