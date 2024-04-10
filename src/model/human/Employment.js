@@ -6,9 +6,9 @@ const Employment = sequelize_sqlserver.define('Employment', {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    Employment_Status: DataTypes.DATE,
-    Hire_Date: DataTypes.STRING,
-    Workers_Comp_Code: DataTypes.INTEGER,
+    Employment_Status: DataTypes.STRING,
+    Hire_Date: DataTypes.DATE,
+    Workers_Comp_Code: DataTypes.STRING,
     Termination_Date: DataTypes.DATE,
     Rehire_Date: DataTypes.DATE,
     Last_Review_Date: DataTypes.DATE
