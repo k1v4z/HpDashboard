@@ -1,5 +1,6 @@
 const { sequelize_mysql } = require('../../config/Sequelize');
 const { DataTypes } = require('sequelize');
+const PayRate = require('./Pay_rates');
 
 // Define model for employee table
 const Employee = sequelize_mysql.define('employee', {
@@ -35,12 +36,10 @@ const Employee = sequelize_mysql.define('employee', {
     'Paid Last Year': {
         type: DataTypes.DECIMAL,
     },
-},
-    {
-        sequelize_mysql,
-        modelName: 'Employee',
-        tableName: 'employee'
-    });
+}, { sequelize_mysql, modelName: 'Employee', tableName: 'employee' });
 
+//define association
+Employee.hasOne(PayRate,{foreignKey: 'idPay Rates'});
+PayRate.belongsTo(Employee);
 
 module.exports = Employee;
