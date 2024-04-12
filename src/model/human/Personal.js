@@ -23,10 +23,7 @@ const Personal = sequelize_sqlserver.define('PERSONAL', {
     CURRENT_MARITAL_STATUS: DataTypes.STRING,
     ETHNICITY: DataTypes.STRING,
     SHAREHOLDER_STATUS: DataTypes.SMALLINT,
-    BENEFIT_PLAN_ID: DataTypes.NUMBER
-}, {
-    tableName: 'PERSONAL',
-    timestamps: false 
-});
+    BENEFIT_PLAN_ID: DataTypes.INTEGER
+}, { sequelize_sqlserver, modelName: 'PERSONAL', tableName: 'PERSONAL' });
 
 module.exports = Personal
