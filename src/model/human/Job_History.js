@@ -3,32 +3,27 @@ const { DataTypes } = require('sequelize');
 const Personal = require('./Personal');
 const Employment = require('./Employment');
 
-const Job_History = sequelize_sqlserver.define('Job_History',{
-    ID: {
+const Job_History = sequelize_sqlserver.define('JOB_HISTORY', {
+    JOB_HISTORY_ID: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    Employee_ID: DataTypes.INTEGER,
-    Department: DataTypes.STRING,
-    Division: DataTypes.STRING,
-    Start_Date: DataTypes.DATE,
-    End_Date: DataTypes.DATE,
-    Job_Title: DataTypes.STRING,
-    Supervisor: DataTypes.INTEGER,
-    Job_Category: DataTypes.STRING,
-    Location: DataTypes.STRING,
-    Departmen_Code: DataTypes.INTEGER,
-    Salary_Type: DataTypes.INTEGER,
-    Pay_Period: DataTypes.STRING,
-    Hours_per_Week: DataTypes.INTEGER,
-    Hazardous_Training: DataTypes.BOOLEAN
-}, { sequelize_sqlserver, modelName: 'Job_History', tableName: 'Job_History'});
+    EMPLOYMENT_ID: DataTypes.INTEGER,
+    DEPARTMENT: DataTypes.STRING,
+    DIVISION: DataTypes.STRING,
+    FROM_DATE: DataTypes.DATE,
+    THRU_DATE: DataTypes.DATE,
+    JOB_TITLE: DataTypes.STRING,
+    SUPERVISOR: DataTypes.STRING,
+    LOCATION: DataTypes.STRING,
+    TYPE_OF_WORK: DataTypes.SMALLINT
+}, { sequelize_sqlserver, modelName: 'JOB_HISTORY', tableName: 'JOB_HISTORY' });
 
 //define association
-Personal.hasMany(Job_History,{foreignKey: 'Employee_ID'});
-Job_History.belongsTo(Personal,{foreignKey: 'Employee_ID'});
+Personal.hasMany(Job_History, { foreignKey: 'Employee_ID' });
+Job_History.belongsTo(Personal, { foreignKey: 'Employee_ID' });
 
-Personal.hasOne(Employment,{foreignKey: 'Employee_ID'});
-Employment.belongsTo(Personal,{foreignKey: 'Employee_ID'});
+Personal.hasOne(Employment, { foreignKey: 'Employee_ID' });
+Employment.belongsTo(Personal, { foreignKey: 'Employee_ID' });
 
 module.exports = Job_History
