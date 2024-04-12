@@ -1,17 +1,20 @@
 const { sequelize_sqlserver } = require('../../config/Sequelize');
 const { DataTypes } = require('sequelize');
 
-const Employment = sequelize_sqlserver.define('Employment', {
-    Employee_ID: {
+const Employment = sequelize_sqlserver.define('EMPLOYMENT', {
+    EMPLOYMENT_ID: {
         type: DataTypes.INTEGER,
         primaryKey: true
     },
-    Employment_Status: DataTypes.STRING,
-    Hire_Date: DataTypes.DATE,
-    Workers_Comp_Code: DataTypes.STRING,
-    Termination_Date: DataTypes.DATE,
-    Rehire_Date: DataTypes.DATE,
-    Last_Review_Date: DataTypes.DATE
-  }, { sequelize_sqlserver, modelName: 'Employment', tableName: 'Employment' });
+    EMPLOYMENT_CODE: DataTypes.STRING,
+    EMPLOYMENT_STATUS: DataTypes.CHAR,
+    HIRE_DATE_FOR_WORKING: DataTypes.DATE,
+    WORKERS_COMP_CODE: DataTypes.CHAR,
+    TERMINATION_DATE: DataTypes.DATE,
+    REHIRE_DATE_FOR_WORKING: DataTypes.DATE,
+    LAST_REVIEW_DATE: DataTypes.DATE,
+    NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH: DataTypes.INTEGER,
+    PERSONAL_ID: DataTypes.INTEGER
+}, { sequelize_sqlserver, modelName: 'EMPLOYMENT', tableName: 'EMPLOYMENT' });
 
-  module.exports = Employment;
+module.exports = Employment;
