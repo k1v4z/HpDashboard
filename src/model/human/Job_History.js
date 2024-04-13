@@ -19,11 +19,5 @@ const Job_History = sequelize_sqlserver.define('JOB_HISTORY', {
     TYPE_OF_WORK: DataTypes.SMALLINT
 }, { sequelize_sqlserver, modelName: 'JOB_HISTORY', tableName: 'JOB_HISTORY' });
 
-//define association
-Personal.hasMany(Job_History, { foreignKey: 'Employee_ID' });
-Job_History.belongsTo(Personal, { foreignKey: 'Employee_ID' });
-
-Personal.hasOne(Employment, { foreignKey: 'Employee_ID' });
-Employment.belongsTo(Personal, { foreignKey: 'Employee_ID' });
 
 module.exports = Job_History
