@@ -1,35 +1,73 @@
-const Benefit_Plans = require('../model/human/Benefit_Plans')
 const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
-const Employee = require('../model/payroll/Employees')
 const { sequelize_mysql } = require('../config/Sequelize')
 const { QueryTypes } = require('sequelize');
 
 function mergeObjectsById(...objects) {
-    const mergedObject = {};
+    const mergedArray = [];
 
     objects.forEach(objArray => {
         objArray.forEach(obj => {
             const id = obj.PERSONAL_ID || obj.idEmployee || obj.EMPLOYMENT_ID; // Lấy ID
 
-            if (!mergedObject[id]) {
-                mergedObject[id] = {}; // Tạo một object mới nếu chưa tồn tại
+            // Tạo một object mới và thêm vào mảng mergedArray
+            const mergedObj = { ...obj };
+            const existingObjIndex = mergedArray.findIndex(item => item.PERSONAL_ID === id || item.idEmployee === id || item.EMPLOYMENT_ID === id);
+            if (existingObjIndex !== -1) {
+                Object.assign(mergedArray[existingObjIndex], obj); // Merge object vào object đã tồn tại
+            } else {
+                mergedArray.push(mergedObj);
             }
-
-            Object.assign(mergedObject[id], obj); // Merge object vào object đã tồn tại
         });
     });
 
-    return mergedObject;
+    return mergedArray;
+}
+
+function filterObjects(Employees, choiceYear, choice, choiceValue) {
+    // Lọc các đối tượng dựa trên điều kiện
+    const filteredObjects = Employees.filter(e => {
+        // Chọn loại
+        let choiceValueToCheck;
+        switch (choice) {
+            case 'CURRENT_GENDER':
+                choiceValueToCheck = e.CURRENT_GENDER;
+                break;
+            case 'ETHNICITY':
+                choiceValueToCheck = e.ETHNICITY;
+                break;
+            case 'SHAREHOLDER_STATUS':
+                choiceValueToCheck = e.SHAREHOLDER_STATUS;
+                break;
+            case 'TYPE_OF_WORK':
+                choiceValueToCheck = e.TYPE_OF_WORK;
+                break;
+            default:
+                choiceValueToCheck = null;
+        }
+        return choiceValueToCheck === choiceValue;
+    });
+
+    // Nếu choiceYear là Paid To Date, loại bỏ trường Paid Last Year
+    if (choiceYear === 'Paid To Date') {
+        filteredObjects.forEach(obj => delete obj['Paid Last Year']);
+    }
+    // Nếu choiceYear là Paid Last Year, loại bỏ trường Paid To Date
+    else if (choiceYear === 'Paid Last Year') {
+        filteredObjects.forEach(obj => delete obj['Paid To Date']);
+    }
+
+    // Trả về mảng các đối tượng đã lọc
+    return filteredObjects;
 }
 
 // Tạo object chứa bảng employee
 const getVacationDays = async () => {
     //Temp hash code change dynamic later
-    const choice_year = 'Paid To Date'; //step 1
-    const choice = 'Employment_Status'; //Gender or Ethinicity or Shareholder or type of work, step 2
-    const choiceValue = 'Part-Time'; // value of option, step 3
+    const choiceYear = 'Paid Last Year'; //step 1
+    const choice = 'ETHNICITY'; //Gender or Ethinicity or Shareholder or type of work, step 2
+    const choiceValue = 'Asian     '; // value of option, step 3
 
     const EmployeeWithVacationDays = await sequelize_mysql.query(
         `SELECT \`idEmployee\`, \`Vacation Days\`, \`Paid To Date\`, \`Paid Last Year\` 
@@ -59,12 +97,11 @@ const getVacationDays = async () => {
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
 
-    
-    const mergedObject = mergeObjectsById(EmployeeWithVacationDays, Personals, Employments, EmploymentStatus);
-    console.log(mergedObject);
 
+    const AllVacationDaysEmployees = mergeObjectsById(EmployeeWithVacationDays, Personals, Employments, EmploymentStatus);
 
-    
+    const result = filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue);
+    console.log(result);
 }
 
 getVacationDays();
