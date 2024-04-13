@@ -1,6 +1,8 @@
+require('dotenv').config({ path: '../../../.env' })
 const { sequelize_sqlserver } = require('../../config/Sequelize');
-const { DataTypes } = require('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 const Job_History = require('./Job_History');
+const Personal = require('./Personal');
 
 const Employment = sequelize_sqlserver.define('EMPLOYMENT', {
     EMPLOYMENT_ID: {
