@@ -18,7 +18,5 @@ const Employment = sequelize_sqlserver.define('EMPLOYMENT', {
     PERSONAL_ID: DataTypes.INTEGER
 }, { sequelize_sqlserver, modelName: 'EMPLOYMENT', tableName: 'EMPLOYMENT' });
 
-// Employment.hasMany(Job_History, { foreignKey: 'EMPLOYMENT_ID' });
-// Job_History.belongsTo(Employment, { foreignKey: 'EMPLOYMENT_ID' });
 
 module.exports = Employment;
