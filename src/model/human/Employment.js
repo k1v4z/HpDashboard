@@ -1,6 +1,8 @@
+require('dotenv').config({ path: '../../../.env' })
 const { sequelize_sqlserver } = require('../../config/Sequelize');
-const { DataTypes } = require('sequelize');
+const { Sequelize, Model, DataTypes } = require('sequelize');
 const Job_History = require('./Job_History');
+const Personal = require('./Personal');
 
 const Employment = sequelize_sqlserver.define('EMPLOYMENT', {
     EMPLOYMENT_ID: {
@@ -18,7 +20,5 @@ const Employment = sequelize_sqlserver.define('EMPLOYMENT', {
     PERSONAL_ID: DataTypes.INTEGER
 }, { sequelize_sqlserver, modelName: 'EMPLOYMENT', tableName: 'EMPLOYMENT' });
 
-Employment.hasMany(Job_History, { foreignKey: 'EMPLOYMENT_ID' });
-Job_History.belongsTo(Employment, { foreignKey: 'EMPLOYMENT_ID' });
 
 module.exports = Employment;
