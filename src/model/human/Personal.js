@@ -1,5 +1,7 @@
 const { sequelize_sqlserver } = require('../../config/Sequelize');
 const { DataTypes } = require('sequelize');
+const Employment = require('./Employment');
+const Benefit_Plans = require('./Benefit_Plans');
 
 const Personal = sequelize_sqlserver.define('PERSONAL', {
     PERSONAL_ID: {
@@ -25,5 +27,8 @@ const Personal = sequelize_sqlserver.define('PERSONAL', {
     SHAREHOLDER_STATUS: DataTypes.SMALLINT,
     BENEFIT_PLAN_ID: DataTypes.INTEGER
 }, { sequelize_sqlserver, modelName: 'PERSONAL', tableName: 'PERSONAL' });
+
+Personal.hasMany(Employment, { foreignKey:'PERSONAL_ID'});
+Employment.belongsTo(Personal, { foreignKey: 'PERSONAL_ID'});
 
 module.exports = Personal
