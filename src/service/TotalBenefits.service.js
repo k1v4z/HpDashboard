@@ -1,33 +1,44 @@
 const { sequelize_mysql } = require("../config/Sequelize");
 const { checkPersonalWhere, checkEmploymentWhere } = require("../helper/CheckCondition.helper");
+const Benefit_Plans = require("../model/human/Benefit_Plans");
 const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
 const { QueryTypes } = require('sequelize');
 
-const CalculateTotalBenefits = async () => {
+const getBenefitEachPersonal = async () => {
 
     //Temp hash code change dynamic later
-    const department = 'Marketing'; //step1 
+    const department = 'Finance'; //step1 
     const choice_year = 'Paid To Date'; //step 2
-    const choice = 'Employment_Status'; //Gender or Ethinicity or Shareholder status option 3
-    const choiceValue = 'Part-Time';
+    const choice = 'CURRENT_GENDER'; //Gender or Ethinicity or Shareholder status option 3
+    const choiceValue = 'Female';
 
     let Total_Benefit = 0;
 
-    const humans = await Job_History.findAll({
-        attributes: ['Employee_ID', 'Department'],
-        where: { Department: department },
+    const humans = await Personal.findAll({
+        attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME',
+            'SHAREHOLDER_STATUS', 'ETHNICITY'],
+        where: checkPersonalWhere(choice, choiceValue),
         include: [{
-            model: Personal,
-            attributes: ['First_Name', 'Last_Name', 'Middle_Initial'],
-            where: checkPersonalWhere(choice, choiceValue),
+            model: Benefit_Plans,
+            attributes: ['DEDUCTABLE'],
+            required: true,
+            right: true
+        }, {
+            model: Employment,
+            attributes: ['EMPLOYMENT_STATUS'],
+            required: true,
+            right: true,
+            where: checkEmploymentWhere(choice, choiceValue),
             include: [{
-                model: Employment,
-                attributes: ['Employment_Status'],
-                where: checkEmploymentWhere(choice, choiceValue)
+                model: Job_History,
+                attributes: ['DEPARTMENT'],
+                where: { DEPARTMENT: department },
+                required: true,
+                right: true
             }]
-        }]
+        }],
     }).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
@@ -41,18 +52,22 @@ const CalculateTotalBenefits = async () => {
     ).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
-
-    const benefit = humans.map((human, index) => {
-        human.fullname = human.Personal.First_Name + ' ' + human.Personal.Middle_Initial + ' ' + human.Personal.Last_Name;
-        const tempAmount = payroll[index]['Pay Amount'] * payroll[index][`${choice_year}`];
-        human.Total_benefit = tempAmount - (tempAmount * payroll[index]['Tax Percentage'] / 100);
-        Total_Benefit += human.Total_benefit;
-        return human;
-    });
-
-    console.log(Total_Benefit);
-    console.log(benefit);
+    console.log(humans);
+    console.log(mapping(humans, payroll));
 }
 
+const mapping = (humans, payrolls) => {
+    //map personal with payroll following id
+    const benefit_each_person = [];
+    let indexhumans = 0;
+    payrolls.forEach((payroll) => {
+        if (payroll['idEmployee'] == humans[indexhumans].PERSONAL_ID) {
+            benefit_each_person.push(humans[indexhumans]);
+            indexhumans++;
+        }
+    });
 
-CalculateTotalBenefits();
+    return benefit_each_person;
+}
+
+getBenefitEachPersonal();
