@@ -28,7 +28,7 @@ const Personal = sequelize_sqlserver.define('PERSONAL', {
     BENEFIT_PLAN_ID: DataTypes.INTEGER
 }, { sequelize_sqlserver, modelName: 'PERSONAL', tableName: 'PERSONAL' });
 
-Personal.hasMany(Employment, { foreignKey:'PERSONAL_ID'});
-Employment.belongsTo(Personal, { foreignKey: 'PERSONAL_ID'});
+// Personal.hasMany(Employment, { foreignKey:'PERSONAL_ID'});
+// Employment.belongsTo(Personal, { foreignKey: 'PERSONAL_ID'});
 
 module.exports = Personal
