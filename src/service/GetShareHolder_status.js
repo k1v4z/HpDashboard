@@ -28,3 +28,5 @@ getAllStatusShareholders()
     .catch(error => {
         console.error('Error:', error);
     });
+    module.exports= getAllStatusShareholders()
+
