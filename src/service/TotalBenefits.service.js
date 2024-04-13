@@ -1,15 +1,18 @@
 const { sequelize_mysql } = require("../config/Sequelize");
 const { checkPersonalWhere, checkEmploymentWhere } = require("../helper/CheckCondition.helper");
+const defineAssociation = require("../model/association/Association");
 const Benefit_Plans = require("../model/human/Benefit_Plans");
 const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
 const { QueryTypes } = require('sequelize');
 
+defineAssociation();
+
 const getBenefitEachPersonal = async () => {
 
     //Temp hash code change dynamic later
-    const department = 'Finance'; //step1 
+    const department = 'Sales'; //step1 
     const choice_year = 'Paid To Date'; //step 2
     const choice = 'CURRENT_GENDER'; //Gender or Ethinicity or Shareholder status option 3
     const choiceValue = 'Female';
@@ -52,20 +55,20 @@ const getBenefitEachPersonal = async () => {
     ).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
-    console.log(humans);
-    console.log(mapping(humans, payroll));
+    console.log(mapping(humans, payroll,choice_year));
 }
 
-const mapping = (humans, payrolls) => {
+const mapping = (humans, payrolls,choice_year) => {
     //map personal with payroll following id
     const benefit_each_person = [];
-    let indexhumans = 0;
-    payrolls.forEach((payroll) => {
-        if (payroll['idEmployee'] == humans[indexhumans].PERSONAL_ID) {
-            benefit_each_person.push(humans[indexhumans]);
-            indexhumans++;
-        }
-    });
+    humans.forEach((human) => {
+        payrolls.forEach((payroll) => {
+            if(human.PERSONAL_ID == payroll['idEmployee']){
+                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human.BENEFIT_PLAN.DEDUCTABLE;
+                benefit_each_person.push(human);
+            }
+        })
+    })
 
     return benefit_each_person;
 }
