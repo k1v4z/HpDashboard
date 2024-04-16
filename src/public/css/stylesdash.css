@@ -663,25 +663,14 @@ thead {
 /* .content.alert-employees.active {
   display: block;
 } */
-.content.alert-birthday {
-  display: none;
-}
+
 .content.alert-birthday.active {
   display: block;
-}
-.content.alert-vacations__day {
-  display: none;
 }
 .content.alert-vacations__day.active {
   display: block;
 }
 
-.content.ui1,
-.content.ui2,
-.content.ui3,
-.content.ui4 {
-  display: none;
-}
 .dynamic-box {
   display: none;
 }

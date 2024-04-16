@@ -22,9 +22,9 @@ setViewEngine(app);
 //app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use(router);
-// app.use((req, res) => {
-//     res.send('404 NOT Found');
-// })
+app.use((req, res) => {
+    res.send('404 NOT Found');
+})
 
 app.listen(port, localhost, () => {
     console.log(`http://${localhost}:${port}`);
