@@ -1,13 +1,12 @@
 const { sequelize_sqlserver } = require("../config/Sequelize");
 const Personal = require("../model/human/Personal");
-const { Op } = require("sequelize");
 
 const defineAssociation = require("../model/association/Association");
 
 defineAssociation();
 
 const getEmployeesWithBirthdayThisMonth = async () => {
-    const currentMonth = new Date().getMonth() + 1; // Lấy tháng hiện tại (chú ý rằng tháng bắt đầu từ 0)
+    const currentMonth = new Date().getMonth() + 1; // Get current month (January = 0, ...)
 
     const getInfo = await Personal.findAll({
         where: sequelize_sqlserver.where(
