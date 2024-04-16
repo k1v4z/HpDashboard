@@ -26,19 +26,19 @@ const getBenefitEachPersonal = async () => {
         include: [{
             model: Benefit_Plans,
             attributes: ['DEDUCTABLE'],
-            required: true,
-            right: true
+            required: true, //inner join
+            right: true 
         }, {
             model: Employment,
             attributes: ['EMPLOYMENT_STATUS'],
             required: true,
-            right: true,
+            right: true, //no effect
             where: checkEmploymentWhere(choice, choiceValue),
             include: [{
                 model: Job_History,
                 attributes: ['DEPARTMENT'],
                 where: { DEPARTMENT: department },
-                required: true,
+                required: true, //inner join
                 right: true
             }]
         }],
@@ -64,7 +64,7 @@ const mapping = (humans, payrolls,choice_year) => {
     humans.forEach((human) => {
         payrolls.forEach((payroll) => {
             if(human.PERSONAL_ID == payroll['idEmployee']){
-                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human.BENEFIT_PLAN.DEDUCTABLE;
+                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human  .BENEFIT_PLAN.DEDUCTABLE;
                 benefit_each_person.push(human);
             }
         })

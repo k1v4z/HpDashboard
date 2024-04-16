@@ -1,5 +1,5 @@
 const checkPersonalWhere = (choice, value) => {
-    if (choice == 'CURRENT_ GENDER' || choice == 'ETHNICICTY' || choice == 'SHAREHOLDER_STATUS') {
+    if (choice == 'CURRENT_GENDER' || choice == 'ETHNICITY' || choice == 'SHAREHOLDER_STATUS') {
         return { [choice]: value };
     }
 
