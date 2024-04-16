@@ -1,0 +1,737 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  width: 100%;
+  height: 100%;
+  background: rgb(223, 218, 218);
+  display: grid;
+  place-items: center;
+}
+
+header {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  overflow: hidden;
+  background-color: rgba(255, 255, 255, 0.968);
+}
+
+header .navbar {
+  width: 15%;
+  box-shadow: 0px 3px 12px var(--color-box-shadow);
+  color: var(--color-main-text);
+  position: fixed;
+}
+
+header .main-content .header {
+  position: fixed;
+  width: 85%;
+  height: 70px;
+  background: rgba(223 251 241 / 99%);
+  display: flex;
+  top: 0;
+  left: 15.6%;
+  z-index: 9;
+}
+
+header .main-content {
+  padding-top: 70px;
+  width: 85%;
+  margin-left: 16%;
+}
+html::-webkit-scrollbar {
+  display: none;
+}
+header .navbar .logo {
+  width: 90%;
+  height: 70px;
+  margin: 5px 5px 0 10px;
+}
+
+header .navbar .logo img {
+  width: 100%;
+}
+
+header .navbar .menu {
+  margin-top: 30px;
+  margin-left: 10px;
+  width: 90%;
+  height: 100%;
+  padding-left: 0px;
+}
+
+header .navbar .menu li {
+  width: 100%;
+  margin-bottom: 40px;
+  display: flex;
+  align-items: center;
+  padding: 5px;
+  background-color: rgb(47, 45, 45);
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 700;
+  width: 100%;
+  font-size: 10px;
+}
+
+.alert {
+  position: relative;
+  /* height: 10px; */
+  background-color: #337ab7;
+  width: 100%;
+  display: none;
+}
+.alert.active {
+  display: block;
+  padding: 0px;
+  margin: 0px;
+}
+.title-alert {
+  padding-top: 10px;
+  display: block;
+  width: 100%;
+  height: 70px;
+  color: #e94646;
+  justify-content: center;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 900;
+  background-color: #666;
+  border-radius: 30px 0px;
+  background-color: #ddcbcb;
+  position: absolute;
+}
+.alert-box .box {
+  margin-top: 70px;
+  height: 555px;
+  overflow-x: auto;
+  padding: 0px 10px 2px 10px;
+}
+.alert-box .box li {
+  padding: 10px 5px 10px 5px;
+  margin: 5px;
+  background-color: #fff;
+  list-style: none;
+  font-weight: 400;
+  line-height: 25px;
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-style: italic;
+  border-radius: 4px;
+}
+.alert-box .box li:hover {
+  cursor: pointer;
+  font-weight: 700;
+  line-height: 35px;
+  background-color: rgba(7, 238, 246, 0.5);
+}
+.alert-box {
+  top: 45px;
+  right: 0;
+  position: fixed;
+  width: 537px;
+  height: 625px;
+  flex-shrink: 0;
+  background-color: rgba(175, 152, 152, 0.9);
+  z-index: 9999;
+  margin-right: 30px;
+  border-radius: 30px 0px 20px 20px;
+}
+.alert-box .box::-webkit-scrollbar {
+  display: none;
+}
+/* Logout */
+.container-box {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 9999;
+}
+
+.question-box {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  width: 576px;
+  height: 264px;
+  text-align: center;
+  text-transform: uppercase;
+  font-weight: 700;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.question {
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+}
+
+.option {
+  margin-top: 30px;
+  width: 150px;
+  padding: 10px 20px;
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option:hover {
+  background-color: #45a049;
+}
+
+.container-box.active {
+  display: block;
+}
+
+/*  */
+
+header .navbar .menu li:last-child {
+  margin-top: 25px;
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header .navbar .menu li img {
+  margin-right: 15px;
+}
+
+header .navbar .menu li:hover {
+  background-color: #12c2ce;
+  cursor: pointer;
+}
+
+.menu li.btn.active.n1 {
+  background-color: #12c2ce;
+}
+
+.menu li.btn.active {
+  background-color: #12c2ce;
+}
+
+header .main-content .name-project {
+  display: block;
+  text-transform: uppercase;
+  color: #13ccd8;
+  font-size: 45px;
+  font-weight: 700;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+header .main-content h2 {
+  color: #3823bb;
+  font-size: 25px;
+  font-weight: 700;
+  font-style: italic;
+}
+
+#alert-btn {
+  position: absolute;
+  top: 7px;
+  right: 30px;
+  cursor: pointer;
+  z-index: 999999;
+}
+.header .number-info {
+  position: absolute;
+  background-color: red;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  right: 32px;
+  top: 6px;
+}
+.dropbtn {
+  background: none;
+  color: black;
+  font-weight: 700;
+  font-style: italic;
+  padding: 16px;
+  font-size: 14px;
+  border: none;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+  border-radius: 10px 10px 0px 0px;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #f1f1f1;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+.dropdown .btn {
+  background-color: #77e8ec;
+  border-radius: 30px;
+  border: 1px solid black;
+  padding: 2px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 150px;
+}
+.dropdown .btn img {
+  width: 30px;
+  height: 30px;
+}
+
+.dropdown button {
+  padding: 5px;
+}
+
+.fillter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 40px 10px 10px 10px;
+  background-color: #e7d7d7;
+  padding: 5px 30px 5px 30px;
+  border-radius: 20px;
+}
+.fillter.fillter-ui3 {
+  display: flex;
+  justify-content: space-between;
+  padding: 5px 30px 5px 30px;
+  margin: 40px 10px 10px 10px;
+}
+
+.chart-container {
+  margin-top: 30px;
+  width: 400px;
+  height: 200px;
+  display: flex;
+  flex-direction: column;
+}
+
+.chart-container .column {
+  color: #fff;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+}
+
+.bar1 {
+  width: 50%;
+  background-color: #3498db;
+}
+
+.bar2 {
+  margin-top: 20px;
+  width: 60%;
+  background-color: #102939;
+}
+
+.ruler-container {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 40px;
+}
+
+.ruler-mark {
+  width: 1px;
+  height: 10px;
+  background-color: black;
+  position: relative;
+}
+
+.ruler-mark span {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 12px;
+}
+
+.table-content {
+  width: 100%;
+  height: 300px;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+}
+
+thead {
+  position: sticky;
+  top: 0;
+}
+
+.content .el1 {
+  margin-top: 50px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.content .item {
+  display: block;
+  width: 22%;
+  height: 80px;
+  border: 2px solid #eceef6;
+  padding-left: 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  padding: 10px;
+}
+
+.content .item:hover {
+  background-color: #faf4f4;
+}
+
+.el1 .item h1,
+.el1 .item p {
+  text-transform: none;
+  font-size: 14px;
+  color: black;
+  font-weight: 700;
+  text-align: start;
+}
+
+.el1 .item p {
+  text-transform: none;
+  font-size: 14px;
+  color: black;
+  font-weight: 700;
+  text-align: start;
+  margin-bottom: 0px;
+}
+
+.el1 .item .span {
+  font-size: 14px;
+  color: rgb(78, 76, 76);
+  font-weight: 700;
+}
+
+.chart-info {
+  width: 100%;
+  margin-left: 0px;
+  margin-top: 10px;
+  border: 2px solid #eceef6;
+}
+
+.main-content .chart-info h1 {
+  font-size: 15px;
+  margin-top: 20px;
+  padding-left: 10px;
+}
+
+.content-chart {
+  display: flex;
+}
+
+.values {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-end;
+  width: 2%;
+  margin-right: 1%;
+}
+
+.values span {
+  font-size: 14px;
+  color: #666;
+  padding-top: 10px;
+}
+
+.chart {
+  display: flex;
+  width: 95%;
+  margin-top: 50px;
+  justify-content: space-around;
+}
+
+.bar {
+  width: 6%;
+  margin: auto 0px 0px 0px;
+  background-color: #337ab7;
+  border-radius: 5px;
+  transition: 0.3s;
+}
+.bar.bar_color {
+  background-color: rgb(41, 182, 186);
+}
+.bar:hover {
+  background-color: #29629a;
+}
+
+.labels {
+  width: 95%;
+  display: flex;
+  margin-left: 3%;
+  justify-content: space-around;
+}
+
+.chart-info span {
+  width: 6%;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+}
+
+.table-info {
+  width: 100%;
+  height: auto;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-around;
+  padding-bottom: 15px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.info-employee {
+  border: 1px solid rgb(121, 119, 119);
+  width: 600px;
+  height: 364px;
+  overflow-y: auto;
+}
+
+#employee-table {
+  border-collapse: collapse;
+  width: 100%;
+  height: 100%;
+}
+
+#employee-table th,
+#employee-table td {
+  border: 1px solid rgb(121, 119, 119);
+  padding: 8px;
+  text-align: left;
+}
+
+#employee-table th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#employee-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.info-vacationdays {
+  border: 1px solid rgb(121, 119, 119);
+  width: 400px;
+  height: 364px;
+  overflow-y: auto;
+}
+#vacationdays {
+  width: 100%;
+  border: 1px solid #ccc;
+  padding: 5px;
+  box-sizing: border-box;
+}
+
+#vacationdays h2 {
+  font-size: 24px;
+  font-weight: bold;
+  margin: 0 0 16px;
+}
+
+#vacationdays table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+#vacationdays th,
+#vacationdays td {
+  border: 1px solid #ccc;
+  padding: 8px;
+  text-align: left;
+}
+
+#vacationdays th {
+  background-color: #f2f2f2;
+  font-weight: bold;
+}
+
+#vacationdays tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+.fillter.hiii {
+  justify-content: center;
+  gap: 100px;
+}
+.summary {
+  display: flex;
+  justify-content: space-between;
+  margin: 30px;
+}
+.summary_chart {
+  background-color: rgb(239, 224, 226);
+  height: 400px;
+  border-radius: 5px;
+}
+
+.summary_total {
+  display: flex;
+  gap: 10px;
+}
+.summary-span {
+  width: 100px;
+  background-color: #12c2ce;
+  text-transform: uppercase;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  height: 45px;
+}
+.summary-ip {
+  outline: none;
+  border: none;
+  background-color: #12c2ce;
+  border-radius: 5px;
+  width: 300px;
+  height: 45px;
+}
+/* Alert All employees have birthday in curent month */
+.fillter.alert-b,
+.alert-v {
+  color: #bc4444;
+  text-align: center;
+  font-family: Inter;
+  font-size: 20px;
+  font-style: italic;
+  font-weight: 900;
+  line-height: 130%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 16px;
+}
+
+/* js */
+.content.ui2.active {
+  display: block;
+}
+
+.content.ui1.active {
+  display: block;
+}
+.content.ui3.active {
+  display: block;
+}
+.content.ui4.active {
+  display: block;
+}
+
+/* .content.alert-employees.active {
+  display: block;
+} */
+.content.alert-birthday {
+  display: none;
+}
+.content.alert-birthday.active {
+  display: block;
+}
+.content.alert-vacations__day {
+  display: none;
+}
+.content.alert-vacations__day.active {
+  display: block;
+}
+
+.content.ui1,
+.content.ui2,
+.content.ui3,
+.content.ui4 {
+  display: none;
+}
+.dynamic-box {
+  display: none;
+}
+.dynamic-box.active {
+  display: block;
+}
+@media (max-width: 1240px) {
+  .info-vacationdays {
+    border: 1px solid rgb(121, 119, 119);
+    width: 400px;
+    height: 364px;
+    margin-left: 20px;
+    overflow-y: auto;
+  }
+  .table-info section:last-child h2 {
+    margin-left: 20px;
+  }
+  .summary_chart {
+    width: 38%;
+  }
+  #alert-btn {
+    width: 30px;
+    height: 35px;
+  }
+  .header h1 {
+    font-size: 32px !important;
+  }
+  .alert-box {
+    width: 437px;
+    height: 500px;
+    top: 45px;
+    position: fixed;
+  }
+  .alert-box .box {
+    margin-top: 70px;
+    height: 80%;
+  }
+  header .navbar .logo {
+    height: 30px;
+  }
+  header .navbar .menu li:last-child {
+    margin-top: 20px;
+  }
+  header .navbar .menu li {
+    margin-bottom: 30px;
+  }
+  .navbar .menu {
+    padding-bottom: 20px;
+  }
+  .navbar .menu {
+    height: 500px;
+  }
+}
