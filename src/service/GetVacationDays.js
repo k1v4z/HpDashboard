@@ -9,13 +9,13 @@ function mergeObjectsById(...objects) {
 
     objects.forEach(objArray => {
         objArray.forEach(obj => {
-            const id = obj.PERSONAL_ID || obj.idEmployee || obj.EMPLOYMENT_ID; // Lấy ID
+            const id = obj.PERSONAL_ID || obj.idEmployee || obj.EMPLOYMENT_ID; // get ID
 
-            // Tạo một object mới và thêm vào mảng mergedArray
+            // Create an new object and push on mergedArray
             const mergedObj = { ...obj };
             const existingObjIndex = mergedArray.findIndex(item => item.PERSONAL_ID === id || item.idEmployee === id || item.EMPLOYMENT_ID === id);
             if (existingObjIndex !== -1) {
-                Object.assign(mergedArray[existingObjIndex], obj); // Merge object vào object đã tồn tại
+                Object.assign(mergedArray[existingObjIndex], obj); // Merge object in exist object
             } else {
                 mergedArray.push(mergedObj);
             }
@@ -26,9 +26,9 @@ function mergeObjectsById(...objects) {
 }
 
 function filterObjects(Employees, choiceYear, choice, choiceValue) {
-    // Lọc các đối tượng dựa trên điều kiện
+    // Filter objects based on condition
     const filteredObjects = Employees.filter(e => {
-        // Chọn loại
+        // Choose type
         let choiceValueToCheck;
         switch (choice) {
             case 'CURRENT_GENDER':
@@ -49,20 +49,22 @@ function filterObjects(Employees, choiceYear, choice, choiceValue) {
         return choiceValueToCheck === choiceValue;
     });
 
-    // Nếu choiceYear là Paid To Date, loại bỏ trường Paid Last Year
+    // If choiceYear === Paid To Date, remove Paid Last Year field
     if (choiceYear === 'Paid To Date') {
         filteredObjects.forEach(obj => delete obj['Paid Last Year']);
     }
-    // Nếu choiceYear là Paid Last Year, loại bỏ trường Paid To Date
+    //If choiceYear === Paid Last Year, remove Paid To Date field
     else if (choiceYear === 'Paid Last Year') {
         filteredObjects.forEach(obj => delete obj['Paid To Date']);
     }
 
-    // Trả về mảng các đối tượng đã lọc
+
+
+    // Return objects fiterd
     return filteredObjects;
 }
 
-// Tạo object chứa bảng employee
+// Create an object contains employee table
 const getVacationDays = async () => {
     //Temp hash code change dynamic later
     const choiceYear = 'Paid Last Year'; //step 1
