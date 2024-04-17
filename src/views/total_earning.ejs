@@ -50,28 +50,27 @@
                     </ul>
                 </section>
             </div>
-            <!-- total-earing -->
+            <!-- total-earning -->
             <div class="content ui2">
                 <section class="fillter">
                     <div class="dropdown">
                         <div class="btn">
-                            <button class="dropbtn">Derpartment</button>
+                            <button class="dropbtn department">Derpartment</button>
                             <img src="/icon/dropdown.png" alt="">
                         </div>
                         <div class="dropdown-content">
-                            <a id="btn-nondynamic type1 " class="btn1" href="#">Sales</a>
-                            <a id="btn-nondynamic type1" class="btn1" href="#">Marketing</a>
-                            <a id="btn-nondynamic type1" class="btn1" href="#">Account</a>
-                            <a id="btn-nondynamic type1 " class="btn1" href="#">Accounting and Finance</a>
-                            <a id="btn-nondynamic type1" class="btn1" href="#">IT Support</a>
-                            <a id="btn-nondynamic type1" class="btn1" href="#">Human Resources</a>
+                            <% department.forEach((item)=>{%>
+                                <a id="btn-nondynamic type1 " class="btn1" href="#">
+                                    <%= item.DEPARTMENT %>
+                                </a>
+                                <%})%>
                         </div>
                     </div>
                     <img src="/icon/img 6.png" alt="">
-                    <div class="radio-btn">
-                        <input type="radio" id="age1" name="age" value="30">
+                    <div class="radio-btn choice-year">
+                        <input type="radio" id="age1" name="age" value="Paid To Date">
                         <label for="age1">Paid To Date</label><br>
-                        <input type="radio" id="age2" name="age" value="60">
+                        <input type="radio" id="age2" name="age" value="Paid Last Year">
                         <label for="age2">Paid Last Year</label><br>
                     </div>
                     <img src="/icon/img 6.png" alt="">
@@ -81,10 +80,10 @@
                             <img src="/icon/dropdown.png" alt="">
                         </div>
                         <div class="dropdown-content">
-                            <a class="btn-dynamic" href="#">Shareholder</a>
-                            <a class="btn-dynamic" href="#">Gender</a>
-                            <a class="btn-dynamic" href="#">Employee Status</a>
-                            <a class="btn-dynamic" href="#">Ethicity</a>
+                            <a class="btn-dynamic choice" href="#" value="SHAREHOLDER_STATUS">Shareholder</a>
+                            <a class="btn-dynamic choice" href="#" value="GENDER">Gender</a>
+                            <a class="btn-dynamic choice" href="#" value="TYPE_OF_WORK">Employee Status</a>
+                            <a class="btn-dynamic choice" href="#" value="ETHNICITY">Ethnicity</a>
                         </div>
                     </div>
                     <div class="dynamic-box">
@@ -94,7 +93,7 @@
                                 <img src="/icon/dropdown.png" alt="">
                             </div>
                             <div class="dropdown-content">
-                                <a href="#">Shareholder</a>
+                                <a href="#" value="1">Shareholder</a>
                                 <a href="#">Non-shareholder</a>
                             </div>
                         </div>
@@ -126,85 +125,41 @@
                     <div class="dynamic-box">
                         <div class="dropdown 1">
                             <div class="btn">
-                                <button class="dropbtn">Kinh</button>
+                                <button class="dropbtn"></button>
                                 <img src="/icon/dropdown.png" alt="">
                             </div>
                             <div class="dropdown-content">
-                                <a href="#">Kinh</a>
-                                <a href="#">Hoa</a>
-                                <a href="#">Mường</a>
-                                <a href="#">Kinh</a>
-                                <a href="#">Hoa</a>
-                                <a href="#">Mường</a>
+                                <% ethnicity.forEach((item)=>{%>
+                                    <a href="#">
+                                        <%=item.ETHNICITY%>
+                                    </a>
+                                <%})%>
                             </div>
                         </div>
                     </div>
+                    <button style="
+                        padding: 5px 15px;
+                        border: none;
+                        background-color: aqua;
+                        color: white;
+                        font-weight: bold;
+                        border-radius: 5px;
+                    " onclick="getData();">
+                        OK
+                    </button>
                 </section>
                 <div class="table-content">
                     <table class="table table-bordered">
                         <thead>
                             <tr>
-                                <th>Firstname</th>
-                                <th>Lastname</th>
-                                <th>Email</th>
-                                <th>Email</th>
+                                <th>Full Name</th>
+                                <th>Department</th>
+                                <th>Ethnicity</th>
+                                <th>Benefit</th>
                             </tr>
                         </thead>
-                        <tbody>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>John</td>
-                                <td>Doe</td>
-                                <td>john@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>Mary</td>
-                                <td>Moe</td>
-                                <td>mary@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
-                            <tr>
-                                <td>July</td>
-                                <td>Dooley</td>
-                                <td>july@example.com</td>
-                                <td>john@example.com</td>
-                            </tr>
+                        <tbody class="benefit-table-data">
+                            
                         </tbody>
                     </table>
                 </div>
@@ -223,6 +178,7 @@
     </header>
     <script src="/js/chart.min.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/handle.js"></script>
 </body>
 
 </html>
