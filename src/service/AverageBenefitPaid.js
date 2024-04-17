@@ -1,38 +1,40 @@
+const { sequelize_mysql } = require("../config/Sequelize");
+const Sequelize = require('sequelize');
 const Personal = require("../model/human/Personal");
-const BenefitPlan=require("../model/human/Benefit_Plans");
-const { Where } = require("sequelize/lib/utils");
-const { Model } = require("sequelize");
+const BenefitPlan = require("../model/human/Benefit_Plans");
+const defineAssociation = require("../model/association/Association");
 
+const getAveragebenefit = async (req, res) => {
+    try {
+        // Định nghĩa mối quan hệ giữa hai bảng
+        await defineAssociation();
 
-
-const getAveragebenefit=(req,res)=>{
- try {
-    const AverageBenefit=Personal.findAll({
-        attributes:[
-            'BENEFIT_PLAN_ID',
-            [Sequelize.fn('AVG', Sequelize.col('DEDUCTABLE')), 'avg_deductable'],
-            [Sequelize.fn('AVG', Sequelize.col('PERCENTAGE_COPAY')), 'avg_percentage_copay']],
-            include:
-            [{
-                model : BenefitPlan,
-                where: {
-                    SHAREHOLDER_STATUS:0,
-                }
-
-            } 
+        const result = await BenefitPlan.findAll({
+            attributes: [
+              [Sequelize.fn('AVG', Sequelize.col('DEDUCTABLE')), 'Average_DEDUCTABLE'],
+              [Sequelize.fn('AVG', Sequelize.col('PERCENTAGE_COPAY')), 'Average_PERCENTAGE_COPAY']
             ],
-            group:['BENEFIT_PLAN_ID']
-    })
- } catch (error) {
-    console.log(error)
- }
-}
-// Sử dụng hàm để lấy kết quả
-getAllStatusShareholders()
-    .then(result => {
-        console.log('Non-shareholders:', result);
-    })
-    .catch(error => {
-        console.error('Error:', error);
-    });
-    module.exports= getAveragebenefit()
+            include: [{
+              model: Personal,
+              attributes: [],
+              where: {
+                SHAREHOLDER_STATUS: 0 // Lọc chỉ lấy những người SHAREHOLDER_STATUS là non_SHAREHOLDER
+              }
+            }],
+            raw: true, // Kết quả trả về dưới dạng đối tượng JSON
+            
+          });
+      
+          // Lấy ra kết quả trung bình
+          const averageDeductable = result[0]['Average_DEDUCTABLE'];
+          const averagePercentageCopay = result[0]['Average_PERCENTAGE_COPAY'];
+      
+          // In kết quả ra terminal
+          
+        } catch (error) {
+          console.error('Lỗi khi tính trung bình:', error);
+          throw error; // Ném lỗi để bên ngoài xử lý
+        }
+      };
+      getAveragebenefit();
+      module.exports = getAveragebenefit;
