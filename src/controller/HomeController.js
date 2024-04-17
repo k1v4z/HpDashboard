@@ -1,9 +1,17 @@
+const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
+
 const getDashBoard = (req, res) => {
     return res.render('dashboard.ejs');
 }
 
-const getTotalEarnings = (req, res) => {
-    return res.render('total_earning.ejs');
+const getTotalEarnings = async (req, res) => {
+    const department = await getAllDepartment();
+    const ethnicity = await getAllEthnicity();
+
+    return res.render('total_earning.ejs', {
+        department: department,
+        ethnicity: ethnicity
+    });
 }
 
 const getVacationDays = (req, res) => {
