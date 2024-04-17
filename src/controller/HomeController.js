@@ -18,8 +18,11 @@ const getTotalEarnings = async (req, res) => {
     });
 }
 
-const getVacationDays = (req, res) => {
-    return res.render('number_of_vacation_days.ejs');
+const getVacationDays = async (req, res) => {
+    const ethnicity = await getAllEthnicity();
+    return res.render('number_of_vacation_days.ejs', {
+        ethnicity: ethnicity
+    });
 }
 
 const getAverageBenefitPaid = (req, res) => {
