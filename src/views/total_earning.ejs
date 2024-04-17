@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/css/stylesdash.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <title>Total Earning</title>
+</head>
+
+<body>
+    <header>
+        <!-- Nabar -->
+        <div class="navbar">
+            <div class="logo">
+                <img src="/icon/LOGO.png" alt="">
+            </div>
+            <ul class="menu">
+                <li class="btn n1" id="dash"><img src="/icon/icon-btn1.png" alt=""><span>DashBoard</span></li>
+                <li class="btn n2 active" id="earnings"><img src="/icon/icon-btn2.png" alt=""><span>Total earnings
+                    </span></li>
+                <li class="btn n3" id="vacationdays"><img src="/icon/icon-btn3.png" alt=""><span>Number of vacation
+                        days</span>
+                </li>
+                <li class="btn n4" id="benefits"><img src="/icon/icon-btn4.png" alt=""><span>Average benefits
+                        paid</span></li>
+                <li class="btn n5" id="logout"><img src="/icon/icon-btn5.png" alt=""><span>Logout</span></li>
+            </ul>
+        </div>
+        <!-- main content -->
+        <div class="main-content">
+            <!-- Logo CEO MEMO -->
+            <section class="header">
+                <h1 class="name-project">ceo memo system</h1>
+                <span>
+                    <img id="alert-btn" src="/icon/Vector.png" alt="">
+                    <span class="number-info"></span>
+                </span>
+            </section>
+            <!-- Icon Alert -->
+            <div class="alert">
+                <section class="alert-box">
+                    <section class="title-alert">
+                        <span>Important notification</span>
+                    </section>
+                    <ul class="box">
+                        <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
+                        <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li>
+                    </ul>
+                </section>
+            </div>
+            <!-- total-earning -->
+            <div class="content ui2">
+                <section class="fillter">
+                    <div class="dropdown">
+                        <div class="btn">
+                            <button class="dropbtn department">Derpartment</button>
+                            <img src="/icon/dropdown.png" alt="">
+                        </div>
+                        <div class="dropdown-content">
+                            <% department.forEach((item)=>{%>
+                                <a id="btn-nondynamic type1 " class="btn1" href="#">
+                                    <%= item.DEPARTMENT %>
+                                </a>
+                                <%})%>
+                        </div>
+                    </div>
+                    <img src="/icon/img 6.png" alt="">
+                    <div class="radio-btn choice-year">
+                        <input type="radio" id="age1" name="age" value="Paid To Date">
+                        <label for="age1">Paid To Date</label><br>
+                        <input type="radio" id="age2" name="age" value="Paid Last Year">
+                        <label for="age2">Paid Last Year</label><br>
+                    </div>
+                    <img src="/icon/img 6.png" alt="">
+                    <div class="dropdown">
+                        <div class="btn">
+                            <button id="titleOption" class="dropbtn">Option</button>
+                            <img src="/icon/dropdown.png" alt="">
+                        </div>
+                        <div class="dropdown-content">
+                            <a class="btn-dynamic choice" href="#" value="SHAREHOLDER_STATUS">Shareholder</a>
+                            <a class="btn-dynamic choice" href="#" value="GENDER">Gender</a>
+                            <a class="btn-dynamic choice" href="#" value="TYPE_OF_WORK">Employee Status</a>
+                            <a class="btn-dynamic choice" href="#" value="ETHNICITY">Ethnicity</a>
+                        </div>
+                    </div>
+                    <div class="dynamic-box">
+                        <div class="dropdown 1">
+                            <div class="btn">
+                                <button class="dropbtn">Shareholder</button>
+                                <img src="/icon/dropdown.png" alt="">
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="#" value="1">Shareholder</a>
+                                <a href="#">Non-shareholder</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dynamic-box">
+                        <div class="dropdown 1">
+                            <div class="btn">
+                                <button class="dropbtn">Male</button>
+                                <img src="/icon/dropdown.png" alt="">
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="#">Male</a>
+                                <a href="#">Female</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dynamic-box">
+                        <div class="dropdown 1">
+                            <div class="btn">
+                                <button class="dropbtn">Full-time</button>
+                                <img src="/icon/dropdown.png" alt="">
+                            </div>
+                            <div class="dropdown-content">
+                                <a href="#">Full-time</a>
+                                <a href="#">Part-time</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="dynamic-box">
+                        <div class="dropdown 1">
+                            <div class="btn">
+                                <button class="dropbtn"></button>
+                                <img src="/icon/dropdown.png" alt="">
+                            </div>
+                            <div class="dropdown-content">
+                                <% ethnicity.forEach((item)=>{%>
+                                    <a href="#">
+                                        <%=item.ETHNICITY%>
+                                    </a>
+                                <%})%>
+                            </div>
+                        </div>
+                    </div>
+                    <button style="
+                        padding: 5px 15px;
+                        border: none;
+                        background-color: aqua;
+                        color: white;
+                        font-weight: bold;
+                        border-radius: 5px;
+                    " onclick="getData();">
+                        OK
+                    </button>
+                </section>
+                <div class="table-content">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Full Name</th>
+                                <th>Department</th>
+                                <th>Ethnicity</th>
+                                <th>Benefit</th>
+                            </tr>
+                        </thead>
+                        <tbody class="benefit-table-data">
+                            
+                        </tbody>
+                    </table>
+                </div>
+                <div class="chart-container">
+                    <div class="column bar1" style="height: 60%;">To Date</div>
+                    <div class="column bar2" style="height: 60%;">Previous Year</div>
+                    <div class="ruler-container">
+                        <div class="ruler-mark"><span>0</span></div>
+                        <div class="ruler-mark"><span>1</span></div>
+                        <div class="ruler-mark"><span>2</span></div>
+                        <div class="ruler-mark"><span>3</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+    <script src="/js/chart.min.js"></script>
+    <script src="/js/app.js"></script>
+    <script src="/js/handle.js"></script>
+</body>
+
+</html>

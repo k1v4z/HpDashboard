@@ -6,14 +6,17 @@ const checkPersonalWhere = (choice, value) => {
     return {};
 }
 
-const checkEmploymentWhere = (choice, value) => {
+const checkJobHistoryWhere = (choice, value, department) => {
     if (choice == 'TYPE_OF_WORK') {
-        return { [choice]: value }
+        return {
+            DEPARTMENT: department,
+            [choice]: value
+        }
     }
 
-    return {};
+    return { DEPARTMENT: department };
 }
 
 module.exports = {
-    checkPersonalWhere, checkEmploymentWhere
+    checkPersonalWhere, checkJobHistoryWhere
 }

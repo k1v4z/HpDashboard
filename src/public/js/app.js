@@ -109,25 +109,27 @@ function removeActiveClasses() {
 
 // menu 
 document.querySelector('#earnings').onclick = () => {
-    hideAllContent();
-    showUI2.classList.add('active');
+    window.location.href = "/total-earnings";
+    //showUI2.classList.add('active');
     BtnN2.classList.add('active');
     alertBtn.classList.remove('active');
 }
 document.querySelector('#dash').onclick = () => {
-    hideAllContent();
-    showUI1.classList.add('active');
-    BtnN1.classList.add('active');
+    window.location.href = "/"
+    // showUI1.classList.add('active');
+    // BtnN1.classList.add('active');
     alertBtn.classList.remove('active');
+
 }
 document.querySelector('#vacationdays').onclick = () => {
-    hideAllContent();
+    window.location.href = "/vacation-days";
     showUI3.classList.add('active');
     BtnN3.classList.add('active');
     alertBtn.classList.remove('active');
 }
 document.querySelector('#benefits').onclick = () => {
-    hideAllContent();
+    window.location.href = "/average-benefit-paid";
+    // hideAllContent();
     showUI4.classList.add('active');
     BtnN4.classList.add('active');
     alertBtn.classList.remove('active');

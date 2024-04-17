@@ -1,5 +1,5 @@
 const { sequelize_mysql } = require("../config/Sequelize");
-const { checkPersonalWhere, checkEmploymentWhere } = require("../helper/CheckCondition.helper");
+const { checkPersonalWhere, checkJobHistoryWhere } = require("../helper/CheckCondition.helper");
 const defineAssociation = require("../model/association/Association");
 const Benefit_Plans = require("../model/human/Benefit_Plans");
 const Employment = require("../model/human/Employment");
@@ -9,16 +9,13 @@ const { QueryTypes } = require('sequelize');
 
 defineAssociation();
 
-const getBenefitEachPersonal = async () => {
+const getBenefitEachPersonal = async (department, choice_year, choice, choiceValue) => {
 
-    //Temp hash code change dynamic later
-    const department = 'Sales'; //step1 
-    const choice_year = 'Paid To Date'; //step 2
-    const choice = 'CURRENT_GENDER'; //Gender or Ethinicity or Shareholder status option 3
-    const choiceValue = 'Female';
-
-    let Total_Benefit = 0;
-
+    // //Temp hash code change dynamic later
+    // const department = 'Sales'; //step1 
+    // const choice_year = 'Paid To Date'; //step 2
+    // const choice = 'CURRENT_GENDER'; //Gender or Ethinicity or Shareholder status option 3
+    // const choiceValue = 'Female';
     const humans = await Personal.findAll({
         attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME',
             'SHAREHOLDER_STATUS', 'ETHNICITY'],
@@ -27,17 +24,16 @@ const getBenefitEachPersonal = async () => {
             model: Benefit_Plans,
             attributes: ['DEDUCTABLE'],
             required: true, //inner join
-            right: true 
+            right: true
         }, {
             model: Employment,
             attributes: ['EMPLOYMENT_STATUS'],
             required: true,
             right: true, //no effect
-            where: checkEmploymentWhere(choice, choiceValue),
             include: [{
                 model: Job_History,
                 attributes: ['DEPARTMENT'],
-                where: { DEPARTMENT: department },
+                where: checkJobHistoryWhere(choice, choiceValue, department),
                 required: true, //inner join
                 right: true
             }]
@@ -55,16 +51,17 @@ const getBenefitEachPersonal = async () => {
     ).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
-    console.log(mapping(humans, payroll,choice_year));
+
+    return mapping(humans, payroll, choice_year);
 }
 
-const mapping = (humans, payrolls,choice_year) => {
+const mapping = (humans, payrolls, choice_year) => {
     //map personal with payroll following id
     const benefit_each_person = [];
     humans.forEach((human) => {
         payrolls.forEach((payroll) => {
-            if(human.PERSONAL_ID == payroll['idEmployee']){
-                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human  .BENEFIT_PLAN.DEDUCTABLE;
+            if (human.PERSONAL_ID == payroll['idEmployee']) {
+                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human.BENEFIT_PLAN.DEDUCTABLE;
                 benefit_each_person.push(human);
             }
         })
@@ -73,4 +70,6 @@ const mapping = (humans, payrolls,choice_year) => {
     return benefit_each_person;
 }
 
-getBenefitEachPersonal();
+module.exports = {
+    getBenefitEachPersonal
+}
