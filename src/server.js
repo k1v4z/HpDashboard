@@ -5,6 +5,7 @@ const router = require('./route/web/web');
 const setViewEngine = require('./config/ViewEngine');
 const bodyParser = require('body-parser');
 const init_API_Total_Earning = require('./route/api/API_Total_Earning');
+const init_API_Vacation_Days = require('./route/api/API_Vacation_Days');
 
 //const cookieParser = require('cookie-parser');
 const app = express()
@@ -21,6 +22,7 @@ app.use(express.urlencoded({ extended: true }));
 //config view engine
 setViewEngine(app);
 init_API_Total_Earning(app);
+init_API_Vacation_Days(app);
 
 app.use(router);
 app.use((req, res) => {

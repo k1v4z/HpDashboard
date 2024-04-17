@@ -117,82 +117,23 @@
                 <thead>
                   <tr>
                     <th>Name</th>
-                    <th>Department</th>
-                    <th>Age</th>
+                    <th>Ethnicity</th>
+                    <th>Gender</th>
                     <th>Vacationdays</th>
                     <th>Pay Rate</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
-                    <td>Nguyen Tan Dung</td>
-                    <td>Marketing</td>
-                    <td>22</td>
-                    <td>100</td>
-                    <td>9000</td>
-                  </tr>
-                  <tr>
-                    <td>Lê Văn Tri</td>
-                    <td>Finance</td>
-                    <td>24</td>
-                    <td>95</td>
-                    <td>9500</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
-                  </tr>
-                  <tr>
-                    <td>Trương Công Hữu</td>
-                    <td>R&D</td>
-                    <td>28</td>
-                    <td>89</td>
-                    <td>8900</td>
+                    <%listEmployee.forEach((employee)=>{%>
+                      <td>
+                        <%=employee.CURRENT_LAST_NAME + ' ' + employee.CURRENT_LAST_NAME %>
+                      </td>
+                      <td>Marketing</td>
+                      <td>22</td>
+                      <td>100</td>
+                      <td>9000</td>
+                      <%})%>
                   </tr>
                 </tbody>
               </table>

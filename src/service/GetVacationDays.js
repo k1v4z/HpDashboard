@@ -29,47 +29,40 @@ function filterObjects(Employees, choiceYear, choice, choiceValue) {
     // Filter objects based on condition
     const filteredObjects = Employees.filter(e => {
         // Choose type
-        let choiceValueToCheck;
-        switch (choice) {
-            case 'CURRENT_GENDER':
-                choiceValueToCheck = e.CURRENT_GENDER;
-                break;
-            case 'ETHNICITY':
-                choiceValueToCheck = e.ETHNICITY;
-                break;
-            case 'SHAREHOLDER_STATUS':
-                choiceValueToCheck = e.SHAREHOLDER_STATUS;
-                break;
-            case 'TYPE_OF_WORK':
-                choiceValueToCheck = e.TYPE_OF_WORK;
-                break;
-            default:
-                choiceValueToCheck = null;
+        if (choice === 'CURRENT_GENDER') {
+            return (e.CURRENT_GENDER === 'Male' && choiceValue === 'Male') ||
+                (e.CURRENT_GENDER === 'Female' && choiceValue === 'Female');
+        } else if (choice === 'ETHNICITY') {
+            return e.ETHNICITY && e.ETHNICITY.includes(choiceValue);
+        } else if (choice === 'SHAREHOLDER_STATUS') {
+            return typeof e.SHAREHOLDER_STATUS === 'number' && e.SHAREHOLDER_STATUS === parseInt(choiceValue);
+        } else if (choice === 'TYPE_OF_WORK') {
+            return typeof e.TYPE_OF_WORK === 'number' && e.TYPE_OF_WORK === parseInt(choiceValue);
+        } else {
+            return false;
         }
-        return choiceValueToCheck === choiceValue;
+
     });
 
-    // If choiceYear === Paid To Date, remove Paid Last Year field
-    if (choiceYear === 'Paid To Date') {
-        filteredObjects.forEach(obj => delete obj['Paid Last Year']);
-    }
-    //If choiceYear === Paid Last Year, remove Paid To Date field
-    else if (choiceYear === 'Paid Last Year') {
-        filteredObjects.forEach(obj => delete obj['Paid To Date']);
-    }
-
-
+    // // If choiceYear === Paid To Date, remove Paid Last Year field
+    // if (choiceYear === 'Paid To Date') {
+    //     filteredObjects.forEach(obj => delete obj['Paid Last Year']);
+    // }
+    // //If choiceYear === Paid Last Year, remove Paid To Date field
+    // else if (choiceYear === 'Paid Last Year') {
+    //     filteredObjects.forEach(obj => delete obj['Paid To Date']);
+    // }
 
     // Return objects fiterd
     return filteredObjects;
 }
 
-// Create an object contains employee table
-const getVacationDays = async () => {
+// Create an object contains employee table: 
+const getVacationDays = async (choiceYear, choice, choiceValue) => {
     //Temp hash code change dynamic later
-    const choiceYear = 'Paid Last Year'; //step 1
-    const choice = 'ETHNICITY'; //Gender or Ethinicity or Shareholder or type of work, step 2
-    const choiceValue = 'Asian     '; // value of option, step 3
+    // const choiceYear = 'Paid Last Year'; //step 1
+    // const choice = 'ETHNICITY'; //Gender or Ethinicity or Shareholder or type of work, step 2
+    // const choiceValue = 'American'; // value of option, step 3
 
     const EmployeeWithVacationDays = await sequelize_mysql.query(
         `SELECT \`idEmployee\`, \`Vacation Days\`, \`Paid To Date\`, \`Paid Last Year\` 
@@ -82,7 +75,7 @@ const getVacationDays = async () => {
 
     const Personals = await Personal.findAll({
         attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME', 'CURRENT_GENDER',
-            'SHAREHOLDER_STATUS', 'ETHNICITY'],
+            'SHAREHOLDER_STATUS', 'ETHNICITY', 'CURRENT_PERSONAL_EMAIL', 'CURRENT_PHONE_NUMBER'],
     }).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
@@ -101,9 +94,11 @@ const getVacationDays = async () => {
 
 
     const AllVacationDaysEmployees = mergeObjectsById(EmployeeWithVacationDays, Personals, Employments, EmploymentStatus);
-
-    const result = filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue);
-    console.log(result);
+    const res = filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue)
+    // console.log("Mảng gồm:" + res);
+    return filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue);
 }
 
 getVacationDays();
+
+module.exports = { getVacationDays };
