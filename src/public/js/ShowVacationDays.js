@@ -93,7 +93,6 @@ const renderView = (data, selectedColumn) => {
                 <td>None</td>
                 <td>None</td>
                 <td>None</td>
-                <td>None</td>
             </tr>`;
     } else {
         data.result.forEach((data_Item) => {
@@ -102,7 +101,6 @@ const renderView = (data, selectedColumn) => {
             const ethnicity = data_Item.ETHNICITY;
             const email = data_Item.CURRENT_PERSONAL_EMAIL;
             const phoneNumber = data_Item.CURRENT_PHONE_NUMBER;
-            const typeOfWork = data_Item.TYPE_OF_WORK;
             const paidToDate = data_Item['Paid To Date'];
             const paidLastYear = data_Item['Paid Last Year'];
             const vacationDays = data_Item['Vacation Days'];
@@ -132,7 +130,6 @@ const renderView = (data, selectedColumn) => {
                     ${paidLastYearColumn}
                     <td>${email}</td>
                     <td>${phoneNumber}</td>
-                    <td>${typeOfWork}</td>
                     <td>${vacationDays}</td>
                 </tr>`;
         });

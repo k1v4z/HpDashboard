@@ -88,19 +88,10 @@ const getVacationDays = async (choiceYear, choice, choiceValue) => {
 
     const EmploymentStatus = await Job_History.findAll({
         attributes: ['EMPLOYMENT_ID', 'TYPE_OF_WORK'],
-    }).then(res => {
-        // Chuyển đổi giá trị TYPE_OF_WORK
-        const modifiedTOW = res.map(item => {
-            if (item.TYPE_OF_WORK === 1) {
-                item.TYPE_OF_WORK = "Full-Time";
-            } else if (item.TYPE_OF_WORK === 0) {
-                item.TYPE_OF_WORK = "Part-Time";
-            }
-            return item;
-        });
-        return JSON.stringify(modifiedTOW);
-    }).then(StringJSON => JSON.parse(StringJSON))
+    }).then(res => JSON.stringify(res))
+        .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
+
 
     const AllVacationDaysEmployees = mergeObjectsById(EmployeeWithVacationDays, Personals, Employments, EmploymentStatus);
     const res = filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue)
