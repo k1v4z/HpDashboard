@@ -13,13 +13,13 @@ const getBirthdaysNotification = async () => {
             throw new Error('Network response was not ok');
         }
         const data = await response.json();
-        renderView(data);
+        renderNotification(data);
     } catch (error) {
         console.error('There was a problem with the fetch operation:', error);
     }
 }
 
-const renderView = (data) => {
+const renderNotification = (data) => {
     const list = document.querySelector('.box');
     list.innerHTML = '';
 
