@@ -1,4 +1,6 @@
 function getAllNotification() {
+    const list = document.querySelector('.box');
+    list.innerHTML = '';
     getBirthdaysNotification();
     getCertainDayAniversary();
     getExceededNotification();
