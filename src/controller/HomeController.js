@@ -1,11 +1,9 @@
 const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
-const { getListEmployee } = require("../service/Dashboard.service");
-
-const getDashBoard = async (req, res) => {
-    const listEmployee = await getListEmployee();
-    return res.render('dashboard.ejs', {
-        listEmployee: listEmployee
-    });
+const {getAllStatusShareholders,getDeductable,getPlanNames,getPercentageCopay}= require('../service/GetShareHolder_status');
+const {Getdropdownlist}= require('../helper/GetDropdowlistStatusHolder')
+const bodyParser = require('body-parser');
+const getDashBoard = (req, res) => {
+    return res.render('dashboard.ejs');
 }
 
 const getTotalEarnings = async (req, res) => {
