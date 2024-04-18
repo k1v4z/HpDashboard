@@ -1,6 +1,7 @@
 function getAllNotification() {
     getExceededNotification();
     getBirthdaysNotification();
+    getCertainDayAniversary();
 }
 
 const getExceededNotification = async () => {
@@ -20,7 +21,6 @@ const getExceededNotification = async () => {
 
 const renderExceededData = (data) => {
     const list = document.querySelector('.box');
-    list.innerHTML = '';
 
     if (data.exceeded.length === 0) {
         list.innerHTML = '<ul><li>None</li></ul>';

@@ -1,22 +1,7 @@
 function getAllNotification() {
     getBirthdaysNotification();
     getCertainDayAniversary();
-}
-
-const getBirthdaysNotification = async () => {
-    const url = 'http://localhost:4080/api/v1/aniversary';
-
-    try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        const data = await response.json();
-        renderCertainDayAniversary(data);
-
-    } catch (error) {
-        console.error('There was a problem with the fetch operation:', error);
-    }
+    getExceededNotification();
 }
 
 const getCertainDayAniversary = async () => {
@@ -35,11 +20,10 @@ const getCertainDayAniversary = async () => {
 
 const renderCertainDayAniversary = (data) => {
     const list = document.querySelector('.box');
-    list.innerHTML = '';
 
-    const name = data.CURRENT_FIRST_NAME;
+    const name = data.Fullname;
     const certainDay = data.CertainDay;
-    const sex = data.Sex == 'Male' ? 'His' : 'Her';
+    const sex = data.Sex == 'Male' ? 'his' : 'her';
     const hiringDay = data.HiringDay;
 
     // Create a new list item for each notification
