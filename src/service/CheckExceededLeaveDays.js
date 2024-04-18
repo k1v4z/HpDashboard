@@ -31,9 +31,16 @@ const mergeObjects = (personalInfo, employmentInfo, employmentWorkingTimeInfo) =
             map.set(id, { ...info });
         }
     });
+
+    // Thêm key mới cho tất cả các object trong mảng kết quả
+    map.forEach(info => {
+        info.link = "http://localhost:4080/detail_announcement_2";
+    });
+
     const mergedArray = Array.from(map.values());
     return mergedArray;
 };
+
 
 
 const showEmployeeInfo = async () => {
@@ -61,7 +68,8 @@ const showEmployeeInfo = async () => {
         const AllInfo = await mergeObjects(PersonalInfo, EmploymentInfo, Employment_Working_Time_Info);
 
         const employeesWithVacationDays = AllInfo.filter(employee => employee.TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH < 0);
-        console.error(employeesWithVacationDays);
+        return employeesWithVacationDays;
+        // console.error(employeesWithVacationDays);
     } catch (err) {
         console.error(err);
     }
@@ -79,4 +87,4 @@ JOIN dbo.EMPLOYMENT AS E ON EWT.EMPLOYMENT_ID = E.EMPLOYMENT_ID;
 - Step 3: run run run
 */
 
-showEmployeeInfo();
+module.exports = showEmployeeInfo

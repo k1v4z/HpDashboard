@@ -1,6 +1,7 @@
 const { getBenefitEachPersonal } = require("../service/TotalBenefits.service")
 const { getVacationDays } = require("../service/GetVacationDays")
 const { getEmployeesWithBirthdayThisMonth } = require("../service/GetBirthdaysThisMonth");
+const showEmployeeInfo = require("../service/CheckExceededLeaveDays");
 
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
@@ -34,9 +35,11 @@ const getAllVacationDays = async (req, res) => {
 const getAllNotifications = async (req, res) => {
     try {
         const birthdaysCurrentMonth = await getEmployeesWithBirthdayThisMonth();
+        const employeesOverDays = await showEmployeeInfo();
         // ...
         return res.status(200).json({
             birthday: birthdaysCurrentMonth,
+            exceeded: employeesOverDays
             // ...
         })
     } catch {

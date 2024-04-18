@@ -73,9 +73,9 @@ const getData = async () => {
             // Handle errors
             console.error('There was a problem with the fetch operation:', error);
         });
-    renderView(data, choice_year);
+    renderVacationDaysTable(data, choice_year);
 }
-const renderView = (data, selectedColumn) => {
+const renderVacationDaysTable = (data, selectedColumn) => {
     let tabledata = document.querySelector('.vacation_days-table-data');
     tabledata.innerHTML = '';
 
