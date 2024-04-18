@@ -119,22 +119,20 @@
                     <th>Name</th>
                     <th>Ethnicity</th>
                     <th>Gender</th>
-                    <th>Vacationdays</th>
+                    <th>Plan Name</th>
                     <th>Pay Rate</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <%listEmployee.forEach((employee)=>{%>
-                      <td>
-                        <%=employee.CURRENT_LAST_NAME + ' ' + employee.CURRENT_LAST_NAME %>
-                      </td>
-                      <td>Marketing</td>
-                      <td>22</td>
-                      <td>100</td>
-                      <td>9000</td>
-                      <%})%>
-                  </tr>
+                  <%listEmployee.forEach((employee) => {%>
+                      <tr>
+                        <td><%=employee.FullName%></td>
+                        <td><%=employee.ETHNICITY%></td>
+                        <td><%=employee.CURRENT_GENDER%></td>
+                        <td><%=employee.BENEFIT_PLAN.PLAN_NAME%></td>
+                        <td><%=employee.PayRate%></td>
+                      </tr>
+                  <%})%>                   
                 </tbody>
               </table>
             </div>
@@ -145,67 +143,25 @@
               <table id="vacationdays">
                 <thead>
                   <tr>
-                    <th>Employee</th>
-                    <th>Department</th>
-                    <th>Age</th>
-                    <th>Total Vacaton</th>
+                    <th>Name</th>
+                    <th>Gender</th>
+                    <th>Vacation Days</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
-                  <tr>
-                    <td>Nguyen Van</td>
-                    <td>IT</td>
-                    <td>20</td>
-                    <td>2</td>
-                  </tr>
+                  <%listEmployee.forEach((employee)=> {%>
+                    <tr>
+                      <td>
+                        <%=employee.FullName%>
+                      </td>
+                      <td>
+                        <%=employee.CURRENT_GENDER%>
+                      </td>
+                      <td>
+                        <%=employee.VacationDays%>
+                      </td>
+                    </tr>
+                    <%})%>
                 </tbody>
               </table>
             </div>

@@ -1,5 +1,5 @@
 const { QueryTypes } = require("sequelize");
-const { sequelize_mysql } = require("../config/Sequelize");
+const { sequelize_mysql, sequelize_sqlserver } = require("../config/Sequelize");
 const Benefit_Plans = require("../model/human/Benefit_Plans")
 const Personal = require("../model/human/Personal");
 const defineAssociation = require("../model/association/Association");
@@ -23,7 +23,7 @@ const getListEmployee = async () => {
 
     //get payroll
     const payroll = await sequelize_mysql.query(
-        `SELECT e.\`Pay Rate\`, p.\`Value\`,e.\`idEmployee\`
+        `SELECT e.\`Pay Rate\`, p.\`Value\`,e.\`idEmployee\`,e.\`Vacation Days\`
         FROM mydb.employee AS e
         INNER JOIN mydb.\`pay rates\` AS p ON p.\`idPay Rates\` = e.\`Pay Rates_idPay Rates\`;`,
         { type: QueryTypes.SELECT }
@@ -42,6 +42,8 @@ const mapping = (humans, payrolls) => {
             if (human.PERSONAL_ID == payroll['idEmployee']) {
                 human.Value = payroll['Value'];
                 human.PayRate = payroll['Pay Rate'];
+                human.FullName = human.CURRENT_LAST_NAME + ' ' + human.CURRENT_MIDDLE_NAME + ' ' + human.CURRENT_FIRST_NAME;
+                human.VacationDays = payroll['Vacation Days'];
                 listEmployee.push(human);
             }
         })

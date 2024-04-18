@@ -1,5 +1,6 @@
 const { getBenefitEachPersonal } = require("../service/TotalBenefits.service")
 const { getVacationDays } = require("../service/GetVacationDays")
+
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
     try {
