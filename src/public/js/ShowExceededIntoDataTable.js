@@ -1,5 +1,5 @@
 
-const getBirthdaysIntoTable = async () => {
+const getExceeded = async () => {
     const formData = new URLSearchParams();
     const url = 'http://localhost:4080/api/v1/notification';
     const urlWithParams = `${url}?${formData.toString()}`;
@@ -16,14 +16,14 @@ const getBirthdaysIntoTable = async () => {
             console.error('There was a problem with the fetch operation:', error);
         });
     console.log(data);
-    renderBirthdaysTable(data);
+    renderExceededTable(data);
 }
 
-const renderBirthdaysTable = (data) => {
-    let tabledata = document.querySelector('.birthdays-table-data');
+const renderExceededTable = (data) => {
+    let tabledata = document.querySelector('.exceeded-table-data');
     tabledata.innerHTML = '';
 
-    if ((data.birthday).length === 0) {
+    if ((data.exceeded).length === 0) {
         tabledata.innerHTML = `
             <tr>
                 <td>None</td>
@@ -32,15 +32,19 @@ const renderBirthdaysTable = (data) => {
                 <td>None</td>
                 <td>None</td>
                 <td>None</td>
+                <td>None</td>
+                <td>None</td>
             </tr>`;
     } else {
-        data.birthday.forEach((data_Item) => {
+        data.exceeded.forEach((data_Item) => {
             const fullname = data_Item.CURRENT_LAST_NAME + ' ' + data_Item.CURRENT_MIDDLE_NAME + ' ' + data_Item.CURRENT_FIRST_NAME;
             const gender = data_Item.CURRENT_GENDER;
             const ethnicity = data_Item.ETHNICITY;
             const email = data_Item.CURRENT_PERSONAL_EMAIL;
             const phoneNumber = data_Item.CURRENT_PHONE_NUMBER;
-            const dob = data_Item.BIRTH_DATE;
+            const requireDays = data_Item.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH;
+            const actualDays = data_Item.NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH;
+            const overDays = data_Item.TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH
 
 
             tabledata.innerHTML += `
@@ -50,10 +54,12 @@ const renderBirthdaysTable = (data) => {
                     <td>${gender}</td>
                     <td>${email}</td>
                     <td>${phoneNumber}</td>
-                    <td>${dob}</td>
+                    <td>${requireDays}</td>
+                    <td>${actualDays}</td>
+                    <td>${overDays}</td>
                 </tr>`;
         });
     }
 }
 
-getBirthdaysIntoTable();
+getExceeded();

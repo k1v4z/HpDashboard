@@ -22,7 +22,7 @@ const inputData = () => {
             break;
         }
     }
-    console.log('department',department);
+    console.log('department', department);
 }
 
 const pre_process_data = () => {
@@ -54,7 +54,7 @@ const getData = async () => {
     inputData();
     pre_process_data();
 
-    console.log("Hi",department, choice, choice_value, choice_year);
+    console.log("Hi", department, choice, choice_value, choice_year);
     const formData = new URLSearchParams();
     formData.append('department', department);
     formData.append('choice_year', choice_year);
@@ -76,11 +76,11 @@ const getData = async () => {
             console.error('There was a problem with the fetch operation:', error);
         });
     console.log(data);
-    renderView(data);
+    renderEarningtable(data);
 
 }
 
-const renderView = (data) => {
+const renderEarningtable = (data) => {
     let tabledata = document.querySelector('.benefit-table-data');
     tabledata.innerHTML = ''
     if ((data.result).length == 0) {
