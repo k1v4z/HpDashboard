@@ -19,6 +19,7 @@ const getTotalEarnings = async (req, res) => {
 }
 
 const getVacationDays = async (req, res) => {
+    // Load ethnicity to dropdownlist button
     const ethnicity = await getAllEthnicity();
     return res.render('number_of_vacation_days.ejs', {
         ethnicity: ethnicity
