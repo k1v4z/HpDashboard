@@ -37,4 +37,5 @@ const getAveragebenefit = async (req, res) => {
         }
       };
       getAveragebenefit();
-      module.exports = getAveragebenefit;
+      
+module.exports = getAveragebenefit;
