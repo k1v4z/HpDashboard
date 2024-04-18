@@ -29,6 +29,7 @@ let BtnN5 = document.querySelector('li.btn.n5');
 let alertBtn = document.querySelector('.alert');
 document.querySelector('#alert-btn').onclick = () => {
     alertBtn.classList.toggle('active');
+    // window.location.href = "/notification";
 }
 let destroyAlert = document.querySelectorAll('.content');
 for (let i = 0; i < destroyAlert.length; i++) {

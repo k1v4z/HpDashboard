@@ -9,3 +9,4 @@ const init_API_Total_Earning = (app) => {
 }
 
 module.exports = init_API_Total_Earning
+

@@ -1,5 +1,6 @@
 const { getBenefitEachPersonal } = require("../service/TotalBenefits.service")
 const { getVacationDays } = require("../service/GetVacationDays")
+const { getEmployeesWithBirthdayThisMonth } = require("../service/GetBirthdaysThisMonth");
 
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
@@ -30,6 +31,21 @@ const getAllVacationDays = async (req, res) => {
 
 }
 
+const getAllNotifications = async (req, res) => {
+    try {
+        const birthdaysCurrentMonth = await getEmployeesWithBirthdayThisMonth();
+        // ...
+        return res.status(200).json({
+            birthday: birthdaysCurrentMonth,
+            // ...
+        })
+    } catch {
+        return res.status(500).json({
+            error: 'Error'
+        })
+    }
+}
+
 module.exports = {
-    getTotalEarning, getAllVacationDays
+    getTotalEarning, getAllVacationDays, getAllNotifications
 }
