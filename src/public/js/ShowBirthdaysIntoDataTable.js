@@ -56,4 +56,4 @@ const renderTable = (data) => {
     }
 }
 
-// getBirthdaysNotification();
+getBirthdaysIntoTable();

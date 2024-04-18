@@ -1,7 +1,5 @@
 function getAllNotification() {
     getBirthdaysNotification();
-    // alert("Lên rồi nhé!")
-    // console.log("Gọi đến get all notify")
 }
 
 const getBirthdaysNotification = async () => {
@@ -38,7 +36,6 @@ const renderNotification = (data) => {
         // Set the onclick event to redirect to the notification link
         newListItem.onclick = function () {
             window.location.href = link;
-            // getBirthdaysIntoTable();
         };
 
         // Append the new list item to the list
