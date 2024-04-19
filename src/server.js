@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const init_API_Total_Earning = require('./route/api/API_Total_Earning');
 const init_API_Vacation_Days = require('./route/api/API_Vacation_Days');
 const init_API_Notification = require('./route/api/API_Notification');
+const init_API_BenefitPlan = require('./route/api/API_BenefitPlan');
 
 //const cookieParser = require('cookie-parser');
 const app = express()
@@ -25,7 +26,7 @@ setViewEngine(app);
 init_API_Total_Earning(app);
 init_API_Vacation_Days(app);
 init_API_Notification(app);
-
+init_API_BenefitPlan(app);
 app.use(router);
 app.use((req, res) => {
     res.send('404 NOT Found');

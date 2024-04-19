@@ -75,77 +75,42 @@
                 <img src="/icon/dropdown.png" alt="" />
               </div>
               <div class="dropdown-content">
-                <a href="#">Link 1</a>
-                <a href="#">Link 2</a>
-                <a href="#">Link 3</a>
+                <a href="#" class="option">Non-Shareholder</a>
+                <a href="#" class="option">Shareholder</a>
               </div>
             </div>
+            <button
+              style="
+                padding: 5px 15px;
+                border: none;
+                background-color: aqua;
+                color: white;
+                font-weight: bold;
+                border-radius: 5px;
+              "
+              onclick="getData();"
+            >
+              OK
+            </button>
           </section>
           <div class="table-content">
             <table class="table table-bordered">
               <thead>
-                <tr>
-                  <th>Firstname</th>
-                  <th>Lastname</th>
-                  <th>Email</th>
-                  <th>Email</th>
-                </tr>
-              </thead>
-              <tbody id="tableBody">
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>John</td>
-                  <td>Doe</td>
-                  <td>john@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>Mary</td>
-                  <td>Moe</td>
-                  <td>mary@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
-                <tr>
-                  <td>July</td>
-                  <td>Dooley</td>
-                  <td>july@example.com</td>
-                  <td>john@example.com</td>
-                </tr>
+                <tbody id="tableBody">
+                  <th>Fist Name</th>
+                  <th>Last Name</th>
+                  <th>Plan Name</th>
+                <th>Deductable</th>
+                <th>Percentage Copay</th>
+                  <% for (let i = 0; i < BenefitList.length; i++) { %>
+                      <tr>
+                          <td><%= BenefitList[i].CURRENT_FIRST_NAME %></td>
+                          <td><%= BenefitList[i].CURRENT_LAST_NAME %></td>
+                          <td><%= BenefitList[i].BENEFIT_PLAN.PLAN_NAME %></td>
+                          <td><%= BenefitList[i].BENEFIT_PLAN.DEDUCTABLE %></td>
+                          <td><%= BenefitList[i].BENEFIT_PLAN.PERCENTAGE_COPAY %></td>
+                      </tr>
+                  <% } %>
               </tbody>
             </table>
           </div>

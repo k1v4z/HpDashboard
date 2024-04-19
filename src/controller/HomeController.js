@@ -1,8 +1,8 @@
 const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
-const { getAllStatusShareholders, getDeductable, getPlanNames, getPercentageCopay } = require('../service/GetShareHolder_status');
-const { Getdropdownlist } = require('../helper/GetDropdowlistStatusHolder')
+const { GetAllShareHolderStatus} = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
+const { getAllBenefitPlan } = require("./ApiController");
 
 const getDashBoard = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -31,21 +31,16 @@ const getVacationDays = async(req, res) => {
 }
 
 const getAverageBenefitPaid = async (req, res) => {
-    const DataGetShareholder_status = await getAllStatusShareholders();
-    const Deductable = await getDeductable();
-    const Percentage_Copay = await getPercentageCopay();
-    const planName = await getPlanNames();
+    try {
+        const Benefit = await await getAllBenefitPlan();
+        res.render('average_benefit_paid.ejs', { BenefitList: Benefit});
+    } catch (error) {
+        console.error('Error:', error);
+        res.status(500).send('Internal Server Error');
+    }
+};
 
 
-    // Call the Getdropdownlist function with the selected value
-
-    return res.render('average_benefit_paid.ejs', {
-        ListPerson: DataGetShareholder_status,
-        Deductable: Deductable,
-        Percentage_Copay: Percentage_Copay,
-        planName: planName
-    });
-}
 
 const getAnnouncementOne = (req, res) => {
     //Notify all employees have birthday in curent month
