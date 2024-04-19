@@ -1,5 +1,5 @@
 const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
-const { GetAllShareHolderStatus} = require('../service/GetShareHolder_status');
+const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getAllBenefitPlan } = require("./ApiController");
@@ -22,18 +22,18 @@ const getTotalEarnings = async (req, res) => {
     });
 }
 
-const getVacationDays = async(req, res) => {
+const getVacationDays = async (req, res) => {
     const ethnicity = await getAllEthnicity();
 
-    return res.render('number_of_vacation_days.ejs',{
+    return res.render('number_of_vacation_days.ejs', {
         ethnicity: ethnicity
     });
 }
 
 const getAverageBenefitPaid = async (req, res) => {
     try {
-        const Benefit = await await getAllBenefitPlan();
-        res.render('average_benefit_paid.ejs', { BenefitList: Benefit});
+        const Benefit = await getAllBenefitPlan();
+        res.render('average_benefit_paid.ejs', { BenefitList: Benefit });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
