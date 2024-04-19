@@ -31,14 +31,9 @@ const getVacationDays = async(req, res) => {
 }
 
 const getAverageBenefitPaid = async (req, res) => {
-    try {
-        const Benefit = await await getAllBenefitPlan();
-        res.render('average_benefit_paid.ejs', { BenefitList: Benefit});
-    } catch (error) {
-        console.error('Error:', error);
-        res.status(500).send('Internal Server Error');
-    }
-};
+        // const Benefit = await await getAllBenefitPlan();
+        res.render('average_benefit_paid.ejs');
+    } 
 
 
 

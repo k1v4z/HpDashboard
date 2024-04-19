@@ -96,22 +96,15 @@
           <div class="table-content">
             <table class="table table-bordered">
               <thead>
-                <tbody id="tableBody">
+                <tr>
                   <th>Fist Name</th>
                   <th>Last Name</th>
                   <th>Plan Name</th>
                 <th>Deductable</th>
                 <th>Percentage Copay</th>
-                  <% for (let i = 0; i < BenefitList.length; i++) { %>
-                      <tr>
-                          <td><%= BenefitList[i].CURRENT_FIRST_NAME %></td>
-                          <td><%= BenefitList[i].CURRENT_LAST_NAME %></td>
-                          <td><%= BenefitList[i].BENEFIT_PLAN.PLAN_NAME %></td>
-                          <td><%= BenefitList[i].BENEFIT_PLAN.DEDUCTABLE %></td>
-                          <td><%= BenefitList[i].BENEFIT_PLAN.PERCENTAGE_COPAY %></td>
-                      </tr>
-                  <% } %>
-              </tbody>
+                </tr>
+              </thead>
+                <tbody class="Benefit-table-data"></tbody>
             </table>
           </div>
           <div class="summary">
@@ -133,5 +126,6 @@
     <script src="/js/ShowLabelExceededVacationDays.js"></script>
     <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
     <script src="/js/app.js"></script>
+    <script src="/js/ShowBenefitPlan.js"></script>
   </body>
 </html>
