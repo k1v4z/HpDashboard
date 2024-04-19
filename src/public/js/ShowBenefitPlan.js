@@ -1,14 +1,7 @@
 var choice;
 
 const inputData = () => {
-    option.addEventListener('click', function() {
-        const selectedOption = this.textContent.trim();
-        if (selectedOption === 'Shareholder' || selectedOption === 'Non-Shareholder') {
-            choice = selectedOption === 'Shareholder' ? 1 : 0;
-        } else {
-            console.error('Invalid choice:', selectedOption);
-        }
-    });
+    choice = document.querySelector('.dropbtn').innerText;
 };
 
 const pre_process_data = () => {
@@ -46,7 +39,7 @@ const getData = async () => {
 const renderData = (data) => {
     let tabledata = document.querySelector('.Benefit-table-data');
     tabledata.innerHTML = '';
-
+    let sum = 0;
     if ((data.result).length === 0) {
         tabledata.innerHTML = `
             <tr>
@@ -63,6 +56,7 @@ const renderData = (data) => {
             const planName = data_Item.BENEFIT_PLAN.PLAN_NAME;
             const deductible = data_Item.BENEFIT_PLAN.DEDUCTABLE;
             const percentageCopay = data_Item.BENEFIT_PLAN.PERCENTAGE_COPAY;
+            sum += data_Item.BENEFIT_PLAN.DEDUCTABLE;
 
             tabledata.innerHTML += `
                 <tr>
@@ -74,6 +68,8 @@ const renderData = (data) => {
                 </tr>`;
         });
     }
+    document.querySelector('.summary-ip').innerHTML = sum / data.result.length;
+
 };
 
 // Khởi chạy hàm inputData khi trang được tải

@@ -6,6 +6,8 @@ const { QueryTypes } = require('sequelize');
 const defineAssociation = require("../model/association/Association");
 const { Getdropdownlist } = require('../helper/GetDropdowlistStatusHolder');
 
+defineAssociation();
+
 const GetAllShareHolderStatus=async(choice)=>{
     try {
         // Lấy dữ liệu từ bảng Personal và kết hợp với bảng Benefit_Plans

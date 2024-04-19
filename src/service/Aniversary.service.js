@@ -27,7 +27,9 @@ const getEmployeeCertainDayAniversary = async () => {
     employee[0].FullName = employee[0].CURRENT_LAST_NAME + ' ' + employee[0].CURRENT_MIDDLE_NAME + ' ' + employee[0].CURRENT_FIRST_NAME;
     //Set certain day of their hiring aniversary
     employee[0].certainDay = (Date.parse(formatCurrentDay) - Date.parse(employee[0].EMPLOYMENTs[0].HIRE_DATE_FOR_WORKING)) / 86400000;
-
+    sequelize_sqlserver.addHook('afterUpdate','Benefit_Plans',async (noti)=>{
+        
+    })
     return employee[0];
 }
 
