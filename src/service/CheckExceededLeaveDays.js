@@ -46,7 +46,7 @@ const mergeObjects = (personalInfo, employmentInfo, employmentWorkingTimeInfo) =
 const showEmployeeInfo = async () => {
     try {
         const PersonalInfo = await Personal.findAll({
-            attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME', 'CURRENT_PHONE_NUMBER', 'CURRENT_PERSONAL_EMAIL',
+            attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME', 'CURRENT_PHONE_NUMBER','CURRENT_GENDER', 'CURRENT_PERSONAL_EMAIL',
                 'SHAREHOLDER_STATUS', 'ETHNICITY']
         }).then(res => JSON.stringify(res))
             .then(StringJSON => JSON.parse(StringJSON))
