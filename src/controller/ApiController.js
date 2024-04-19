@@ -36,7 +36,6 @@ const getAllVacationDays = async (req, res) => {
 }
 const getAllBenefitPlan = async (req, res) => {
     const choice= req.query;
-    console.log(choice);
     try {
         const result = await GetAllShareHolderStatus(choice);
         return res.status(200).json({
