@@ -2,6 +2,7 @@ require('dotenv').config();
 
 const express = require('express');
 const router = require('./route/web/web');
+const routerManage = require('./route/web/em');
 const setViewEngine = require('./config/ViewEngine');
 const bodyParser = require('body-parser');
 const init_API_Total_Earning = require('./route/api/API_Total_Earning');
@@ -27,7 +28,10 @@ init_API_Total_Earning(app);
 init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
+
 app.use(router);
+app.use(routerManage);
+
 app.use((req, res) => {
     res.send('404 NOT Found');
 })
