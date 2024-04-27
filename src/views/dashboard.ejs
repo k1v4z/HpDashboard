@@ -22,8 +22,17 @@
         <li class="btn n3" id="vacationdays"><img src="/icon/icon-btn3.png" alt=""><span>Number of vacation days</span>
         </li>
         <li class="btn n4" id="benefits"><img src="/icon/icon-btn4.png" alt=""><span>Average benefits paid</span></li>
-        <li class="btn n6" id="benefits" onclick="window.location.href='./manage'"><img src="/icon/icon-btn4.png" alt=""><span>Employee Management</span></li>
+        <li class="btn n6" id="employee-management"><img src="/icon/icon-btn4.png" alt=""><span>Employee
+            Management</span>
+        </li>
+        <div class="box-child">
+          <button class="btn-view">View</button>
+          <button class="btn-edit">Edit</button>
+        </div>
+
+
         <li class="btn n5" id="logout"><img src="/icon/icon-btn5.png" alt=""><span>Logout</span></li>
+
       </ul>
     </div>
     <!-- main content -->
@@ -125,15 +134,25 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <%listEmployee.forEach((employee) => {%>
-                      <tr>
-                        <td><%=employee.FullName%></td>
-                        <td><%=employee.ETHNICITY%></td>
-                        <td><%=employee.CURRENT_GENDER%></td>
-                        <td><%=employee.BENEFIT_PLAN.PLAN_NAME%></td>
-                        <td><%=employee.PayRate%></td>
-                      </tr>
-                  <%})%>                   
+                  <%listEmployee.forEach((employee)=> {%>
+                    <tr>
+                      <td>
+                        <%=employee.FullName%>
+                      </td>
+                      <td>
+                        <%=employee.ETHNICITY%>
+                      </td>
+                      <td>
+                        <%=employee.CURRENT_GENDER%>
+                      </td>
+                      <td>
+                        <%=employee.BENEFIT_PLAN.PLAN_NAME%>
+                      </td>
+                      <td>
+                        <%=employee.PayRate%>
+                      </td>
+                    </tr>
+                    <%})%>
                 </tbody>
               </table>
             </div>

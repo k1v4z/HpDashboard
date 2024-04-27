@@ -60,7 +60,7 @@ header .navbar .logo img {
 }
 
 header .navbar .menu {
-  margin-top: 30px;
+  margin-top: 10px;
   margin-left: 10px;
   width: 90%;
   height: 100%;
@@ -69,7 +69,7 @@ header .navbar .menu {
 
 header .navbar .menu li {
   width: 100%;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
   display: flex;
   align-items: center;
   padding: 5px;
@@ -188,9 +188,10 @@ header .navbar .menu li {
 
 .option {
   margin-top: 30px;
-  width: 150px;
+  margin-left: 2px;
+  width: 180px;
   padding: 10px 20px;
-  background-color: #4caf50;
+  background-color: #12c2ce;
   color: white;
   border: none;
   border-radius: 5px;
@@ -198,14 +199,11 @@ header .navbar .menu li {
 }
 
 .option:hover {
-  background-color: #45a049;
+  background-color: #12c2ce;
 }
-
 .container-box.active {
   display: block;
 }
-
-/*  */
 
 header .navbar .menu li:last-child {
   margin-top: 25px;
@@ -660,10 +658,6 @@ thead {
   display: block;
 }
 
-/* .content.alert-employees.active {
-  display: block;
-} */
-
 .content.alert-birthday.active {
   display: block;
 }
@@ -677,6 +671,42 @@ thead {
 .dynamic-box.active {
   display: block;
 }
+
+/* Employee Management */
+
+.box-child {
+  margin-top: -27px;
+  margin-bottom: -20px;
+}
+
+.box-child {
+  display: none;
+}
+
+.box-child.active {
+  display: block;
+}
+
+#logout {
+  display: block;
+}
+
+.box-child button {
+  width: 100%;
+  height: 40px;
+  display: block;
+  border: none;
+  border-radius: 10px;
+  margin-top: 10px;
+}
+
+.box-child.active button:hover {
+  background-color: #12c2ce;
+  color: #ffffff;
+  background-color: #12c2ce;
+}
+/* End Employee Management */
+
 @media (max-width: 1240px) {
   .info-vacationdays {
     border: 1px solid rgb(121, 119, 119);

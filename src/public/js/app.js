@@ -21,11 +21,14 @@ let showUI1 = document.querySelector('.content.ui1');
 let showUI2 = document.querySelector('.content.ui2');
 let showUI3 = document.querySelector('.content.ui3');
 let showUI4 = document.querySelector('.content.ui4');
+let showUI5 = document.querySelector('.content.ui5')
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
 let BtnN4 = document.querySelector('li.btn.n4');
 let BtnN5 = document.querySelector('li.btn.n5');
+
+// console.log(BtnN6);
 let alertBtn = document.querySelector('.alert');
 document.querySelector('#alert-btn').onclick = () => {
     alertBtn.classList.toggle('active');
@@ -136,6 +139,26 @@ document.querySelector('#benefits').onclick = () => {
     alertBtn.classList.remove('active');
 }
 
+
+// Employee management
+let logoutBtn = document.getElementById("logout");
+let BtnN6 = document.querySelector('li.btn.n6');
+let boxActive = document.querySelector(".box-child");
+BtnN6.addEventListener('mouseover', () => {
+    boxActive.classList.add("active");
+    logoutBtn.style.display = "none";
+})
+
+BtnN6.addEventListener('mouseleave', () => {
+    boxActive.classList.add("active");
+});
+
+boxActive.addEventListener('mouseleave', () => {
+    boxActive.classList.remove("active");
+    logoutBtn.style.display = "block";
+});
+
+// End Employee management
 function hideAllContent() {
     menus.forEach(menu => {
         menu.classList.remove('active');

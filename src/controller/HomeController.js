@@ -52,6 +52,8 @@ const getAnnouncementTwo = (req, res) => {
     return res.render('detail_announcement_2.ejs');
 }
 
+
+
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
     getAnnouncementOne, getAnnouncementTwo

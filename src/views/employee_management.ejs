@@ -17,11 +17,22 @@
         <img src="/icon/LOGO.png" alt="">
       </div>
       <ul class="menu">
-        <li class="btn n1 active" id="dash"><img src="/icon/icon-btn1.png" alt=""><span>DashBoard</span></li>
+        <li class="btn n1" id="dash"><img src="/icon/icon-btn1.png" alt=""><span>DashBoard</span></li>
         <li class="btn n2" id="earnings"><img src="/icon/icon-btn2.png" alt=""><span>Total earnings </span></li>
         <li class="btn n3" id="vacationdays"><img src="/icon/icon-btn3.png" alt=""><span>Number of vacation days</span>
         </li>
         <li class="btn n4" id="benefits"><img src="/icon/icon-btn4.png" alt=""><span>Average benefits paid</span></li>
+
+        <li class="btn n6 active" id="employee-management"><img src="/icon/icon-btn4.png" alt=""><span>Employee
+            Management</span>
+          <div class="box-child">
+            <button class="btn-view">View</button>
+            <button class="btn-edit">Edit</button>
+          </div>
+        </li>
+        <li>
+          <div class="test8"></div>
+        </li>
         <li class="btn n5" id="logout"><img src="/icon/icon-btn5.png" alt=""><span>Logout</span></li>
       </ul>
     </div>
@@ -47,136 +58,9 @@
           </ul>
         </section>
       </div>
-      <!-- DashBoard -->
-      <div class="content ui1 active">
-        <div class="el1">
-          <div class="item">
-            <h1>Total Earnings</h1>
-            <p>856tr</p>
-            <span>VND</span>
-          </div>
-          <div class="item">
-            <h1>Vacation Days</h1>
-            <p>31</p>
-            <span>DAYS</span>
-          </div>
-          <div class="item">
-            <h1>Average Benefits</h1>
-            <p>856tr</p>
-            <span>VND</span>
-          </div>
-        </div>
-        <div class="chart-info">
-          <h1>Tổng thu nhập</h1>
-          <div class="content-chart">
-            <div class="values">
-              <span>160</span>
-              <span>140</span>
-              <span>120</span>
-              <span>100</span>
-              <span>80</span>
-              <span>60</span>
-              <span>40</span>
-              <span>20</span>
-            </div>
-            <div class="chart">
-              <div class="bar" style="height: 100px;"></div>
-              <div class="bar" style="height: 77px;"></div>
-              <div class="bar" style="height: 40px;"></div>
-              <div class="bar" style="height: 20px;"></div>
-              <div class="bar" style="height: 50px;"></div>
-              <div class="bar" style="height: 60px;"></div>
-              <div class="bar" style="height: 70px;"></div>
-              <div class="bar" style="height: 80px;"></div>
-              <div class="bar" style="height: 90px;"></div>
-              <div class="bar" style="height: 100px;"></div>
-              <div class="bar" style="height: 110px;"></div>
-              <div class="bar" style="height: 120px;"></div>
-            </div>
-          </div>
-          <div class="labels">
-            <span>Tháng 1</span>
-            <span>Tháng 2</span>
-            <span>Tháng 3</span>
-            <span>Tháng 4</span>
-            <span>Tháng 5</span>
-            <span>Tháng 6</span>
-            <span>Tháng 7</span>
-            <span>Tháng 8</span>
-            <span>Tháng 9</span>
-            <span>Tháng 10</span>
-            <span>Tháng 11</span>
-            <span>Tháng 12</span>
-          </div>
-        </div>
-        <div class="table-info">
-          <section>
-            <h2>Employee info</h2>
-            <div class="info-employee">
-              <table id="employee-table">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Ethnicity</th>
-                    <th>Gender</th>
-                    <th>Plan Name</th>
-                    <th>Pay Rate</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <%listEmployee.forEach((employee)=> {%>
-                    <tr>
-                      <td>
-                        <%=employee.FullName%>
-                      </td>
-                      <td>
-                        <%=employee.ETHNICITY%>
-                      </td>
-                      <td>
-                        <%=employee.CURRENT_GENDER%>
-                      </td>
-                      <td>
-                        <%=employee.BENEFIT_PLAN.PLAN_NAME%>
-                      </td>
-                      <td>
-                        <%=employee.PayRate%>
-                      </td>
-                    </tr>
-                    <%})%>
-                </tbody>
-              </table>
-            </div>
-          </section>
-          <section>
-            <h2>Vacation Days</h2>
-            <div class="info-vacationdays">
-              <table id="vacationdays">
-                <thead>
-                  <tr>
-                    <th>Name</th>
-                    <th>Gender</th>
-                    <th>Vacation Days</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <%listEmployee.forEach((employee)=> {%>
-                    <tr>
-                      <td>
-                        <%=employee.FullName%>
-                      </td>
-                      <td>
-                        <%=employee.CURRENT_GENDER%>
-                      </td>
-                      <td>
-                        <%=employee.VacationDays%>
-                      </td>
-                    </tr>
-                    <%})%>
-                </tbody>
-              </table>
-            </div>
-          </section>
-        </div>
+      <!-- Employee Management -->
+      <div class="content ui5">
+        hi
       </div>
     </div>
   </header>
