@@ -21,7 +21,8 @@ let showUI1 = document.querySelector('.content.ui1');
 let showUI2 = document.querySelector('.content.ui2');
 let showUI3 = document.querySelector('.content.ui3');
 let showUI4 = document.querySelector('.content.ui4');
-let showUI5 = document.querySelector('.content.ui5')
+let showUI5 = document.querySelector('.content.ui5');
+let showUI6 = document.querySelector('.content.ui6');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
@@ -140,25 +141,6 @@ document.querySelector('#benefits').onclick = () => {
 }
 
 
-// Employee management
-let logoutBtn = document.getElementById("logout");
-let BtnN6 = document.querySelector('li.btn.n6');
-let boxActive = document.querySelector(".box-child");
-BtnN6.addEventListener('mouseover', () => {
-    boxActive.classList.add("active");
-    logoutBtn.style.display = "none";
-})
-
-BtnN6.addEventListener('mouseleave', () => {
-    boxActive.classList.add("active");
-});
-
-boxActive.addEventListener('mouseleave', () => {
-    boxActive.classList.remove("active");
-    logoutBtn.style.display = "block";
-});
-
-// End Employee management
 function hideAllContent() {
     menus.forEach(menu => {
         menu.classList.remove('active');
@@ -228,3 +210,42 @@ function showAlert2() {
     alertBtn.classList.remove('active');
 }
 
+// Employee management
+let logoutBtn = document.getElementById("logout");
+let BtnN6 = document.querySelector('li.btn.n6');
+let boxActive = document.querySelector(".box-child");
+let checkClick = false;
+BtnN6.addEventListener('click', () => {
+    BtnN6.classList.add("active");
+    if (!checkClick) {
+        boxActive.classList.add("active");
+        hideAllContent();
+        logoutBtn.classList.add("active");
+        checkClick = true;
+    }
+    else {
+        boxActive.classList.remove("active");
+        hideAllContent();
+        logoutBtn.classList.remove("active");
+        checkClick = false;
+    }
+})
+
+document.querySelector('.btn-view').onclick = (e) => {
+    e.preventDefault();
+    window.location.href = "/employee-view";
+    showUI5.classList.add('active');
+    showUI6.classList.remove('active');
+    return false;
+}
+
+let btnAdd = document.querySelector('.btn-add');
+btnAdd.addEventListener('click', (e) => {
+    e.preventDefault();
+    window.location.href = "/employee-add";
+    showUI6.classList.add('active');
+    showUI5.classList.remove('active');
+    return false;
+})
+
+// End Employee management

@@ -644,7 +644,7 @@ thead {
 }
 
 /* js */
-.content.ui2.active {
+/* .content.ui2.active {
   display: block;
 }
 
@@ -657,6 +657,12 @@ thead {
 .content.ui4.active {
   display: block;
 }
+.content.ui5.active {
+  display: block;
+}
+.content.ui6.active {
+  display: block;
+} */
 
 .content.alert-birthday.active {
   display: block;
@@ -689,6 +695,9 @@ thead {
 
 #logout {
   display: block;
+}
+#logout.active {
+  display: none;
 }
 
 .box-child button {
@@ -739,13 +748,13 @@ thead {
     height: 80%;
   }
   header .navbar .logo {
-    height: 30px;
+    height: 20px;
   }
   header .navbar .menu li:last-child {
     margin-top: 20px;
   }
   header .navbar .menu li {
-    margin-bottom: 30px;
+    margin-bottom: 20px;
   }
   .navbar .menu {
     padding-bottom: 20px;

@@ -53,8 +53,30 @@ const getAnnouncementTwo = (req, res) => {
 }
 
 
+const getEmployeeView = (req, res) => {
+    return res.render('employee-view.ejs');
+}
+const getEmployeeAdd = (req, res) => {
+    return res.render('employee-add.ejs');
+}
+
+
 
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo
+    getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
