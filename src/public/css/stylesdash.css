@@ -527,6 +527,10 @@ thead {
   height: 364px;
   overflow-y: auto;
 }
+.info-employee::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
 
 #employee-table {
   border-collapse: collapse;
@@ -552,9 +556,13 @@ thead {
 
 .info-vacationdays {
   border: 1px solid rgb(121, 119, 119);
-  width: 400px;
+  width: 500px;
   height: 364px;
   overflow-y: auto;
+}
+.info-vacationdays::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
 }
 #vacationdays {
   width: 100%;
@@ -642,28 +650,6 @@ thead {
   align-items: center;
   padding-top: 16px;
 }
-
-/* js */
-/* .content.ui2.active {
-  display: block;
-}
-
-.content.ui1.active {
-  display: block;
-}
-.content.ui3.active {
-  display: block;
-}
-.content.ui4.active {
-  display: block;
-}
-.content.ui5.active {
-  display: block;
-}
-.content.ui6.active {
-  display: block;
-} */
-
 .content.alert-birthday.active {
   display: block;
 }
@@ -715,6 +701,95 @@ thead {
   background-color: #12c2ce;
 }
 /* End Employee Management */
+
+/* START Emloyee Management VIEW */
+
+.frm-view {
+  padding: 20px;
+}
+
+.tb-view {
+  width: 100%;
+  border-collapse: collapse;
+}
+.tb-view th {
+  padding: 10px;
+  text-align: left;
+  text-transform: uppercase;
+  color: white;
+  border: 1px solid #ddd;
+  text-align: center;
+  background-color: #12c2ce;
+}
+.tb-view td {
+  border: 1px solid #ddd;
+  text-align: center;
+}
+.btn-edit {
+  width: 60px;
+  height: 30px;
+  background-color: #102939;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+.btn-delete {
+  width: 60px;
+  height: 30px;
+  background-color: #ab2626;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+.editing {
+  background-color: #ffffcc;
+}
+
+.container-box__delete {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: none;
+  z-index: 99999999;
+}
+
+.question-box__delete {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.options-delete {
+  margin-top: 20px;
+}
+
+.option-delete {
+  padding: 10px 20px;
+  margin: 0 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.option-delete.yes {
+  background-color: #dc3545; /* Red color */
+  color: #fff; /* White text color */
+}
+
+.option-delete.no {
+  background-color: #007bff; /* Blue color */
+  color: #fff; /* White text color */
+}
+
+/* END Emloyee Management VIEW */
 
 @media (max-width: 1240px) {
   .info-vacationdays {

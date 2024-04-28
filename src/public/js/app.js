@@ -230,15 +230,6 @@ BtnN6.addEventListener('click', () => {
         checkClick = false;
     }
 })
-
-document.querySelector('.btn-view').onclick = (e) => {
-    e.preventDefault();
-    window.location.href = "/employee-view";
-    showUI5.classList.add('active');
-    showUI6.classList.remove('active');
-    return false;
-}
-
 let btnAdd = document.querySelector('.btn-add');
 btnAdd.addEventListener('click', (e) => {
     e.preventDefault();
@@ -247,5 +238,48 @@ btnAdd.addEventListener('click', (e) => {
     showUI5.classList.remove('active');
     return false;
 })
+document.querySelector('.btn-view').onclick = (e) => {
+    e.preventDefault();
+    window.location.href = "/employee-view";
+    showUI5.classList.add('active');
+    showUI6.classList.remove('active');
+    return false;
+}
 
 // End Employee management
+
+// START Employee Management VIEW-DELETE
+let overlayDelete = document.createElement('div');
+overlayDelete.className = 'container-box__delete';
+overlayDelete.innerHTML = `
+    <div class="question-box__delete">
+        <p class="question">Would you like to delete this?</p>
+        <div class="options-delete">
+            <button class="option-delete yes">Yes</button>
+            <button class="option-delete no">No</button>
+        </div>
+    </div>
+`;
+document.body.appendChild(overlayDelete);
+
+var deleteButtons = document.querySelectorAll('.btn-delete');
+
+deleteButtons.forEach(function (button) {
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        overlayDelete.style.display = 'block';
+    });
+});
+let yesDelete = overlayDelete.querySelector('.option-delete.yes');
+let noDelete = overlayDelete.querySelector('.option-delete.no');
+yesDelete.addEventListener('click', () => {
+    
+    console.log('Xoa thanh cong');
+    overlayDelete.style.display = 'none';
+});
+noDelete.addEventListener('click', () => {
+    overlayDelete.style.display = 'none';
+
+});
+
+// END Employee Management VIEW-DELETE

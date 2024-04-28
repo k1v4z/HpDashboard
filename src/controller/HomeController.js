@@ -62,6 +62,7 @@ const getEmployeeAdd = (req, res) => {
 
 
 
+
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
     getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd
