@@ -791,6 +791,66 @@ thead {
 
 /* END Emloyee Management VIEW */
 
+/* START Emloyee Management ADD */
+.personal-title {
+  text-align: left;
+  font-size: 44px;
+  font-weight: 700;
+  margin-bottom: 20px;
+  text-transform: uppercase;
+  color: #4ed4de;
+}
+
+.personal-info {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
+  margin: 20px;
+}
+
+.personal-info label {
+  grid-column: 1;
+  text-align: right;
+  text-transform: uppercase;
+  font-weight: 600;
+  padding-top: 10px;
+}
+
+.personal-info input[type="text"],
+.personal-info input[type="date"],
+.personal-info input[type="number"],
+.personal-info select,
+.personal-info input[type="email"] {
+  grid-column: 2;
+  width: 100%;
+  padding: 5px;
+  outline: none;
+}
+
+.personal-info button {
+  grid-column: span 2;
+  width: 30%;
+  margin: 0 auto;
+  height: 40px;
+  background-color: #12c2ce;
+  border: none;
+  border-radius: 10px;
+  color: white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: 600;
+  font-size: 28px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+
+.personal-info button:hover {
+  background-color: rgb(15, 14, 14);
+  color: #12c2ce;
+}
+/* END Emloyee Management ADD */
+
+/* Responsive */
 @media (max-width: 1240px) {
   .info-vacationdays {
     border: 1px solid rgb(121, 119, 119);
