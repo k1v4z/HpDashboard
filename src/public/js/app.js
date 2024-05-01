@@ -273,7 +273,7 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    
+
     console.log('Xoa thanh cong');
     overlayDelete.style.display = 'none';
 });
@@ -283,3 +283,17 @@ noDelete.addEventListener('click', () => {
 });
 
 // END Employee Management VIEW-DELETE
+
+// START Employee Management ADD
+document.addEventListener("DOMContentLoaded", function () {
+    var checkbox = document.getElementById("employee-showInfo");
+    var employeeInfo = document.querySelector(".employee-infor");
+
+    checkbox.addEventListener("change", function () {
+        if (checkbox.checked) {
+            employeeInfo.style.display = "block";
+        } else {
+            employeeInfo.style.display = "none";
+        }
+    });
+});

@@ -62,6 +62,7 @@
             <!-- Employee-ADD -->
             <div class="content ui6">
                 <h1 class="personal-title">Personal Detail</h1>
+
                 <form action="" method="" class="personal-info">
                     <div class="personal-info_left">
                         <label for="">First-Name:</label>
@@ -107,8 +108,36 @@
                         <label for="">Ethnicity</label>
                         <input type="text">
                     </div>
+
+                    <div class="employee-infor">
+                        <h1 class="employee-title">EMPLOYEE DETAIL</h1>
+                        <label for="">First Name:</label>
+                        <input type="text" required>
+                        <label for="">hire_date_for_working:</label>
+                        <input type="text" required>
+                        <label for="">work_comp_code:</label>
+                        <input type="text" required>
+                        <label for="">termination_day:</label>
+                        <input type="text" required>
+                        <label for="">rehire_date_for_working:</label>
+                        <input type="text" required>
+                        <label for="">Last_review_date:</label>
+                        <input type="date" required>
+                        <label for="">Employeement_status: </label>
+                        <select name="employment-status" id="">
+                            <option value="fulltime">Fulltime</option>
+                            <option value="partime">Partime</option>
+                        </select>
+                    </div>
                     <button type="submit">Create</button>
                 </form>
+
+                <div class="checkbox-employee">
+                    <input type="checkbox" name="employee-showInfo" id="employee-showInfo">
+                    <label for="employee-showInfo">Edit employee</label>
+                </div>
+
+
             </div>
         </div>
     </header>

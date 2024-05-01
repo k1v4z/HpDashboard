@@ -792,7 +792,8 @@ thead {
 /* END Emloyee Management VIEW */
 
 /* START Emloyee Management ADD */
-.personal-title {
+.personal-title,
+.employee-title {
   text-align: left;
   font-size: 44px;
   font-weight: 700;
@@ -800,7 +801,9 @@ thead {
   text-transform: uppercase;
   color: #4ed4de;
 }
-
+.employee-title {
+  padding-top: 30px;
+}
 .personal-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -841,12 +844,21 @@ thead {
   font-weight: 600;
   font-size: 28px;
   margin-top: 20px;
-  margin-bottom: 30px;
 }
 
 .personal-info button:hover {
   background-color: rgb(15, 14, 14);
   color: #12c2ce;
+}
+.employee-infor {
+  display: none;
+}
+.checkbox-employee {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  font-size: 16px;
+  margin-bottom: 40px;
 }
 /* END Emloyee Management ADD */
 
