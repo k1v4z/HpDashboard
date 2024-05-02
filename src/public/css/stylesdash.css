@@ -703,11 +703,11 @@ thead {
 /* End Employee Management */
 
 /* START Emloyee Management VIEW */
-
 .frm-view {
   padding: 20px;
+  /* height: 100vh;
+  overflow-x: auto; */
 }
-
 .tb-view {
   width: 100%;
   border-collapse: collapse;
@@ -780,15 +780,14 @@ thead {
 }
 
 .option-delete.yes {
-  background-color: #dc3545; /* Red color */
-  color: #fff; /* White text color */
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .option-delete.no {
-  background-color: #007bff; /* Blue color */
-  color: #fff; /* White text color */
+  background-color: #007bff;
+  color: #fff;
 }
-
 /* END Emloyee Management VIEW */
 
 /* START Emloyee Management ADD */
@@ -848,23 +847,24 @@ thead {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 28px;
-  margin-top: 20px;
 }
-
+.employee-infor_left,
+.employee-infor_right {
+  width: 50%;
+}
 .personal-info button:hover {
   background-color: rgb(15, 14, 14);
   color: #12c2ce;
 }
 .employee-infor {
   display: none;
-  /* display: flex; */
 }
 .checkbox-employee {
-  display: flex;
-  justify-content: center;
+  width: 300px;
   gap: 10px;
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-left: 75%;
+  padding-left: 90px;
 }
 /* END Emloyee Management ADD */
 
