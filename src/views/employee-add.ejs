@@ -65,103 +65,64 @@
 
                 <form action="/add" method="post" class="personal-info">
                     <div class="personal-info_left">
-                        <label for="">First Name:</label>
-                        <input type="text" required>
-                        <label for="">Middle Name:</label>
-                        <input type="text" required>
-                        <label for="">Last Name:</label>
-                        <input type="text" required>
-                        <label for="">Date of Birth:</label>
-                        <input type="date" required>
-                        <label for="">Current Address 1: </label>
-                        <input type="text">
-                        <label for="">Current Address 2: </label>
-                        <input type="text">
-                        <label for="">Current ZIP: </label>
-                        <input type="text">
-                        <label for="">Current Gender</label>
-                        <select name="gender" id="">
+                        <label for="">First_Name:</label>
+                        <input type="text" name="CURRENT_FIRST_NAME" required>
+                        <label for="">Middle_Name:</label>
+                        <input type="text" name="CURRENT_MIDDLE_NAME" required>
+                        <label for="">Last_Name:</label>
+                        <input type="text" name="CURRENT_LAST_NAME" required>
+                        <label for="">Date_of_Birth:</label>
+                        <input type="date" name="BIRTH_DATE" required>
+                        <label for="">Current_Address 1: </label>
+                        <input type="text" name="CURRENT_ADDRESS_1">
+                        <label for="">Current_Address 2: </label>
+                        <input type="text" name="CURRENT_ADDRESS_2">
+                        <label for="">Current_ZIP: </label>
+                        <input type="text" name="CURRENT_ZIP">
+                        <label for="">Current_Gender</label>
+                        <select name="CURRENT_GENDER" id="">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                        <label for="">Current Personal Email: </label>
-                        <input type="email">
+                        <label for="">Current_Personal_email: </label>
+                        <input type="email" name="CURRENT_PERSONAL_EMAIL">
                     </div>
                     <div class="personal-infor_right">
-                        <label for="">Social security number :</label>
-                        <input type="number" required>
-                        <label for="">Drivers licenes: </label>
+                        <label for="">Social_security_number :</label>
+                        <input type="text" name="SOCIAL_SECURITY_NUMBER" required>
+                        <label for="">Drivers_license: </label>
                         <input type="text" required>
                         <label for="">Current City: </label>
                         <input type="text">
                         <label for="">Current Country: </label>
                         <input type="text">
-                        <label for="">Current Phone number: </label>
-                        <input type="number">
-                        <label for="">Current marital status: </label>
-                        <input type="text">
-                        <label for="">Shareholder status: </label>
-                        <select name="shareholder-status" id="">
-                            <option value="shareholder">Shareholder</option>
-                            <option value="non-shareholder">Non-Shareholder</option>
+                        <label for="">Current_Phone_number: </label>
+                        <input type="number" name="CURRENT_PHONE_NUMBER">
+                        <label for="">Current_marital_status: </label>
+                        <input type="text" name="CURRENT_MARITAL_STATUS">
+                        <label for="">Shareholder_status: </label>
+                        <select name="SHAREHOLDER_STATUS" id="">
+                            <option value="fulltime">Shareholder</option>
+                            <option value="partime">Non-shareholder</option>
                         </select>
                         <label for="">Ethnicity</label>
-                        <input type="text">
+                        <input type="text" name="ETHNICITY">
                     </div>
 
                     <h1 class="employee-title">EMPLOYEE DETAIL</h1>
 
                     <div class="employee-infor" style="grid-column: 1 / 3;">
-                        <div class="employee-infor_left">
-                            <label for="">First Name:</label>
-                            <input type="text" required>
-                            <label for="">hire date for working:</label>
-                            <input type="text" required>
-                            <label for="">work comp code:</label>
-                            <input type="text" required>
-                            <label for="">termination day:</label>
-                            <input type="text" required>
-                            <label for="">rehire date for working:</label>
-                            <input type="text" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" required>
-                            <label for="">Employeement status: </label>
-                            <select name="employment-status" id="">
-                                <option value="fulltime">Fulltime</option>
-                                <option value="partime">Partime</option>
-                            </select>
-                        </div>
-                        <div class="employee-infor_right">
 
-                            <label for="">Pay rate:</label>
-                            <input type="number" required>
-                            <label for="">ID Pay rate:</label>
-                            <input type="number" required>
-                            <label for="">vocation day:</label>
-                            <input type="date" required>
-                            <label for="">Pay to date:</label>
-                            <input type="date" required>
-                            <label for="">pay last year:</label>
-                            <input type="text" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" required>
-                            <label for="">Number day requiement:</label>
-                            <input type="date" required>
-                        </div>
+
                     </div>
-
 
 
                     <div class="checkbox-employee">
-                        <input type="checkbox" name="employee-showInfo" id="employee-showInfo">
+                        <input type="checkbox" name="employee-showInfo" id="employee-showInfo" onclick="handle()">
                         <label for="employee-showInfo">Edit employee</label>
                     </div>
-                    <button type="submit">Create</button>
+                    <button type="submit">Add</button>
                 </form>
-
-
-
-
             </div>
         </div>
     </header>
