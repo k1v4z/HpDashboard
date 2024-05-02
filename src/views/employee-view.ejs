@@ -65,70 +65,33 @@
                     <table class="tb-view" border="1">
                         <thead>
                             <tr>
-                                <th>Code</th>
-                                <th>fullname</th>
-                                <th>address</th>
-                                <th>gmail</th>
-                                <th>benefit plan</th>
-                                <th>Action</th>
+                                <th>FULLNAME</th>
+                                <th>ADDRESS</th>
+                                <th>CITY</th>
+                                <th>COUNTRY</th>
+                                <th>GENDER</th>
+                                <th>EMAIL</th>
+                                <th>PHONE NUMBER</th>
+                                <th>ACTION</th>
+
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody class="view-table-data">
+                            <%dataPersonal.forEach((dataPersonal)=> {%>
                             <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
+                                <td><%=dataPersonal.CURRENT_FIRST_NAME%>+</td>
+                                <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
+                                <td><%=dataPersonal.CURRENT_CITY%></td>
+                                <td><%=dataPersonal.CURRENT_COUNTRY%></td>
+                                <td><%=dataPersonal.CURRENT_GENDER%></td>
+                                <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
+                                <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                                 <td>
                                     <button class="btn-edit">Edit</button>
                                     <button class="btn-delete">Delete</button>
                                 </td>
                             </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>
-                                    <button class="btn-edit">Edit</button>
-                                    <button class="btn-delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>
-                                    <button class="btn-edit">Edit</button>
-                                    <button class="btn-delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>
-                                    <button class="btn-edit">Edit</button>
-                                    <button class="btn-delete">Delete</button>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>1</td>
-                                <td>2</td>
-                                <td>3</td>
-                                <td>4</td>
-                                <td>5</td>
-                                <td>
-                                    <button class="btn-edit">Edit</button>
-                                    <button class="btn-delete">Delete</button>
-                                </td>
-                            </tr>
+                            <%})%>
                         </tbody>
                     </table>
                 </form>
