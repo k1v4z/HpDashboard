@@ -63,33 +63,33 @@
             <div class="content ui6">
                 <h1 class="personal-title">Personal Detail</h1>
 
-                <form action="" method="" class="personal-info">
+                <form action="/add" method="post" class="personal-info">
                     <div class="personal-info_left">
                         <label for="">First_Name:</label>
-                        <input type="text" required>
+                        <input type="text" name="CURRENT_FIRST_NAME" required>
                         <label for="">Middle_Name:</label>
-                        <input type="text" required>
+                        <input type="text" name="CURRENT_MIDDLE_NAME" required>
                         <label for="">Last_Name:</label>
-                        <input type="text" required>
+                        <input type="text" name="CURRENT_LAST_NAME" required>
                         <label for="">Date_of_Birth:</label>
-                        <input type="date" required>
+                        <input type="date" name="BIRTH_DATE" required>
                         <label for="">Current_Address 1: </label>
-                        <input type="text">
+                        <input type="text" name="CURRENT_ADDRESS_1">
                         <label for="">Current_Address 2: </label>
-                        <input type="text">
+                        <input type="text" name="CURRENT_ADDRESS_2">
                         <label for="">Current_ZIP: </label>
-                        <input type="text">
+                        <input type="text" name="CURRENT_ZIP">
                         <label for="">Current_Gender</label>
-                        <select name="gender" id="">
+                        <select name="CURRENT_GENDER" id="">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
                         <label for="">Current_Personal_email: </label>
-                        <input type="email">
+                        <input type="email" name="CURRENT_PERSONAL_EMAIL">
                     </div>
                     <div class="personal-infor_right">
                         <label for="">Social_security_number :</label>
-                        <input type="number" required>
+                        <input type="number" name="SOCIAL_SECURITY_NUMBER" required>
                         <label for="">Drivers_licenes: </label>
                         <input type="text" required>
                         <label for="">Current_City: </label>
@@ -97,16 +97,16 @@
                         <label for="">Current_Country: </label>
                         <input type="text">
                         <label for="">Current_Phone_number: </label>
-                        <input type="number">
+                        <input type="number" name="CURRENT_PHONE_NUMBER">
                         <label for="">Current_marital_status: </label>
-                        <input type="text">
+                        <input type="text" name="CURRENT_MARITAL_STATUS">
                         <label for="">Shareholder_status: </label>
-                        <select name="shareholder-status" id="">
+                        <select name="SHAREHOLDER_STATUS" id="">
                             <option value="fulltime">Fulltime</option>
                             <option value="partime">Partime</option>
                         </select>
                         <label for="">Ethnicity</label>
-                        <input type="text">
+                        <input type="text" name="ETHNICITY">
                     </div>
 
                     <div class="employee-infor">
@@ -136,8 +136,6 @@
                     <input type="checkbox" name="employee-showInfo" id="employee-showInfo">
                     <label for="employee-showInfo">Edit employee</label>
                 </div>
-
-
             </div>
         </div>
     </header>
