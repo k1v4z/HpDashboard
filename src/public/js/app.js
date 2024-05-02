@@ -275,7 +275,7 @@ let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
 
-    console.log('Delete successful');
+    console.log('Delete succesful');
     overlayDelete.style.display = 'none';
 });
 noDelete.addEventListener('click', () => {
