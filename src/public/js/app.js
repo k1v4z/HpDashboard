@@ -23,6 +23,7 @@ let showUI3 = document.querySelector('.content.ui3');
 let showUI4 = document.querySelector('.content.ui4');
 let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
+let showUI7 = document.querySelector('.content.ui7');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
@@ -282,7 +283,22 @@ noDelete.addEventListener('click', () => {
 
 });
 
+
+
 // END Employee Management VIEW-DELETE
+
+// START Employee Management VIEW-EDIT
+
+var editButtons = document.querySelectorAll('.btn-edit');
+editButtons.forEach(function (button) {
+
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        window.location.href = "/employee-viewEdit";
+        showUI7.classList.add('active');
+    });
+});
+// END Employee Management VIEW-EDIT
 
 // START Employee Management ADD
 document.addEventListener("DOMContentLoaded", function () {
@@ -297,3 +313,4 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+// END Employee Management ADD
