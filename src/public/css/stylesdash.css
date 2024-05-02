@@ -50,9 +50,9 @@ html::-webkit-scrollbar {
   display: none;
 }
 header .navbar .logo {
-  width: 90%;
-  height: 70px;
-  margin: 5px 5px 0 10px;
+  width: 60%;
+  height: 40px;
+  margin: 0px 5px 30px 30px;
 }
 
 header .navbar .logo img {
