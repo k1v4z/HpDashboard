@@ -275,7 +275,7 @@ let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
 
-    console.log('Xoa thanh cong');
+    console.log('Delete successful');
     overlayDelete.style.display = 'none';
 });
 noDelete.addEventListener('click', () => {
@@ -359,8 +359,8 @@ const handle = () => {
                             <input type="text" required>
                             <label for="">Last review date:</label>
                             <input type="date" required>
-                            <label for="">Number day requiement:</label>
-                            <input type="date" required>
+                            <label for="">Number day requirement:</label>
+                            <input type="number" required>
             </div>`
     } else {
         document.querySelector('.employee-infor').innerHTML = ``
