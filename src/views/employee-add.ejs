@@ -89,8 +89,8 @@
                     </div>
                     <div class="personal-infor_right">
                         <label for="">Social_security_number :</label>
-                        <input type="number" name="SOCIAL_SECURITY_NUMBER" required>
-                        <label for="">Drivers_licenes: </label>
+                        <input type="text" name="SOCIAL_SECURITY_NUMBER" required>
+                        <label for="">Drivers_license: </label>
                         <input type="text" required>
                         <label for="">Current City: </label>
                         <input type="text">
@@ -102,8 +102,8 @@
                         <input type="text" name="CURRENT_MARITAL_STATUS">
                         <label for="">Shareholder_status: </label>
                         <select name="SHAREHOLDER_STATUS" id="">
-                            <option value="fulltime">Fulltime</option>
-                            <option value="partime">Partime</option>
+                            <option value="fulltime">Shareholder</option>
+                            <option value="partime">Non-shareholder</option>
                         </select>
                         <label for="">Ethnicity</label>
                         <input type="text" name="ETHNICITY">
@@ -112,49 +112,52 @@
                     <h1 class="employee-title">EMPLOYEE DETAIL</h1>
 
                     <div class="employee-infor" style="grid-column: 1 / 3;">
-                        <div class="employee-infor_left">
+                        <!-- <div class="employee-infor_left">
 
                             <label for="">First Name:</label>
                             <input type="text" required>
+
                             <label for="">hire date for working:</label>
-                            <input type="text" required>
+                            <input type="text" name="HIRE_DATE" required>
                             <label for="">work comp code:</label>
-                            <input type="text" required>
+                            <input type="text" name="EMPLOYEE_CODE" required>
                             <label for="">termination day:</label>
-                            <input type="text" required>
+                            <input type="date" name="TERMINATION_DATE" required>
                             <label for="">rehire date for working:</label>
-                            <input type="text" required>
+                            <input type="date" name="REHIRE_DATE_FOR_WORKING" required>
                             <label for="">Last review date:</label>
-                            <input type="date" required>
-                            <label for="">Employeement status: </label>
+                            <input type="date" name="LAST_REVIEW_DATE" required>
+                            <label for="">Employment status: </label>
                             <select name="employment-status" id="">
-                                <option value="fulltime">Fulltime</option>
-                                <option value="partime">Partime</option>
+                                <option value="fulltime">Alive</option>
+                                <option value="partime">Quit</option>
                             </select>
                         </div>
                         <div class="employee-infor_right">
 
                             <label for="">Pay rate:</label>
-                            <input type="number" required>
+                            <input type="text" required>
                             <label for="">ID Pay rate:</label>
                             <input type="number" required>
-                            <label for="">vocation day:</label>
+                            <label for="">vacation day:</label>
                             <input type="date" required>
-                            <label for="">Pay to date:</label>
+                            <label for="">Paid to date:</label>
                             <input type="date" required>
-                            <label for="">pay last year:</label>
+                            <label for="">Paid last year:</label>
                             <input type="text" required>
                             <label for="">Last review date:</label>
                             <input type="date" required>
                             <label for="">Number day requiement:</label>
                             <input type="date" required>
-                        </div>
+                        </div> -->
                     </div>
 
                 <div class="checkbox-employee">
-                    <input type="checkbox" name="employee-showInfo" id="employee-showInfo">
+                    <input type="checkbox" name="employee-showInfo" id="employee-showInfo" onclick="handle()">
                     <label for="employee-showInfo">Edit employee</label>
                 </div>
+                <button type="submit">Add</button>
+                </form>
             </div>
         </div>
     </header>

@@ -1,5 +1,6 @@
 //convert shareholder status from string to small int
 
+const { QueryTypes } = require("sequelize")
 const { sequelize_mysql } = require("../config/Sequelize")
 const defineAssociation = require("../model/association/Association")
 
@@ -18,17 +19,17 @@ const generateEmployeeCode = async () => {
         `SELECT count(idEmployee) FROM mydb.employee`,
         { type: QueryTypes.SELECT }
     ).then(res => JSON.stringify(res))
-        .then(StringJSON => JSON.parse(StringJSON))
+        .then((StringJSON)=> {
+            const count = JSON.parse(StringJSON)
+            const num = count[0]['count(idEmployee)'] + 1 //get Number in json
+
+            const result = 'EMP' + num //get Employee code
+            return result
+        })
         .catch(err => console.log(err));
 
     return code
 }
-
-async function hello(){
-    console.log(await generateEmployeeCode())
-}
-
-hello();
 
 module.exports = {
     convertShareHolder, generateEmployeeCode
