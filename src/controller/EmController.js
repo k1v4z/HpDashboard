@@ -16,6 +16,11 @@ const addEPI = (req, res) => {
     
 }
 
+//editEPI stand for edit Employee Personal Information
+const iditEPI = (req, res) => {
+    
+}
+
 module.exports = {
     getAllEmployee
 }
