@@ -6,7 +6,7 @@ const { getAllEmployee } = require('../../controller/EmController');
 const routerManage = express.Router();
 
 routerManage.get('/manage', getAllEmployee);
-// routerManage.add('/add', )
+// routerManage.add('/add',)
 
 module.exports = routerManage;
 //temporary for FE test UI
