@@ -1,0 +1,17 @@
+{
+	"folders": [
+		{
+			"path": "../../../store-api"
+		},
+		{
+			"path": "../../../task-manager"
+		},
+		{
+			"path": "../../../MERN JOB"
+		},
+		{
+			"path": "../.."
+		}
+	],
+	"settings": {}
+}

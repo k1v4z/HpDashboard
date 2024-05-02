@@ -19,6 +19,11 @@ const addEPI = async (req, res) => {
     return res.send(add);
 }
 
+//editEPI stand for edit Employee Personal Information
+const iditEPI = (req, res) => {
+    
+}
+
 module.exports = {
     getAllEmployee, addEPI
 }

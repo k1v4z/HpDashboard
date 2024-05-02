@@ -3,6 +3,7 @@ const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getAllBenefitPlan } = require("./ApiController");
+const { getAllPersonalImfomations } = require("../service/GetAllPersonalData");
 
 const getDashBoard = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -53,8 +54,11 @@ const getAnnouncementTwo = (req, res) => {
 }
 
 
-const getEmployeeView = (req, res) => {
-    return res.render('employee-view.ejs');
+const getEmployeeView = async (req, res) => {
+    const dataPersonal=  await getAllPersonalImfomations();
+    return res.render('employee-view.ejs',{
+        dataPersonal : dataPersonal
+    });
 }
 const getEmployeeAdd = (req, res) => {
     return res.render('employee-add.ejs');

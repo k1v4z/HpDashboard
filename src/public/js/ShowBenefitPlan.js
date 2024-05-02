@@ -24,6 +24,7 @@ const getData = async () => {
     const urlWithParams = `${url}?${formData.toString()}`;
 
     const data = await fetch(urlWithParams)
+    
         .then(response => {
             if (!response.ok) {
                 throw new Error('Network response was not ok');
