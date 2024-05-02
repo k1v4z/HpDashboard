@@ -682,7 +682,7 @@ thead {
 #logout {
   display: block;
 }
-#logout.active {
+#logout.activeLogout {
   display: none;
 }
 

@@ -221,13 +221,13 @@ BtnN6.addEventListener('click', () => {
     if (!checkClick) {
         boxActive.classList.add("active");
         hideAllContent();
-        logoutBtn.classList.add("active");
+        logoutBtn.classList.add("activeLogout");
         checkClick = true;
     }
     else {
         boxActive.classList.remove("active");
         hideAllContent();
-        logoutBtn.classList.remove("active");
+        logoutBtn.classList.remove("activeLogout");
         checkClick = false;
     }
 })
