@@ -24,6 +24,7 @@ let showUI4 = document.querySelector('.content.ui4');
 let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
 let showUI7 = document.querySelector('.content.ui7');
+let showUI8 = document.querySelector('.content.ui8');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
@@ -371,4 +372,6 @@ const handle = () => {
 }
 
 // END Employee Management ADD
+
+
 
