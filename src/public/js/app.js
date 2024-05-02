@@ -373,5 +373,19 @@ const handle = () => {
 
 // END Employee Management ADD
 
+let personalManage = document.querySelector('.personal-manage');
+let employeeManage = document.querySelector('.employee-manage');
 
 
+personalManage.addEventListener('click', () => {
+    personalManage.classList.add('active');
+    employeeManage.classList.remove('active');
+    showUI5.classList.add('active');
+    showUI8.classList.remove('active');
+})
+employeeManage.addEventListener('click', () => {
+    personalManage.classList.remove('active');
+    employeeManage.classList.add('active');
+    showUI8.classList.add('active');
+    showUI5.classList.remove('active');
+})

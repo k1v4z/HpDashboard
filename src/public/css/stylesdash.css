@@ -869,6 +869,27 @@ thead {
 }
 /* END Emloyee Management ADD */
 
+.personal-manage.active {
+  background-color: aqua;
+  color: black;
+}
+.employee-manage.active {
+  background-color: aqua;
+  color: black;
+}
+.content.ui8 {
+  display: none;
+}
+.content.ui8.active {
+  display: block;
+}
+.content.ui5 {
+  display: none;
+}
+.content.ui5.active {
+  display: block;
+}
+
 /* Responsive */
 @media (max-width: 1240px) {
   .info-vacationdays {
