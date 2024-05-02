@@ -78,8 +78,9 @@
                         </thead>
                         <tbody class="view-table-data">
                             <%dataPersonal.forEach((dataPersonal)=> {%>
-                            <tr>
-                                <td><%=dataPersonal.CURRENT_FIRST_NAME%>+</td>
+                                <tr>
+                                    <td>
+                                        <%=dataPersonal.CURRENT_FIRST_NAME + ' ' +dataPersonal.CURRENT_MIDDLE_NAME+' ' + dataPersonal.CURRENT_LAST_NAME%></td>
                                 <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
                                 <td><%=dataPersonal.CURRENT_CITY%></td>
                                 <td><%=dataPersonal.CURRENT_COUNTRY%></td>
