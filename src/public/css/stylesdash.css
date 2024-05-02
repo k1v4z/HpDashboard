@@ -803,12 +803,17 @@ thead {
 }
 .employee-title {
   padding-top: 30px;
+  display: none;
 }
 .personal-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin: 20px;
+}
+.employee-infor {
+  display: flex;
+  gap: 10px;
 }
 
 .personal-info label {
@@ -852,6 +857,7 @@ thead {
 }
 .employee-infor {
   display: none;
+  /* display: flex; */
 }
 .checkbox-employee {
   display: flex;

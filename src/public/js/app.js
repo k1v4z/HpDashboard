@@ -304,12 +304,16 @@ editButtons.forEach(function (button) {
 document.addEventListener("DOMContentLoaded", function () {
     var checkbox = document.getElementById("employee-showInfo");
     var employeeInfo = document.querySelector(".employee-infor");
+    var employeeTilte = document.querySelector(".employee-title");
 
     checkbox.addEventListener("change", function () {
         if (checkbox.checked) {
-            employeeInfo.style.display = "block";
+            employeeInfo.style.display = "flex";
+            employeeTilte.style.display = "block";
+
         } else {
             employeeInfo.style.display = "none";
+            employeeTilte.style.display = "none";
         }
     });
 });

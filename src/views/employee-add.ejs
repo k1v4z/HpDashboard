@@ -65,70 +65,92 @@
 
                 <form action="" method="post" class="personal-info">
                     <div class="personal-info_left">
-                        <label for="">First_Name:</label>
+                        <label for="">First Name:</label>
                         <input type="text" required>
-                        <label for="">Middle_Name:</label>
+                        <label for="">Middle Name:</label>
                         <input type="text" required>
-                        <label for="">Last_Name:</label>
+                        <label for="">Last Name:</label>
                         <input type="text" required>
-                        <label for="">Date_of_Birth:</label>
+                        <label for="">Date of Birth:</label>
                         <input type="date" required>
-                        <label for="">Current_Address 1: </label>
+                        <label for="">Current Address 1: </label>
                         <input type="text">
-                        <label for="">Current_Address 2: </label>
+                        <label for="">Current Address 2: </label>
                         <input type="text">
-                        <label for="">Current_ZIP: </label>
+                        <label for="">Current ZIP: </label>
                         <input type="text">
-                        <label for="">Current_Gender</label>
+                        <label for="">Current Gender</label>
                         <select name="gender" id="">
                             <option value="male">Male</option>
                             <option value="female">Female</option>
                         </select>
-                        <label for="">Current_Personal_email: </label>
+                        <label for="">Current Personal Email: </label>
                         <input type="email">
                     </div>
                     <div class="personal-infor_right">
-                        <label for="">Social_security_number :</label>
+                        <label for="">Social security number :</label>
                         <input type="number" required>
-                        <label for="">Drivers_licenes: </label>
+                        <label for="">Drivers licenes: </label>
                         <input type="text" required>
-                        <label for="">Current_City: </label>
+                        <label for="">Current City: </label>
                         <input type="text">
-                        <label for="">Current_Country: </label>
+                        <label for="">Current Country: </label>
                         <input type="text">
-                        <label for="">Current_Phone_number: </label>
+                        <label for="">Current Phone number: </label>
                         <input type="number">
-                        <label for="">Current_marital_status: </label>
+                        <label for="">Current marital status: </label>
                         <input type="text">
-                        <label for="">Shareholder_status: </label>
+                        <label for="">Shareholder status: </label>
                         <select name="shareholder-status" id="">
-                            <option value="fulltime">Fulltime</option>
-                            <option value="partime">Partime</option>
+                            <option value="shareholder">Shareholder</option>
+                            <option value="non-shareholder">Non-Shareholder</option>
                         </select>
                         <label for="">Ethnicity</label>
                         <input type="text">
                     </div>
 
-                    <div class="employee-infor">
-                        <h1 class="employee-title">EMPLOYEE DETAIL</h1>
-                        <label for="">First Name:</label>
-                        <input type="text" required>
-                        <label for="">hire_date_for_working:</label>
-                        <input type="text" required>
-                        <label for="">work_comp_code:</label>
-                        <input type="text" required>
-                        <label for="">termination_day:</label>
-                        <input type="text" required>
-                        <label for="">rehire_date_for_working:</label>
-                        <input type="text" required>
-                        <label for="">Last_review_date:</label>
-                        <input type="date" required>
-                        <label for="">Employeement_status: </label>
-                        <select name="employment-status" id="">
-                            <option value="fulltime">Fulltime</option>
-                            <option value="partime">Partime</option>
-                        </select>
+                    <h1 class="employee-title">EMPLOYEE DETAIL</h1>
+
+                    <div class="employee-infor" style="grid-column: 1 / 3;">
+                        <div class="employee-infor_left">
+
+                            <label for="">First Name:</label>
+                            <input type="text" required>
+                            <label for="">hire date for working:</label>
+                            <input type="text" required>
+                            <label for="">work comp code:</label>
+                            <input type="text" required>
+                            <label for="">termination day:</label>
+                            <input type="text" required>
+                            <label for="">rehire date for working:</label>
+                            <input type="text" required>
+                            <label for="">Last review date:</label>
+                            <input type="date" required>
+                            <label for="">Employeement status: </label>
+                            <select name="employment-status" id="">
+                                <option value="fulltime">Fulltime</option>
+                                <option value="partime">Partime</option>
+                            </select>
+                        </div>
+                        <div class="employee-infor_right">
+
+                            <label for="">Pay rate:</label>
+                            <input type="number" required>
+                            <label for="">ID Pay rate:</label>
+                            <input type="number" required>
+                            <label for="">vocation day:</label>
+                            <input type="date" required>
+                            <label for="">Pay to date:</label>
+                            <input type="date" required>
+                            <label for="">pay last year:</label>
+                            <input type="text" required>
+                            <label for="">Last review date:</label>
+                            <input type="date" required>
+                            <label for="">Number day requiement:</label>
+                            <input type="date" required>
+                        </div>
                     </div>
+
                     <button type="submit">Create</button>
                 </form>
 
