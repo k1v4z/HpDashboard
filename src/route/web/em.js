@@ -3,7 +3,7 @@
 
 const express = require('express');
 const { getAllEmployee, addEPI } = require('../../controller/EmController');
-const { getEmployeeView, getEmployeeViewEdit, getEmployeeAdd } = require('../../controller/HomeController');
+const { getEmployeeView, setEditDataToForm, getEmployeeAdd } = require('../../controller/HomeController');
 
 const routerManage = express.Router();
 
@@ -12,7 +12,7 @@ routerManage.get('/manage', getAllEmployee);
 // routerManage.add('/add',)
 
 routerManage.get('/employee-view', getEmployeeView);
-routerManage.post('/employee-viewEdit', getEmployeeViewEdit);
+routerManage.get('/employee-view/edit/:id', setEditDataToForm);
 routerManage.get('/employee-add', getEmployeeAdd);
 
 

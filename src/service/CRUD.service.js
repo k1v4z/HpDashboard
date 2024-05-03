@@ -70,6 +70,27 @@ const add_EP_Information = async (req) => {
     return req.body
 }
 
+
+const getEditPersonal = async (id) => {
+    const PersonalByID = await Personal.findOne({
+        where: {
+            PERSONAL_ID: id
+        }
+    }).then(res => JSON.stringify(res))
+        .then(StringJSON => JSON.parse(StringJSON))
+        .catch(err => console.log(err));
+
+    return PersonalByID;
+};
+
+// getEditPersonal(3).then(personalData => {
+//     console.log(personalData);
+// }).catch(error => {
+//     console.error('An error occurred:', error);
+// });
+
+
+
 const addPersonal = async (employeeCode) => {
     //add personal
     sequelize_sqlserver.transaction(async (t) => {
@@ -100,5 +121,5 @@ const addPersonal = async (employeeCode) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEditPersonal
 }

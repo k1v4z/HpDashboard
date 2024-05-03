@@ -1,4 +1,4 @@
-const { getAllDepartment, getAllEthnicity,getAllPersonalImfomations } = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEditPersonal } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -64,12 +64,29 @@ const getEmployeeAdd = (req, res) => {
     return res.render('employee-add.ejs');
 }
 
-const getEmployeeViewEdit = (req, res) => {
-    return res.render('employee-view_edit.ejs');
+const setEditDataToForm = async (req, res) => {
+    let id = req.params.id;
+    try {
+        let [results, fields] = await getEditPersonal(id);
+        if (!results || results.length === 0) {
+            // Handle the case where no results are found
+            return res.status(404).send("No personal data found for the given ID.");
+        }
+        const { PERSONAL_ID, CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME, BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE, CURRENT_ADDRESS_1, CURRENT_ADDRESS_2,
+            CURRENT_CITY, CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER, CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS, ETHNICITY, SHAREHOLDER_STATUS, BENEFIT_PLAN_ID } = results[0];
+        
+        res.render('employee-view_edit.ejs', {
+            PERSONAL_ID, CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME, BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE, CURRENT_ADDRESS_1, CURRENT_ADDRESS_2,
+            CURRENT_CITY, CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER, CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS, ETHNICITY, SHAREHOLDER_STATUS, BENEFIT_PLAN_ID
+        });
+    } catch (error) {
+        console.error("Failed to retrieve or process personal data:", error);
+        res.status(500).send("An error occurred while retrieving personal data.");
+    }
 }
 
 
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, getEmployeeViewEdit
+    getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, setEditDataToForm
 }
