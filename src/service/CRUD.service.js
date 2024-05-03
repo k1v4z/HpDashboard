@@ -32,6 +32,7 @@ const getAllPersonalImfomations = async () => {
     }).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
+
     return data;
 }
 //add Employee Personal Information
@@ -43,7 +44,7 @@ const add_EP_Information = async (req) => {
     if (data.employee_showInfo == 'on') {
         message = await addEmployee(data)
         return message
-    }else{
+    } else {
         message = await addPersonal(data)
         return message
     }
@@ -84,7 +85,7 @@ const addPersonal = async (data) => {
             console.log('sqlserver: ->>>>>>>>>>>', err);
             return message = 'Create Fail'
         })
-    
+
     return message
 }
 

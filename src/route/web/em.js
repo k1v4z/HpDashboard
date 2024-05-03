@@ -9,12 +9,11 @@ const routerManage = express.Router();
 
 routerManage.get('/manage', getAllEmployee);
 
+//CRUD Action
+routerManage.post('/add', addEPI)
 routerManage.get('/employee-view', getEmployeeView);
 routerManage.get('/employee-view/edit/:id', setEditDataToForm);
 routerManage.get('/employee-add', getEmployeeAdd);
 
-
-//CRUD Action
-routerManage.post('/add', addEPI)
 module.exports = routerManage;
 //temporary for FE test UIz
