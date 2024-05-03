@@ -295,7 +295,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        window.location.href = "/employee-viewEdit";
+        window.location.href = "/employee-viewEdit/edit";
         showUI7.classList.add('active');
     });
 });

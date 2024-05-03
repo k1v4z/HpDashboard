@@ -16,13 +16,17 @@ const getAllEmployee = async (req, res) => {
 
 const addEPI = async (req, res) => {
     const add = await add_EP_Information(req);
-    
+
     return res.send(add);
 
-    //editEPI stand for edit Employee Personal Information
-    const iditEPI = (req, res) => {
+}
 
-    }
+//editEPI stand for edit Employee Personal Information
+const editEPI = async (req, res) => {
+    let id = req.params.id;
+    let [results, fields] = await getEditUser(id);
+    const { name, email, City: address } = results[0];
+    res.render("edit.ejs", { id, name, email, address });
 }
 
 module.exports = {

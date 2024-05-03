@@ -101,7 +101,7 @@ header .navbar .menu li {
   color: #e94646;
   justify-content: center;
   text-align: center;
-  font-family: Inter;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 900;
@@ -123,7 +123,7 @@ header .navbar .menu li {
   list-style: none;
   font-weight: 400;
   line-height: 25px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: italic;
   border-radius: 4px;
 }
@@ -395,7 +395,7 @@ header .main-content h2 {
 
 thead {
   position: sticky;
-  top: 0;
+  top: -2px;
 }
 
 .content .el1 {
@@ -640,7 +640,7 @@ thead {
 .alert-v {
   color: #bc4444;
   text-align: center;
-  font-family: Inter;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 900;
@@ -705,16 +705,18 @@ thead {
 /* START Emloyee Management VIEW */
 
 .frm-view {
-  padding: 20px;
-  /* height: 100vh;
-  overflow-x: auto; */
+  padding: 0 10px 0 10px;
+  height: 500px;
+  overflow-y: auto;
 }
 .tb-view {
   width: 100%;
+  border-spacing: 0;
   border-collapse: collapse;
 }
+
 .tb-view th {
-  padding: 10px;
+  padding: 7px;
   text-align: left;
   text-transform: uppercase;
   color: white;
@@ -734,12 +736,20 @@ thead {
   border: none;
   color: white;
 }
+.btn-edit:hover {
+  background-color: #008cba;
+  color: white;
+}
 .btn-delete {
   width: 60px;
   height: 30px;
   background-color: #ab2626;
   border-radius: 10px;
   border: none;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #555555;
   color: white;
 }
 .editing {
@@ -789,14 +799,52 @@ thead {
   background-color: #007bff;
   color: #fff;
 }
+
+.personal-manage,
+.employee-manage {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cdd7d8;
+  color: rgb(18, 16, 16);
+  font-weight: 600;
+  margin: 10px 0 0 10px;
+}
+.personal-manage.active,
+.employee-manage.active {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #12c2ce;
+  color: white;
+  font-weight: 600;
+  margin: 10px 0 6px 10px;
+}
+
+.content.ui8 {
+  display: none;
+}
+.content.ui8.active {
+  display: block;
+}
+.content.ui5 {
+  display: none;
+}
+.content.ui5.active {
+  display: block;
+}
 /* END Emloyee Management VIEW */
 
 /* START Emloyee Management ADD */
 .personal-title,
 .employee-title {
   text-align: left;
-  font-size: 44px;
+  padding-top: 10px;
+  font-size: 35px;
   font-weight: 700;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 20px;
   text-transform: uppercase;
   color: #4ed4de;
@@ -868,27 +916,6 @@ thead {
   padding-left: 90px;
 }
 /* END Emloyee Management ADD */
-
-.personal-manage.active {
-  background-color: aqua;
-  color: black;
-}
-.employee-manage.active {
-  background-color: aqua;
-  color: black;
-}
-.content.ui8 {
-  display: none;
-}
-.content.ui8.active {
-  display: block;
-}
-.content.ui5 {
-  display: none;
-}
-.content.ui5.active {
-  display: block;
-}
 
 /* Responsive */
 @media (max-width: 1240px) {

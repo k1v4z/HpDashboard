@@ -12,7 +12,7 @@ routerManage.get('/manage', getAllEmployee);
 // routerManage.add('/add',)
 
 routerManage.get('/employee-view', getEmployeeView);
-routerManage.get('/employee-viewEdit', getEmployeeViewEdit);
+routerManage.post('/employee-viewEdit', getEmployeeViewEdit);
 routerManage.get('/employee-add', getEmployeeAdd);
 
 
