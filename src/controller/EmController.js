@@ -14,14 +14,10 @@ const getAllEmployee = async (req, res) => {
 
 //addEPI stand for add Employee Personal Information
 
-const addEPI = (req, res) => {
-
-    const addEPI = async (req, res) => {
-        const add = await add_EP_Information(req);
-
-        return res.send(add);
-
-    }
+const addEPI = async (req, res) => {
+    const add = await add_EP_Information(req);
+    
+    return res.send(add);
 
     //editEPI stand for edit Employee Personal Information
     const iditEPI = (req, res) => {

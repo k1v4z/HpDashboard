@@ -330,8 +330,6 @@ const handle = () => {
     if (check.checked == true) {
         document.querySelector('.employee-infor').innerHTML = `
             <div class="employee-infor_left">
-                            <label for="">First Name:</label>
-                            <input type="text" required>
 
                             <label for="">hire date for working:</label>
                             <input type="text" name="HIRE_DATE" required>
@@ -344,27 +342,25 @@ const handle = () => {
                             <label for="">Last review date:</label>
                             <input type="date" name="LAST_REVIEW_DATE" required>
                             <label for="">Employment status: </label>
-                            <select name="employment-status" id="">
-                                <option value="fulltime">Alive</option>
-                                <option value="partime">Quit</option>
+                            <select name="employment-status" id="" name="EMPLOYMENT_STATUS">
+                                <option value="Alive">Alive</option>
+                                <option value="Quit">Quit</option>
                             </select>
                         </div>
                         <div class="employee-infor_right">
 
                             <label for="">Pay rate:</label>
-                            <input type="text" required>
-                            <label for="">ID Pay rate:</label>
-                            <input type="number" required>
+                            <input type="text" name="PAY_RATE" required>
+                            <label for="">Id Pay rate:</label>
+                            <input type="number" name="ID_PAY_RATE" required>
                             <label for="">vacation day:</label>
-                            <input type="date" required>
+                            <input type="number" name="VACATION_DAYS" required>
                             <label for="">Paid to date:</label>
-                            <input type="date" required>
+                            <input type="number" name="PAID_TO_DATE" required>
                             <label for="">Paid last year:</label>
-                            <input type="text" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" required>
+                            <input type="number" name="PAID_LAST_YEAR" required>
                             <label for="">Number day requirement:</label>
-                            <input type="number" required>
+                            <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
             </div>`
     } else {
         document.querySelector('.employee-infor').innerHTML = ``
