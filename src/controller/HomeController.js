@@ -1,9 +1,9 @@
-const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity,getAllPersonalImfomations } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getAllBenefitPlan } = require("./ApiController");
-const { getAllPersonalImfomations } = require("../service/GetAllPersonalData");
+// const { getAllPersonalImfomations } = require("../service/GetAllPersonalData");
 
 const getDashBoard = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -73,18 +73,4 @@ const getEmployeeViewEdit = (req, res) => {
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
     getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, getEmployeeViewEdit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }
