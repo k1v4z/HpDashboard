@@ -8,7 +8,7 @@ const Employee = sequelize_mysql.define('employee', {
         type: DataTypes.INTEGER,
     },
     'Employee Number': {
-        type: DataTypes.INTEGER,
+        type: DataTypes.STRING,
         primaryKey: true
     },
     'Last Name': {
@@ -39,7 +39,7 @@ const Employee = sequelize_mysql.define('employee', {
 }, { sequelize_mysql, modelName: 'Employee', tableName: 'employee' });
 
 //define association
-Employee.hasOne(PayRate,{foreignKey: 'idPay Rates'});
+Employee.hasOne(PayRate, { foreignKey: 'idPay Rates' });
 PayRate.belongsTo(Employee);
 
 module.exports = Employee;

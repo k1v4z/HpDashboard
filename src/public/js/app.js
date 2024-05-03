@@ -24,6 +24,7 @@ let showUI4 = document.querySelector('.content.ui4');
 let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
 let showUI7 = document.querySelector('.content.ui7');
+let showUI8 = document.querySelector('.content.ui8');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
@@ -275,7 +276,7 @@ let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
 
-    console.log('Xoa thanh cong');
+    console.log('Delete succesful');
     overlayDelete.style.display = 'none';
 });
 noDelete.addEventListener('click', () => {
@@ -294,7 +295,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        window.location.href = "/employee-viewEdit";
+        window.location.href = "/employee-viewEdit/edit";
         showUI7.classList.add('active');
     });
 });
@@ -317,4 +318,74 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
 // END Employee Management ADD
+
+
+
+//test
+const handle = () => {
+    const check = document.getElementById("employee-showInfo")
+
+    if (check.checked == true) {
+        document.querySelector('.employee-infor').innerHTML = `
+            <div class="employee-infor_left">
+                            <label for="">First Name:</label>
+                            <input type="text" required>
+
+                            <label for="">hire date for working:</label>
+                            <input type="text" name="HIRE_DATE" required>
+                            <label for="">work comp code:</label>
+                            <input type="text" name="EMPLOYEE_CODE" required>
+                            <label for="">termination day:</label>
+                            <input type="date" name="TERMINATION_DATE" required>
+                            <label for="">rehire date for working:</label>
+                            <input type="date" name="REHIRE_DATE_FOR_WORKING" required>
+                            <label for="">Last review date:</label>
+                            <input type="date" name="LAST_REVIEW_DATE" required>
+                            <label for="">Employment status: </label>
+                            <select name="employment-status" id="">
+                                <option value="fulltime">Alive</option>
+                                <option value="partime">Quit</option>
+                            </select>
+                        </div>
+                        <div class="employee-infor_right">
+
+                            <label for="">Pay rate:</label>
+                            <input type="text" required>
+                            <label for="">ID Pay rate:</label>
+                            <input type="number" required>
+                            <label for="">vacation day:</label>
+                            <input type="date" required>
+                            <label for="">Paid to date:</label>
+                            <input type="date" required>
+                            <label for="">Paid last year:</label>
+                            <input type="text" required>
+                            <label for="">Last review date:</label>
+                            <input type="date" required>
+                            <label for="">Number day requirement:</label>
+                            <input type="number" required>
+            </div>`
+    } else {
+        document.querySelector('.employee-infor').innerHTML = ``
+    }
+}
+
+// END Employee Management ADD
+
+let personalManage = document.querySelector('.personal-manage');
+let employeeManage = document.querySelector('.employee-manage');
+
+
+personalManage.addEventListener('click', () => {
+    personalManage.classList.add('active');
+    employeeManage.classList.remove('active');
+    showUI5.classList.add('active');
+    showUI8.classList.remove('active');
+})
+employeeManage.addEventListener('click', () => {
+    personalManage.classList.remove('active');
+    employeeManage.classList.add('active');
+    showUI8.classList.add('active');
+    showUI5.classList.remove('active');
+})

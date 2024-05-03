@@ -705,15 +705,18 @@ thead {
 /* START Emloyee Management VIEW */
 
 .frm-view {
-  padding: 20px;
+  padding: 0 10px 0 10px;
+  height: 500px;
+  overflow-y: auto;
 }
-
 .tb-view {
   width: 100%;
+  border-spacing: 0;
   border-collapse: collapse;
 }
+
 .tb-view th {
-  padding: 10px;
+  padding: 7px;
   text-align: left;
   text-transform: uppercase;
   color: white;
@@ -780,15 +783,50 @@ thead {
 }
 
 .option-delete.yes {
-  background-color: #dc3545; /* Red color */
-  color: #fff; /* White text color */
+  background-color: #dc3545;
+  color: #fff;
 }
 
 .option-delete.no {
-  background-color: #007bff; /* Blue color */
-  color: #fff; /* White text color */
+  background-color: #007bff;
+  color: #fff;
 }
 
+.personal-manage,
+.employee-manage {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cdd7d8;
+  color: rgb(18, 16, 16);
+  font-weight: 600;
+  margin: 10px 0 0 10px;
+}
+.personal-manage.active,
+.employee-manage.active {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #12c2ce;
+  color: white;
+  font-weight: 600;
+  margin: 10px 0 6px 10px;
+}
+
+.content.ui8 {
+  display: none;
+}
+.content.ui8.active {
+  display: block;
+}
+.content.ui5 {
+  display: none;
+}
+.content.ui5.active {
+  display: block;
+}
 /* END Emloyee Management VIEW */
 
 /* START Emloyee Management ADD */
@@ -848,23 +886,24 @@ thead {
   text-transform: uppercase;
   font-weight: 600;
   font-size: 28px;
-  margin-top: 20px;
 }
-
+.employee-infor_left,
+.employee-infor_right {
+  width: 50%;
+}
 .personal-info button:hover {
   background-color: rgb(15, 14, 14);
   color: #12c2ce;
 }
 .employee-infor {
   display: none;
-  /* display: flex; */
 }
 .checkbox-employee {
-  display: flex;
-  justify-content: center;
+  width: 300px;
   gap: 10px;
   font-size: 16px;
-  margin-bottom: 40px;
+  margin-left: 75%;
+  padding-left: 90px;
 }
 /* END Emloyee Management ADD */
 

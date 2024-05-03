@@ -83,6 +83,33 @@ const getAniversaryNotifications = async (req, res) => {
         })
     }
 }
+<<<<<<< HEAD
+=======
+const getAllPersonalImformationdata = async (req, res, next) => {
+    try {
+        const result = await getAllPersonalImfomations();
+        return res.status(200).json({
+            result: result
+        })
+    } catch {
+        return res.status(500).json({
+            error: 'Error'
+        })
+    }
+}
+
+const getValuesFromDBToInputs = async (req, res) => {
+    try {
+        const { id } = req.query; 
+    } catch {
+        return res.status(500).json({
+            error: 'Error'
+        })
+    }
+}
+
+
+>>>>>>> 949fbdfc6f7d65ecbf25bec7ecd97d8a5e71ad7b
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications,
     getAniversaryNotifications, getAllBenefitPlan

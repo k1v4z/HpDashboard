@@ -55,9 +55,9 @@ const getAnnouncementTwo = (req, res) => {
 
 
 const getEmployeeView = async (req, res) => {
-    const dataPersonal=  await getAllPersonalImfomations();
-    return res.render('employee-view.ejs',{
-        dataPersonal : dataPersonal
+    const dataPersonal = await getAllPersonalImfomations();
+    return res.render('employee-view.ejs', {
+        dataPersonal: dataPersonal
     });
 }
 const getEmployeeAdd = (req, res) => {
@@ -67,7 +67,6 @@ const getEmployeeAdd = (req, res) => {
 const getEmployeeViewEdit = (req, res) => {
     return res.render('employee-view_edit.ejs');
 }
-
 
 
 module.exports = {
