@@ -101,7 +101,7 @@ header .navbar .menu li {
   color: #e94646;
   justify-content: center;
   text-align: center;
-  font-family: Inter;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 900;
@@ -123,7 +123,7 @@ header .navbar .menu li {
   list-style: none;
   font-weight: 400;
   line-height: 25px;
-  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  font-family: "Poppins", sans-serif;
   font-style: italic;
   border-radius: 4px;
 }
@@ -395,7 +395,7 @@ header .main-content h2 {
 
 thead {
   position: sticky;
-  top: 0;
+  top: -2px;
 }
 
 .content .el1 {
@@ -640,7 +640,7 @@ thead {
 .alert-v {
   color: #bc4444;
   text-align: center;
-  font-family: Inter;
+  font-family: "Poppins", sans-serif;
   font-size: 20px;
   font-style: italic;
   font-weight: 900;
@@ -736,12 +736,20 @@ thead {
   border: none;
   color: white;
 }
+.btn-edit:hover {
+  background-color: #008cba;
+  color: white;
+}
 .btn-delete {
   width: 60px;
   height: 30px;
   background-color: #ab2626;
   border-radius: 10px;
   border: none;
+  color: white;
+}
+.btn-delete:hover {
+  background-color: #555555;
   color: white;
 }
 .editing {
@@ -833,8 +841,10 @@ thead {
 .personal-title,
 .employee-title {
   text-align: left;
-  font-size: 44px;
+  padding-top: 10px;
+  font-size: 35px;
   font-weight: 700;
+  font-family: "Poppins", sans-serif;
   margin-bottom: 20px;
   text-transform: uppercase;
   color: #4ed4de;
