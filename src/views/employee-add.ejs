@@ -78,11 +78,11 @@
                         <label for="">Current_Address 2: </label>
                         <input type="text" name="CURRENT_ADDRESS_2">
                         <label for="">Current_ZIP: </label>
-                        <input type="text" name="CURRENT_ZIP">
+                        <input type="number" name="CURRENT_ZIP">
                         <label for="">Current_Gender</label>
                         <select name="CURRENT_GENDER" id="">
-                            <option value="male">Male</option>
-                            <option value="female">Female</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
                         </select>
                         <label for="">Current_Personal_email: </label>
                         <input type="email" name="CURRENT_PERSONAL_EMAIL">
@@ -97,13 +97,13 @@
                         <label for="">Current Country: </label>
                         <input type="text">
                         <label for="">Current_Phone_number: </label>
-                        <input type="number" name="CURRENT_PHONE_NUMBER">
+                        <input type="text" name="CURRENT_PHONE_NUMBER">
                         <label for="">Current_marital_status: </label>
                         <input type="text" name="CURRENT_MARITAL_STATUS">
                         <label for="">Shareholder_status: </label>
                         <select name="SHAREHOLDER_STATUS" id="">
-                            <option value="fulltime">Shareholder</option>
-                            <option value="partime">Non-shareholder</option>
+                            <option value="Shareholder">Shareholder</option>
+                            <option value="Non-shareholder">Non-shareholder</option>
                         </select>
                         <label for="">Ethnicity</label>
                         <input type="text" name="ETHNICITY">
@@ -116,7 +116,7 @@
 
 
                     <div class="checkbox-employee">
-                        <input type="checkbox" name="employee-showInfo" id="employee-showInfo" onclick="handle()">
+                        <input type="checkbox" name="employee_showInfo" id="employee-showInfo" onclick="handle()">
                         <label for="employee-showInfo">Edit employee</label>
                     </div>
                     <button type="submit">Add</button>
