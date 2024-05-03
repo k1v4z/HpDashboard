@@ -9,8 +9,6 @@ const routerManage = express.Router();
 
 routerManage.get('/manage', getAllEmployee);
 
-// routerManage.add('/add',)
-
 routerManage.get('/employee-view', getEmployeeView);
 routerManage.post('/employee-viewEdit', getEmployeeViewEdit);
 routerManage.get('/employee-add', getEmployeeAdd);

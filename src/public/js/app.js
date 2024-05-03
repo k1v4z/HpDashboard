@@ -332,7 +332,7 @@ const handle = () => {
             <div class="employee-infor_left">
 
                             <label for="">hire date for working:</label>
-                            <input type="text" name="HIRE_DATE" required>
+                            <input type="date" name="HIRE_DATE" required>
                             <label for="">work comp code:</label>
                             <input type="text" name="EMPLOYEE_CODE" required>
                             <label for="">termination day:</label>
