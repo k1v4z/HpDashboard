@@ -5,7 +5,7 @@ const defineAssociation = require("../model/association/Association");
 const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
-
+const Employment = require("../model/human/Employment");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -25,7 +25,16 @@ const getAllEthnicity = async () => {
 
     return ethnicity;
 }
-
+const getAllPersonalImfomations = async () => {
+    const data = await Personal.findAll({
+        include: [{
+            model: Employment,
+        }]
+    }).then(res => JSON.stringify(res))
+        .then(StringJSON => JSON.parse(StringJSON))
+        .catch(err => console.log(err));
+    return data;
+}
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
     //data is information of personel
@@ -42,7 +51,7 @@ const add_EP_Information = async (req) => {
         const employeeCode = await generateEmployeeCode()
         addPersonal()
 
-    }else{
+    } else {
 
     }
 
@@ -64,7 +73,7 @@ const add_EP_Information = async (req) => {
 
 const addPersonal = async (employeeCode) => {
     //add personal
-    sequelize_sqlserver.transaction(async(t) =>{
+    sequelize_sqlserver.transaction(async (t) => {
         const personal = await Personal.create({
             CURRENT_FIRST_NAME: CURRENT_FIRST_NAME,
             CURRENT_LAST_NAME: CURRENT_LAST_NAME,
@@ -84,7 +93,7 @@ const addPersonal = async (employeeCode) => {
             ETHNICITY: ETHNICITY,
             SHAREHOLDER_STATUS: SHAREHOLDER_STATUS,
         }, { transaction: t })
-        
+
         await Employment.create({
             EMPLOYMENT_STATUS: EMPLOYMENT_STATUS
         })
@@ -92,5 +101,5 @@ const addPersonal = async (employeeCode) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, add_EP_Information
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information
 }
