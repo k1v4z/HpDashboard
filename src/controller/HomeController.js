@@ -66,23 +66,17 @@ const getEmployeeAdd = (req, res) => {
 
 const setEditDataToForm = async (req, res) => {
     let id = req.params.id;
-    try {
-        let [results, fields] = await getEditPersonal(id);
-        if (!results || results.length === 0) {
-            // Handle the case where no results are found
-            return res.status(404).send("No personal data found for the given ID.");
-        }
-        const { PERSONAL_ID, CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME, BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE, CURRENT_ADDRESS_1, CURRENT_ADDRESS_2,
-            CURRENT_CITY, CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER, CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS, ETHNICITY, SHAREHOLDER_STATUS, BENEFIT_PLAN_ID } = results[0];
-        
-        res.render('employee-view_edit.ejs', {
-            PERSONAL_ID, CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME, BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE, CURRENT_ADDRESS_1, CURRENT_ADDRESS_2,
-            CURRENT_CITY, CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER, CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS, ETHNICITY, SHAREHOLDER_STATUS, BENEFIT_PLAN_ID
-        });
-    } catch (error) {
-        console.error("Failed to retrieve or process personal data:", error);
-        res.status(500).send("An error occurred while retrieving personal data.");
-    }
+    let [results, fields] = await getEditPersonal(id);
+    // if (!results || results.length === 0) {
+    //     // Handle the case where no results are found
+    //     return res.status(404).send("No personal data found for the given ID.");
+    // }
+    const { PERSONAL_ID, CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME, BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE, CURRENT_ADDRESS_1, CURRENT_ADDRESS_2,
+        CURRENT_CITY, CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER, CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS, ETHNICITY, SHAREHOLDER_STATUS, BENEFIT_PLAN_ID } = results[0];
+
+    return res.render('employee-view_edit.ejs', {
+        ...Object.values(results[0])
+    });
 }
 
 

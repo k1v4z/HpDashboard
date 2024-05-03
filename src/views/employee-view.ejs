@@ -68,10 +68,8 @@
             <ul class="box">
               <!-- <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
             <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li> -->
-<<<<<<< HEAD
             </ul>
           </section>
-=======
                     </ul>
                 </section>
             </div>
@@ -111,7 +109,7 @@
                                 <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                                 <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                                 <td>
-                                    <button class="btn-edit">Edit</button>
+                                    <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
                                     <button class="btn-delete">Delete</button>
                                 </td>
                             </tr>
@@ -151,7 +149,7 @@
                                 <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                                 <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                                 <td>
-                                    <button  class="btn-edit" onclick="alert('Chào bạn!')">Edit</button>
+                                    <button  class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
                                     <button class="btn-delete">Delete</button>
                                 </td>
                             </tr>
@@ -193,12 +191,7 @@
                   <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                   <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                   <td>
-                    <button
-                      onclick=""
-                      class="btn-edit"
-                    >
-                      Edit
-                    </button>
+                    <button class="btn-edit">Edit</button>
                     <button class="btn-delete">Delete</button>
                   </td>
                 </tr>
