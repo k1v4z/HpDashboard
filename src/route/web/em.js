@@ -9,7 +9,7 @@ const routerManage = express.Router();
 
 routerManage.get('/manage', getAllEmployee);
 routerManage.get('/employee-view', getEmployeeView);
-routerManage.get('/employee-viewEdit', getEmployeeViewEdit);
+routerManage.post('/employee-viewEdit', getEmployeeViewEdit);
 routerManage.get('/employee-add', getEmployeeAdd);
 
 //CRUD Action
