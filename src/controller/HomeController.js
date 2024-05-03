@@ -67,12 +67,21 @@ const getEmployeeAdd = (req, res) => {
     return res.render('employee-add.ejs');
 }
 
-const getEmployeeViewEdit = (req, res) => {
-    return res.render('employee-view_edit.ejs');
+const setEditDataToForm = async (req, res) => {
+    let id = req.params.id;
+    let result = await getEditPersonal(id);
+    // if (!results || results.length === 0) {
+    //     // Handle the case where no results are found
+    //     return res.status(404).send("No personal data found for the given ID.");
+    // }
+
+    return res.render('employee-view_edit.ejs', {
+        personal: result
+    });
 }
 
 
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, getEmployeeViewEdit
+    getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, setEditDataToForm
 }

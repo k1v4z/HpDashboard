@@ -15,6 +15,8 @@ const getPersonalById = async (id) => {
     return PersonalByID;
 }
 
+getPersonalById(3);
+
 module.exports = {
     getPersonalById
 }

@@ -1,6 +1,5 @@
-
+const { QueryTypes } = require("sequelize");
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
-const { QueryTypes } = require('sequelize');
 const { convertShareHolder, generateEmployeeCode } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
@@ -120,9 +119,40 @@ const addPersonal = async (employeeCode) => {
         }, { transaction: t })
 
         await Employment.create({
-            EMPLOYMENT_STATUS: EMPLOYMENT_STATUS
+            EMPLOYMENT_ID: employmentId,
+            EMPLOYMENT_CODE: employeeCode,
+            EMPLOYMENT_STATUS: data.EMPLOYMENT_STATUS,
+            HIRE_DATE_FOR_WORKING: data.HIRE_DATE_FOR_WORKING,
+            WORKERS_COMP_CODE: data.WORKERS_COMP_CODE,
+            TERMINATION_DATE: data.TERMINATION_DATE,
+            REHIRE_DATE_FOR_WORKING: data.REHIRE_DATE_FOR_WORKING,
+            LAST_REVIEW_DATE: data.LAST_REVIEW_DATE,
+            NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH: data.NUMBER_DAY_REQUIREMENT,
+            PERSONAL_ID: personal.PERSONAL_ID
+        }, { transaction: t })
+    }).then(res => message = 'Create Successful')
+        .catch((err) => {
+            console.log('sqlserver: ->>>>>>>>>>>', err);
+            return message = 'Create Fail'
         })
-    })
+
+    if (message == 'Create Fail')
+        return message
+
+    //add employee
+    await sequelize_mysql.query(
+        `INSERT INTO mydb.employee(\`idEmployee\`,\`Employee Number\`,\`First Name\`,
+            \`Last Name\`,\`SSN\`,\`Pay Rate\`,\`Pay Rates_idPay Rates\`,
+            \`Vacation Days\`,\`Paid To Date\`,\`Paid Last Year\`
+        ) VALUES (${employeeId},'${employeeCode}','${data.CURRENT_FIRST_NAME}','${data.CURRENT_LAST_NAME}',${SSN_Converted},'${data.PAY_RATE}',${data.ID_PAY_RATE},${data.VACATION_DAYS},${data.PAID_TO_DATE},${data.PAID_LAST_YEAR});`,
+        { type: QueryTypes.INSERT }
+    ).then(res => message = 'Create Successful')
+        .catch((err) => {
+            console.log('mysql: ->>>>>>>>>>>', err);
+            return message = 'Create Fail'
+        })
+
+    return message;
 }
 
 module.exports = {
