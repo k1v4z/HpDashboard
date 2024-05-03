@@ -5,7 +5,6 @@ const defineAssociation = require("../model/association/Association");
 const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
-const Employment = require("../model/human/Employment");
 defineAssociation();
 
 const getAllDepartment = async () => {
