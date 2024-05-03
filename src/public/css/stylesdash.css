@@ -703,17 +703,20 @@ thead {
 /* End Employee Management */
 
 /* START Emloyee Management VIEW */
+
 .frm-view {
-  padding: 20px;
-  /* height: 100vh;
-  overflow-x: auto; */
+  padding: 0 10px 0 10px;
+  height: 500px;
+  overflow-y: auto;
 }
 .tb-view {
   width: 100%;
+  border-spacing: 0;
   border-collapse: collapse;
 }
+
 .tb-view th {
-  padding: 10px;
+  padding: 7px;
   text-align: left;
   text-transform: uppercase;
   color: white;
@@ -787,6 +790,42 @@ thead {
 .option-delete.no {
   background-color: #007bff;
   color: #fff;
+}
+
+.personal-manage,
+.employee-manage {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #cdd7d8;
+  color: rgb(18, 16, 16);
+  font-weight: 600;
+  margin: 10px 0 0 10px;
+}
+.personal-manage.active,
+.employee-manage.active {
+  width: 200px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  background-color: #12c2ce;
+  color: white;
+  font-weight: 600;
+  margin: 10px 0 6px 10px;
+}
+
+.content.ui8 {
+  display: none;
+}
+.content.ui8.active {
+  display: block;
+}
+.content.ui5 {
+  display: none;
+}
+.content.ui5.active {
+  display: block;
 }
 /* END Emloyee Management VIEW */
 

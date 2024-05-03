@@ -8,11 +8,15 @@ const { getEmployeeView, getEmployeeViewEdit, getEmployeeAdd } = require('../../
 const routerManage = express.Router();
 
 routerManage.get('/manage', getAllEmployee);
+
+// routerManage.add('/add',)
+
 routerManage.get('/employee-view', getEmployeeView);
 routerManage.post('/employee-viewEdit', getEmployeeViewEdit);
 routerManage.get('/employee-add', getEmployeeAdd);
 
+
 //CRUD Action
 routerManage.post('/add', addEPI)
 module.exports = routerManage;
-//temporary for FE test UI
+//temporary for FE test UIz

@@ -68,21 +68,8 @@ const getEmployeeViewEdit = (req, res) => {
     return res.render('employee-view_edit.ejs');
 }
 
+
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
     getAnnouncementOne, getAnnouncementTwo, getEmployeeView, getEmployeeAdd, getEmployeeViewEdit
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

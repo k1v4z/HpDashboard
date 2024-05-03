@@ -68,8 +68,101 @@
             <ul class="box">
               <!-- <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
             <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li> -->
+<<<<<<< HEAD
             </ul>
           </section>
+=======
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Employee-VIEW -->
+
+            <div class="manage-infor">
+                <button class="personal-manage active">PERSONAL MANAGE</button>
+                <button class="employee-manage">EMPLOYEE MANAGE</button>
+            </div>
+            <!-- Personal Management -->
+            <div class="content ui5 active">
+                <form class="frm-view" action="" method="get">
+                    <table class="tb-view" border="1">
+                        <thead>
+                            <tr>
+                                <th>FULLNAME</th>
+                                <th>ADDRESS</th>
+                                <th>CITY</th>
+                                <th>COUNTRY</th>
+                                <th>GENDER</th>
+                                <th>EMAIL</th>
+                                <th>PHONE NUMBER</th>
+                                <th>ACTION</th>
+
+                            </tr>
+                        </thead>
+                        <tbody class="view-table-data">
+                            <%dataPersonal.forEach((dataPersonal)=> {%>
+                                <tr>
+                                    <td>
+                                        <%=dataPersonal.CURRENT_FIRST_NAME + ' ' +dataPersonal.CURRENT_MIDDLE_NAME+' ' + dataPersonal.CURRENT_LAST_NAME%></td>
+                                <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
+                                <td><%=dataPersonal.CURRENT_CITY%></td>
+                                <td><%=dataPersonal.CURRENT_COUNTRY%></td>
+                                <td><%=dataPersonal.CURRENT_GENDER%></td>
+                                <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
+                                <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
+                                <td>
+                                    <button class="btn-edit">Edit</button>
+                                    <button class="btn-delete">Delete</button>
+                                </td>
+                            </tr>
+                            <%})%>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+            <!-- Employee Management -->
+            <div class="content ui8">
+                <form class="frm-view" action="" method="get">
+                                                <table class="tb-view" border="1">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>Code</th>
+                                                            <th>FULLNAME</th>
+                                                            <th>ADDRESS</th>
+                                                            <th>CITY</th>
+                                                            <th>GENDER</th>
+                                                            <th>EMAIL</th>
+                                                            <th>PHONE NUMBER</th>
+                                                            <th>ACTION</th>
+
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody class="view-table-data">
+                                                        <%dataPersonal.forEach((dataPersonal)=> {%>
+                                                            <tr>
+                                                                <td>
+                                                                    <%=dataPersonal.CURRENT_FIRST_NAME + ' '
+                                                                        +dataPersonal.CURRENT_MIDDLE_NAME+' ' + dataPersonal.CURRENT_LAST_NAME%></td>
+                                <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
+                                <td><%=dataPersonal.CURRENT_CITY%></td>
+                                <td><%=dataPersonal.CURRENT_COUNTRY%></td>
+                                <td><%=dataPersonal.CURRENT_GENDER%></td>
+                                <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
+                                <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
+                                <td>
+                                    <button class="btn-edit">Edit</button>
+                                    <button class="btn-delete">Delete</button>
+                                </td>
+                            </tr>
+                            <%})%>
+                        </tbody>
+                    </table>
+                </form>
+            </div>
+
+
+>>>>>>> e489ef6f40c9b39a8d20a666d9ecc5142d15a336
         </div>
 
         <!-- Employee-VIEW -->

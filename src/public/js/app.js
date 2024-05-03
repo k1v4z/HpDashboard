@@ -24,6 +24,7 @@ let showUI4 = document.querySelector('.content.ui4');
 let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
 let showUI7 = document.querySelector('.content.ui7');
+let showUI8 = document.querySelector('.content.ui8');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
@@ -275,7 +276,7 @@ let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
 
-    console.log('Delete successful');
+    console.log('Delete succesful');
     overlayDelete.style.display = 'none';
 });
 noDelete.addEventListener('click', () => {
@@ -317,6 +318,9 @@ document.addEventListener("DOMContentLoaded", function () {
         }
     });
 });
+
+// END Employee Management ADD
+
 
 
 //test
@@ -368,3 +372,20 @@ const handle = () => {
 }
 
 // END Employee Management ADD
+
+let personalManage = document.querySelector('.personal-manage');
+let employeeManage = document.querySelector('.employee-manage');
+
+
+personalManage.addEventListener('click', () => {
+    personalManage.classList.add('active');
+    employeeManage.classList.remove('active');
+    showUI5.classList.add('active');
+    showUI8.classList.remove('active');
+})
+employeeManage.addEventListener('click', () => {
+    personalManage.classList.remove('active');
+    employeeManage.classList.add('active');
+    showUI8.classList.add('active');
+    showUI5.classList.remove('active');
+})
