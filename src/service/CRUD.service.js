@@ -1,11 +1,14 @@
 
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
+const { QueryTypes } = require('sequelize');
 const { convertShareHolder, generateEmployeeCode } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
-const Employment = require("../model/human/Employment");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
-const Employment= require("../model/human/Employment");
+const Employment = require("../model/human/Employment");
+const Employee = require("../model/payroll/Employees");
+const { where } = require("sequelize");
+const { query } = require("express");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -25,15 +28,37 @@ const getAllEthnicity = async () => {
 
     return ethnicity;
 }
-const getAllPersonalImfomations= async ()=>{
-        const data = await Personal.findAll({
-            include: [{
-                model: Employment,
-            }]
-        }).then(res => JSON.stringify(res))
+const getAllPersonalImfomations = async () => {
+    const data = await Personal.findAll({
+        include: [{
+            model: Employment,
+        }]
+    }).then(res => JSON.stringify(res))
         .then(StringJSON => JSON.parse(StringJSON))
         .catch(err => console.log(err));
-        return data;
+    return data;
+}
+const getEmployeeInfor = async () => {
+    const dataEmployment = await Employment.findAll({
+        include: [{
+            model: Personal,
+            required: true, // Inner join
+        }]
+    })
+
+    let ids = dataEmployment.map(Employment => Employment.EMPLOYMENT_ID);
+    console.log(ids);
+
+    const dataEmployee = await sequelize_mysql.query(
+        `SELECT * FROM mydb.employee 
+         WHERE idEmployee IN (${ids.join(',')})`,
+        { type: QueryTypes.SELECT }
+    );
+    const Data = dataEmployment.map(employment => {
+        const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
+        return { ...employment.toJSON(), ...employee };
+      });
+      return Data;
 }
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
@@ -51,7 +76,7 @@ const add_EP_Information = async (req) => {
         const employeeCode = await generateEmployeeCode()
         addPersonal()
 
-    }else{
+    } else {
 
     }
 
@@ -73,7 +98,7 @@ const add_EP_Information = async (req) => {
 
 const addPersonal = async (employeeCode) => {
     //add personal
-    sequelize_sqlserver.transaction(async(t) =>{
+    sequelize_sqlserver.transaction(async (t) => {
         const personal = await Personal.create({
             CURRENT_FIRST_NAME: CURRENT_FIRST_NAME,
             CURRENT_LAST_NAME: CURRENT_LAST_NAME,
@@ -93,7 +118,7 @@ const addPersonal = async (employeeCode) => {
             ETHNICITY: ETHNICITY,
             SHAREHOLDER_STATUS: SHAREHOLDER_STATUS,
         }, { transaction: t })
-        
+
         await Employment.create({
             EMPLOYMENT_STATUS: EMPLOYMENT_STATUS
         })
@@ -101,9 +126,5 @@ const addPersonal = async (employeeCode) => {
 }
 
 module.exports = {
-<<<<<<< HEAD
-    getAllDepartment, getAllEthnicity,getAllPersonalImfomations
-=======
-    getAllDepartment, getAllEthnicity, add_EP_Information
->>>>>>> 949fbdfc6f7d65ecbf25bec7ecd97d8a5e71ad7b
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor
 }

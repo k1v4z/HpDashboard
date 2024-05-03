@@ -83,8 +83,6 @@ const getAniversaryNotifications = async (req, res) => {
         })
     }
 }
-<<<<<<< HEAD
-=======
 const getAllPersonalImformationdata = async (req, res, next) => {
     try {
         const result = await getAllPersonalImfomations();
@@ -107,9 +105,6 @@ const getValuesFromDBToInputs = async (req, res) => {
         })
     }
 }
-
-
->>>>>>> 949fbdfc6f7d65ecbf25bec7ecd97d8a5e71ad7b
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications,
     getAniversaryNotifications, getAllBenefitPlan

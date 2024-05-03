@@ -1,4 +1,4 @@
-const { getAllDepartment, getAllEthnicity,getAllPersonalImfomations } = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity,getAllPersonalImfomations, getEmployeeInfor } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -56,8 +56,11 @@ const getAnnouncementTwo = (req, res) => {
 
 const getEmployeeView = async (req, res) => {
     const dataPersonal = await getAllPersonalImfomations();
+    const dataEmployee= await getEmployeeInfor();
     return res.render('employee-view.ejs', {
-        dataPersonal: dataPersonal
+        dataPersonal: dataPersonal,
+        dataEmployee: dataEmployee
+
     });
 }
 const getEmployeeAdd = (req, res) => {
