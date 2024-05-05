@@ -1,7 +1,7 @@
 //Em controller stand for Employee Management Controller
 //This file will define a controller of Employee Management 
 
-const { add_EP_Information } = require("../service/CRUD.service");
+const { add_EP_Information,DeleletePersonal } = require("../service/CRUD.service");
 const { getListEmployee } = require("../service/Dashboard.service");
 
 const getAllEmployee = async (req, res) => {
@@ -29,6 +29,16 @@ const editEPI = async (req, res) => {
     res.render("edit.ejs", { id, name, email, address });
 }
 
+const DeletePersonalView = async (req, res) => {
+    const idpersonal = req.params.id;
+    console.log(idpersonal);
+    try {
+        await DeleletePersonal(idpersonal);
+        res.status(200).json({ status: "Success!" });
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting personal data" });
+    }
+    }
 module.exports = {
-    getAllEmployee, addEPI
+    getAllEmployee, addEPI,DeletePersonalView
 }

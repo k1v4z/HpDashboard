@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <link rel="stylesheet" href="/css/stylesdash.css" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
   <title>DashBoard</title>
 </head>
 
@@ -62,7 +64,7 @@
           <ul class="box">
             <!-- <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
             <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li> -->
-            <<<<<<< HEAD </ul>
+            </ul>
         </section>
         =======
         </ul>
@@ -94,7 +96,7 @@
             </thead>
             <tbody class="view-table-data">
               <%dataPersonal.forEach((dataPersonal)=> {%>
-                <tr>
+                <tr data-employee-id="<%= dataPersonal.PERSONAL_ID %>">
                   <td>
                     <%=dataPersonal.CURRENT_FIRST_NAME + ' ' +dataPersonal.CURRENT_MIDDLE_NAME+' ' + dataPersonal.CURRENT_LAST_NAME%></td>
                                 <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
@@ -105,7 +107,7 @@
                                 <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                                 <td>
                                     <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
-                                    <button class="btn-delete">Delete</button>
+                                    <button class="btn-delete"onclick="deleteEmployee('<%= dataPersonal.PERSONAL_ID %>')">Delete</button>
                                 </td>
                             </tr>
                             <%})%>

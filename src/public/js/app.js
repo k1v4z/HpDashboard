@@ -276,15 +276,33 @@ let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
 
-    console.log('Delete succesful');
-    overlayDelete.style.display = 'none';
+    deleteEmployee(employeeId);
 });
 noDelete.addEventListener('click', () => {
     overlayDelete.style.display = 'none';
-
 });
-
-
+function deleteEmployee(employeeId) {
+    // Sử dụng AJAX để gửi yêu cầu xóa
+    $.ajax({
+        url: `http://localhost:4080/employee-view/${employeeId}`,
+        type: 'DELETE',
+        success: function(response) {
+            console.log('Delete successful');
+            // Xóa hàng từ bảng HTML sau khi xóa thành công
+            const rowToDelete = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
+            if (rowToDelete) {
+                rowToDelete.remove();
+            }
+            // Ẩn overlay sau khi xóa thành công
+            overlayDelete.style.display = 'none';
+        },
+        error: function(xhr, status, error) {
+            // Xử lý lỗi khi yêu cầu xóa không thành công
+            console.error('Error deleting employee:', error);
+            alert('Error deleting employee');
+        }
+    });
+}
 
 // END Employee Management VIEW-DELETE
 

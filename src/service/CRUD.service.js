@@ -37,6 +37,7 @@ const getAllPersonalImfomations = async () => {
         .catch(err => console.log(err));
     return data;
 }
+
 const getEmployeeInfor = async () => {
     const dataEmployment = await Employment.findAll({
         include: [{
@@ -58,6 +59,16 @@ const getEmployeeInfor = async () => {
         return { ...employment.toJSON(), ...employee };
       });
       return Data;
+}
+
+
+const DeleletePersonal= async (id)=>{
+    const data = await Personal.destroy({
+        where: {
+            PERSONAL_ID: id
+        }
+    });
+    return data;
 }
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
@@ -156,5 +167,5 @@ const addPersonal = async (employeeCode) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor,DeleletePersonal
 }
