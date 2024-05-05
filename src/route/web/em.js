@@ -2,8 +2,7 @@
 //This file will define endpoint of employment route
 
 const express = require('express');
-const { getAllEmployee, addEPI,DeletePersonalView } = require('../../controller/EmController');
-const { getEmployeeView, setEditDataToForm, getEmployeeAdd } = require('../../controller/HomeController');
+const { getAllEmployee, addEPI,DeletePersonalView,getEmployeeView,setEditDataToForm,getEmployeeAdd} = require('../../controller/EmController');
 
 const routerManage = express.Router();
 
