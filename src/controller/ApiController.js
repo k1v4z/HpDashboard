@@ -105,8 +105,6 @@ const getValuesFromDBToInputs = async (req, res) => {
         })
     }
 }
-
-
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications,
     getAniversaryNotifications, getAllBenefitPlan

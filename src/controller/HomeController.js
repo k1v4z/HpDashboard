@@ -1,4 +1,4 @@
-const { getAllDepartment, getAllEthnicity } = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEditPersonal } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -52,6 +52,34 @@ const getAnnouncementTwo = (req, res) => {
     //All employees have vacations day over standard
     return res.render('detail_announcement_2.ejs');
 }
+
+
+const getEmployeeView = async (req, res) => {
+    const dataPersonal = await getAllPersonalImfomations();
+    const dataEmployee= await getEmployeeInfor();
+    return res.render('employee-view.ejs', {
+        dataPersonal: dataPersonal,
+        dataEmployee: dataEmployee
+
+    });
+}
+const getEmployeeAdd = (req, res) => {
+    return res.render('employee-add.ejs');
+}
+
+const setEditDataToForm = async (req, res) => {
+    let id = req.params.id;
+    let result = await getEditPersonal(id);
+    // if (!results || results.length === 0) {
+    //     // Handle the case where no results are found
+    //     return res.status(404).send("No personal data found for the given ID.");
+    // }
+
+    return res.render('employee-view_edit.ejs', {
+        personal: result
+    });
+}
+
 
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
