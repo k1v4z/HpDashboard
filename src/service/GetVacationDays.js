@@ -44,26 +44,12 @@ function filterObjects(Employees, choiceYear, choice, choiceValue) {
 
     });
 
-    // // If choiceYear === Paid To Date, remove Paid Last Year field
-    // if (choiceYear === 'Paid To Date') {
-    //     filteredObjects.forEach(obj => delete obj['Paid Last Year']);
-    // }
-    // //If choiceYear === Paid Last Year, remove Paid To Date field
-    // else if (choiceYear === 'Paid Last Year') {
-    //     filteredObjects.forEach(obj => delete obj['Paid To Date']);
-    // }
-
     // Return objects fiterd
     return filteredObjects;
 }
 
 // Create an object contains employee table: 
 const getVacationDays = async (choiceYear, choice, choiceValue) => {
-    //Temp hash code change dynamic later
-    // const choiceYear = 'Paid Last Year'; //step 1
-    // const choice = 'ETHNICITY'; //Gender or Ethinicity or Shareholder or type of work, step 2
-    // const choiceValue = 'American'; // value of option, step 3
-
     const EmployeeWithVacationDays = await sequelize_mysql.query(
         `SELECT \`idEmployee\`, \`Vacation Days\`, \`Paid To Date\`, \`Paid Last Year\` 
         from employee`,
@@ -95,10 +81,9 @@ const getVacationDays = async (choiceYear, choice, choiceValue) => {
 
     const AllVacationDaysEmployees = mergeObjectsById(EmployeeWithVacationDays, Personals, Employments, EmploymentStatus);
     const res = filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue)
-    // console.log("Mảng gồm:" + res);
     return filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue);
 }
 
-getVacationDays();
+// getVacationDays();
 
 module.exports = { getVacationDays };

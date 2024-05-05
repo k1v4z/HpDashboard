@@ -10,10 +10,10 @@ defineAssociation();
 
 const GetAllShareHolderStatus=async(choice)=>{
     try {
-        // Lấy dữ liệu từ bảng Personal và kết hợp với bảng Benefit_Plans
+        
         const data = await Personal.findAll({
             where: {
-                SHAREHOLDER_STATUS: choice // Điều kiện Shareholder_Status truyền động
+                SHAREHOLDER_STATUS: choice 
             },
             attributes: [
                 'CURRENT_FIRST_NAME',

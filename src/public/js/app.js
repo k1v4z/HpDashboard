@@ -1,4 +1,3 @@
-
 document.addEventListener("DOMContentLoaded", () => {
     let btnLogin = document.getElementById('login');
     let dashboardWindow;
@@ -340,23 +339,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // END Employee Management ADD
 
-// const employmentData = async (req, res) => {
-//     let id = req.params.id;
-//     const data = await getAllDataEmployment(id);
-//     return data;
-// }
-
-// //test
-const handle = () => {
-    const check = document.getElementById("employee-showInfo");
-    if (check.checked) {
-        document.querySelector('.employee-infor').style.display = 'block';
-    } else {
-        document.querySelector('.employee-infor').style.display = 'none';
-    }
-}
-
-
 // END Employee Management ADD
 
 let personalManage = document.querySelector('.personal-manage');
@@ -375,3 +357,59 @@ employeeManage.addEventListener('click', () => {
     showUI8.classList.add('active');
     showUI5.classList.remove('active');
 })
+
+
+
+// handle add form
+const handleAdd = () => {
+    const check = document.getElementById("employee-showInfo")
+
+    if (check.checked == true) {
+        document.querySelector('.employee-infor').innerHTML = `
+            <div class="employee-infor_left">
+  <label for="">hire date for working:</label>
+  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+  <label for="">work comp code:</label>
+  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+  <label for="">termination day:</label>
+  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
+  <label for="">rehire date for working:</label>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
+  <label for="">Last review date:</label>
+  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+  <label for="">Employment status: </label>
+  <select name="EMPLOYMENT_STATUS" id="employment-status">
+    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
+    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+</select>
+</div>
+<div class="employee-infor_right">
+
+  <label for="">Pay rate:</label>
+  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+  <label for="">Id Pay rate:</label>
+  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+  <label for="">vacation day:</label>
+  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+  <label for="">Paid to date:</label>
+  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+  <label for="">Paid last year:</label>
+  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+  <label for="">Number day requirement:</label>
+  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+</div>
+`
+    } else {
+        document.querySelector('.employee-infor').innerHTML = ``
+    }
+}
+
+// handle update form
+const handleUpdate = () => {
+    const check = document.getElementById("employee-showInfo");
+    if (check.checked) {
+        document.querySelector('.employee-infor').style.display = 'block';
+    } else {
+        document.querySelector('.employee-infor').style.display = 'none';
+    }
+}

@@ -48,11 +48,4 @@ const getAllDataEmployment = async (id) => {
     return null;
 }
 
-// getAllDataEmployment(4).then(data => {
-//     console.log(data);
-// }).catch(error => {
-//     console.error("Error:", error);
-// });
-
-
 module.exports = getAllDataEmployment;
