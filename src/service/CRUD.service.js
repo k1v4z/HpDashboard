@@ -8,6 +8,7 @@ const Employment = require("../model/human/Employment");
 const Employee = require("../model/payroll/Employees");
 const { where } = require("sequelize");
 const { query } = require("express");
+const isEmployee = require("../helper/IsEmployee");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -57,12 +58,12 @@ const getEmployeeInfor = async () => {
     const Data = dataEmployment.map(employment => {
         const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
         return { ...employment.toJSON(), ...employee };
-      });
-      return Data;
+    });
+    return Data;
 }
 
 
-const DeleletePersonal= async (id)=>{
+const DeleletePersonal = async (id) => {
     const data = await Personal.destroy({
         where: {
             PERSONAL_ID: id
@@ -166,6 +167,29 @@ const addPersonal = async (employeeCode) => {
     return message;
 }
 
+const getPersonalById = async (id) => {
+    const PersonalByID = await Personal.findOne({
+        where: {
+            PERSONAL_ID: id
+        }
+    }).then(res => JSON.stringify(res))
+        .then(StringJSON => JSON.parse(StringJSON))
+        .catch(err => console.log(err));
+
+    return PersonalByID;
+}
+
+const handleUpdateOrInsertEmployment = async (id) => {
+    isEmployee(id).then(isEmp => {
+        if (isEmp) {
+            console.log("Xử lý cho trường hợp là nhân viên");
+        } else {
+            console.log("Xử lý cho trường hợp không phải nhân viên");
+        }
+    });
+
+}
+
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor,DeleletePersonal
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, DeleletePersonal, getPersonalById, handleUpdateOrInsertEmployment
 }
