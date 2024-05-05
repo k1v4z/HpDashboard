@@ -160,13 +160,13 @@
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/employee-view/edit/<%= dataEmployee.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
                     <button
                       class="btn-delete"
-                      onclick="deleteEmployee('<%= dataPersonal.PERSONAL_ID %>')"
+                      onclick="deleteEmployee('<%= dataEmployee.PERSONAL_ID %>')"
                     >
                       Delete
                     </button>
@@ -209,7 +209,7 @@
                   <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                   <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                   <td>
-                    <button class="btn-edit">Edit</button>
+                    <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
                     <button class="btn-delete">Delete</button>
                   </td>
                 </tr>

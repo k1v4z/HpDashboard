@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded", () => {
     let btnLogin = document.getElementById('login');
     let dashboardWindow;
@@ -286,7 +287,7 @@ function deleteEmployee(employeeId) {
     $.ajax({
         url: `http://localhost:4080/employee-view/${employeeId}`,
         type: 'DELETE',
-        success: function(response) {
+        success: function (response) {
             console.log('Delete successful');
             // Xóa hàng từ bảng HTML sau khi xóa thành công
             const rowToDelete = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
@@ -296,7 +297,7 @@ function deleteEmployee(employeeId) {
             // Ẩn overlay sau khi xóa thành công
             overlayDelete.style.display = 'none';
         },
-        error: function(xhr, status, error) {
+        error: function (xhr, status, error) {
             // Xử lý lỗi khi yêu cầu xóa không thành công
             console.error('Error deleting employee:', error);
             alert('Error deleting employee');
@@ -313,7 +314,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         showUI7.classList.add('active');
     });
 });
@@ -339,51 +340,22 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // END Employee Management ADD
 
+// const employmentData = async (req, res) => {
+//     let id = req.params.id;
+//     const data = await getAllDataEmployment(id);
+//     return data;
+// }
 
-
-//test
+// //test
 const handle = () => {
-    const check = document.getElementById("employee-showInfo")
-
-    if (check.checked == true) {
-        document.querySelector('.employee-infor').innerHTML = `
-            <div class="employee-infor_left">
-
-                            <label for="">hire date for working:</label>
-                            <input type="date" name="HIRE_DATE" required>
-                            <label for="">work comp code:</label>
-                            <input type="text" name="EMPLOYEE_CODE" required>
-                            <label for="">termination day:</label>
-                            <input type="date" name="TERMINATION_DATE" required>
-                            <label for="">rehire date for working:</label>
-                            <input type="date" name="REHIRE_DATE_FOR_WORKING" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" name="LAST_REVIEW_DATE" required>
-                            <label for="">Employment status: </label>
-                            <select name="employment-status" id="" name="EMPLOYMENT_STATUS">
-                                <option value="Alive">Alive</option>
-                                <option value="Quit">Quit</option>
-                            </select>
-                        </div>
-                        <div class="employee-infor_right">
-
-                            <label for="">Pay rate:</label>
-                            <input type="text" name="PAY_RATE" required>
-                            <label for="">Id Pay rate:</label>
-                            <input type="number" name="ID_PAY_RATE" required>
-                            <label for="">vacation day:</label>
-                            <input type="number" name="VACATION_DAYS" required>
-                            <label for="">Paid to date:</label>
-                            <input type="number" name="PAID_TO_DATE" required>
-                            <label for="">Paid last year:</label>
-                            <input type="number" name="PAID_LAST_YEAR" required>
-                            <label for="">Number day requirement:</label>
-                            <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
-            </div>`
+    const check = document.getElementById("employee-showInfo");
+    if (check.checked) {
+        document.querySelector('.employee-infor').style.display = 'block';
     } else {
-        document.querySelector('.employee-infor').innerHTML = ``
+        document.querySelector('.employee-infor').style.display = 'none';
     }
 }
+
 
 // END Employee Management ADD
 
