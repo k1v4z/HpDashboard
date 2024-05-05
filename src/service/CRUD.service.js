@@ -58,8 +58,9 @@ const getEmployeeInfor = async () => {
     const Data = dataEmployment.map(employment => {
         const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
         return { ...employment.toJSON(), ...employee };
-    });
-    return Data;
+      });
+      console.log(Data);
+      return Data;
 }
 
 
