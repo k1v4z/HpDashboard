@@ -3,7 +3,7 @@
 
 const express = require('express');
 const { getAllEmployee, addEPI } = require('../../controller/EmController');
-const { getEmployeeView, setEditDataToForm, getEmployeeAdd } = require('../../controller/HomeController');
+const { getEmployeeView, setEditDataToForm, getEmployeeAdd } = require('../../controller/EmController');
 
 const routerManage = express.Router();
 

@@ -1,7 +1,7 @@
 //Em controller stand for Employee Management Controller
 //This file will define a controller of Employee Management 
 
-const { add_EP_Information } = require("../service/CRUD.service");
+const { add_EP_Information, getEditPersonal, getAllPersonalImfomations } = require("../service/CRUD.service");
 const { getListEmployee } = require("../service/Dashboard.service");
 
 const getAllEmployee = async (req, res) => {
@@ -21,14 +21,29 @@ const addEPI = async (req, res) => {
 
 }
 
-//editEPI stand for edit Employee Personal Information
-const editEPI = async (req, res) => {
+const getEmployeeView = async (req, res) => {
+    const dataPersonal = await getAllPersonalImfomations();
+
+    return res.render('employee-view.ejs', {
+        dataPersonal: dataPersonal
+    });
+}
+const getEmployeeAdd = (req, res) => {
+    return res.render('employee-add.ejs');
+}
+
+const setEditDataToForm = async (req, res) => {
     let id = req.params.id;
-    let [results, fields] = await getEditUser(id);
-    const { name, email, City: address } = results[0];
-    res.render("edit.ejs", { id, name, email, address });
+    let result = await getEditPersonal(id);
+    // if (!results || results.length === 0) {
+    //     // Handle the case where no results are found
+    //     return res.status(404).send("No personal data found for the given ID.");
+    // }
+    return res.render('employee-view_edit.ejs', {
+        personal: result
+    });
 }
 
 module.exports = {
-    getAllEmployee, addEPI
+    getAllEmployee, addEPI, getEmployeeView, getEmployeeAdd, setEditDataToForm
 }
