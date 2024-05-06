@@ -316,7 +316,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-
+        
         showUI7.classList.add('active');
     });
 });
@@ -349,6 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <option value="Alive"</option>
     <option value="Quit"</option>
 </select>
+<label for="">Employee CODE: </label>
+              <input type="number" required>
 </div>
 <div class="employee-infor_right">
 
@@ -363,7 +365,9 @@ document.addEventListener("DOMContentLoaded", function () {
   <label for="">Paid last year:</label>
   <input type="number" name="PAID_LAST_YEAR" required>
   <label for="">Number day requirement:</label>
-  <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
+  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+  <label for="">Workes Comp CODE: </label>
+              <input type="text" required>
 </div>
 `
         }
