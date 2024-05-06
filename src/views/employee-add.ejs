@@ -30,7 +30,7 @@
           <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
         </li>
         <li class="btn n7" id="access-control">
-          <img src="/icon/icon-btn6.png" alt="" /><span>Access Control</span>
+          <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
         </li>
         <li class="btn n6 active" id="employee-management">
           <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
@@ -116,24 +116,27 @@
             <input type="text" name="ETHNICITY" />
           </div>
 
-          <h1 class="employee-title">EMPLOYEE DETAIL</h1>
+            <h1 class="employee-title none">EMPLOYEE DETAIL</h1>
 
           <div class="employee-infor" style="grid-column: 1 / 3"></div>
 
-          <div class="checkbox-employee">
-            <input type="checkbox" name="employee_showInfo" id="employee-showInfo" onclick="handleAdd()" />
-            <label for="employee-showInfo">Edit employee</label>
-          </div>
-          <button type="submit">Add</button>
-        </form>
+            <div class="checkbox-employee">
+              <input
+                type="checkbox"
+                name="employee_showInfo"
+                id="employee-showInfo"
+              />
+              <label for="employee-showInfo">Edit employee</label>
+            </div>
+            <button type="submit">Add</button>
+          </form>
+        </div>
       </div>
-    </div>
-  </header>
-  <script src="/js/chart.min.js"></script>
-  <script src="js/ShowLabelCurrentBirthdaysMonth.js"></script>
-  <script src="/js/ShowLabelExceededVacationDays.js"></script>
-  <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
-  <script src="/js/app.js"></script>
-</body>
-
+    </header>
+    <script src="/js/chart.min.js"></script>
+    <script src="js/ShowLabelCurrentBirthdaysMonth.js"></script>
+    <script src="/js/ShowLabelExceededVacationDays.js"></script>
+    <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
+    <script src="/js/app.js"></script>
+  </body>
 </html>

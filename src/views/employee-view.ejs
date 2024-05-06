@@ -32,7 +32,7 @@
           <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
         </li>
         <li class="btn n7" id="access-control">
-          <img src="/icon/icon-btn6.png" alt="" /><span>Access Control</span>
+          <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
         </li>
         <li class="btn n6 active" id="employee-management">
           <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
@@ -107,7 +107,7 @@
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/personal/edit/<%= dataPersonal.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
@@ -157,9 +157,14 @@
                   <td>
                     <%=dataEmployee['Vacation Days']%>
                   </td>
+                  <td><%=dataEmployee.SSN%></td>
+                  <td><%=dataEmployee['Pay Rate']%></td>
+                  <td><%=dataEmployee['Vacation Days']%></td>
                   <td>
-                    <button class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataEmployee.PERSONAL_ID %>`">
+                    <button
+                      class="btn-edit"
+                      onclick="window.location.href = `/employment/edit/<%= dataEmployee.PERSONAL_ID %>`"
+                    >
                       Edit
                     </button>
                     <button class="btn-delete" onclick="deleteEmployee('<%= dataEmployee.PERSONAL_ID %>')">
@@ -203,7 +208,12 @@
                   <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                   <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                   <td>
-                    <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
+                    <button
+                      class="btn-edit"
+                      onclick="window.location.href = `/personal/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                    >
+                      Edit
+                    </button>
                     <button class="btn-delete">Delete</button>
                   </td>
                 </tr>

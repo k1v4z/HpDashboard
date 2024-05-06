@@ -32,7 +32,7 @@
             <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
           </li>
           <li class="btn n7" id="access-control">
-            <img src="/icon/icon-btn6.png" alt="" /><span>Access Control</span>
+            <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
           </li>
           <li class="btn n6 active" id="employee-management">
             <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
@@ -73,37 +73,40 @@
         <div class="content ui7">
           <h1 class="personal-title">Personal Detail</h1>
 
-          <form action="/update" method="post" class="personal-info">
+          <form action="manage-personal/update" method="POST" class="personal-info">
             <div class="personal-info_left">
               <label for="">First Name:</label>
               <input
                 type="text"
+                name="CURRENT_FIRST_NAME"
                 value="<%= personal.CURRENT_FIRST_NAME %>"
                 required
               />
               <label for="">Middle Name:</label>
               <input
                 type="text"
+                name="CURRENT_MIDDLE_NAME"
                 value="<%= personal.CURRENT_MIDDLE_NAME %>"
                 required
               />
               <label for="">Last Name:</label>
               <input
                 type="text"
+                name="CURRENT_LAST_NAME"
                 value="<%= personal.CURRENT_LAST_NAME %>"
                 required
               />
               <label for="">Date of Birth:</label>
-              <input type="date" value="<%= personal.BIRTH_DATE %>" required />
+              <input type="date" value="<%= personal.BIRTH_DATE %>" name="BIRTH_DATE" required />
               <label for="">Current Address 1: </label>
-              <input type="text" value="<%= personal.CURRENT_ADDRESS_1 %>" />
+              <input type="text" value="<%= personal.CURRENT_ADDRESS_1 %>" name="CURRENT_ADDRESS_1" />
               <label for="">Current Address 2: </label>
-              <input type="text" value="<%= personal.CURRENT_ADDRESS_2 %>" />
+              <input type="text" value="<%= personal.CURRENT_ADDRESS_2 %>" name="CURRENT_ADDRESS_2" />
               <label for="">Current ZIP: </label>
-              <input type="text" value="<%= personal.CURRENT_ZIP %>" />
+              <input type="text" value="<%= personal.CURRENT_ZIP %>" name="CURRENT_ZIP" />
               <label for="">Current Gender</label>
               <select
-                name="gender"
+                name="CURRENT_GENDER"
                 id=""
               >
               <option value="male" <%= personal.CURRENT_GENDER === 'Male' ? 'selected' : '' %>>Male</option>
@@ -112,6 +115,7 @@
               <label for="">Current Personal Email: </label>
               <input
                 type="email"
+                name="CURRENT_PERSONAL_EMAIL"
                 value="<%= personal.CURRENT_PERSONAL_EMAIL %>"
               />
             </div>
@@ -119,36 +123,39 @@
               <label for="">Social security number :</label>
               <input
                 type="text"
+                name="SOCIAL_SECURITY_NUMBER"
                 value="<%= personal.SOCIAL_SECURITY_NUMBER %>"
                 required
               />
               <label for="">Drivers licenes: </label>
               <input
                 type="text"
+                name="DRIVERS_LICENSE"
                 value="<%= personal.DRIVERS_LICENSE %>"
                 required
               />
               <label for="">Current City: </label>
-              <input type="text" value="<%= personal.CURRENT_CITY %>" />
+              <input type="text" value="<%= personal.CURRENT_CITY %>" name="CURRENT_CITY" />
               <label for="">Current Country: </label>
-              <input type="text" value="<%= personal.CURRENT_COUNTRY %>" />
+              <input type="text" value="<%= personal.CURRENT_COUNTRY %>" name="CURRENT_COUNTRY" />
               <label for="">Current Phone number: </label>
-              <input type="text" value="<%= personal.CURRENT_PHONE_NUMBER %>" />
+              <input type="text" value="<%= personal.CURRENT_PHONE_NUMBER %>" name="CURRENT_PHONE_NUMBER" />
               <label for="">Current marital status: </label>
               <input
                 type="text"
+                name="CURRENT_MARITAL_STATUS"
                 value="<%= personal.CURRENT_MARITAL_STATUS %>"
               />
               <label for="">Shareholder status: </label>
               <select
-                name="shareholder-status"
+                name="SHAREHOLDER_STATUS"
                 id=""
               >
                 <option value="shareholder" <%= personal.SHAREHOLDER_STATUS === 1 ? 'selected' : '' %>>Shareholder</option>
                 <option value="non-shareholder" <%= personal.SHAREHOLDER_STATUS === 0 ? 'selected' : '' %>>Non-Shareholder</option>
               </select>
               <label for="">Ethnicity</label>
-              <input type="text" value="<%= personal.ETHNICITY %>" />
+              <input type="text" value="<%= personal.ETHNICITY %>" name="ETHNICITY" />
             </div>
 
             <h1 class="employee-title">EMPLOYEE DETAIL</h1>
@@ -157,9 +164,9 @@
               <div class="employee-infor_left">
 
                 <label for="">hire date for working:</label>
-                <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+                <input type="date" name="HIRE_DATE_FOR_WORKING" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
                 <label for="">work comp code:</label>
-                <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+                <input type="text" name="EMPLOYMENT_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
                 <label for="">termination day:</label>
                 <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" >
                 <label for="">rehire date for working:</label>
@@ -187,16 +194,6 @@
                 <label for="">Number day requirement:</label>
                 <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
               </div>
-            </div>
-
-            <div class="checkbox-employee">
-              <input
-                type="checkbox"
-                name="employee_showInfo"
-                id="employee-showInfo"
-                onclick="handleUpdate()"
-              />
-              <label for="employee-showInfo">Edit employee</label>
             </div>
             <button type="submit">Update</button>
           </form>
