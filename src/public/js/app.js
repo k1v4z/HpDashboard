@@ -287,12 +287,7 @@ yesDelete.addEventListener('click', () => {
     $.ajax({
         url: `http://localhost:4080/employee-view/${personalId}`,
         method: 'DELETE',
-        success: function(response) {
-=======
-        url: `http://localhost:4080/employee-view/${employeeId}`,
-        type: 'DELETE',
         success: function (response) {
->>>>>>> aa6da96632f6a25eaa7699e3763e144adb516511
             console.log('Delete successful');
             const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
             if (rowToDelete) {

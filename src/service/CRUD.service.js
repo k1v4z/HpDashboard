@@ -59,7 +59,7 @@ const getEmployeeInfor = async () => {
         const employee = dataEmployee.find(Employee => Employee['Employee Number'] === employment.EMPLOYMENT_CODE);
         return { ...employment.toJSON(), ...employee };
     });
-    //   console.log(Data);
+      console.log(Data);
     return Data;
 }
 
