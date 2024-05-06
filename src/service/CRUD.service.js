@@ -8,6 +8,7 @@ const Employment = require("../model/human/Employment");
 const Employee = require("../model/payroll/Employees");
 const { where } = require("sequelize");
 const { query } = require("express");
+const isEmployee = require("../helper/IsEmployee");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -47,7 +48,7 @@ const getEmployeeInfor = async () => {
     })
 
     let ids = dataEmployment.map(Employment => Employment.EMPLOYMENT_ID);
-    console.log(ids);
+    // console.log(ids);
 
     const dataEmployee = await sequelize_mysql.query(
         `SELECT * FROM mydb.employee 
@@ -55,21 +56,38 @@ const getEmployeeInfor = async () => {
         { type: QueryTypes.SELECT }
     );
     const Data = dataEmployment.map(employment => {
-        const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
+        const employee = dataEmployee.find(Employee => Employee['Employee Number'] === employment.EMPLOYMENT_CODE);
         return { ...employment.toJSON(), ...employee };
-    });
-    console.log(Data);
-    return Data;
+      });
+    //   console.log(Data);
+      return Data;
 }
 
 
-const DeleletePersonal = async (id) => {
-    const data = await Personal.destroy({
-        where: {
-            PERSONAL_ID: id
+const deletePersonalAndEmployment = async (personalId) => {
+    try {
+        // Xóa thông tin từ bảng Employment trước
+        await Employment.destroy({
+            where: {
+                EMPLOYMENT_ID: personalId
+            }
+        });
+
+        // Sau đó xóa thông tin từ bảng Personal
+        const deletedPersonalCount = await Personal.destroy({
+            where: {
+                PERSONAL_ID: personalId
+            }
+        });
+
+        if (deletedPersonalCount > 0) {
+            console.log(`Xóa thành công thông tin của PERSONAL_ID ${personalId}`);
+        } else {
+            console.log(`Không tìm thấy bản ghi nào với PERSONAL_ID ${personalId}`);
         }
-    });
-    return data;
+    } catch (error) {
+        console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
+    }
 }
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
@@ -167,6 +185,29 @@ const addPersonal = async (employeeCode) => {
     return message;
 }
 
+const getPersonalById = async (id) => {
+    const PersonalByID = await Personal.findOne({
+        where: {
+            PERSONAL_ID: id
+        }
+    }).then(res => JSON.stringify(res))
+        .then(StringJSON => JSON.parse(StringJSON))
+        .catch(err => console.log(err));
+
+    return PersonalByID;
+}
+
+const handleUpdateOrInsertEmployment = async (id) => {
+    isEmployee(id).then(isEmp => {
+        if (isEmp) {
+            console.log("Xử lý cho trường hợp là nhân viên");
+        } else {
+            console.log("Xử lý cho trường hợp không phải nhân viên");
+        }
+    });
+
+}
+
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, DeleletePersonal
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, deletePersonalAndEmployment, getPersonalById, handleUpdateOrInsertEmployment
 }

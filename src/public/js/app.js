@@ -265,9 +265,10 @@ overlayDelete.innerHTML = `
 document.body.appendChild(overlayDelete);
 
 var deleteButtons = document.querySelectorAll('.btn-delete');
-
+let personalId;
 deleteButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
+        personalId = this.getAttribute('data-id');
         e.preventDefault();
         overlayDelete.style.display = 'block';
     });
@@ -275,34 +276,29 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-
-    deleteEmployee(employeeId);
-});
-noDelete.addEventListener('click', () => {
-    overlayDelete.style.display = 'none';
-});
-function deleteEmployee(employeeId) {
-    // Sử dụng AJAX để gửi yêu cầu xóa
+    console.log('PERSONAL_ID để xóa:', personalId);
     $.ajax({
-        url: `http://localhost:4080/employee-view/${employeeId}`,
-        type: 'DELETE',
-        success: function(response) {
+        url: `http://localhost:4080/employee-view/${personalId}`,
+        method: 'DELETE',
+        success: function (response) {
             console.log('Delete successful');
-            // Xóa hàng từ bảng HTML sau khi xóa thành công
-            const rowToDelete = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
+            const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
             if (rowToDelete) {
                 rowToDelete.remove();
             }
-            // Ẩn overlay sau khi xóa thành công
             overlayDelete.style.display = 'none';
         },
-        error: function(xhr, status, error) {
-            // Xử lý lỗi khi yêu cầu xóa không thành công
+        error: function (xhr, status, error) {
             console.error('Error deleting employee:', error);
             alert('Error deleting employee');
         }
     });
-}
+});
+
+noDelete.addEventListener('click', () => {
+    overlayDelete.style.display = 'none';
+});
+
 
 // END Employee Management VIEW-DELETE
 
@@ -313,7 +309,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         showUI7.classList.add('active');
     });
 });
@@ -339,52 +335,6 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // END Employee Management ADD
 
-
-
-//test
-const handle = () => {
-    const check = document.getElementById("employee-showInfo")
-
-    if (check.checked == true) {
-        document.querySelector('.employee-infor').innerHTML = `
-            <div class="employee-infor_left">
-
-                            <label for="">hire date for working:</label>
-                            <input type="date" name="HIRE_DATE" required>
-                            <label for="">work comp code:</label>
-                            <input type="text" name="EMPLOYEE_CODE" required>
-                            <label for="">termination day:</label>
-                            <input type="date" name="TERMINATION_DATE" required>
-                            <label for="">rehire date for working:</label>
-                            <input type="date" name="REHIRE_DATE_FOR_WORKING" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" name="LAST_REVIEW_DATE" required>
-                            <label for="">Employment status: </label>
-                            <select name="employment-status" id="" name="EMPLOYMENT_STATUS">
-                                <option value="Alive">Alive</option>
-                                <option value="Quit">Quit</option>
-                            </select>
-                        </div>
-                        <div class="employee-infor_right">
-
-                            <label for="">Pay rate:</label>
-                            <input type="text" name="PAY_RATE" required>
-                            <label for="">Id Pay rate:</label>
-                            <input type="number" name="ID_PAY_RATE" required>
-                            <label for="">vacation day:</label>
-                            <input type="number" name="VACATION_DAYS" required>
-                            <label for="">Paid to date:</label>
-                            <input type="number" name="PAID_TO_DATE" required>
-                            <label for="">Paid last year:</label>
-                            <input type="number" name="PAID_LAST_YEAR" required>
-                            <label for="">Number day requirement:</label>
-                            <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
-            </div>`
-    } else {
-        document.querySelector('.employee-infor').innerHTML = ``
-    }
-}
-
 // END Employee Management ADD
 
 let personalManage = document.querySelector('.personal-manage');
@@ -403,3 +353,59 @@ employeeManage.addEventListener('click', () => {
     showUI8.classList.add('active');
     showUI5.classList.remove('active');
 })
+
+
+
+// handle add form
+const handleAdd = () => {
+    const check = document.getElementById("employee-showInfo")
+
+    if (check.checked == true) {
+        document.querySelector('.employee-infor').innerHTML = `
+            <div class="employee-infor_left">
+  <label for="">hire date for working:</label>
+  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+  <label for="">work comp code:</label>
+  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+  <label for="">termination day:</label>
+  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
+  <label for="">rehire date for working:</label>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
+  <label for="">Last review date:</label>
+  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+  <label for="">Employment status: </label>
+  <select name="EMPLOYMENT_STATUS" id="employment-status">
+    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
+    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+</select>
+</div>
+<div class="employee-infor_right">
+
+  <label for="">Pay rate:</label>
+  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+  <label for="">Id Pay rate:</label>
+  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+  <label for="">vacation day:</label>
+  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+  <label for="">Paid to date:</label>
+  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+  <label for="">Paid last year:</label>
+  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+  <label for="">Number day requirement:</label>
+  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+</div>
+`
+    } else {
+        document.querySelector('.employee-infor').innerHTML = ``
+    }
+}
+
+// handle update form
+const handleUpdate = () => {
+    const check = document.getElementById("employee-showInfo");
+    if (check.checked) {
+        document.querySelector('.employee-infor').style.display = 'block';
+    } else {
+        document.querySelector('.employee-infor').style.display = 'none';
+    }
+}

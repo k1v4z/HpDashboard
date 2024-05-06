@@ -1,7 +1,6 @@
 const defineAssociation = require("../model/association/Association");
 const Employment = require("../model/human/Employment");
 const Employee = require("../model/payroll/Employees");
-const { getPersonalById } = require('../service/GetPersonalById');
 
 defineAssociation();
 
@@ -38,5 +37,5 @@ const getEmployeeByCode = async (id) => {
 
 
 module.exports = {
-    getEmployeeByCode
+    getEmploymentById, getEmployeeByCode
 }

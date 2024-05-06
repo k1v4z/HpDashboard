@@ -10,12 +10,6 @@ const { QueryTypes } = require('sequelize');
 defineAssociation();
 
 const getBenefitEachPersonal = async (department, choice_year, choice, choiceValue) => {
-
-    // //Temp hash code change dynamic later
-    // const department = 'Sales'; //step1 
-    // const choice_year = 'Paid To Date'; //step 2
-    // const choice = 'CURRENT_GENDER'; //Gender or Ethinicity or Shareholder status option 3
-    // const choiceValue = 'Female';
     const humans = await Personal.findAll({
         attributes: ['PERSONAL_ID', 'CURRENT_FIRST_NAME', 'CURRENT_MIDDLE_NAME', 'CURRENT_LAST_NAME',
             'SHAREHOLDER_STATUS', 'ETHNICITY'],

@@ -66,8 +66,6 @@
               <span>Important notification</span>
             </section>
             <ul class="box">
-              <!-- <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
-            <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li> -->
             </ul>
           </section>
         </div>
@@ -76,7 +74,7 @@
         <div class="content ui7">
           <h1 class="personal-title">Personal Detail</h1>
 
-          <form action="" method="post" class="personal-info">
+          <form action="/update" method="post" class="personal-info">
             <div class="personal-info_left">
               <label for="">First Name:</label>
               <input
@@ -107,11 +105,10 @@
               <label for="">Current Gender</label>
               <select
                 name="gender"
-                value="<%= personal.CURRENT_GENDER %>"
                 id=""
               >
-                <option value="male">Male</option>
-                <option value="female">Female</option>
+              <option value="male" <%= personal.CURRENT_GENDER === 'Male' ? 'selected' : '' %>>Male</option>
+              <option value="female" <%= personal.CURRENT_GENDER === 'Female' ? 'selected' : '' %>>Female</option>
               </select>
               <label for="">Current Personal Email: </label>
               <input
@@ -146,61 +143,62 @@
               <label for="">Shareholder status: </label>
               <select
                 name="shareholder-status"
-                value="<%= personal.SHAREHOLDER_STATUS %>"
                 id=""
               >
-                <option value="shareholder">Shareholder</option>
-                <option value="non-shareholder">Non-Shareholder</option>
+                <option value="shareholder" <%= personal.SHAREHOLDER_STATUS === 1 ? 'selected' : '' %>>Shareholder</option>
+                <option value="non-shareholder" <%= personal.SHAREHOLDER_STATUS === 0 ? 'selected' : '' %>>Non-Shareholder</option>
               </select>
               <label for="">Ethnicity</label>
               <input type="text" value="<%= personal.ETHNICITY %>" />
             </div>
 
-            <!-- <h1 class="employee-title">EMPLOYEE DETAIL</h1>
+            <h1 class="employee-title">EMPLOYEE DETAIL</h1>
 
-                    <div class="employee-infor" style="grid-column: 1 / 3;">
-                        <div class="employee-infor_left">
+            <div class="employee-infor" style="grid-column: 1 / 3">
+              <div class="employee-infor_left">
 
-                            <label for="">First Name:</label>
-                            <input type="text" value="" required>
-                            <label for="">hire date for working:</label>
-                            <input type="text" value="" required>
-                            <label for="">work comp code:</label>
-                            <input type="text" value="" required>
-                            <label for="">termination day:</label>
-                            <input type="text" value="" required>
-                            <label for="">rehire date for working:</label>
-                            <input type="text" value="" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" value="" required>
-                            <label for="">Employeement status: </label>
-                            <select name="employment-status" value="" id="">
-                                <option value="fulltime">Fulltime</option>
-                                <option value="partime">Partime</option>
-                            </select>
-                        </div>
-                        <div class="employee-infor_right">
-                            <label for="">Pay rate:</label>
-                            <input type="number" value="" required>
-                            <label for="">ID Pay rate:</label>
-                            <input type="number" value="" required>
-                            <label for="">vocation day:</label>
-                            <input type="date" value="" required>
-                            <label for="">Pay to date:</label>
-                            <input type="date" value="" required>
-                            <label for="">pay last year:</label>
-                            <input type="text" value="" required>
-                            <label for="">Last review date:</label>
-                            <input type="date" value="" required>
-                            <label for="">Number day requiement:</label>
-                            <input type="date" value="" required>
-                        </div>
-                    </div>
+                <label for="">hire date for working:</label>
+                <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+                <label for="">work comp code:</label>
+                <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+                <label for="">termination day:</label>
+                <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" >
+                <label for="">rehire date for working:</label>
+                <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" >
+                <label for="">Last review date:</label>
+                <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+                <label for="">Employment status: </label>
+                <select name="EMPLOYMENT_STATUS" id="employment-status">
+                  <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
+                  <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+              </select>
+              </div>
+              <div class="employee-infor_right">
+              
+                <label for="">Pay rate:</label>
+                <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+                <label for="">Id Pay rate:</label>
+                <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+                <label for="">vacation day:</label>
+                <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+                <label for="">Paid to date:</label>
+                <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+                <label for="">Paid last year:</label>
+                <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+                <label for="">Number day requirement:</label>
+                <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+              </div>
+            </div>
 
-                    <div class="checkbox-employee">
-                        <input type="checkbox" name="employee-showInfo" id="employee-showInfo">
-                        <label for="employee-showInfo">Edit employee</label>
-                    </div> -->
+            <div class="checkbox-employee">
+              <input
+                type="checkbox"
+                name="employee_showInfo"
+                id="employee-showInfo"
+                onclick="handleUpdate()"
+              />
+              <label for="employee-showInfo">Edit employee</label>
+            </div>
             <button type="submit">Update</button>
           </form>
         </div>
@@ -213,3 +211,6 @@
     <script src="/js/app.js"></script>
   </body>
 </html>
+
+
+
