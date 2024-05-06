@@ -25,11 +25,13 @@ let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
 let showUI7 = document.querySelector('.content.ui7');
 let showUI8 = document.querySelector('.content.ui8');
+let showUI9 = document.querySelector('.content.ui9');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
 let BtnN4 = document.querySelector('li.btn.n4');
 let BtnN5 = document.querySelector('li.btn.n5');
+let BtnN7 = document.querySelector('li.btn.n7');
 
 // console.log(BtnN6);
 let alertBtn = document.querySelector('.alert');
@@ -139,6 +141,11 @@ document.querySelector('#benefits').onclick = () => {
     // hideAllContent();
     showUI4.classList.add('active');
     BtnN4.classList.add('active');
+    alertBtn.classList.remove('active');
+}
+document.querySelector('#access-control').onclick = () => {
+    window.location.href = "/access_control";
+    BtnN7.classList.add('active');
     alertBtn.classList.remove('active');
 }
 

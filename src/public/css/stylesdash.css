@@ -69,15 +69,16 @@ header .navbar .menu {
 
 header .navbar .menu li {
   width: 100%;
+  height: 45px;
   margin-bottom: 30px;
   display: flex;
   align-items: center;
+  justify-content: stretch;
   padding: 5px;
   background-color: rgb(47, 45, 45);
   color: #fff;
   border-radius: 10px;
   font-weight: 700;
-  width: 100%;
   font-size: 10px;
 }
 
@@ -214,6 +215,7 @@ header .navbar .menu li:last-child {
 
 header .navbar .menu li img {
   margin-right: 15px;
+  width: 34px;
 }
 
 header .navbar .menu li:hover {
@@ -917,6 +919,109 @@ thead {
 }
 /* END Emloyee Management ADD */
 
+/* ACCESS CONTROL */
+.tag-select,
+.group,
+.module,
+.function {
+  padding-top: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0px 20px 0px 20px;
+}
+
+.tag-select_left,
+.group-left,
+.module-left,
+.function-left {
+  width: 80%;
+}
+
+.group-left,
+.module-left,
+.function-left {
+  border-right: 4px solid #12c2ce;
+}
+.tag-select_left select {
+  width: 99%;
+  height: 40px;
+  border-radius: 5px;
+  outline: none;
+}
+.tag-select_left select:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+.tag-select_right,
+.group-right,
+.module-right,
+.function-right {
+  width: 20%;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.group-left,
+.module-left,
+.function-left {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 20px;
+  overflow-x: auto;
+}
+.group-left_item,
+.module-left_item,
+.function-left_item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+}
+.group-left_item label,
+.module-left_item label,
+.function-left_item label {
+  width: 120px;
+}
+.group-right h1,
+.tag-select_right h1,
+.module-right h1,
+.function-right h1 {
+  color: #13ccd8;
+  font-size: 30px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.group,
+.module,
+.function {
+  margin: 30px;
+}
+.btn-save {
+  margin-top: 50px;
+  display: flex;
+  justify-content: end;
+  align-items: center;
+  margin-right: 70px;
+}
+.btn-save button {
+  width: 150px;
+  height: 40px;
+  border-radius: 10px;
+  outline: none;
+  background-color: #44c6cf;
+  color: white;
+  font-size: 20px;
+  font-weight: 700;
+}
+.btn-save button:hover {
+  background-color: #12ce5a;
+}
+
+/* ACCESS CONTROL */
+
 /* Responsive */
 @media (max-width: 1240px) {
   .info-vacationdays {
@@ -925,6 +1030,9 @@ thead {
     height: 364px;
     margin-left: 20px;
     overflow-y: auto;
+  }
+  .box-child {
+    padding-top: 1px;
   }
   .table-info section:last-child h2 {
     margin-left: 20px;
