@@ -279,15 +279,9 @@ yesDelete.addEventListener('click', () => {
     
             console.log('PERSONAL_ID để xóa:', personalId);
     $.ajax({
-<<<<<<< HEAD
         url: `http://localhost:4080/employee-view/${personalId}`,
         method: 'DELETE',
         success: function(response) {
-=======
-        url: `http://localhost:4080/employee-view/${employeeId}`,
-        type: 'DELETE',
-        success: function (response) {
->>>>>>> aa6da96632f6a25eaa7699e3763e144adb516511
             console.log('Delete successful');
             // Xóa hàng từ bảng HTML sau khi xóa thành công
             const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
