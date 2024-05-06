@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/stylesdash.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <title>DashBoard</title>
+</head>
+
+<body>
+  <header>
+    <!-- Nabar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="/icon/LOGO.png" alt="" />
+      </div>
+      <ul class="menu">
+        <li class="btn n1" id="dash">
+          <img src="/icon/icon-btn1.png" alt="" /><span>DashBoard</span>
+        </li>
+        <li class="btn n2" id="earnings">
+          <img src="/icon/icon-btn2.png" alt="" /><span>Total earnings </span>
+        </li>
+        <li class="btn n3" id="vacationdays">
+          <img src="/icon/icon-btn3.png" alt="" /><span>Vacation days</span>
+        </li>
+        <li class="btn n4" id="benefits">
+          <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
+        </li>
+        <li class="btn n7 " id="access-control">
+          <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
+        </li>
+        <li class="btn n6 active" id="employee-management">
+          <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
+        </li>
+        <div class="box-child">
+          <button class="btn-view">View</button>
+          <button class="btn-add">Add</button>
+        </div>
+
+        <li class="btn n5" id="logout">
+          <img src="/icon/icon-btn5.png" alt="" /><span>Logout</span>
+        </li>
+      </ul>
+    </div>
+    <!-- main content -->
+    <div class="main-content">
+      <!-- Logo CEO MEMO -->
+      <section class="header">
+        <h1 class="name-project">H-P system</h1>
+        <span onclick="getAllNotification();">
+          <img id="alert-btn" src="/icon/Vector.png" alt="" />
+          <span class="number-info"></span>
+        </span>
+      </section>
+      <!-- Icon Alert -->
+      <div class="alert">
+        <section class="alert-box">
+          <section class="title-alert">
+            <span>Important notification</span>
+          </section>
+          <ul class="box">
+          </ul>
+        </section>
+      </div>
+
+      <!-- Employee-ADD -->
+      <div class="content ui7">
+        <h1 class="personal-title">Personal Detail</h1>
+
+        <form action="/update" method="POST" class="personal-info">
+          <div class="personal-info_left">
+            <label for="">First Name:</label>
+            <input type="text" name="CURRENT_FIRST_NAME" value="<%= personal.CURRENT_FIRST_NAME %>" required />
+            <label for="">Middle Name:</label>
+            <input type="text" name="CURRENT_MIDDLE_NAME" value="<%= personal.CURRENT_MIDDLE_NAME %>" required />
+            <label for="">Last Name:</label>
+            <input type="text" name="CURRENT_LAST_NAME" value="<%= personal.CURRENT_LAST_NAME %>" required />
+            <label for="">Date of Birth:</label>
+            <input type="date" value="<%= personal.BIRTH_DATE %>" name="BIRTH_DATE" required />
+            <label for="">Current Address 1: </label>
+            <input type="text" value="<%= personal.CURRENT_ADDRESS_1 %>" name="CURRENT_ADDRESS_1" />
+            <label for="">Current Address 2: </label>
+            <input type="text" value="<%= personal.CURRENT_ADDRESS_2 %>" name="CURRENT_ADDRESS_2" />
+            <label for="">Current ZIP: </label>
+            <input type="text" value="<%= personal.CURRENT_ZIP %>" name="CURRENT_ZIP" />
+            <label for="">Current Gender</label>
+            <select name="CURRENT_GENDER" id="">
+              <option value="Male" <%=personal.CURRENT_GENDER==='Male' ? 'selected' : '' %>>Male</option>
+              <option value="Female" <%=personal.CURRENT_GENDER==='Female' ? 'selected' : '' %>>Female</option>
+            </select>
+            <label for="">Current Personal Email: </label>
+            <input type="email" name="CURRENT_PERSONAL_EMAIL" value="<%= personal.CURRENT_PERSONAL_EMAIL %>" />
+          </div>
+          <div class="personal-infor_right">
+            <label for="">Social security number :</label>
+            <input type="text" name="SOCIAL_SECURITY_NUMBER" value="<%= personal.SOCIAL_SECURITY_NUMBER %>" required />
+            <label for="">Drivers licenes: </label>
+            <input type="text" name="DRIVERS_LICENSE" value="<%= personal.DRIVERS_LICENSE %>" required />
+            <label for="">Current City: </label>
+            <input type="text" value="<%= personal.CURRENT_CITY %>" name="CURRENT_CITY" />
+            <label for="">Current Country: </label>
+            <input type="text" value="<%= personal.CURRENT_COUNTRY %>" name="CURRENT_COUNTRY" />
+            <label for="">Current Phone number: </label>
+            <input type="text" value="<%= personal.CURRENT_PHONE_NUMBER %>" name="CURRENT_PHONE_NUMBER" />
+            <label for="">Current marital status: </label>
+            <input type="text" name="CURRENT_MARITAL_STATUS" value="<%= personal.CURRENT_MARITAL_STATUS %>" />
+            <label for="">Shareholder status: </label>
+            <select name="SHAREHOLDER_STATUS" id="">
+              <option value="Shareholder" <%=personal.SHAREHOLDER_STATUS===1 ? 'selected' : '' %>>Shareholder</option>
+              <option value="Non-shareholder" <%=personal.SHAREHOLDER_STATUS===0 ? 'selected' : '' %>>Non-Shareholder
+              </option>
+            </select>
+            <label for="">Ethnicity</label>
+            <input type="text" value="<%= personal.ETHNICITY %>" name="ETHNICITY" />
+            <label for="">Benefit Plan ID: </label>
+            <input type="number" required>
+          </div>
+
+          <h1 class="employee-title_update none">EMPLOYEE DETAIL</h1>
+
+          <div class="employee-infor_update" style="grid-column: 1 / 3">
+            <div class="employee-infor_left-update">
+
+              <label for="">hire date for working:</label>
+              <input type="date" name="HIRE_DATE_FOR_WORKING" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+              <label for="">work comp code:</label>
+              <input type="text" name="EMPLOYMENT_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+              <label for="">termination day:</label>
+              <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>">
+              <label for="">rehire date for working:</label>
+              <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>">
+              <label for="">Last review date:</label>
+              <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+              <label for="">Employment status: </label>
+              <select name="EMPLOYMENT_STATUS" id="employment-status">
+                <option value="Alive" <%=employment.EMPLOYMENT_STATUS==='Alive' ? 'selected' : '' %>>Alive</option>
+                <option value="Quit" <%=employment.EMPLOYMENT_STATUS==='Quit' ? 'selected' : '' %>>Quit</option>
+              </select>
+              <label for="">Workes Comp CODE: </label>
+              <input type="text" required>
+            </div>
+            <div class="employee-infor_right-update">
+
+              <label for="">Pay rate:</label>
+              <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+              <label for="">Id Pay rate:</label>
+              <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+              <label for="">vacation day:</label>
+              <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+              <label for="">Paid to date:</label>
+              <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+              <label for="">Paid last year:</label>
+              <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+              <label for="">Number day requirement:</label>
+              <input type="number" name="NUMBER_DAY_REQUIREMENT"
+                value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+              <label for="">Employee CODE: </label>
+              <input type="text" required>
+            </div>
+          </div>
+
+          <div class="checkbox-employee">
+            <input type="checkbox" name="employee_showInfo" id="employee-showInfo_update" />
+            <label for="employee-showInfo">Edit employee</label>
+          </div>
+          <button type="submit">Update</button>
+        </form>
+      </div>
+    </div>
+  </header>
+  <script src="/js/HandleUpdateForm.js"></script>
+  <script src="/js/chart.min.js"></script>
+  <script src="js/ShowLabelCurrentBirthdaysMonth.js"></script>
+  <script src="/js/ShowLabelExceededVacationDays.js"></script>
+  <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
+  <script src="/js/app.js"></script>
+</body>
+
+</html>

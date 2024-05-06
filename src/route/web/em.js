@@ -2,7 +2,7 @@
 //This file will define endpoint of employment route
 
 const express = require('express');
-const { getAllEmployee, addEPI,DeletePersonalView,getEmployeeView,setEditDataToForm,getEmployeeAdd} = require('../../controller/EmController');
+const { getAllEmployee, addEPI, DeletePersonalView, getEmployeeView, getEmployeeAdd, postUpdateOrInsertEmployment, setEditDataToFormEmploymentEdit, setEditDataToFormPersonalEdit } = require('../../controller/EmController');
 
 const routerManage = express.Router();
 
@@ -12,7 +12,13 @@ routerManage.get('/manage', getAllEmployee);
 routerManage.post('/add', addEPI)
 routerManage.get('/employee-view', getEmployeeView);
 routerManage.delete('/employee-view/:id', DeletePersonalView);
-routerManage.get('/employee-view/edit/:id', setEditDataToForm);
+
+routerManage.get('/employment/edit/:id', setEditDataToFormEmploymentEdit);
+routerManage.post('/update', postUpdateOrInsertEmployment)
+
+routerManage.get('/personal/edit/:id', setEditDataToFormPersonalEdit);
+routerManage.post('/update', postUpdateOrInsertEmployment)
+
 routerManage.get('/employee-add', getEmployeeAdd);
 
 module.exports = routerManage;

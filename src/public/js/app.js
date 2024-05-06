@@ -25,11 +25,13 @@ let showUI5 = document.querySelector('.content.ui5');
 let showUI6 = document.querySelector('.content.ui6');
 let showUI7 = document.querySelector('.content.ui7');
 let showUI8 = document.querySelector('.content.ui8');
+let showUI9 = document.querySelector('.content.ui9');
 let BtnN1 = document.querySelector('li.btn.n1');
 let BtnN2 = document.querySelector('li.btn.n2');
 let BtnN3 = document.querySelector('li.btn.n3');
 let BtnN4 = document.querySelector('li.btn.n4');
 let BtnN5 = document.querySelector('li.btn.n5');
+let BtnN7 = document.querySelector('li.btn.n7');
 
 // console.log(BtnN6);
 let alertBtn = document.querySelector('.alert');
@@ -139,6 +141,11 @@ document.querySelector('#benefits').onclick = () => {
     // hideAllContent();
     showUI4.classList.add('active');
     BtnN4.classList.add('active');
+    alertBtn.classList.remove('active');
+}
+document.querySelector('#access-control').onclick = () => {
+    window.location.href = "/access_control";
+    BtnN7.classList.add('active');
     alertBtn.classList.remove('active');
 }
 
@@ -276,28 +283,30 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    
-            console.log('PERSONAL_ID để xóa:', personalId);
+    console.log('PERSONAL_ID để xóa:', personalId);
     $.ajax({
         url: `http://localhost:4080/employee-view/${personalId}`,
         method: 'DELETE',
         success: function(response) {
+=======
+        url: `http://localhost:4080/employee-view/${employeeId}`,
+        type: 'DELETE',
+        success: function (response) {
+>>>>>>> aa6da96632f6a25eaa7699e3763e144adb516511
             console.log('Delete successful');
-            // Xóa hàng từ bảng HTML sau khi xóa thành công
             const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
             if (rowToDelete) {
                 rowToDelete.remove();
             }
-            // Ẩn overlay sau khi xóa thành công
             overlayDelete.style.display = 'none';
         },
         error: function (xhr, status, error) {
-            // Xử lý lỗi khi yêu cầu xóa không thành công
             console.error('Error deleting employee:', error);
             alert('Error deleting employee');
         }
     });
 });
+
 noDelete.addEventListener('click', () => {
     overlayDelete.style.display = 'none';
 });
@@ -312,7 +321,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-
+        
         showUI7.classList.add('active');
     });
 });
@@ -328,8 +337,47 @@ document.addEventListener("DOMContentLoaded", function () {
         if (checkbox.checked) {
             employeeInfo.style.display = "flex";
             employeeTilte.style.display = "block";
+            document.querySelector('.employee-infor').innerHTML = `
+            <div class="employee-infor_left">
+  <label for="">hire date for working:</label>
+  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+  <label for="">work comp code:</label>
+  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+  <label for="">termination day:</label>
+  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
+  <label for="">rehire date for working:</label>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
+  <label for="">Last review date:</label>
+  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+  <label for="">Employment status: </label>
+  <select name="EMPLOYMENT_STATUS" id="employment-status">
+    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
+    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+</select>
+<label for="">Employee CODE: </label>
+              <input type="number" required>
+</div>
+<div class="employee-infor_right">
 
-        } else {
+  <label for="">Pay rate:</label>
+  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+  <label for="">Id Pay rate:</label>
+  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+  <label for="">vacation day:</label>
+  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+  <label for="">Paid to date:</label>
+  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+  <label for="">Paid last year:</label>
+  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+  <label for="">Number day requirement:</label>
+  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+  <label for="">Workes Comp CODE: </label>
+              <input type="text" required>
+</div>
+`
+        }
+        else {
+            document.querySelector('.employee-infor').innerHTML = ``
             employeeInfo.style.display = "none";
             employeeTilte.style.display = "none";
         }
@@ -356,59 +404,3 @@ employeeManage.addEventListener('click', () => {
     showUI8.classList.add('active');
     showUI5.classList.remove('active');
 })
-
-
-
-// handle add form
-const handleAdd = () => {
-    const check = document.getElementById("employee-showInfo")
-
-    if (check.checked == true) {
-        document.querySelector('.employee-infor').innerHTML = `
-            <div class="employee-infor_left">
-  <label for="">hire date for working:</label>
-  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
-  <label for="">work comp code:</label>
-  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
-  <label for="">termination day:</label>
-  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
-  <label for="">rehire date for working:</label>
-  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
-  <label for="">Last review date:</label>
-  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
-  <label for="">Employment status: </label>
-  <select name="EMPLOYMENT_STATUS" id="employment-status">
-    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
-    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
-</select>
-</div>
-<div class="employee-infor_right">
-
-  <label for="">Pay rate:</label>
-  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
-  <label for="">Id Pay rate:</label>
-  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
-  <label for="">vacation day:</label>
-  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
-  <label for="">Paid to date:</label>
-  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
-  <label for="">Paid last year:</label>
-  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
-  <label for="">Number day requirement:</label>
-  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
-</div>
-`
-    } else {
-        document.querySelector('.employee-infor').innerHTML = ``
-    }
-}
-
-// handle update form
-const handleUpdate = () => {
-    const check = document.getElementById("employee-showInfo");
-    if (check.checked) {
-        document.querySelector('.employee-infor').style.display = 'block';
-    } else {
-        document.querySelector('.employee-infor').style.display = 'none';
-    }
-}

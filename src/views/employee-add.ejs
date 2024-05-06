@@ -1,146 +1,141 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="/css/stylesdash.css" />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <title>DashBoard</title>
-  </head>
 
-  <body>
-    <header>
-      <!-- Nabar -->
-      <div class="navbar">
-        <div class="logo">
-          <img src="/icon/LOGO.png" alt="" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="/css/stylesdash.css" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <title>DashBoard</title>
+</head>
+
+<body>
+  <header>
+    <!-- Nabar -->
+    <div class="navbar">
+      <div class="logo">
+        <img src="/icon/LOGO.png" alt="" />
+      </div>
+      <ul class="menu">
+        <li class="btn n1" id="dash">
+          <img src="/icon/icon-btn1.png" alt="" /><span>DashBoard</span>
+        </li>
+        <li class="btn n2" id="earnings">
+          <img src="/icon/icon-btn2.png" alt="" /><span>Total earnings </span>
+        </li>
+        <li class="btn n3" id="vacationdays">
+          <img src="/icon/icon-btn3.png" alt="" /><span>Vacation days</span>
+        </li>
+        <li class="btn n4" id="benefits">
+          <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
+        </li>
+        <li class="btn n7" id="access-control">
+          <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
+        </li>
+        <li class="btn n6 active" id="employee-management">
+          <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
+        </li>
+
+        <div class="box-child">
+          <button class="btn-view">View</button>
+          <button class="btn-add">Add</button>
         </div>
-        <ul class="menu">
-          <li class="btn n1" id="dash">
-            <img src="/icon/icon-btn1.png" alt="" /><span>DashBoard</span>
-          </li>
-          <li class="btn n2" id="earnings">
-            <img src="/icon/icon-btn2.png" alt="" /><span>Total earnings </span>
-          </li>
-          <li class="btn n3" id="vacationdays">
-            <img src="/icon/icon-btn3.png" alt="" /><span>Vacation days</span>
-          </li>
-          <li class="btn n4" id="benefits">
-            <img src="/icon/icon-btn4.png" alt="" /><span
-              >Average benefits paid</span
-            >
-          </li>
 
-          <li class="btn n6 active" id="employee-management">
-            <img src="/icon/icon-btn6.png" alt="" /><span
-              >Employee Management</span
-            >
-          </li>
-          <div class="box-child">
-            <button class="btn-view">View</button>
-            <button class="btn-add">Add</button>
+        <li class="btn n5" id="logout">
+          <img src="/icon/icon-btn5.png" alt="" /><span>Logout</span>
+        </li>
+      </ul>
+    </div>
+    <!-- main content -->
+    <div class="main-content">
+      <!-- Logo CEO MEMO -->
+      <section class="header">
+        <h1 class="name-project">H-P system</h1>
+        <span onclick="getAllNotification();">
+          <img id="alert-btn" src="/icon/Vector.png" alt="" />
+          <span class="number-info"></span>
+        </span>
+      </section>
+      <!-- Icon Alert -->
+      <div class="alert">
+        <section class="alert-box">
+          <section class="title-alert">
+            <span>Important notification</span>
+          </section>
+          <ul class="box"></ul>
+        </section>
+      </div>
+
+      <!-- Employee-ADD -->
+      <div class="content ui6">
+        <h1 class="personal-title">Personal Detail</h1>
+
+        <form action="/add" method="post" class="personal-info">
+          <div class="personal-info_left">
+            <label for="">First_Name:</label>
+            <input type="text" name="CURRENT_FIRST_NAME" required />
+            <label for="">Middle_Name:</label>
+            <input type="text" name="CURRENT_MIDDLE_NAME" required />
+            <label for="">Last_Name:</label>
+            <input type="text" name="CURRENT_LAST_NAME" required />
+            <label for="">Date_of_Birth:</label>
+            <input type="date" name="BIRTH_DATE" required />
+            <label for="">Current_Address 1: </label>
+            <input type="text" name="CURRENT_ADDRESS_1" />
+            <label for="">Current_Address 2: </label>
+            <input type="text" name="CURRENT_ADDRESS_2" />
+            <label for="">Current_ZIP: </label>
+            <input type="number" name="CURRENT_ZIP" />
+            <label for="">Current_Gender</label>
+            <select name="CURRENT_GENDER" id="">
+              <option value="Male">Male</option>
+              <option value="Female">Female</option>
+            </select>
+            <label for="">Current_Personal_email: </label>
+            <input type="email" name="CURRENT_PERSONAL_EMAIL" />
+          </div>
+          <div class="personal-infor_right">
+            <label for="">Social_security_number :</label>
+            <input type="text" name="SOCIAL_SECURITY_NUMBER" required />
+            <label for="">Drivers_license: </label>
+            <input type="text" required />
+            <label for="">Current City: </label>
+            <input type="text" />
+            <label for="">Current Country: </label>
+            <input type="text" />
+            <label for="">Current_Phone_number: </label>
+            <input type="text" name="CURRENT_PHONE_NUMBER" />
+            <label for="">Current_marital_status: </label>
+            <input type="text" name="CURRENT_MARITAL_STATUS" />
+            <label for="">Shareholder_status: </label>
+            <select name="SHAREHOLDER_STATUS" id="">
+              <option value="Shareholder">Shareholder</option>
+              <option value="Non-shareholder">Non-shareholder</option>
+            </select>
+            <label for="">Ethnicity</label>
+            <input type="text" name="ETHNICITY" />
+            <label for="">Benefit Plan ID: </label>
+            <input type="number" required>
           </div>
 
-          <li class="btn n5" id="logout">
-            <img src="/icon/icon-btn5.png" alt="" /><span>Logout</span>
-          </li>
-        </ul>
+          <h1 class="employee-title none">EMPLOYEE DETAIL</h1>
+
+          <div class="employee-infor" style="grid-column: 1 / 3"></div>
+
+          <div class="checkbox-employee">
+            <input type="checkbox" name="employee_showInfo" id="employee-showInfo" />
+            <label for="employee-showInfo">Edit employee</label>
+          </div>
+          <button type="submit">Add</button>
+        </form>
       </div>
-      <!-- main content -->
-      <div class="main-content">
-        <!-- Logo CEO MEMO -->
-        <section class="header">
-          <h1 class="name-project">H-P system</h1>
-          <span onclick="getAllNotification();">
-            <img id="alert-btn" src="/icon/Vector.png" alt="" />
-            <span class="number-info"></span>
-          </span>
-        </section>
-        <!-- Icon Alert -->
-        <div class="alert">
-          <section class="alert-box">
-            <section class="title-alert">
-              <span>Important notification</span>
-            </section>
-            <ul class="box"></ul>
-          </section>
-        </div>
+    </div>
+  </header>
+  <script src="/js/chart.min.js"></script>
+  <script src="js/ShowLabelCurrentBirthdaysMonth.js"></script>
+  <script src="/js/ShowLabelExceededVacationDays.js"></script>
+  <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
+  <script src="/js/app.js"></script>
+</body>
 
-        <!-- Employee-ADD -->
-        <div class="content ui6">
-          <h1 class="personal-title">Personal Detail</h1>
-
-          <form action="/add" method="post" class="personal-info">
-            <div class="personal-info_left">
-              <label for="">First_Name:</label>
-              <input type="text" name="CURRENT_FIRST_NAME" required />
-              <label for="">Middle_Name:</label>
-              <input type="text" name="CURRENT_MIDDLE_NAME" required />
-              <label for="">Last_Name:</label>
-              <input type="text" name="CURRENT_LAST_NAME" required />
-              <label for="">Date_of_Birth:</label>
-              <input type="date" name="BIRTH_DATE" required />
-              <label for="">Current_Address 1: </label>
-              <input type="text" name="CURRENT_ADDRESS_1" />
-              <label for="">Current_Address 2: </label>
-              <input type="text" name="CURRENT_ADDRESS_2" />
-              <label for="">Current_ZIP: </label>
-              <input type="number" name="CURRENT_ZIP" />
-              <label for="">Current_Gender</label>
-              <select name="CURRENT_GENDER" id="">
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-              </select>
-              <label for="">Current_Personal_email: </label>
-              <input type="email" name="CURRENT_PERSONAL_EMAIL" />
-            </div>
-            <div class="personal-infor_right">
-              <label for="">Social_security_number :</label>
-              <input type="text" name="SOCIAL_SECURITY_NUMBER" required />
-              <label for="">Drivers_license: </label>
-              <input type="text" required />
-              <label for="">Current City: </label>
-              <input type="text" />
-              <label for="">Current Country: </label>
-              <input type="text" />
-              <label for="">Current_Phone_number: </label>
-              <input type="text" name="CURRENT_PHONE_NUMBER" />
-              <label for="">Current_marital_status: </label>
-              <input type="text" name="CURRENT_MARITAL_STATUS" />
-              <label for="">Shareholder_status: </label>
-              <select name="SHAREHOLDER_STATUS" id="">
-                <option value="Shareholder">Shareholder</option>
-                <option value="Non-shareholder">Non-shareholder</option>
-              </select>
-              <label for="">Ethnicity</label>
-              <input type="text" name="ETHNICITY" />
-            </div>
-
-            <h1 class="employee-title">EMPLOYEE DETAIL</h1>
-
-            <div class="employee-infor" style="grid-column: 1 / 3"></div>
-
-            <div class="checkbox-employee">
-              <input
-                type="checkbox"
-                name="employee_showInfo"
-                id="employee-showInfo"
-                onclick="handleAdd()"
-              />
-              <label for="employee-showInfo">Edit employee</label>
-            </div>
-            <button type="submit">Add</button>
-          </form>
-        </div>
-      </div>
-    </header>
-    <script src="/js/chart.min.js"></script>
-    <script src="js/ShowLabelCurrentBirthdaysMonth.js"></script>
-    <script src="/js/ShowLabelExceededVacationDays.js"></script>
-    <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
-    <script src="/js/app.js"></script>
-  </body>
 </html>
