@@ -62,6 +62,15 @@ const convert_SSN = (SSN) => {
     return SSN
 }
 
+//convert zip from string to number
+const typeCastingZIP = (ZIP) =>{
+    if (ZIP == '') {
+        return ZIP = null
+    } else {
+        return ZIP = Number(ZIP)
+    }
+}
+
 const generateEmploymentId = async () => {
     const employmentId = await Employment.max('EMPLOYMENT_ID')
         .then(res => JSON.stringify(res))
@@ -73,5 +82,6 @@ const generateEmploymentId = async () => {
 
 module.exports = {
     convertShareHolder, generateEmployeeCode, generatePersonalId,
-    generateEmployeeId, generateEmploymentId, convert_SSN
+    generateEmployeeId, generateEmploymentId, convert_SSN,
+    typeCastingZIP
 }

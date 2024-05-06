@@ -353,19 +353,19 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector('.employee-infor').innerHTML = `
             <div class="employee-infor_left">
   <label for="">hire date for working:</label>
-  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+  <input type="date" name="HIRE_DATE" id="HIRE_DATE" required>
   <label for="">work comp code:</label>
-  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+  <input type="text" name="EMPLOYEE_CODE" required>
   <label for="">termination day:</label>
-  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
+  <input type="date" name="TERMINATION_DATE" id="TERMINATION_DATE" oninput="validTerminationDay(this)" required>
   <label for="">rehire date for working:</label>
-  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" oninput="validRehireDay(this)" required>
   <label for="">Last review date:</label>
-  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+  <input type="date" name="LAST_REVIEW_DATE" required>
   <label for="">Employment status: </label>
   <select name="EMPLOYMENT_STATUS" id="employment-status">
-    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
-    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+    <option value="Alive"</option>
+    <option value="Quit"</option>
 </select>
 <label for="">Employee CODE: </label>
               <input type="number" required>
@@ -373,15 +373,15 @@ document.addEventListener("DOMContentLoaded", function () {
 <div class="employee-infor_right">
 
   <label for="">Pay rate:</label>
-  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+  <input type="text" name="PAY_RATE" required>
   <label for="">Id Pay rate:</label>
-  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+  <input type="number" name="ID_PAY_RATE" required>
   <label for="">vacation day:</label>
-  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+  <input type="number" name="VACATION_DAYS" required>
   <label for="">Paid to date:</label>
-  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+  <input type="number" name="PAID_TO_DATE" required>
   <label for="">Paid last year:</label>
-  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+  <input type="number" name="PAID_LAST_YEAR" required>
   <label for="">Number day requirement:</label>
   <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
   <label for="">Workes Comp CODE: </label>
