@@ -48,7 +48,7 @@ const getEmployeeInfor = async () => {
     })
 
     let ids = dataEmployment.map(Employment => Employment.EMPLOYMENT_ID);
-    console.log(ids);
+    // console.log(ids);
 
     const dataEmployee = await sequelize_mysql.query(
         `SELECT * FROM mydb.employee 

@@ -68,8 +68,6 @@
               <span>Important notification</span>
             </section>
             <ul class="box">
-              <!-- <li onclick="window.location.href = './detail_announcement_1'">thong bao 1</li>
-            <li onclick="window.location.href = './detail_announcement_2'">thong bao 2</li> -->
             </ul>
           </section>
         </div>
@@ -160,13 +158,13 @@
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/employee-view/edit/<%= dataEmployee.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
                     <button
                       class="btn-delete"
-                      onclick="deleteEmployee('<%= dataPersonal.PERSONAL_ID %>')"
+                      onclick="deleteEmployee('<%= dataEmployee.PERSONAL_ID %>')"
                     >
                       Delete
                     </button>
@@ -209,7 +207,7 @@
                   <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                   <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                   <td>
-                    <button class="btn-edit">Edit</button>
+                    <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
                     <button class="btn-delete">Delete</button>
                   </td>
                 </tr>

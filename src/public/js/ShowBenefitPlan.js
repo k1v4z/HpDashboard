@@ -73,5 +73,3 @@ const renderData = (data) => {
 
 };
 
-// Khởi chạy hàm inputData khi trang được tải
-

@@ -7,6 +7,7 @@ const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmplo
 
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getEmploymentById } = require("../service/GetEmploymentById");
+const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
 
 const getAllEmployee = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -31,18 +32,20 @@ const getEmployeeAdd = (req, res) => {
 
 const setEditDataToForm = async (req, res) => {
     let id = req.params.id;
-    let personal = await getPersonalById(id);
-    let employment = await getEmploymentById(id);
     let isEmp = await isEmployee(id);
 
     if (isEmp) {
+        let personal = await getPersonalById(id);
+        let employment = await getAllDataEmployment(id);
         return res.render('employee-view_edit.ejs', {
-            personal: personal,  
+            personal: personal,
             employment: employment
         });
     } else {
+        let personal = await getPersonalById(id);
         return res.render('employee-view_edit.ejs', {
-            personal: personal
+            personal: personal,
+            employment: {}
         });
     }
 }

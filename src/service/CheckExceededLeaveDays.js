@@ -32,7 +32,6 @@ const mergeObjects = (personalInfo, employmentInfo, employmentWorkingTimeInfo) =
         }
     });
 
-    // Thêm key mới cho tất cả các object trong mảng kết quả
     map.forEach(info => {
         info.link = "http://localhost:4080/detail_announcement_2";
     });
@@ -75,16 +74,5 @@ const showEmployeeInfo = async () => {
     }
 };
 
-/*
-Để chạy thử được hàm này cần làm các bước sau:
-- Step 1: Sửa lại giá trị của một vài record ở trường NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH 
-trong bảng Employment_Working_Time_Info với value < 22
-- Step 2: chạy đoạn query này:
-UPDATE EWT
-SET EWT.TOTAL_NUMBER_VACATION_WORKING_DAYS_PER_MONTH = EWT.NUMBER_DAYS_ACTUAL_OF_WORKING_PER_MONTH - E.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH
-FROM dbo.EMPLOYMENT_WORKING_TIME AS EWT
-JOIN dbo.EMPLOYMENT AS E ON EWT.EMPLOYMENT_ID = E.EMPLOYMENT_ID;
-- Step 3: run run run
-*/
 
 module.exports = showEmployeeInfo
