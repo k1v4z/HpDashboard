@@ -341,7 +341,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <label for="">termination day:</label>
   <input type="date" name="TERMINATION_DATE" id="TERMINATION_DATE" oninput="validTerminationDay(this)" required>
   <label for="">rehire date for working:</label>
-  <input type="date" name="REHIRE_DATE_FOR_WORKING" required>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" oninput="validRehireDay(this)" required>
   <label for="">Last review date:</label>
   <input type="date" name="LAST_REVIEW_DATE" required>
   <label for="">Employment status: </label>

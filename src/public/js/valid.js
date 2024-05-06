@@ -94,3 +94,19 @@ function validTerminationDay(input){
         input.value = 'dd/mm/yy'
     }
 }
+
+function validRehireDay(input){
+    let inputValue = input.value
+    const rehireDay = new Date(inputValue)
+
+    // const HIRE_DATE = document.getElementById("HIRE_DATE").value
+    // const hireDay = new Date(HIRE_DATE)
+
+    const TERMINATION_DATE = document.getElementById("TERMINATION_DATE").value
+    const terminationDay = new Date(TERMINATION_DATE)
+
+    if ((rehireDay - terminationDay) / 86400000 < 0){
+        alert("RehireDay must equals or bigger than termination day")
+        input.value = "dd/mm/yy"
+    }
+}
