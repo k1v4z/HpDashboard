@@ -57,13 +57,13 @@ const getEmployeeInfor = async () => {
     const Data = dataEmployment.map(employment => {
         const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
         return { ...employment.toJSON(), ...employee };
-      });
-      console.log(Data);
-      return Data;
+    });
+    console.log(Data);
+    return Data;
 }
 
 
-const DeleletePersonal= async (id)=>{
+const DeleletePersonal = async (id) => {
     const data = await Personal.destroy({
         where: {
             PERSONAL_ID: id
@@ -168,5 +168,5 @@ const addPersonal = async (employeeCode) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor,DeleletePersonal
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, DeleletePersonal
 }
