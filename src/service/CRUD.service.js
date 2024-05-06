@@ -9,6 +9,7 @@ const Employee = require("../model/payroll/Employees");
 const { where } = require("sequelize");
 const { query } = require("express");
 const isEmployee = require("../helper/IsEmployee");
+const Employment_Working_Time = require("../model/human/Employment_Working_Time");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -48,7 +49,7 @@ const getEmployeeInfor = async () => {
     })
 
     let ids = dataEmployment.map(Employment => Employment.EMPLOYMENT_ID);
-    // console.log(ids);
+    console.log(ids);
 
     const dataEmployee = await sequelize_mysql.query(
         `SELECT * FROM mydb.employee 
@@ -63,31 +64,42 @@ const getEmployeeInfor = async () => {
 }
 
 
-const deletePersonalAndEmployment = async (personalId) => {
+const deletePersonalAndEmployment = async (Id) => {
     try {
-        // Xóa thông tin từ bảng Employment trước
-        await Employment.destroy({
-            where: {
-                EMPLOYMENT_ID: personalId
-            }
+        await sequelize_sqlserver.transaction(async (t) => {
+            // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
+            await sequelize_sqlserver.query(`
+                DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+            await sequelize_sqlserver.query(`
+                DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Employment
+            await sequelize_sqlserver.query(`
+                DELETE FROM EMPLOYMENT WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Personal
+            await sequelize_sqlserver.query(`
+                DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
+            `, { transaction: t });
+            
         });
 
-        // Sau đó xóa thông tin từ bảng Personal
-        const deletedPersonalCount = await Personal.destroy({
-            where: {
-                PERSONAL_ID: personalId
-            }
-        });
-
-        if (deletedPersonalCount > 0) {
-            console.log(`Xóa thành công thông tin của PERSONAL_ID ${personalId}`);
-        } else {
-            console.log(`Không tìm thấy bản ghi nào với PERSONAL_ID ${personalId}`);
-        }
+        // Xóa thông tin từ bảng Employee
+        // await sequelize_mysql.query(
+        //     `DELETE FROM employee WHERE \`Employee Number\` = '${Id}';`,
+        //     { type: QueryTypes.SELECT}
+        // );
     } catch (error) {
         console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
     }
 }
+
+
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
     //data is information of personel

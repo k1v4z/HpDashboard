@@ -53,6 +53,7 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
     id = req.params.id;
+    
     let isEmp = await isEmployee(id);
 
     if (isEmp) {

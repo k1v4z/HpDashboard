@@ -272,10 +272,10 @@ overlayDelete.innerHTML = `
 document.body.appendChild(overlayDelete);
 
 var deleteButtons = document.querySelectorAll('.btn-delete');
-let personalId;
+let Id;
 deleteButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
-        personalId = this.getAttribute('data-id');
+        Id = this.getAttribute('data-id');
         e.preventDefault();
         overlayDelete.style.display = 'block';
     });
@@ -283,15 +283,33 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    console.log('PERSONAL_ID để xóa:', personalId);
+    console.log('PERSONAL_ID để xóa:', Id);
     $.ajax({
-        url: `http://localhost:4080/employee-view/${personalId}`,
+        url: `http://localhost:4080/personal-view/${Id}`, // Endpoint để xóa thông tin cá nhân
         method: 'DELETE',
         success: function (response) {
             console.log('Delete successful');
-            const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
-            if (rowToDelete) {
-                rowToDelete.remove();
+            const rowToDeletePersonal = document.querySelector(`tr[data-employee-id="${Id}"]`);
+            if (rowToDeletePersonal) {
+                rowToDeletePersonal.remove();
+            }
+            overlayDelete.style.display = 'none';
+        },
+        error: function (xhr, status, error) {
+            console.error('Error deleting personal:', error);
+            alert('Error deleting personal');
+        }
+    });
+
+    // Tiếp theo, thực hiện cuộc gọi AJAX để xóa thông tin từ bảng EMPLOYMENT
+    $.ajax({
+        url: `http://localhost:4080/employee-view/${Id}`, // Endpoint để xóa thông tin nhân viên
+        method: 'DELETE',
+        success: function (response) {
+            console.log('Delete successful');
+            const rowToDeleteEmployee = document.querySelector(`tr[data-employee-id="${Id}"]`);
+            if (rowToDeleteEmployee) {
+                rowToDeleteEmployee.remove();
             }
             overlayDelete.style.display = 'none';
         },
