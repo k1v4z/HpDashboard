@@ -67,8 +67,7 @@
             <section class="title-alert">
               <span>Important notification</span>
             </section>
-            <ul class="box">
-            </ul>
+            <ul class="box"></ul>
           </section>
         </div>
 
@@ -111,7 +110,7 @@
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/personal/edit/<%= dataPersonal.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
@@ -158,7 +157,7 @@
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/employee-view/edit/<%= dataEmployee.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/employment/edit/<%= dataEmployee.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
@@ -207,7 +206,12 @@
                   <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
                   <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
                   <td>
-                    <button class="btn-edit" onclick="window.location.href = `/employee-view/edit/<%= dataPersonal.PERSONAL_ID %>`">Edit</button>
+                    <button
+                      class="btn-edit"
+                      onclick="window.location.href = `/personal/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                    >
+                      Edit
+                    </button>
                     <button class="btn-delete">Delete</button>
                   </td>
                 </tr>

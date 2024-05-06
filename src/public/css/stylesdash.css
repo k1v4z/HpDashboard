@@ -839,7 +839,8 @@ thead {
 
 /* START Emloyee Management ADD */
 .personal-title,
-.employee-title {
+.employee-title,
+.employee-title_update {
   text-align: left;
   padding-top: 10px;
   font-size: 35px;
@@ -849,17 +850,20 @@ thead {
   text-transform: uppercase;
   color: #4ed4de;
 }
-.employee-title {
+
+
+.employee-title.none, .employee-title_update.none {
   padding-top: 30px;
   display: none;
 }
+
 .personal-info {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 10px;
   margin: 20px;
 }
-.employee-infor {
+.employee-infor, .employee-infor_update {
   display: flex;
   gap: 10px;
 }
@@ -898,17 +902,19 @@ thead {
   font-size: 28px;
 }
 .employee-infor_left,
-.employee-infor_right {
+.employee-infor_right,
+.employee-infor_left-update,
+.employee-infor_right-update {
   width: 50%;
 }
 .personal-info button:hover {
   background-color: rgb(15, 14, 14);
   color: #12c2ce;
 }
-.employee-infor {
+.employee-infor_update {
   display: none;
 }
-.checkbox-employee {
+.checkbox-employee, .checkbox-employee_update{
   width: 300px;
   gap: 10px;
   font-size: 16px;
