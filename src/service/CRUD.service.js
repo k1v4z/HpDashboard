@@ -1,6 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
-const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId, generateEmployeeId, convert_SSN } = require("../helper/Add_Employee.helper");
+const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId, generateEmployeeId, convert_SSN, typeCastingZIP } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
@@ -106,13 +106,48 @@ const add_EP_Information = async (req) => {
 }
 
 const addPersonal = async (data) => {
+    const PERSONAL_ID = await generatePersonalId()
+    const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder()
+    data.CURRENT_ZIP = typeCastingZIP(data.CURRENT_ZIP)
+    let message = ''
+
+    await Personal.create({
+        PERSONAL_ID: PERSONAL_ID,
+        CURRENT_FIRST_NAME: data.CURRENT_FIRST_NAME,
+        CURRENT_LAST_NAME: data.CURRENT_LAST_NAME,
+        CURRENT_MIDDLE_NAME: data.CURRENT_MIDDLE_NAME,
+        BIRTH_DATE: data.BIRTH_DATE,
+        SOCIAL_SECURITY_NUMBER: data.SOCIAL_SECURITY_NUMBER,
+        DRIVERS_LICENSE: data.DRIVERS_LICENSE,
+        CURRENT_ADDRESS_1: data.CURRENT_ADDRESS_1,
+        CURRENT_ADDRESS_2: data.CURRENT_ADDRESS_2,
+        CURRENT_CITY: data.CURRENT_CITY,
+        CURRENT_COUNTRY: data.CURRENT_COUNTRY,
+        CURRENT_ZIP: data.CURRENT_ZIP,
+        CURRENT_GENDER: data.CURRENT_GENDER,
+        CURRENT_PHONE_NUMBER: data.CURRENT_PHONE_NUMBER,
+        CURRENT_PERSONAL_EMAIL: data.CURRENT_PERSONAL_EMAIL,
+        CURRENT_MARITAL_STATUS: data.CURRENT_MARITAL_STATUS,
+        ETHNICITY: data.ETHNICITY,
+        SHAREHOLDER_STATUS: SHAREHOLDER_STATUS_CONVERTED,
+    }).then(res => message = 'Create Successful')
+        .catch((err) => {
+            console.log('sqlserver: ->>>>>>>>>>>', err);
+            return message = 'Create Fail'
+        })
+    return message
+}
+
+const addEmployee = async (data) => {
     const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder(data.SHAREHOLDER_STATUS) //data after convert
     const PERSONAL_ID = await generatePersonalId()
     const employmentId = await generateEmploymentId()
     const employeeCode = await generateEmployeeCode()
     const employeeId = await generateEmployeeId()
-    const SSN_Converted = await convert_SSN()
-    
+    const SSN_Converted = convert_SSN(data.SOCIAL_SECURITY_NUMBER)
+    data.CURRENT_ZIP = typeCastingZIP(data.CURRENT_ZIP)
+    let message = ''
+
     //add personal
     sequelize_sqlserver.transaction(async (t) => {
         const personal = await Personal.create({
@@ -233,7 +268,7 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
             // Giả sử bạn có tất cả dữ liệu cần thiết cho INSERT
             let employment_id = generateEmploymentId();
             let employment_code = generateEmployeeCode();
-            await sequelize_sqlserver.query(insertSQL, [employment_id, employment_code, dataEmployment.employment_status, dataEmployment.hire_date_working, dataEmployment.employment_status, dataEmployment.hire_date_working, ], { type: QueryTypes.INSERT });
+            await sequelize_sqlserver.query(insertSQL, [employment_id, employment_code, dataEmployment.employment_status, dataEmployment.hire_date_working, dataEmployment.employment_status, dataEmployment.hire_date_working,], { type: QueryTypes.INSERT });
         } else {
             console.log("UPDATE");
             const querySQLSERVER = `
