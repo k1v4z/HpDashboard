@@ -993,7 +993,9 @@ thead {
   font-weight: 700;
   text-transform: uppercase;
 }
-
+.tag-select_right h1 {
+  margin-right: 20px;
+}
 .group,
 .module,
 .function {
