@@ -1,6 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
-const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId } = require("../helper/Add_Employee.helper");
+const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId, generateEmployeeId, convert_SSN } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
@@ -92,60 +92,48 @@ const deletePersonalAndEmployment = async (personalId) => {
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
     //data is information of personel
-    const { CURRENT_FIRST_NAME, CURRENT_LAST_NAME, CURRENT_MIDDLE_NAME,
-        BIRTH_DATE, SOCIAL_SECURITY_NUMBER, DRIVERS_LICENSE,
-        CURRENT_ADDRESS_1, CURRENT_ADDRESS_2, CURRENT_CITY,
-        CURRENT_COUNTRY, CURRENT_ZIP, CURRENT_GENDER,
-        CURRENT_PHONE_NUMBER, CURRENT_PERSONAL_EMAIL, CURRENT_MARITAL_STATUS,
-        ETHNICITY, SHAREHOLDER_STATUS, IS_EMPLOYEE } = req.body;
+    const data = req.body
 
-    const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder(SHAREHOLDER_STATUS) //data after convert
-
-    if (IS_EMPLOYEE) {
-        const employeeCode = await generateEmployeeCode()
-        addPersonal()
-
+    let message = ''
+    if (data.employee_showInfo == 'on') {
+        message = await addEmployee(data)
+        return message
     } else {
-
+        message = await addPersonal(data)
+        return message
     }
 
-    // add employee
-    // if(check){
-    //     const payroll = await sequelize_mysql.query(
-    //         `SELECT e.\`${choice_year}\`, p.\`Tax Percentage\`, p.\`Pay Amount\`, e.\`idEmployee\`
-    //     FROM mydb.employee AS e
-    //     INNER JOIN mydb.\`pay rates\` AS p ON p.\`idPay Rates\` = e.\`Pay Rates_idPay Rates\`;`,
-    //         { type: QueryTypes.SELECT }
-    //     ).then(res => JSON.stringify(res))
-    //         .then(StringJSON => JSON.parse(StringJSON))
-    //         .catch(err => console.log(err));
-
-    // }
-
-    return req.body
 }
 
-const addPersonal = async (employeeCode) => {
+const addPersonal = async (data) => {
+    const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder(data.SHAREHOLDER_STATUS) //data after convert
+    const PERSONAL_ID = await generatePersonalId()
+    const employmentId = await generateEmploymentId()
+    const employeeCode = await generateEmployeeCode()
+    const employeeId = await generateEmployeeId()
+    const SSN_Converted = await convert_SSN()
+    
     //add personal
     sequelize_sqlserver.transaction(async (t) => {
         const personal = await Personal.create({
-            CURRENT_FIRST_NAME: CURRENT_FIRST_NAME,
-            CURRENT_LAST_NAME: CURRENT_LAST_NAME,
-            CURRENT_MIDDLE_NAME: CURRENT_MIDDLE_NAME,
-            BIRTH_DATE: BIRTH_DATE,
-            SOCIAL_SECURITY_NUMBER: SOCIAL_SECURITY_NUMBER,
-            DRIVERS_LICENSE: DRIVERS_LICENSE,
-            CURRENT_ADDRESS_1: CURRENT_ADDRESS_1,
-            CURRENT_ADDRESS_2: CURRENT_ADDRESS_2,
-            CURRENT_CITY: CURRENT_CITY,
-            CURRENT_COUNTRY: CURRENT_COUNTRY,
-            CURRENT_ZIP: CURRENT_ZIP,
-            CURRENT_GENDER: CURRENT_GENDER,
-            CURRENT_PHONE_NUMBER: CURRENT_PHONE_NUMBER,
-            CURRENT_PERSONAL_EMAIL: CURRENT_PERSONAL_EMAIL,
-            CURRENT_MARITAL_STATUS: CURRENT_MARITAL_STATUS,
-            ETHNICITY: ETHNICITY,
-            SHAREHOLDER_STATUS: SHAREHOLDER_STATUS,
+            PERSONAL_ID: PERSONAL_ID,
+            CURRENT_FIRST_NAME: data.CURRENT_FIRST_NAME,
+            CURRENT_LAST_NAME: data.CURRENT_LAST_NAME,
+            CURRENT_MIDDLE_NAME: data.CURRENT_MIDDLE_NAME,
+            BIRTH_DATE: data.BIRTH_DATE,
+            SOCIAL_SECURITY_NUMBER: data.SOCIAL_SECURITY_NUMBER,
+            DRIVERS_LICENSE: data.DRIVERS_LICENSE,
+            CURRENT_ADDRESS_1: data.CURRENT_ADDRESS_1,
+            CURRENT_ADDRESS_2: data.CURRENT_ADDRESS_2,
+            CURRENT_CITY: data.CURRENT_CITY,
+            CURRENT_COUNTRY: data.CURRENT_COUNTRY,
+            CURRENT_ZIP: data.CURRENT_ZIP,
+            CURRENT_GENDER: data.CURRENT_GENDER,
+            CURRENT_PHONE_NUMBER: data.CURRENT_PHONE_NUMBER,
+            CURRENT_PERSONAL_EMAIL: data.CURRENT_PERSONAL_EMAIL,
+            CURRENT_MARITAL_STATUS: data.CURRENT_MARITAL_STATUS,
+            ETHNICITY: data.ETHNICITY,
+            SHAREHOLDER_STATUS: SHAREHOLDER_STATUS_CONVERTED,
         }, { transaction: t })
 
         await Employment.create({
@@ -160,6 +148,7 @@ const addPersonal = async (employeeCode) => {
             NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH: data.NUMBER_DAY_REQUIREMENT,
             PERSONAL_ID: personal.PERSONAL_ID
         }, { transaction: t })
+
     }).then(res => message = 'Create Successful')
         .catch((err) => {
             console.log('sqlserver: ->>>>>>>>>>>', err);
