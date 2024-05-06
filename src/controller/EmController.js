@@ -3,7 +3,7 @@
 
 
 const isEmployee = require("../helper/IsEmployee");
-const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateOrInsertEmployment } = require("../service/CRUD.service");
+const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateOrInsertEmployment, deletePersonalAndEmployment } = require("../service/CRUD.service");
 
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getEmploymentById } = require("../service/GetEmploymentById");
@@ -130,8 +130,9 @@ const postUpdateOrInsertEmployment = async (req, res) => {
 const DeletePersonalView = async (req, res) => {
     const idpersonal = req.params.id;
     console.log(idpersonal);
+
     try {
-        await DeleletePersonal(idpersonal);
+        await deletePersonalAndEmployment(idpersonal);
         res.status(200).json({ status: "Success!" });
     } catch (error) {
         res.status(500).json({ error: "Error deleting personal data" });

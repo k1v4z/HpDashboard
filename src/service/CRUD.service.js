@@ -56,7 +56,7 @@ const getEmployeeInfor = async () => {
         { type: QueryTypes.SELECT }
     );
     const Data = dataEmployment.map(employment => {
-        const employee = dataEmployee.find(Employee => Employee.idEmployee === employment.EMPLOYMENT_ID);
+        const employee = dataEmployee.find(Employee => Employee['Employee Number'] === employment.EMPLOYMENT_CODE);
         return { ...employment.toJSON(), ...employee };
     });
     //   console.log(Data);
@@ -64,13 +64,30 @@ const getEmployeeInfor = async () => {
 }
 
 
-const DeleletePersonal = async (id) => {
-    const data = await Personal.destroy({
-        where: {
-            PERSONAL_ID: id
+const deletePersonalAndEmployment = async (personalId) => {
+    try {
+        // Xóa thông tin từ bảng Employment trước
+        await Employment.destroy({
+            where: {
+                EMPLOYMENT_ID: personalId
+            }
+        });
+
+        // Sau đó xóa thông tin từ bảng Personal
+        const deletedPersonalCount = await Personal.destroy({
+            where: {
+                PERSONAL_ID: personalId
+            }
+        });
+
+        if (deletedPersonalCount > 0) {
+            console.log(`Xóa thành công thông tin của PERSONAL_ID ${personalId}`);
+        } else {
+            console.log(`Không tìm thấy bản ghi nào với PERSONAL_ID ${personalId}`);
         }
-    });
-    return data;
+    } catch (error) {
+        console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
+    }
 }
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
@@ -266,5 +283,5 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, DeleletePersonal, getPersonalById, handleUpdateOrInsertEmployment
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, deletePersonalAndEmployment, getPersonalById, handleUpdateOrInsertEmployment
 }
