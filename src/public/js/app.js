@@ -316,7 +316,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-
+        
         showUI7.classList.add('active');
     });
 });
@@ -350,7 +350,7 @@ document.addEventListener("DOMContentLoaded", function () {
     <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
 </select>
 <label for="">Employee CODE: </label>
-              <input type="text" required>
+              <input type="number" required>
 </div>
 <div class="employee-infor_right">
 
