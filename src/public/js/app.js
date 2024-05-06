@@ -265,9 +265,10 @@ overlayDelete.innerHTML = `
 document.body.appendChild(overlayDelete);
 
 var deleteButtons = document.querySelectorAll('.btn-delete');
-
+let personalId;
 deleteButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
+        personalId = this.getAttribute('data-id');
         e.preventDefault();
         overlayDelete.style.display = 'block';
     });
@@ -275,21 +276,15 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-
-    deleteEmployee(employeeId);
-});
-noDelete.addEventListener('click', () => {
-    overlayDelete.style.display = 'none';
-});
-function deleteEmployee(employeeId) {
-    // Sử dụng AJAX để gửi yêu cầu xóa
+    
+            console.log('PERSONAL_ID để xóa:', personalId);
     $.ajax({
-        url: `http://localhost:4080/employee-view/${employeeId}`,
-        type: 'DELETE',
+        url: `http://localhost:4080/employee-view/${personalId}`,
+        method: 'DELETE',
         success: function(response) {
             console.log('Delete successful');
             // Xóa hàng từ bảng HTML sau khi xóa thành công
-            const rowToDelete = document.querySelector(`tr[data-employee-id="${employeeId}"]`);
+            const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
             if (rowToDelete) {
                 rowToDelete.remove();
             }
@@ -302,7 +297,11 @@ function deleteEmployee(employeeId) {
             alert('Error deleting employee');
         }
     });
-}
+});
+noDelete.addEventListener('click', () => {
+    overlayDelete.style.display = 'none';
+});
+
 
 // END Employee Management VIEW-DELETE
 
