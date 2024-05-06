@@ -332,43 +332,7 @@ document.addEventListener("DOMContentLoaded", function () {
         if (checkbox.checked) {
             employeeInfo.style.display = "flex";
             employeeTilte.style.display = "block";
-
-        } else {
-            employeeInfo.style.display = "none";
-            employeeTilte.style.display = "none";
-        }
-    });
-});
-
-// END Employee Management ADD
-
-// END Employee Management ADD
-
-let personalManage = document.querySelector('.personal-manage');
-let employeeManage = document.querySelector('.employee-manage');
-
-
-personalManage.addEventListener('click', () => {
-    personalManage.classList.add('active');
-    employeeManage.classList.remove('active');
-    showUI5.classList.add('active');
-    showUI8.classList.remove('active');
-})
-employeeManage.addEventListener('click', () => {
-    personalManage.classList.remove('active');
-    employeeManage.classList.add('active');
-    showUI8.classList.add('active');
-    showUI5.classList.remove('active');
-})
-
-
-
-// handle add form
-const handleAdd = () => {
-    const check = document.getElementById("employee-showInfo")
-
-    if (check.checked == true) {
-        document.querySelector('.employee-infor').innerHTML = `
+            document.querySelector('.employee-infor').innerHTML = `
             <div class="employee-infor_left">
   <label for="">hire date for working:</label>
   <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
@@ -402,17 +366,32 @@ const handleAdd = () => {
   <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
 </div>
 `
-    } else {
-        document.querySelector('.employee-infor').innerHTML = ``
-    }
-}
+        }
+        else {
+            document.querySelector('.employee-infor').innerHTML = ``
+            employeeInfo.style.display = "none";
+            employeeTilte.style.display = "none";
+        }
+    });
+});
 
-// handle update form
-const handleUpdate = () => {
-    const check = document.getElementById("employee-showInfo");
-    if (check.checked) {
-        document.querySelector('.employee-infor').style.display = 'block';
-    } else {
-        document.querySelector('.employee-infor').style.display = 'none';
-    }
-}
+// END Employee Management ADD
+
+// END Employee Management ADD
+
+let personalManage = document.querySelector('.personal-manage');
+let employeeManage = document.querySelector('.employee-manage');
+
+
+personalManage.addEventListener('click', () => {
+    personalManage.classList.add('active');
+    employeeManage.classList.remove('active');
+    showUI5.classList.add('active');
+    showUI8.classList.remove('active');
+})
+employeeManage.addEventListener('click', () => {
+    personalManage.classList.remove('active');
+    employeeManage.classList.add('active');
+    showUI8.classList.add('active');
+    showUI5.classList.remove('active');
+})
