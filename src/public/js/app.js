@@ -276,34 +276,25 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    
-            console.log('PERSONAL_ID để xóa:', personalId);
+    console.log('PERSONAL_ID để xóa:', personalId);
     $.ajax({
-<<<<<<< HEAD
         url: `http://localhost:4080/employee-view/${personalId}`,
         method: 'DELETE',
-        success: function(response) {
-=======
-        url: `http://localhost:4080/employee-view/${employeeId}`,
-        type: 'DELETE',
         success: function (response) {
->>>>>>> aa6da96632f6a25eaa7699e3763e144adb516511
             console.log('Delete successful');
-            // Xóa hàng từ bảng HTML sau khi xóa thành công
             const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
             if (rowToDelete) {
                 rowToDelete.remove();
             }
-            // Ẩn overlay sau khi xóa thành công
             overlayDelete.style.display = 'none';
         },
         error: function (xhr, status, error) {
-            // Xử lý lỗi khi yêu cầu xóa không thành công
             console.error('Error deleting employee:', error);
             alert('Error deleting employee');
         }
     });
 });
+
 noDelete.addEventListener('click', () => {
     overlayDelete.style.display = 'none';
 });
