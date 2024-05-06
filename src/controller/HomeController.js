@@ -1,4 +1,4 @@
-const { getAllDepartment, getAllEthnicity,getAllPersonalImfomations, getEmployeeInfor, DeleletePersonal} = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEmployeeInfor, DeleletePersonal } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -53,7 +53,12 @@ const getAnnouncementTwo = (req, res) => {
     return res.render('detail_announcement_2.ejs');
 }
 
+const getAccessControl = (req, res) => {
+    //All employees have vacations day over standard
+    return res.render('access_control.ejs');
+}
+
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo
+    getAnnouncementOne, getAnnouncementTwo, getAccessControl
 }
