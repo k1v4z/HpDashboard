@@ -349,6 +349,8 @@ document.addEventListener("DOMContentLoaded", function () {
     <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
     <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
 </select>
+<label for="">Employee CODE: </label>
+              <input type="text" required>
 </div>
 <div class="employee-infor_right">
 
@@ -364,6 +366,8 @@ document.addEventListener("DOMContentLoaded", function () {
   <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
   <label for="">Number day requirement:</label>
   <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
+  <label for="">Workes Comp CODE: </label>
+              <input type="text" required>
 </div>
 `
         }
