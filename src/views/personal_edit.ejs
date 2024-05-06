@@ -74,7 +74,7 @@
         <div class="content ui7">
           <h1 class="personal-title">Personal Detail</h1>
 
-          <form action="manage-personal/update" method="POST" class="personal-info">
+          <form action="/update" method="POST" class="personal-info">
             <div class="personal-info_left">
               <label for="">First Name:</label>
               <input
@@ -110,8 +110,8 @@
                 name="CURRENT_GENDER"
                 id=""
               >
-              <option value="male" <%= personal.CURRENT_GENDER === 'Male' ? 'selected' : '' %>>Male</option>
-              <option value="female" <%= personal.CURRENT_GENDER === 'Female' ? 'selected' : '' %>>Female</option>
+              <option value="Male" <%= personal.CURRENT_GENDER === 'Male' ? 'selected' : '' %>>Male</option>
+              <option value="Female" <%= personal.CURRENT_GENDER === 'Female' ? 'selected' : '' %>>Female</option>
               </select>
               <label for="">Current Personal Email: </label>
               <input
@@ -152,8 +152,8 @@
                 name="SHAREHOLDER_STATUS"
                 id=""
               >
-                <option value="shareholder" <%= personal.SHAREHOLDER_STATUS === 1 ? 'selected' : '' %>>Shareholder</option>
-                <option value="non-shareholder" <%= personal.SHAREHOLDER_STATUS === 0 ? 'selected' : '' %>>Non-Shareholder</option>
+                <option value="Shareholder" <%= personal.SHAREHOLDER_STATUS === 1 ? 'selected' : '' %>>Shareholder</option>
+                <option value="Non-shareholder" <%= personal.SHAREHOLDER_STATUS === 0 ? 'selected' : '' %>>Non-Shareholder</option>
               </select>
               <label for="">Ethnicity</label>
               <input type="text" value="<%= personal.ETHNICITY %>" name="ETHNICITY" />

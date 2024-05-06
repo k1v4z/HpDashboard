@@ -8,6 +8,7 @@ const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmplo
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getEmploymentById } = require("../service/GetEmploymentById");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
+let id;
 
 const getAllEmployee = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -51,7 +52,7 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 }
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
-    let id = req.params.id;
+    id = req.params.id;
     let isEmp = await isEmployee(id);
 
     if (isEmp) {
@@ -83,7 +84,7 @@ const getEmployeeView = async (req, res) => {
 
 
 const postUpdateOrInsertEmployment = async (req, res) => {
-    let idPersonal = req.params.id;
+    let idPersonal = id;
     const dataPersonal = {
         id_personal: idPersonal,
         first_name: req.body.CURRENT_FIRST_NAME,
@@ -108,6 +109,7 @@ const postUpdateOrInsertEmployment = async (req, res) => {
         hire_date_working: req.body.HIRE_DATE_FOR_WORKING,
         employment_code: req.body.EMPLOYMENT_CODE,
         terminattion_date: req.body.TERMINATION_DATE,
+        Worker_comp_code: req.body.WORKERS_COMP_CODE,
         rehire_date_working: req.body.REHIRE_DATE_FOR_WORKING,
         last_review_date: req.body.LAST_REVIEW_DATE,
         employment_status: req.body.EMPLOYMENT_STATUS,

@@ -14,10 +14,10 @@ routerManage.get('/employee-view', getEmployeeView);
 routerManage.delete('/employee-view/:id', DeletePersonalView);
 
 routerManage.get('/employment/edit/:id', setEditDataToFormEmploymentEdit);
-routerManage.post('manage-employment/update', postUpdateOrInsertEmployment)
+routerManage.post('/update', postUpdateOrInsertEmployment)
 
 routerManage.get('/personal/edit/:id', setEditDataToFormPersonalEdit);
-routerManage.post('/manage-personal/update', postUpdateOrInsertEmployment)
+routerManage.post('/update', postUpdateOrInsertEmployment)
 
 routerManage.get('/employee-add', getEmployeeAdd);
 

@@ -1,6 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
-const { convertShareHolder, generateEmployeeCode } = require("../helper/Add_Employee.helper");
+const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
@@ -198,7 +198,8 @@ const getPersonalById = async (id) => {
 }
 
 const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
-    if (dataPersonal !== undefined) {
+    let message = '';
+    try {
         await Personal.update({
             CURRENT_FIRST_NAME: dataPersonal.first_name,
             CURRENT_MIDDLE_NAME: dataPersonal.middle_name,
@@ -215,70 +216,75 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
             CURRENT_COUNTRY: dataPersonal.country,
             CURRENT_PHONE_NUMBER: dataPersonal.phone_number,
             CURRENT_MARITAL_STATUS: dataPersonal.marital_status,
-            SHAREHOLDER_STATUS: dataPersonal.shareholder_status,
+            SHAREHOLDER_STATUS: dataPersonal.shareholder_status === "Shareholder" ? 1 : 0,
             ETHNICITY: dataPersonal.ethnicity
         }, {
             where: {
                 PERSONAL_ID: dataPersonal.id_personal
             }
-        }).then(res => message = 'Create Successful')
-            .catch((err) => {
-                console.log('sqlserver: ->>>>>>>>>>>', err);
-                return message = 'Create Fail'
-            });
+        });
+        message = 'Update Successful';
+    } catch (err) {
+        console.log('sqlserver: ->>>>>>>>>>>', err);
+        message = 'Update Fail';
     }
+    return message;
+
+
     let isEmployment = isEmployee(dataPersonal.id_personal).then(isEmp => {
         return isEmp;
     });
-    if (!isEmployment) {
-        console.log("INSERT INTO");
-
-    } else {
-        console.log("UPDATE");
-        const querySQLSERVER = `
-            UPDATE mydb.employee
+    try {
+        if (!isEmployment) {
+            console.log("INSERT INTO");
+            const insertSQL = `
+        INSERT INTO dbo.EMPLOYMENT (EMPLOYMENT_ID, EMPLOYMENT_CODE, EMPLOYMENT_STATUS, HIRE_DATE_FOR_WORKING, WORKERS_COMP_CODE, TERMINATION_DATE, REHIRE_DATE_FOR_WORKING, LAST_REVIEW_DATE, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    `;
+            // Giả sử bạn có tất cả dữ liệu cần thiết cho INSERT
+            let employment_id = generateEmploymentId();
+            let employment_code = generateEmployeeCode();
+            await sequelize_sqlserver.query(insertSQL, [employment_id, employment_code, dataEmployment.employment_status, dataEmployment.hire_date_working, dataEmployment.employment_status, dataEmployment.hire_date_working, ], { type: QueryTypes.INSERT });
+        } else {
+            console.log("UPDATE");
+            const querySQLSERVER = `
+            UPDATE dbo.EMPLOYMENT
             SET EMPLOYMENT_ID = ?, EMPLOYMENT_CODE = ?, EMPLOYMENT_STATUS = ?, HIRE_DATE_FOR_WORKING = ?, WORKERS_COMP_CODE = ?, TERMINATION_DATE = ?, REHIRE_DATE_FOR_WORKING = ?, LAST_REVIEW_DATE = ?, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = ?
             WHERE PERSONAL_ID = ?`;
-        await sequelize_mysql.query(querySQLSERVER, [
-            111,
-            dataPersonal.first_name,
-            dataPersonal.last_name,
-            dataPersonal.Social_security_number,
-            dataEmployment.pay_rate,
-            dataEmployment.id_pay_rate,
-            dataEmployment.vaction_days,
-            dataEmployment.paid_to_date,
-            dataEmployment.paid_last_year,
-            dataEmployment.employment_code
-        ], { type: QueryTypes.UPDATE }
-        ).then(res => message = 'Create Successful')
-            .catch((err) => {
-                console.log('mysql: ->>>>>>>>>>>', err);
-                return message = 'Create Fail'
-            })
+            await sequelize_sqlserver.query(querySQLSERVER, [
+                dataEmployment.employment_id,
+                dataEmployment.employment_code,
+                dataEmployment.employment_status,
+                dataEmployment.hire_date_working,
+                dataEmployment.workers_comp_code,
+                dataEmployment.termination_date,
+                dataEmployment.rehire_date_working,
+                dataEmployment.last_review_date,
+                dataEmployment.number_days_requirement,
+                dataPersonal.id_personal
+            ], { type: QueryTypes.UPDATE });
 
 
-        const queryMYSQL = `
+            const queryMYSQL = `
             UPDATE mydb.employee
             SET \`idEmployee\` = ?, \`First Name\` = ?, \`Last Name\` = ?, \`SSN\` = ?, \`Pay Rate\` = ?, \`Pay Rates_idPay Rates\` = ?, \`Vacation Days\` = ?, \`Paid To Date\` = ?, \`Paid Last Year\` = ?
             WHERE \`Employee Number\` = ?`;
-        await sequelize_mysql.query(queryMYSQL, [
-            111,
-            dataPersonal.first_name,
-            dataPersonal.last_name,
-            dataPersonal.Social_security_number,
-            dataEmployment.pay_rate,
-            dataEmployment.id_pay_rate,
-            dataEmployment.vaction_days,
-            dataEmployment.paid_to_date,
-            dataEmployment.paid_last_year,
-            dataEmployment.employment_code
-        ], { type: QueryTypes.UPDATE }
-        ).then(res => message = 'Create Successful')
-            .catch((err) => {
-                console.log('mysql: ->>>>>>>>>>>', err);
-                return message = 'Create Fail'
-            })
+            await sequelize_mysql.query(queryMYSQL, [
+                dataEmployment.id_employee,
+                dataPersonal.first_name,
+                dataPersonal.last_name,
+                dataPersonal.Social_security_number,
+                dataEmployment.pay_rate,
+                dataEmployment.id_pay_rate,
+                dataEmployment.vacation_days,
+                dataEmployment.paid_to_date,
+                dataEmployment.paid_last_year,
+                dataPersonal.id_personal
+            ], { type: QueryTypes.UPDATE });
+        }
+    } catch (error) {
+        console.error('Error during employment update/insert:', error);
+        throw new Error('Operation failed');
     }
 }
 
