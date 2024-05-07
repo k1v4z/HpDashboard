@@ -58,7 +58,11 @@ const getAccessControl = (req, res) => {
     return res.render('access_control.ejs');
 }
 
+const getChangeBenefitPlan = (req, res) => {
+    return res.render('change_benefit_plan.ejs')
+}
+
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo, getAccessControl
+    getAnnouncementOne, getAnnouncementTwo, getAccessControl, getChangeBenefitPlan
 }
