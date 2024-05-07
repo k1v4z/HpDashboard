@@ -5,10 +5,10 @@ const isEmployee = async (id) => {
         const employee = await Employment.findOne({
             where: { PERSONAL_ID: id }
         });
-        return employee !== null;  
+        return !!employee; 
     } catch (err) {
-        console.log(err);
-        return false;  
+        console.error("Error retrieving employee data:", err);
+        return false; 
     }
 }
 

@@ -232,7 +232,7 @@ const getPersonalById = async (id) => {
     return PersonalByID;
 }
 
-const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
+const handleUpdatePersonal = async (dataPersonal) => {
     let message = '';
     try {
         await Personal.update({
@@ -252,7 +252,8 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
             CURRENT_PHONE_NUMBER: dataPersonal.phone_number,
             CURRENT_MARITAL_STATUS: dataPersonal.marital_status,
             SHAREHOLDER_STATUS: dataPersonal.shareholder_status === "Shareholder" ? 1 : 0,
-            ETHNICITY: dataPersonal.ethnicity
+            ETHNICITY: dataPersonal.ethnicity,
+            BENEFIT_PLAN_ID: dataPersonal.benefit_plan_id
         }, {
             where: {
                 PERSONAL_ID: dataPersonal.id_personal
@@ -264,31 +265,50 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
         message = 'Update Fail';
     }
     return message;
+}
 
-
-    let isEmployment = isEmployee(dataPersonal.id_personal).then(isEmp => {
-        return isEmp;
-    });
+const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
+    let isEmployment = await isEmployee(dataPersonal.id_personal);
+    console.log(isEmployment);
+    const employeeCode = await generateEmployeeCode()
+    const employeeId = await generateEmployeeId()
+    const employmentId = await generateEmploymentId()
     try {
         if (!isEmployment) {
-            console.log("INSERT INTO");
-            const insertSQL = `
-        INSERT INTO dbo.EMPLOYMENT (EMPLOYMENT_ID, EMPLOYMENT_CODE, EMPLOYMENT_STATUS, HIRE_DATE_FOR_WORKING, WORKERS_COMP_CODE, TERMINATION_DATE, REHIRE_DATE_FOR_WORKING, LAST_REVIEW_DATE, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH)
-        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
-    `;
-            // Giả sử bạn có tất cả dữ liệu cần thiết cho INSERT
-            let employment_id = generateEmploymentId();
-            let employment_code = generateEmployeeCode();
-            await sequelize_sqlserver.query(insertSQL, [employment_id, employment_code, dataEmployment.employment_status, dataEmployment.hire_date_working, dataEmployment.employment_status, dataEmployment.hire_date_working,], { type: QueryTypes.INSERT });
+            // Insert into employment table
+            await Employment.create({
+                EMPLOYMENT_ID: employmentId,
+                EMPLOYMENT_CODE: employeeCode,
+                EMPLOYMENT_STATUS: dataEmployment.employment_status,
+                HIRE_DATE_FOR_WORKING: dataEmployment.hire_date_working,
+                WORKERS_COMP_CODE: dataEmployment.workers_comp_code,
+                TERMINATION_DATE: dataEmployment.termination_date,
+                REHIRE_DATE_FOR_WORKING: dataEmployment.rehire_date_working,
+                LAST_REVIEW_DATE: dataEmployment.last_review_date,
+                NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH: dataEmployment.number_days_requirement,
+                PERSONAL_ID: dataPersonal.id_personal
+            }).then(res => {
+                console.log('Create Successful');
+                return 'Create Successful';
+            }).catch(err => {
+                console.log('sqlserver: ->>>>>>>>>>>', err);
+                return 'Create Fail';
+            });
+
+            await sequelize_mysql.query(
+                `INSERT INTO mydb.employee(\`idEmployee\`,\`Employee Number\`,\`First Name\`,
+                        \`Last Name\`,\`SSN\`,\`Pay Rate\`,\`Pay Rates_idPay Rates\`,
+                        \`Vacation Days\`,\`Paid To Date\`,\`Paid Last Year\`
+                    ) VALUES (${employeeId},'${employeeCode}','${dataPersonal.first_name}','${dataPersonal.last_name}',${dataPersonal.Social_security_number},'${dataEmployment.pay_rate}',${dataEmployment.id_pay_rate},${dataEmployment.vaction_days},${dataEmployment.paid_to_date},${dataEmployment.paid_last_year});`,
+                { type: QueryTypes.INSERT }
+            ).then(res => message = 'Create Successful')
+                .catch((err) => {
+                    console.log('mysql: ->>>>>>>>>>>', err);
+                    return message = 'Create Fail'
+                })
         } else {
             console.log("UPDATE");
-            const querySQLSERVER = `
-            UPDATE dbo.EMPLOYMENT
-            SET EMPLOYMENT_ID = ?, EMPLOYMENT_CODE = ?, EMPLOYMENT_STATUS = ?, HIRE_DATE_FOR_WORKING = ?, WORKERS_COMP_CODE = ?, TERMINATION_DATE = ?, REHIRE_DATE_FOR_WORKING = ?, LAST_REVIEW_DATE = ?, NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH = ?
-            WHERE PERSONAL_ID = ?`;
-            await sequelize_sqlserver.query(querySQLSERVER, [
-                dataEmployment.employment_id,
-                dataEmployment.employment_code,
+            console.log("Parameters: ", [
                 dataEmployment.employment_status,
                 dataEmployment.hire_date_working,
                 dataEmployment.workers_comp_code,
@@ -297,25 +317,46 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
                 dataEmployment.last_review_date,
                 dataEmployment.number_days_requirement,
                 dataPersonal.id_personal
-            ], { type: QueryTypes.UPDATE });
+            ]);
 
+            await Employment.update({
+                EMPLOYMENT_STATUS: dataEmployment.employment_status,
+                HIRE_DATE_FOR_WORKING: dataEmployment.hire_date_working,
+                WORKERS_COMP_CODE: dataEmployment.workers_comp_code,
+                TERMINATION_DATE: dataEmployment.termination_date,
+                REHIRE_DATE_FOR_WORKING: dataEmployment.rehire_date_working,
+                LAST_REVIEW_DATE: dataEmployment.last_review_date,
+                NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH: dataEmployment.number_days_requirement
+            }, {
+                where: { PERSONAL_ID: dataPersonal.id_personal }
+            }).then(res => {
+                console.log('Update Successful');
+                return 'Update Successful';
+            }).catch(err => {
+                console.log('sqlserver: ->>>>>>>>>>>', err);
+                return 'Update Fail';
+            });
 
-            const queryMYSQL = `
-            UPDATE mydb.employee
-            SET \`idEmployee\` = ?, \`First Name\` = ?, \`Last Name\` = ?, \`SSN\` = ?, \`Pay Rate\` = ?, \`Pay Rates_idPay Rates\` = ?, \`Vacation Days\` = ?, \`Paid To Date\` = ?, \`Paid Last Year\` = ?
-            WHERE \`Employee Number\` = ?`;
-            await sequelize_mysql.query(queryMYSQL, [
-                dataEmployment.id_employee,
-                dataPersonal.first_name,
-                dataPersonal.last_name,
-                dataPersonal.Social_security_number,
-                dataEmployment.pay_rate,
-                dataEmployment.id_pay_rate,
-                dataEmployment.vacation_days,
-                dataEmployment.paid_to_date,
-                dataEmployment.paid_last_year,
-                dataPersonal.id_personal
-            ], { type: QueryTypes.UPDATE });
+            await sequelize_mysql.query(
+                `UPDATE mydb.employee SET
+                    \`First Name\`='${dataPersonal.first_name}',
+                    \`Last Name\`='${dataPersonal.last_name}',
+                    \`SSN\`=${dataPersonal.Social_security_number},
+                    \`Pay Rate\`='${dataEmployment.pay_rate}',
+                    \`Pay Rates_idPay Rates\`=${dataEmployment.id_pay_rate},
+                    \`Vacation Days\`=${dataEmployment.vaction_days},
+                    \`Paid To Date\`=${dataEmployment.paid_to_date},
+                    \`Paid Last Year\`=${dataEmployment.paid_last_year}
+                WHERE \`Employee Number\`=${dataEmployment.employment_code};`,
+                { type: QueryTypes.UPDATE }
+            ).then(res => {
+                console.log('Update Successful');
+                return 'Update Successful';
+            }).catch(err => {
+                console.log('mysql: ->>>>>>>>>>>', err);
+                return 'Update Fail';
+            });
+
         }
     } catch (error) {
         console.error('Error during employment update/insert:', error);
@@ -324,5 +365,6 @@ const handleUpdateOrInsertEmployment = async (dataPersonal, dataEmployment) => {
 }
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, deletePersonalAndEmployment, getPersonalById, handleUpdateOrInsertEmployment
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor,
+    deletePersonalAndEmployment, getPersonalById, handleUpdateOrInsertEmployment, handleUpdatePersonal
 }
