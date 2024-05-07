@@ -4,6 +4,8 @@ const { getEmployeesWithBirthdayThisMonth } = require("../service/GetBirthdaysTh
 const { getEmployeeCertainDayAniversary } = require("../service/Aniversary.service");
 const showEmployeeInfo = require("../service/CheckExceededLeaveDays");
 const { GetAllShareHolderStatus } = require("../service/GetShareHolder_status");
+const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
+const { getId } = require("./EmController");
 
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
@@ -96,16 +98,22 @@ const getAllPersonalImformationdata = async (req, res, next) => {
     }
 }
 
-const getValuesFromDBToInputs = async (req, res) => {
+const setDataEmployment = async (req, res) => {
     try {
-        const { id } = req.query; 
+        const id = getId();
+        const employment = await getAllDataEmployment(id);
+        return res.status(200).json({
+            employment: employment
+        })
     } catch {
         return res.status(500).json({
             error: 'Error'
         })
     }
 }
+
+
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications,
-    getAniversaryNotifications, getAllBenefitPlan
+    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment
 }

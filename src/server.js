@@ -9,6 +9,7 @@ const init_API_Total_Earning = require('./route/api/API_Total_Earning');
 const init_API_Vacation_Days = require('./route/api/API_Vacation_Days');
 const init_API_Notification = require('./route/api/API_Notification');
 const init_API_BenefitPlan = require('./route/api/API_BenefitPlan');
+const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment')
 //const cookieParser = require('cookie-parser');
 const app = express()
 const port = process.env.PORT;
@@ -27,6 +28,7 @@ init_API_Total_Earning(app);
 init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
+init_API_DataEmployment(app);
 app.use(router);
 app.use(routerManage);
 
