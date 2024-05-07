@@ -272,10 +272,10 @@ overlayDelete.innerHTML = `
 document.body.appendChild(overlayDelete);
 
 var deleteButtons = document.querySelectorAll('.btn-delete');
-let personalId;
+let Id;
 deleteButtons.forEach(function (button) {
     button.addEventListener('click', function (e) {
-        personalId = this.getAttribute('data-id');
+        Id = this.getAttribute('data-id');
         e.preventDefault();
         overlayDelete.style.display = 'block';
     });
@@ -283,15 +283,33 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    console.log('PERSONAL_ID để xóa:', personalId);
+    console.log('PERSONAL_ID để xóa:', Id);
     $.ajax({
-        url: `http://localhost:4080/employee-view/${personalId}`,
+        url: `http://localhost:4080/personal-view/${Id}`, // Endpoint để xóa thông tin cá nhân
         method: 'DELETE',
         success: function (response) {
             console.log('Delete successful');
-            const rowToDelete = document.querySelector(`tr[data-employee-id="${personalId}"]`);
-            if (rowToDelete) {
-                rowToDelete.remove();
+            const rowToDeletePersonal = document.querySelector(`tr[data-employee-id="${Id}"]`);
+            if (rowToDeletePersonal) {
+                rowToDeletePersonal.remove();
+            }
+            overlayDelete.style.display = 'none';
+        },
+        error: function (xhr, status, error) {
+            console.error('Error deleting personal:', error);
+            alert('Error deleting personal');
+        }
+    });
+
+    // Tiếp theo, thực hiện cuộc gọi AJAX để xóa thông tin từ bảng EMPLOYMENT
+    $.ajax({
+        url: `http://localhost:4080/employee-view/${Id}`, // Endpoint để xóa thông tin nhân viên
+        method: 'DELETE',
+        success: function (response) {
+            console.log('Delete successful');
+            const rowToDeleteEmployee = document.querySelector(`tr[data-employee-id="${Id}"]`);
+            if (rowToDeleteEmployee) {
+                rowToDeleteEmployee.remove();
             }
             overlayDelete.style.display = 'none';
         },
@@ -316,7 +334,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-
+        
         showUI7.classList.add('active');
     });
 });
@@ -335,35 +353,35 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelector('.employee-infor').innerHTML = `
             <div class="employee-infor_left">
   <label for="">hire date for working:</label>
-  <input type="date" name="HIRE_DATE" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
+  <input type="date" name="HIRE_DATE" id="HIRE_DATE" required>
   <label for="">work comp code:</label>
-  <input type="text" name="EMPLOYEE_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required>
+  <input type="text" name="EMPLOYEE_CODE" required>
   <label for="">termination day:</label>
-  <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" required>
+  <input type="date" name="TERMINATION_DATE" id="TERMINATION_DATE" oninput="validTerminationDay(this)" required>
   <label for="">rehire date for working:</label>
-  <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>" required>
+  <input type="date" name="REHIRE_DATE_FOR_WORKING" oninput="validRehireDay(this)" required>
   <label for="">Last review date:</label>
-  <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
+  <input type="date" name="LAST_REVIEW_DATE" required>
   <label for="">Employment status: </label>
   <select name="EMPLOYMENT_STATUS" id="employment-status">
-    <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
-    <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
+    <option value="Alive"</option>
+    <option value="Quit"</option>
 </select>
 <label for="">Employee CODE: </label>
-              <input type="text" required>
+              <input type="number" required>
 </div>
 <div class="employee-infor_right">
 
   <label for="">Pay rate:</label>
-  <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+  <input type="text" name="PAY_RATE" required>
   <label for="">Id Pay rate:</label>
-  <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+  <input type="number" name="ID_PAY_RATE" required>
   <label for="">vacation day:</label>
-  <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
+  <input type="number" name="VACATION_DAYS" required>
   <label for="">Paid to date:</label>
-  <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+  <input type="number" name="PAID_TO_DATE" required>
   <label for="">Paid last year:</label>
-  <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+  <input type="number" name="PAID_LAST_YEAR" required>
   <label for="">Number day requirement:</label>
   <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
   <label for="">Workes Comp CODE: </label>

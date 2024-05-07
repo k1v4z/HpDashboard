@@ -1,6 +1,6 @@
 const { QueryTypes } = require("sequelize");
 const { sequelize_sqlserver, sequelize_mysql } = require("../config/Sequelize");
-const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId, generateEmployeeId, convert_SSN } = require("../helper/Add_Employee.helper");
+const { convertShareHolder, generateEmployeeCode, generatePersonalId, generateEmploymentId, generateEmployeeId, convert_SSN, typeCastingZIP } = require("../helper/Add_Employee.helper");
 const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
@@ -9,6 +9,7 @@ const Employee = require("../model/payroll/Employees");
 const { where } = require("sequelize");
 const { query } = require("express");
 const isEmployee = require("../helper/IsEmployee");
+const Employment_Working_Time = require("../model/human/Employment_Working_Time");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -48,7 +49,7 @@ const getEmployeeInfor = async () => {
     })
 
     let ids = dataEmployment.map(Employment => Employment.EMPLOYMENT_ID);
-    // console.log(ids);
+    console.log(ids);
 
     const dataEmployee = await sequelize_mysql.query(
         `SELECT * FROM mydb.employee 
@@ -59,36 +60,46 @@ const getEmployeeInfor = async () => {
         const employee = dataEmployee.find(Employee => Employee['Employee Number'] === employment.EMPLOYMENT_CODE);
         return { ...employment.toJSON(), ...employee };
     });
-    //   console.log(Data);
     return Data;
 }
 
 
-const deletePersonalAndEmployment = async (personalId) => {
+const deletePersonalAndEmployment = async (Id) => {
     try {
-        // Xóa thông tin từ bảng Employment trước
-        await Employment.destroy({
-            where: {
-                EMPLOYMENT_ID: personalId
-            }
+        await sequelize_sqlserver.transaction(async (t) => {
+            // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
+            await sequelize_sqlserver.query(`
+                DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+            await sequelize_sqlserver.query(`
+                DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Employment
+            await sequelize_sqlserver.query(`
+                DELETE FROM EMPLOYMENT WHERE EMPLOYMENT_ID = ${Id};
+            `, { transaction: t });
+
+            // Xóa thông tin từ bảng Personal
+            await sequelize_sqlserver.query(`
+                DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
+            `, { transaction: t });
+            
         });
 
-        // Sau đó xóa thông tin từ bảng Personal
-        const deletedPersonalCount = await Personal.destroy({
-            where: {
-                PERSONAL_ID: personalId
-            }
-        });
-
-        if (deletedPersonalCount > 0) {
-            console.log(`Xóa thành công thông tin của PERSONAL_ID ${personalId}`);
-        } else {
-            console.log(`Không tìm thấy bản ghi nào với PERSONAL_ID ${personalId}`);
-        }
+        // Xóa thông tin từ bảng Employee
+        // await sequelize_mysql.query(
+        //     `DELETE FROM employee WHERE \`Employee Number\` = '${Id}';`,
+        //     { type: QueryTypes.SELECT}
+        // );
     } catch (error) {
         console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
     }
 }
+
+
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
     //data is information of personel
@@ -106,12 +117,47 @@ const add_EP_Information = async (req) => {
 }
 
 const addPersonal = async (data) => {
+    const PERSONAL_ID = await generatePersonalId()
+    const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder()
+    data.CURRENT_ZIP = typeCastingZIP(data.CURRENT_ZIP)
+    let message = ''
+
+    await Personal.create({
+        PERSONAL_ID: PERSONAL_ID,
+        CURRENT_FIRST_NAME: data.CURRENT_FIRST_NAME,
+        CURRENT_LAST_NAME: data.CURRENT_LAST_NAME,
+        CURRENT_MIDDLE_NAME: data.CURRENT_MIDDLE_NAME,
+        BIRTH_DATE: data.BIRTH_DATE,
+        SOCIAL_SECURITY_NUMBER: data.SOCIAL_SECURITY_NUMBER,
+        DRIVERS_LICENSE: data.DRIVERS_LICENSE,
+        CURRENT_ADDRESS_1: data.CURRENT_ADDRESS_1,
+        CURRENT_ADDRESS_2: data.CURRENT_ADDRESS_2,
+        CURRENT_CITY: data.CURRENT_CITY,
+        CURRENT_COUNTRY: data.CURRENT_COUNTRY,
+        CURRENT_ZIP: data.CURRENT_ZIP,
+        CURRENT_GENDER: data.CURRENT_GENDER,
+        CURRENT_PHONE_NUMBER: data.CURRENT_PHONE_NUMBER,
+        CURRENT_PERSONAL_EMAIL: data.CURRENT_PERSONAL_EMAIL,
+        CURRENT_MARITAL_STATUS: data.CURRENT_MARITAL_STATUS,
+        ETHNICITY: data.ETHNICITY,
+        SHAREHOLDER_STATUS: SHAREHOLDER_STATUS_CONVERTED,
+    }).then(res => message = 'Create Successful')
+        .catch((err) => {
+            console.log('sqlserver: ->>>>>>>>>>>', err);
+            return message = 'Create Fail'
+        })
+    return message
+}
+
+const addEmployee = async (data) => {
     const SHAREHOLDER_STATUS_CONVERTED = convertShareHolder(data.SHAREHOLDER_STATUS) //data after convert
     const PERSONAL_ID = await generatePersonalId()
     const employmentId = await generateEmploymentId()
     const employeeCode = await generateEmployeeCode()
     const employeeId = await generateEmployeeId()
-    const SSN_Converted = await convert_SSN()
+    const SSN_Converted = convert_SSN(data.SOCIAL_SECURITY_NUMBER)
+    data.CURRENT_ZIP = typeCastingZIP(data.CURRENT_ZIP)
+    let message = ''
 
     //add personal
     sequelize_sqlserver.transaction(async (t) => {

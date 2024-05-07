@@ -22,9 +22,10 @@ const getAllEmployee = async (req, res) => {
 //addEPI stand for add Employee Personal Information
 
 const addEPI = async (req, res) => {
-    const add = await add_EP_Information(req);
+    const status = await add_EP_Information(req);
 
-    return res.send(add);
+    return res.send(status);
+
 }
 
 const getEmployeeAdd = (req, res) => {
@@ -52,6 +53,7 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
     id = req.params.id;
+    
     let isEmp = await isEmployee(id);
 
     if (isEmp) {
