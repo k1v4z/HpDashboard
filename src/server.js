@@ -12,6 +12,8 @@ const init_API_BenefitPlan = require('./route/api/API_BenefitPlan');
 const routerAuth = require('./route/web/userAuthRoute');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
+const redis = require('redis')
+const configRedis = require('./config/Redis');
 
 const app = express()
 const port = process.env.PORT;
@@ -39,6 +41,8 @@ init_API_Total_Earning(app);
 init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
+
+configRedis(redis);
 
 app.use(router);
 app.use(routerManage);
