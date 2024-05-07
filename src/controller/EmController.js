@@ -3,7 +3,8 @@
 
 
 const isEmployee = require("../helper/IsEmployee");
-const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateOrInsertEmployment, deletePersonalAndEmployment } = require("../service/CRUD.service");
+const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateOrInsertEmployment,
+    handleUpdatePersonal, deletePersonalAndEmployment } = require("../service/CRUD.service");
 
 const { getListEmployee } = require("../service/Dashboard.service");
 const { getEmploymentById } = require("../service/GetEmploymentById");
@@ -24,7 +25,6 @@ const addEPI = async (req, res) => {
     const add = await add_EP_Information(req);
 
     return res.send(add);
-
 }
 
 const getEmployeeAdd = (req, res) => {
@@ -32,9 +32,8 @@ const getEmployeeAdd = (req, res) => {
 }
 
 const setEditDataToFormEmploymentEdit = async (req, res) => {
-    let id = req.params.id;
+    id = req.params.id;
     let isEmp = await isEmployee(id);
-
     if (isEmp) {
         let personal = await getPersonalById(id);
         let employment = await getAllDataEmployment(id);
@@ -103,13 +102,14 @@ const postUpdateOrInsertEmployment = async (req, res) => {
         phone_number: req.body.CURRENT_PHONE_NUMBER,
         marital_status: req.body.CURRENT_MARITAL_STATUS,
         shareholder_status: req.body.SHAREHOLDER_STATUS,
-        ethnicity: req.body.ETHNICITY
+        ethnicity: req.body.ETHNICITY,
+        benefit_plan_id: req.body.BENEFIT_PLAN_ID
     };
     const dataEmployment = {
         hire_date_working: req.body.HIRE_DATE_FOR_WORKING,
         employment_code: req.body.EMPLOYMENT_CODE,
-        terminattion_date: req.body.TERMINATION_DATE,
-        Worker_comp_code: req.body.WORKERS_COMP_CODE,
+        termination_date: req.body.TERMINATION_DATE,
+        workers_comp_code: req.body.WORKERS_COMP_CODE,
         rehire_date_working: req.body.REHIRE_DATE_FOR_WORKING,
         last_review_date: req.body.LAST_REVIEW_DATE,
         employment_status: req.body.EMPLOYMENT_STATUS,
@@ -121,7 +121,10 @@ const postUpdateOrInsertEmployment = async (req, res) => {
         number_days_requirement: req.body.NUMBER_DAY_REQUIREMENT
     };
     try {
-        await handleUpdateOrInsertEmployment(dataPersonal, dataEmployment);
+        await handleUpdatePersonal(dataPersonal);
+        // if (dataEmployment.employment_code !== undefined) {
+        //     await handleUpdateOrInsertEmployment(dataPersonal, dataEmployment)
+        // }
         return res.redirect("/employee-view");
     } catch (error) {
         console.error("Error updating user:", error);
