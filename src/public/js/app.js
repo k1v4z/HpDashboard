@@ -334,7 +334,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         showUI7.classList.add('active');
     });
 });
@@ -355,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <label for="">hire date for working:</label>
   <input type="date" name="HIRE_DATE" id="HIRE_DATE" required>
   <label for="">work comp code:</label>
-  <input type="text" name="EMPLOYEE_CODE" required>
+  <input type="text" name="EMPLOYEE_CODE">
   <label for="">termination day:</label>
   <input type="date" name="TERMINATION_DATE" id="TERMINATION_DATE" oninput="validTerminationDay(this)" required>
   <label for="">rehire date for working:</label>
@@ -364,8 +364,8 @@ document.addEventListener("DOMContentLoaded", function () {
   <input type="date" name="LAST_REVIEW_DATE" required>
   <label for="">Employment status: </label>
   <select name="EMPLOYMENT_STATUS" id="employment-status">
-    <option value="Alive"</option>
-    <option value="Quit"</option>
+    <option value="Alive">Alive</option>
+    <option value="Quit">Quit</option>
 </select>
 <label for="">Employee CODE: </label>
               <input type="number" required>
@@ -383,9 +383,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <label for="">Paid last year:</label>
   <input type="number" name="PAID_LAST_YEAR" required>
   <label for="">Number day requirement:</label>
-  <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
-  <label for="">Workes Comp CODE: </label>
-              <input type="text" required>
+  <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
 </div>
 `
         }

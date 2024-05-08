@@ -13,7 +13,7 @@ const routerAuth = require('./route/web/userAuthRoute');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const redis = require('redis')
-const configRedis = require('./config/Redis');
+const connectRedis = require('./model/message/Redis');
 
 const app = express()
 const port = process.env.PORT;
@@ -42,7 +42,8 @@ init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
 
-configRedis(redis);
+//config redis
+connectRedis();
 
 app.use(router);
 app.use(routerManage);
