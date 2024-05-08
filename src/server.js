@@ -45,7 +45,7 @@ init_API_Notification(app);
 init_API_BenefitPlan(app);
 init_API_DataEmployment(app);
 
-configRedis(redis);
+// configRedis(redis);
 
 app.use(router);
 app.use(routerManage);
