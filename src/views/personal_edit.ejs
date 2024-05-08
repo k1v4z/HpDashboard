@@ -72,6 +72,7 @@
 
         <form action="/update" method="POST" class="personal-info">
           <div class="personal-info_left">
+            <input type="number" name="PERSONAL_ID" value="<%= personal.PERSONAL_ID %>" style="display: none;">
             <label for="">First Name:</label>
             <input type="text" name="CURRENT_FIRST_NAME" value="<%= personal.CURRENT_FIRST_NAME %>" required />
             <label for="">Middle Name:</label>
@@ -96,7 +97,7 @@
           </div>
           <div class="personal-infor_right">
             <label for="">Social security number :</label>
-            <input type="text" name="SOCIAL_SECURITY_NUMBER" maxlength="10" value="<%= personal.SOCIAL_SECURITY_NUMBER %>" required />
+            <input type="number" name="SOCIAL_SECURITY_NUMBER" max="9999999999" value="<%= personal.SOCIAL_SECURITY_NUMBER %>" required />
             <label for="">Drivers licenes: </label>
             <input type="text" name="DRIVERS_LICENSE" value="<%= personal.DRIVERS_LICENSE %>" required />
             <label for="">Current City: </label>
@@ -116,53 +117,17 @@
             <label for="">Ethnicity</label>
             <input type="text" value="<%= personal.ETHNICITY %>" name="ETHNICITY" />
             <label for="">Benefit Plan ID: </label>
-            <input type="number" name="BENEFIT_PLAN_ID" value="<%= personal.BENEFIT_PLAN_ID %>" required>
+            <input type="number" name="BENEFIT_PLAN_ID" max="10" value="<%= personal.BENEFIT_PLAN_ID %>" required>
           </div>
 
           <h1 class="employee-title_update none">EMPLOYEE DETAIL</h1>
 
           <div class="employee-infor_update" style="grid-column: 1 / 3">
-            <div class="employee-infor_left-update">
-
-              <label for="">hire date for working:</label>
-              <input type="date" name="HIRE_DATE_FOR_WORKING" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
-              <label for="">work comp code:</label>
-              <input type="text" name="WORKERS_COMP_CODE" value="<%= employment.WORKERS_COMP_CODE %>" required>
-              <label for="">termination day:</label>
-              <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>">
-              <label for="">rehire date for working:</label>
-              <input type="date" name="REHIRE_DATE_FOR_WORKING" value="<%= employment.REHIRE_DATE_FOR_WORKING %>">
-              <label for="">Last review date:</label>
-              <input type="date" name="LAST_REVIEW_DATE" value="<%= employment.LAST_REVIEW_DATE %>" required>
-              <label for="">Employment status: </label>
-              <select name="EMPLOYMENT_STATUS" id="employment-status">
-                <option value="Alive" <%=employment.EMPLOYMENT_STATUS==='Alive' ? 'selected' : '' %>>Alive</option>
-                <option value="Quit" <%=employment.EMPLOYMENT_STATUS==='Quit' ? 'selected' : '' %>>Quit</option>
-              </select>
-              <!-- <label for="">Employee CODE: </label>
-              <input type="text" name="EMPLOYMENT_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required> -->
-            </div>
-            <div class="employee-infor_right-update">
-
-              <label for="">Pay rate:</label>
-              <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
-              <label for="">Id Pay rate:</label>
-              <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
-              <label for="">vacation day:</label>
-              <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
-              <label for="">Paid to date:</label>
-              <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
-              <label for="">Paid last year:</label>
-              <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
-              <label for="">Number day requirement:</label>
-              <input type="number" name="NUMBER_DAY_REQUIREMENT"
-                value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
-              
-            </div>
+            
           </div>
 
           <div class="checkbox-employee">
-            <input type="checkbox" name="employee_showInfo" id="employee-showInfo_update" />
+            <input type="checkbox" name="editEmployee" id="employee-showInfo_update" />
             <label for="employee-showInfo">Edit employee</label>
           </div>
           <button type="submit">Update</button>

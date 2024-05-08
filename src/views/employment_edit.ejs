@@ -75,6 +75,7 @@
 
           <form action="/update" method="POST" class="personal-info">
             <div class="personal-info_left">
+              <input type="number" name="PERSONAL_ID" value="<%= personal.PERSONAL_ID %>" style="display: none;">
               <label for="">First Name:</label>
               <input
                 type="text"
@@ -122,8 +123,9 @@
             <div class="personal-infor_right">
               <label for="">Social security number :</label>
               <input
-                type="text"
+                type="number"
                 name="SOCIAL_SECURITY_NUMBER"
+                max="9999999999"
                 value="<%= personal.SOCIAL_SECURITY_NUMBER %>"
                 required
               />
@@ -157,7 +159,7 @@
               <label for="">Ethnicity</label>
               <input type="text" value="<%= personal.ETHNICITY %>" name="ETHNICITY" />
               <label for="">Benefit Plan ID: </label>
-              <input type="number" name="BENEFIT_PLAN_ID" value="<%= personal.BENEFIT_PLAN_ID %>" required>
+              <input type="number" name="BENEFIT_PLAN_ID" max="10" value="<%= personal.BENEFIT_PLAN_ID %>" required>
             </div>
 
             <h1 class="employee-title">EMPLOYEE DETAIL</h1>
@@ -168,7 +170,7 @@
                 <label for="">hire date for working:</label>
                 <input type="date" name="HIRE_DATE_FOR_WORKING" value="<%= employment.HIRE_DATE_FOR_WORKING %>" required>
                 <label for="">work comp code:</label>
-                <input type="text" name="WORKERS_COMP_CODE" value="<%= employment.WORKERS_COMP_CODE %>" required>
+                <input type="text" name="WORKERS_COMP_CODE" maxlength="10" value="<%= employment.WORKERS_COMP_CODE %>" required>
                 <label for="">termination day:</label>
                 <input type="date" name="TERMINATION_DATE" value="<%= employment.TERMINATION_DATE %>" >
                 <label for="">rehire date for working:</label>
@@ -180,21 +182,20 @@
                   <option value="Alive" <%= employment.EMPLOYMENT_STATUS === 'Alive' ? 'selected' : '' %>>Alive</option>
                   <option value="Quit" <%= employment.EMPLOYMENT_STATUS === 'Quit' ? 'selected' : '' %>>Quit</option>
               </select>
-              <!-- <label for="">Employee CODE: </label>
-              <input type="text" name="EMPLOYMENT_CODE" value="<%= employment.EMPLOYMENT_CODE %>" required> -->
+              <input type="text" name="EMPLOYMENT_CODE" value="<%= employment.EMPLOYMENT_CODE %>" style="display: none;">
               </div>
               <div class="employee-infor_right">
               
                 <label for="">Pay rate:</label>
-                <input type="text" name="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
+                <input type="text" name="PAY_RATE" id="PAY_RATE" value="<%= employment['Pay Rate'] %>" required>
                 <label for="">Id Pay rate:</label>
-                <input type="number" name="ID_PAY_RATE" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
+                <input type="number" name="ID_PAY_RATE" max="7" value="<%= employment['Pay Rates_idPay Rates'] %>" required>
                 <label for="">vacation day:</label>
                 <input type="number" name="VACATION_DAYS" value="<%= employment['Vacation Days'] %>" required>
                 <label for="">Paid to date:</label>
-                <input type="number" name="PAID_TO_DATE" value="<%= employment['Paid To Date'] %>" required>
+                <input type="number" name="PAID_TO_DATE" max="99" value="<%= employment['Paid To Date'] %>" required>
                 <label for="">Paid last year:</label>
-                <input type="number" name="PAID_LAST_YEAR" value="<%= employment['Paid Last Year'] %>" required>
+                <input type="number" name="PAID_LAST_YEAR" max="99" value="<%= employment['Paid Last Year'] %>" required>
                 <label for="">Number day requirement:</label>
                 <input type="number" name="NUMBER_DAY_REQUIREMENT" value="<%= employment.NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH %>" required>
               </div>

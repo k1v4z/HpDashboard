@@ -15,6 +15,8 @@ const session = require('express-session');
 const redis = require('redis')
 const connectRedis = require('./model/message/Redis');
 
+const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment')
+//const cookieParser = require('cookie-parser');
 const app = express()
 const port = process.env.PORT;
 const localhost = process.env.HOST;
@@ -41,6 +43,7 @@ init_API_Total_Earning(app);
 init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
+init_API_DataEmployment(app);
 
 //config redis
 connectRedis();
