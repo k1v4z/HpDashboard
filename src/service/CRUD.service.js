@@ -10,6 +10,7 @@ const { where } = require("sequelize");
 const { query } = require("express");
 const Employment_Working_Time = require("../model/human/Employment_Working_Time");
 const formatDate = require("../helper/FormatDate");
+const isEmployee = require("../helper/IsEmployee");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -53,7 +54,7 @@ const getEmployeeInfor = async () => {
 
     const dataEmployee = await sequelize_mysql.query(
         `SELECT * FROM mydb.employee 
-         WHERE idEmployee IN (${ids.join(',')})`,
+            WHERE idEmployee IN (${ids.join(',')})`,
         { type: QueryTypes.SELECT }
     );
     const Data = dataEmployment.map(employment => {
@@ -63,36 +64,56 @@ const getEmployeeInfor = async () => {
     return Data;
 }
 
+const getEmployeeCode = async (id) => {
+    const codeEmployee = await Employment.findOne({
+        attributes: ['EMPLOYMENT_CODE'],
+        include: [{
+            model: Personal,
+            where: {
+                PERSONAL_ID: id
+            }
+        }]
+    })
+    return codeEmployee.EMPLOYMENT_CODE;
+}
 
 const deletePersonalAndEmployment = async (Id) => {
     try {
+        const code= await getEmployeeCode(Id);
         await sequelize_sqlserver.transaction(async (t) => {
-            // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
-            await sequelize_sqlserver.query(`
-            DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
-            `, { transaction: t });
+            if (isEmployee(Id)) {
+                // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
+                await sequelize_sqlserver.query(`
+                DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
+                `, { transaction: t });
 
-            // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
-            await sequelize_sqlserver.query(`
-            DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
-            `, { transaction: t });
+                // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+                await sequelize_sqlserver.query(`
+                DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
+                `, { transaction: t });
 
-            // Xóa thông tin từ bảng Employment
-            await sequelize_sqlserver.query(`
-                DELETE FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id};
-            `, { transaction: t });
+                // Xóa thông tin từ bảng Employment
+                await sequelize_sqlserver.query(`
+                    DELETE FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id};
+                `, { transaction: t });
 
-            // Xóa thông tin từ bảng Personal
-            await sequelize_sqlserver.query(`
-                DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
-            `, { transaction: t });
+                // Xóa thông tin từ bảng Personal
+                await sequelize_sqlserver.query(`
+                    DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
+                `, { transaction: t });
+            }
+            else {
+                await sequelize_sqlserver.query(`
+                    DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
+                `, { transaction: t });
+            }
 
         });
-
+        
         //Xóa thông tin từ bảng Employee
         await sequelize_mysql.query(
-            `DELETE FROM employee WHERE \`idEmployee\` = '${Id}';`,
-            {  type: QueryTypes.DELETE}
+            `DELETE FROM employee WHERE \`Employee Number\` = '${code}';`,
+            { type: QueryTypes.DELETE }
         );
     } catch (error) {
         console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
@@ -207,9 +228,9 @@ const addEmployee = async (data) => {
     //add employee
     await sequelize_mysql.query(
         `INSERT INTO mydb.employee(\`idEmployee\`,\`Employee Number\`,\`First Name\`,
-            \`Last Name\`,\`SSN\`,\`Pay Rate\`,\`Pay Rates_idPay Rates\`,
-            \`Vacation Days\`,\`Paid To Date\`,\`Paid Last Year\`
-        ) VALUES (${employeeId},'${employeeCode}','${data.CURRENT_FIRST_NAME}','${data.CURRENT_LAST_NAME}',${SSN_Converted},'${data.PAY_RATE}',${data.ID_PAY_RATE},${data.VACATION_DAYS},${data.PAID_TO_DATE},${data.PAID_LAST_YEAR});`,
+                \`Last Name\`,\`SSN\`,\`Pay Rate\`,\`Pay Rates_idPay Rates\`,
+                \`Vacation Days\`,\`Paid To Date\`,\`Paid Last Year\`
+            ) VALUES (${employeeId},'${employeeCode}','${data.CURRENT_FIRST_NAME}','${data.CURRENT_LAST_NAME}',${SSN_Converted},'${data.PAY_RATE}',${data.ID_PAY_RATE},${data.VACATION_DAYS},${data.PAID_TO_DATE},${data.PAID_LAST_YEAR});`,
         { type: QueryTypes.INSERT }
     ).then(res => message = 'Create Successful')
         .catch((err) => {
@@ -289,15 +310,15 @@ const handleInsertEmployment = async (dataPersonal, dataEmployment) => {
 
             // Insert into MySQL database using parameterized queries
             const mysqlQuery = `
-                INSERT INTO mydb.employee(
-                    \`idEmployee\`, \`Employee Number\`, \`First Name\`, 
-                    \`Last Name\`, \`SSN\`, \`Pay Rate\`, \`Pay Rates_idPay Rates\`,
-                    \`Vacation Days\`, \`Paid To Date\`, \`Paid Last Year\`
-                ) VALUES (
-                    :employeeId, :employeeCode, :firstName, 
-                    :lastName, :ssn, :payRate, :idPayRate, 
-                    :vacationDays, :paidToDate, :paidLastYear
-                )`;
+                    INSERT INTO mydb.employee(
+                        \`idEmployee\`, \`Employee Number\`, \`First Name\`, 
+                        \`Last Name\`, \`SSN\`, \`Pay Rate\`, \`Pay Rates_idPay Rates\`,
+                        \`Vacation Days\`, \`Paid To Date\`, \`Paid Last Year\`
+                    ) VALUES (
+                        :employeeId, :employeeCode, :firstName, 
+                        :lastName, :ssn, :payRate, :idPayRate, 
+                        :vacationDays, :paidToDate, :paidLastYear
+                    )`;
             await sequelize_mysql.query(mysqlQuery, {
                 replacements: {
                     employeeId,
@@ -356,15 +377,15 @@ const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
             // MySQL Update
             await sequelize_mysql.query(
                 `UPDATE mydb.employee SET
-                \`First Name\`=:firstName,
-                \`Last Name\`=:lastName,
-                \`SSN\`=:ssn,
-                \`Pay Rate\`=:payRate,
-                \`Pay Rates_idPay Rates\`=:idPayRate,
-                \`Vacation Days\`=:vacationDays,
-                \`Paid To Date\`=:paidToDate,
-                \`Paid Last Year\`=:paidLastYear
-                WHERE \`Employee Number\`=:employeeNumber;`,
+                    \`First Name\`=:firstName,
+                    \`Last Name\`=:lastName,
+                    \`SSN\`=:ssn,
+                    \`Pay Rate\`=:payRate,
+                    \`Pay Rates_idPay Rates\`=:idPayRate,
+                    \`Vacation Days\`=:vacationDays,
+                    \`Paid To Date\`=:paidToDate,
+                    \`Paid Last Year\`=:paidLastYear
+                    WHERE \`Employee Number\`=:employeeNumber;`,
                 { replacements: preprocessedDataMYSQL, type: QueryTypes.UPDATE }
             );
             console.log('MySQL Update Successful');

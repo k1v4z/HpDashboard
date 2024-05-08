@@ -13,7 +13,7 @@ const routerAuth = require('./route/web/userAuthRoute');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
 const redis = require('redis')
-const configRedis = require('./config/Redis');
+const connectRedis = require('./model/message/Redis');
 
 const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment')
 //const cookieParser = require('cookie-parser');

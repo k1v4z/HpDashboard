@@ -995,7 +995,7 @@ thead {
 .module-right h1,
 .function-right h1 {
   color: #13ccd8;
-  font-size: 30px;
+  font-size: 25px;
   font-weight: 700;
   text-transform: uppercase;
 }
@@ -1005,7 +1005,7 @@ thead {
 .group,
 .module,
 .function {
-  margin: 30px;
+  margin: 40px;
 }
 .btn-save {
   margin-top: 50px;
