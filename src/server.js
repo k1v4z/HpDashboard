@@ -12,7 +12,7 @@ const init_API_BenefitPlan = require('./route/api/API_BenefitPlan');
 const routerAuth = require('./route/web/userAuthRoute');
 const cookieParser = require('cookie-parser');
 const session = require('express-session');
-const redis = require('redis')
+// const redis = require('redis')
 const configRedis = require('./config/Redis');
 
 const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment')
@@ -45,7 +45,7 @@ init_API_Notification(app);
 init_API_BenefitPlan(app);
 init_API_DataEmployment(app);
 
-configRedis(redis);
+// configRedis(redis);
 
 app.use(router);
 app.use(routerManage);
