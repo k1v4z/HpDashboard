@@ -126,8 +126,8 @@ const deletePersonalAndEmployment = async (Id) => {
 
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
-    //data is information of personel
-    const data = req.body
+    //data is information of personal 
+    const data = req.body;
 
     let message = ''
     if (data.employee_showInfo == 'on') {
