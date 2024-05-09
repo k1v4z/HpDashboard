@@ -57,10 +57,13 @@ const getEmployeeInfor = async () => {
             WHERE idEmployee IN (${ids.join(',')})`,
         { type: QueryTypes.SELECT }
     );
+
     const Data = dataEmployment.map(employment => {
         const employee = dataEmployee.find(Employee => Employee['Employee Number'] === employment.EMPLOYMENT_CODE);
+        //if have key duplicated, employee value will overwrite value from employment.toJSON
         return { ...employment.toJSON(), ...employee };
     });
+
     return Data;
 }
 
@@ -162,6 +165,7 @@ const addPersonal = async (data) => {
         CURRENT_MARITAL_STATUS: data.CURRENT_MARITAL_STATUS,
         ETHNICITY: data.ETHNICITY,
         SHAREHOLDER_STATUS: SHAREHOLDER_STATUS_CONVERTED,
+        BENEFIT_PLAN_ID: data.BENEFIT_PLAN_ID
     }).then(res => message = 'Create Successful')
         .catch((err) => {
             console.log('sqlserver: ->>>>>>>>>>>', err);
@@ -207,7 +211,7 @@ const addEmployee = async (data) => {
             EMPLOYMENT_ID: employmentId,
             EMPLOYMENT_CODE: employeeCode,
             EMPLOYMENT_STATUS: data.EMPLOYMENT_STATUS,
-            HIRE_DATE_FOR_WORKING: data.HIRE_DATE_FOR_WORKING,
+            HIRE_DATE_FOR_WORKING: data.HIRE_DATE,
             WORKERS_COMP_CODE: data.WORKERS_COMP_CODE,
             TERMINATION_DATE: data.TERMINATION_DATE,
             REHIRE_DATE_FOR_WORKING: data.REHIRE_DATE_FOR_WORKING,
