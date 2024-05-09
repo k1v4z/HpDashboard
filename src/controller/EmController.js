@@ -3,7 +3,7 @@
 
 
 const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateEmployment,
-    handleUpdatePersonal, deletePersonalAndEmployment,
+    handleUpdatePersonal, deletePersonalAndEmployment, getDataPersonalByPage, getDataEmploymentByPage,
     handleInsertEmployment } = require("../service/CRUD.service");
 const isEmployee = require("../helper/IsEmployee");
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -65,42 +65,10 @@ const getEmployeeView = async (req, res) => {
 }
 
 const postInsertOrUpdatePersonalPage = async (req, res) => {
-    const dataPersonal = {
-        id_personal: req.body.PERSONAL_ID,
-        first_name: req.body.CURRENT_FIRST_NAME,
-        middle_name: req.body.CURRENT_MIDDLE_NAME,
-        last_name: req.body.CURRENT_LAST_NAME,
-        birth_date: req.body.BIRTH_DATE,
-        address_1: req.body.CURRENT_ADDRESS_1,
-        address_2: req.body.CURRENT_ADDRESS_2,
-        current_zip: req.body.CURRENT_ZIP,
-        gender: req.body.CURRENT_GENDER,
-        mail: req.body.CURRENT_PERSONAL_EMAIL,
-        Social_security_number: req.body.SOCIAL_SECURITY_NUMBER,
-        drivers_license: req.body.DRIVERS_LICENSE,
-        city: req.body.CURRENT_CITY,
-        country: req.body.CURRENT_COUNTRY,
-        phone_number: req.body.CURRENT_PHONE_NUMBER,
-        marital_status: req.body.CURRENT_MARITAL_STATUS,
-        shareholder_status: req.body.SHAREHOLDER_STATUS,
-        ethnicity: req.body.ETHNICITY,
-        benefit_plan_id: req.body.BENEFIT_PLAN_ID
-    };
-    const dataEmployment = {
-        hire_date_working: req.body.HIRE_DATE_FOR_WORKING,
-        employment_code: req.body.EMPLOYMENT_CODE,
-        termination_date: req.body.TERMINATION_DATE,
-        workers_comp_code: req.body.WORKERS_COMP_CODE,
-        rehire_date_working: req.body.REHIRE_DATE_FOR_WORKING,
-        last_review_date: req.body.LAST_REVIEW_DATE,
-        employment_status: req.body.EMPLOYMENT_STATUS,
-        pay_rate: req.body.PAY_RATE,
-        id_pay_rate: req.body.ID_PAY_RATE,
-        vacation_days: req.body.VACATION_DAYS,
-        paid_to_date: req.body.PAID_TO_DATE,
-        paid_last_year: req.body.PAID_LAST_YEAR,
-        number_days_requirement: req.body.NUMBER_DAY_REQUIREMENT
-    };
+    const data = req.body;
+    const dataPersonal = await getDataPersonalByPage(data);
+    const dataEmployment = await getDataEmploymentByPage(data);
+
     try {
         // First, always update personal details regardless of conditions
         await handleUpdatePersonal(dataPersonal);
@@ -126,42 +94,9 @@ const postInsertOrUpdatePersonalPage = async (req, res) => {
 
 
 const postUpdateEmploymentPage = async (req, res) => {
-    const dataPersonal = {
-        id_personal: req.body.PERSONAL_ID,
-        first_name: req.body.CURRENT_FIRST_NAME,
-        middle_name: req.body.CURRENT_MIDDLE_NAME,
-        last_name: req.body.CURRENT_LAST_NAME,
-        birth_date: req.body.BIRTH_DATE,
-        address_1: req.body.CURRENT_ADDRESS_1,
-        address_2: req.body.CURRENT_ADDRESS_2,
-        current_zip: req.body.CURRENT_ZIP,
-        gender: req.body.CURRENT_GENDER,
-        mail: req.body.CURRENT_PERSONAL_EMAIL,
-        Social_security_number: req.body.SOCIAL_SECURITY_NUMBER,
-        drivers_license: req.body.DRIVERS_LICENSE,
-        city: req.body.CURRENT_CITY,
-        country: req.body.CURRENT_COUNTRY,
-        phone_number: req.body.CURRENT_PHONE_NUMBER,
-        marital_status: req.body.CURRENT_MARITAL_STATUS,
-        shareholder_status: req.body.SHAREHOLDER_STATUS,
-        ethnicity: req.body.ETHNICITY,
-        benefit_plan_id: req.body.BENEFIT_PLAN_ID
-    };
-    const dataEmployment = {
-        hire_date_working: req.body.HIRE_DATE_FOR_WORKING,
-        employment_code: req.body.EMPLOYMENT_CODE,
-        termination_date: req.body.TERMINATION_DATE,
-        workers_comp_code: req.body.WORKERS_COMP_CODE,
-        rehire_date_working: req.body.REHIRE_DATE_FOR_WORKING,
-        last_review_date: req.body.LAST_REVIEW_DATE,
-        employment_status: req.body.EMPLOYMENT_STATUS,
-        pay_rate: req.body.PAY_RATE,
-        id_pay_rate: req.body.ID_PAY_RATE,
-        vacation_days: req.body.VACATION_DAYS,
-        paid_to_date: req.body.PAID_TO_DATE,
-        paid_last_year: req.body.PAID_LAST_YEAR,
-        number_days_requirement: req.body.NUMBER_DAY_REQUIREMENT
-    };
+    const data = req.body;
+    const dataPersonal = await getDataPersonalByPage(data);
+    const dataEmployment = await getDataEmploymentByPage(data);
     try {
         await handleUpdatePersonal(dataPersonal);
         await handleUpdateEmployment(dataPersonal, dataEmployment)
