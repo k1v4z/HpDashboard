@@ -355,7 +355,7 @@ document.addEventListener("DOMContentLoaded", function () {
   <label for="">hire date for working:</label>
   <input type="date" name="HIRE_DATE" id="HIRE_DATE" required>
   <label for="">work comp code:</label>
-  <input type="text" name="EMPLOYEE_CODE">
+  <input type="text" name="WORKERS_COMP_CODE">
   <label for="">termination day:</label>
   <input type="date" name="TERMINATION_DATE" id="TERMINATION_DATE" oninput="validTerminationDay(this)" required>
   <label for="">rehire date for working:</label>
@@ -367,8 +367,6 @@ document.addEventListener("DOMContentLoaded", function () {
     <option value="Alive">Alive</option>
     <option value="Quit">Quit</option>
 </select>
-<label for="">Employee CODE: </label>
-              <input type="number" required>
 </div>
 <div class="employee-infor_right">
 
