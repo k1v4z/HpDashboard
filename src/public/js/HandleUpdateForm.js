@@ -16,10 +16,10 @@ document.addEventListener("DOMContentLoaded", function () {
               <input type="text" id="WORKERS_COMP_CODE" maxlength="10" name="WORKERS_COMP_CODE" required>
               
               <label for="TERMINATION_DATE">Termination day:</label>
-              <input type="date" id="TERMINATION_DATE" name="TERMINATION_DATE">
+              <input type="date" id="TERMINATION_DATE" name="TERMINATION_DATE" oninput="validTerminationDay(this)">
               
               <label for="REHIRE_DATE_FOR_WORKING">Rehire date for working:</label>
-              <input type="date" id="REHIRE_DATE_FOR_WORKING" name="REHIRE_DATE_FOR_WORKING">
+              <input type="date" id="REHIRE_DATE_FOR_WORKING" name="REHIRE_DATE_FOR_WORKING" oninput="validRehireDay(this)">
               
               <label for="LAST_REVIEW_DATE">Last review date:</label>
               <input type="date" id="LAST_REVIEW_DATE" name="LAST_REVIEW_DATE" required>

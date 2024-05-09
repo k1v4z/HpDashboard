@@ -74,13 +74,13 @@
           <div class="personal-info_left">
             <input type="number" name="PERSONAL_ID" value="<%= personal.PERSONAL_ID %>" style="display: none;">
             <label for="">First Name:</label>
-            <input type="text" name="CURRENT_FIRST_NAME" value="<%= personal.CURRENT_FIRST_NAME %>" required />
+            <input type="text" name="CURRENT_FIRST_NAME" oninput="validName(this)" value="<%= personal.CURRENT_FIRST_NAME %>" required />
             <label for="">Middle Name:</label>
-            <input type="text" name="CURRENT_MIDDLE_NAME" value="<%= personal.CURRENT_MIDDLE_NAME %>" required />
+            <input type="text" name="CURRENT_MIDDLE_NAME" oninput="validName(this)" value="<%= personal.CURRENT_MIDDLE_NAME %>" required />
             <label for="">Last Name:</label>
-            <input type="text" name="CURRENT_LAST_NAME" value="<%= personal.CURRENT_LAST_NAME %>" required />
+            <input type="text" name="CURRENT_LAST_NAME" oninput="validName(this)" value="<%= personal.CURRENT_LAST_NAME %>" required />
             <label for="">Date of Birth:</label>
-            <input type="date" value="<%= personal.BIRTH_DATE %>" name="BIRTH_DATE" required />
+            <input type="date" value="<%= personal.BIRTH_DATE %>" oninput="validBirthDay(this)" name="BIRTH_DATE" required />
             <label for="">Current Address 1: </label>
             <input type="text" value="<%= personal.CURRENT_ADDRESS_1 %>" name="CURRENT_ADDRESS_1" />
             <label for="">Current Address 2: </label>
@@ -97,7 +97,7 @@
           </div>
           <div class="personal-infor_right">
             <label for="">Social security number :</label>
-            <input type="number" name="SOCIAL_SECURITY_NUMBER" max="9999999999" value="<%= personal.SOCIAL_SECURITY_NUMBER %>" required />
+            <input type="text" name="SOCIAL_SECURITY_NUMBER" oninput="validSSN(this)" value="<%= personal.SOCIAL_SECURITY_NUMBER %>" required />
             <label for="">Drivers licenes: </label>
             <input type="text" name="DRIVERS_LICENSE" value="<%= personal.DRIVERS_LICENSE %>" required />
             <label for="">Current City: </label>
@@ -105,7 +105,7 @@
             <label for="">Current Country: </label>
             <input type="text" value="<%= personal.CURRENT_COUNTRY %>" name="CURRENT_COUNTRY" />
             <label for="">Current Phone number: </label>
-            <input type="text" value="<%= personal.CURRENT_PHONE_NUMBER %>" name="CURRENT_PHONE_NUMBER" />
+            <input type="text" value="<%= personal.CURRENT_PHONE_NUMBER %>" oninput="validPhoneNumber(this)" name="CURRENT_PHONE_NUMBER" />
             <label for="">Current marital status: </label>
             <input type="text" name="CURRENT_MARITAL_STATUS" value="<%= personal.CURRENT_MARITAL_STATUS %>" />
             <label for="">Shareholder status: </label>
@@ -141,6 +141,8 @@
   <script src="/js/ShowLabelExceededVacationDays.js"></script>
   <script src="/js/ShowLabelCertainDaysAniversary.js"></script>
   <script src="/js/app.js"></script>
+  <script src="/js/valid.js"></script>
+  <!-- <script src="/js/SendStatusUpdate.js"></script> -->
 </body>
 
 </html>

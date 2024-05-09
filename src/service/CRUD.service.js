@@ -79,7 +79,7 @@ const getEmployeeCode = async (id) => {
 
 const deletePersonalAndEmployment = async (Id) => {
     try {
-        const code= await getEmployeeCode(Id);
+        const code = await getEmployeeCode(Id);
         await sequelize_sqlserver.transaction(async (t) => {
             if (isEmployee(Id)) {
                 // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
@@ -109,7 +109,7 @@ const deletePersonalAndEmployment = async (Id) => {
             }
 
         });
-        
+
         //Xóa thông tin từ bảng Employee
         await sequelize_mysql.query(
             `DELETE FROM employee WHERE \`Employee Number\` = '${code}';`,
@@ -124,7 +124,7 @@ const deletePersonalAndEmployment = async (Id) => {
 //add Employee Personal Information
 const add_EP_Information = async (req) => {
     //data is information of personel
-    const data = req.body
+    const data = data
 
     let message = ''
     if (data.employee_showInfo == 'on') {
@@ -253,8 +253,53 @@ const getPersonalById = async (id) => {
     return PersonalByID;
 }
 
+
+const getDataPersonalByPage = async (data) => {
+    const dataPersonal = {
+        id_personal: data.PERSONAL_ID,
+        first_name: data.CURRENT_FIRST_NAME,
+        middle_name: data.CURRENT_MIDDLE_NAME,
+        last_name: data.CURRENT_LAST_NAME,
+        birth_date: data.BIRTH_DATE,
+        address_1: data.CURRENT_ADDRESS_1,
+        address_2: data.CURRENT_ADDRESS_2,
+        current_zip: data.CURRENT_ZIP,
+        gender: data.CURRENT_GENDER,
+        mail: data.CURRENT_PERSONAL_EMAIL,
+        Social_security_number: data.SOCIAL_SECURITY_NUMBER,
+        drivers_license: data.DRIVERS_LICENSE,
+        city: data.CURRENT_CITY,
+        country: data.CURRENT_COUNTRY,
+        phone_number: data.CURRENT_PHONE_NUMBER,
+        marital_status: data.CURRENT_MARITAL_STATUS,
+        shareholder_status: data.SHAREHOLDER_STATUS,
+        ethnicity: data.ETHNICITY,
+        benefit_plan_id: data.BENEFIT_PLAN_ID
+    };
+    return dataPersonal;
+}
+
+const getDataEmploymentByPage = async (data) => {
+    const dataEmployment = {
+        hire_date_working: data.HIRE_DATE_FOR_WORKING,
+        employment_code: data.EMPLOYMENT_CODE,
+        termination_date: data.TERMINATION_DATE,
+        workers_comp_code: data.WORKERS_COMP_CODE,
+        rehire_date_working: data.REHIRE_DATE_FOR_WORKING,
+        last_review_date: data.LAST_REVIEW_DATE,
+        employment_status: data.EMPLOYMENT_STATUS,
+        pay_rate: data.PAY_RATE,
+        id_pay_rate: data.ID_PAY_RATE,
+        vacation_days: data.VACATION_DAYS,
+        paid_to_date: data.PAID_TO_DATE,
+        paid_last_year: data.PAID_LAST_YEAR,
+        number_days_requirement: data.NUMBER_DAY_REQUIREMENT
+    };
+    return dataEmployment;
+}
+
 const handleUpdatePersonal = async (dataPersonal) => {
-    let message = '';
+
     try {
         await Personal.update({
             CURRENT_FIRST_NAME: dataPersonal.first_name,
@@ -280,12 +325,11 @@ const handleUpdatePersonal = async (dataPersonal) => {
                 PERSONAL_ID: dataPersonal.id_personal
             }
         });
-        message = 'Update Successful';
+        return true; // Successful update
     } catch (err) {
         console.log('sqlserver: ->>>>>>>>>>>', err);
-        message = 'Update Fail';
+        return false; // Update failed
     }
-    return message;
 }
 
 const handleInsertEmployment = async (dataPersonal, dataEmployment) => {
@@ -335,17 +379,16 @@ const handleInsertEmployment = async (dataPersonal, dataEmployment) => {
                 type: QueryTypes.INSERT
             });
             console.log('MySQL Create Successful');
-            return 'Create Successful in both databases';
+            return true;
         }
     } catch (error) {
         console.error('Error during employment creation:', error);
-        return 'Create Fail';
+        return false;
     }
 }
-
 const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
     try {
-        if (dataEmployment.pay_rate != undefined) {
+        if (dataEmployment.pay_rate !== undefined) {
             const preprocessedDataMSSQL = {
                 EMPLOYMENT_STATUS: dataEmployment.employment_status,
                 HIRE_DATE_FOR_WORKING: formatDate(dataEmployment.hire_date_working),
@@ -367,12 +410,11 @@ const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
                 paidLastYear: dataEmployment.paid_last_year,
                 employeeNumber: dataEmployment.employment_code
             };
-            console.log(preprocessedDataMYSQL.vacationDays)
+
             // SQL Server Update
             await Employment.update(preprocessedDataMSSQL, {
                 where: { PERSONAL_ID: dataPersonal.id_personal }
             });
-            console.log('MSSQL Update Successful');
 
             // MySQL Update
             await sequelize_mysql.query(
@@ -388,18 +430,17 @@ const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
                     WHERE \`Employee Number\`=:employeeNumber;`,
                 { replacements: preprocessedDataMYSQL, type: QueryTypes.UPDATE }
             );
-            console.log('MySQL Update Successful');
 
-            return 'Update Successful';
+            return true; // Successful update
         }
     } catch (error) {
-        console.error('Error during employment update/insert:', error);
-        throw new Error('Operation failed');
+        console.error('Error during employment update:', error);
+        return false; // Update failed
     }
 }
 
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor,
-    deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment
+    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
+    deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage
 }
