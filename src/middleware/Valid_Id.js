@@ -19,14 +19,15 @@ const valid = {
         //case: user only input personal info
         if (data.ID_PAY_RATE == undefined){
             next()
+        }else{
+            //case: user input both personal and employee info
+            const count_idPayRate = await checkIdPayRates(data.ID_PAY_RATE)
+            //if count = 0, id payrate don't exist, user must input id again
+            if (count_idPayRate == 0)
+                res.redirect('/employee-add')
+            else
+                next()
         }
-        //case: user input both personal and employee info
-        const count_idPayRate = await checkIdPayRates(data.ID_PAY_RATE)
-        //if count = 0, id payrate don't exist, user must input id again
-        if(count_idPayRate == 0)
-            res.redirect('/employee-add')
-        else
-            next()
     }
 }
 
