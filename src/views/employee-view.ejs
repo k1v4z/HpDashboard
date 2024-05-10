@@ -1,101 +1,109 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/css/stylesdash.css" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link rel="stylesheet" href="/css/stylesdash.css" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" />
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>DashBoard</title>
+  </head>
 
-  <title>DashBoard</title>
-</head>
+  <body>
+    <header>
+      <!-- Nabar -->
+      <div class="navbar">
+        <div class="logo">
+          <img src="/icon/LOGO.png" alt="" />
+        </div>
+        <ul class="menu">
+          <li class="btn n1" id="dash">
+            <img src="/icon/icon-btn1.png" alt="" /><span>DashBoard</span>
+          </li>
+          <li class="btn n2" id="earnings">
+            <img src="/icon/icon-btn2.png" alt="" /><span>Total earnings </span>
+          </li>
+          <li class="btn n3" id="vacationdays">
+            <img src="/icon/icon-btn3.png" alt="" /><span>Vacation days</span>
+          </li>
+          <li class="btn n4" id="benefits">
+            <img src="/icon/icon-btn4.png" alt="" /><span
+              >Average benefits paid</span
+            >
+          </li>
+          <li class="btn n7" id="access-control">
+            <img src="/icon/access_control.png" alt="" /><span
+              >Access Control</span
+            >
+          </li>
+          <li class="btn n6 active" id="employee-management">
+            <img src="/icon/icon-btn6.png" alt="" /><span
+              >Employee Management</span
+            >
+          </li>
 
-<body>
-  <header>
-    <!-- Nabar -->
-    <div class="navbar">
-      <div class="logo">
-        <img src="/icon/LOGO.png" alt="" />
+          <div class="box-child">
+            <button class="btn-view">View</button>
+            <button class="btn-add">Add</button>
+          </div>
+
+          <li class="btn n5" id="logout">
+            <img src="/icon/icon-btn5.png" alt="" /><span>Logout</span>
+          </li>
+        </ul>
       </div>
-      <ul class="menu">
-        <li class="btn n1" id="dash">
-          <img src="/icon/icon-btn1.png" alt="" /><span>DashBoard</span>
-        </li>
-        <li class="btn n2" id="earnings">
-          <img src="/icon/icon-btn2.png" alt="" /><span>Total earnings </span>
-        </li>
-        <li class="btn n3" id="vacationdays">
-          <img src="/icon/icon-btn3.png" alt="" /><span>Vacation days</span>
-        </li>
-        <li class="btn n4" id="benefits">
-          <img src="/icon/icon-btn4.png" alt="" /><span>Average benefits paid</span>
-        </li>
-        <li class="btn n7" id="access-control">
-          <img src="/icon/access_control.png" alt="" /><span>Access Control</span>
-        </li>
-        <li class="btn n6 active" id="employee-management">
-          <img src="/icon/icon-btn6.png" alt="" /><span>Employee Management</span>
-        </li>
-
-        <div class="box-child">
-          <button class="btn-view">View</button>
-          <button class="btn-add">Add</button>
+      <!-- main content -->
+      <div class="main-content">
+        <!-- Logo CEO MEMO -->
+        <section class="header">
+          <h1 class="name-project">H-P system</h1>
+          <span onclick="getAllNotification();">
+            <img id="alert-btn" src="/icon/Vector.png" alt="" />
+            <span class="number-info"></span>
+          </span>
+        </section>
+        <!-- Icon Alert -->
+        <div class="alert">
+          <section class="alert-box">
+            <section class="title-alert">
+              <span>Important notification</span>
+            </section>
+            <ul class="box"></ul>
+          </section>
         </div>
 
-        <li class="btn n5" id="logout">
-          <img src="/icon/icon-btn5.png" alt="" /><span>Logout</span>
-        </li>
-      </ul>
-    </div>
-    <!-- main content -->
-    <div class="main-content">
-      <!-- Logo CEO MEMO -->
-      <section class="header">
-        <h1 class="name-project">H-P system</h1>
-        <span onclick="getAllNotification();">
-          <img id="alert-btn" src="/icon/Vector.png" alt="" />
-          <span class="number-info"></span>
-        </span>
-      </section>
-      <!-- Icon Alert -->
-      <div class="alert">
-        <section class="alert-box">
-          <section class="title-alert">
-            <span>Important notification</span>
-          </section>
-          <ul class="box">
-          </ul>
-        </section>
-      </div>
+        <!-- Employee-VIEW -->
 
-      <!-- Employee-VIEW -->
-
-      <div class="manage-infor">
-        <button class="personal-manage active">PERSONAL MANAGE</button>
-        <button class="employee-manage">EMPLOYEE MANAGE</button>
-      </div>
-      <!-- Personal Management -->
-      <div class="content ui5 active">
-        <form class="frm-view" action="" method="get">
-          <table class="tb-view" border="1">
-            <thead>
-              <tr>
-                <th>FULLNAME</th>
-                <th>ADDRESS</th>
-                <th>CITY</th>
-                <th>COUNTRY</th>
-                <th>GENDER</th>
-                <th>EMAIL</th>
-                <th>PHONE NUMBER</th>
-                <th>ACTION</th>
-              </tr>
-            </thead>
-            <tbody class="view-table-data">
-              <%dataPersonal.forEach((dataPersonal)=> {%>
+        <div class="manage-infor">
+          <button class="personal-manage active">PERSONAL MANAGE</button>
+          <button class="employee-manage">EMPLOYEE MANAGE</button>
+        </div>
+        <!-- Personal Management -->
+        <div class="content ui5 active">
+          <form class="frm-view" action="" method="get">
+            <table class="tb-view" border="1">
+              <thead>
+                <tr>
+                  <th>FULLNAME</th>
+                  <th>ADDRESS</th>
+                  <th>CITY</th>
+                  <th>COUNTRY</th>
+                  <th>GENDER</th>
+                  <th>EMAIL</th>
+                  <th>PHONE NUMBER</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody class="view-table-data">
+                <%dataPersonal.forEach((dataPersonal)=> {%>
                 <tr data-employee-id="<%= dataPersonal.PERSONAL_ID %>">
                   <td>
-                    <%=dataPersonal.CURRENT_FIRST_NAME + ' ' +dataPersonal.CURRENT_MIDDLE_NAME+' ' +
+                    <%=dataPersonal.CURRENT_FIRST_NAME + ' '
+                    +dataPersonal.CURRENT_MIDDLE_NAME+' ' +
                     dataPersonal.CURRENT_LAST_NAME%>
                   </td>
                   <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
@@ -140,64 +148,66 @@
                   <th>ACTION</th>
                 </tr>
               </thead>
-              <tbody class="view-table-data" >
+              <tbody class="view-table-data">
                 <%dataEmployee.forEach((dataEmployee)=> {%>
                 <tr data-employee-id="<%= dataEmployee.EMPLOYMENT_ID %>">
                   <td><%=dataEmployee.EMPLOYMENT_CODE%></td>
                   <td><%=dataEmployee.EMPLOYMENT_STATUS%></td>
                   <td>
-                    <%=dataEmployee[' First Name']+' '+ dataEmployee[' Last Name']%>
+                    <%=dataEmployee['First Name']+' '+ dataEmployee['Last Name']%>
                   </td>
+                  <td><%=dataEmployee.SSN%></td>
+                  <td><%=dataEmployee['Pay Rate']%></td>
+                  <td><%=dataEmployee['Vacation Days']%></td>
                   <td>
-                    <%=dataEmployee.SSN%>
-                  </td>
-                  <td>
-                    <%=dataEmployee['Pay Rate']%>
-                  </td>
-                  <td>
-                    <%=dataEmployee['Vacation Days']%>
-                  </td>
-                  <td>
-                    <button class="btn-edit"
-                      onclick="window.location.href = `/employment/edit/<%= dataEmployee.PERSONAL_ID %>`">
+                    <button
+                      class="btn-edit"
+                      onclick="window.location.href = `/employment/edit/<%= dataEmployee.PERSONAL_ID %>`"
+                    >
                       Edit
                     </button>
-                    <button class="btn-delete" data-id="<%= dataEmployee.EMPLOYMENT_ID %>">
+                    <button
+                      class="btn-delete"
+                      data-id="<%= dataEmployee.EMPLOYMENT_ID %>"
+                    >
                       Delete
                     </button>
-                    <button class="btn-benefit"
-                      onclick="window.location.href =`/change_benefit_plan/<%= dataEmployee.PERSONAL_ID %>`">
+                    <button
+                      class="btn-edit"
+                      onclick="window.location.href =`/benefit_plan/<%= dataEmployee.PERSONAL_ID %>`"
+                    >
                       Benefit
                     </button>
                   </td>
                 </tr>
                 <%})%>
-            </tbody>
-          </table>
-        </form>
-      </div>
+              </tbody>
+            </table>
+          </form>
+        </div>
 
-      <!-- Employee-VIEW -->
-      <div class="content ui5">
-        <form class="frm-view" action="" method="get">
-          <table class="tb-view" border="1">
-            <thead>
-              <tr>
-                <th>FULLNAME</th>
-                <th>ADDRESS</th>
-                <th>CITY</th>
-                <th>COUNTRY</th>
-                <th>GENDER</th>
-                <th>EMAIL</th>
-                <th>PHONE NUMBER</th>
-                <th>ACTION</th>
-              </tr>
-            </thead>
-            <tbody class="view-table-data">
-              <%dataPersonal.forEach((dataPersonal)=> {%>
+        <!-- Employee-VIEW -->
+        <div class="content ui5">
+          <form class="frm-view" action="" method="get">
+            <table class="tb-view" border="1">
+              <thead>
+                <tr>
+                  <th>FULLNAME</th>
+                  <th>ADDRESS</th>
+                  <th>CITY</th>
+                  <th>COUNTRY</th>
+                  <th>GENDER</th>
+                  <th>EMAIL</th>
+                  <th>PHONE NUMBER</th>
+                  <th>ACTION</th>
+                </tr>
+              </thead>
+              <tbody class="view-table-data">
+                <%dataPersonal.forEach((dataPersonal)=> {%>
                 <tr>
                   <td>
-                    <%=dataPersonal.CURRENT_FIRST_NAME + ' ' +dataPersonal.CURRENT_MIDDLE_NAME+' ' +
+                    <%=dataPersonal.CURRENT_FIRST_NAME + ' '
+                    +dataPersonal.CURRENT_MIDDLE_NAME+' ' +
                     dataPersonal.CURRENT_LAST_NAME%>
                   </td>
                   <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>

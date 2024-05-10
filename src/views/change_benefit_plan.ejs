@@ -1,19 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Document</title>
-</head>
-<body>
+  </head>
+  <body>
     <form action="/change/:id">
-        <label for="Full Name">Full Name</label>
-        <input type="text" name="Full Name" value="<%=name%>" readonly>
-        <label for="Deductable">Deductable</label>
-        <input type="text" name="deductable" value="<%=benefit.DEDUCTABLE%>">
-        <label for="copay">PERCENTAGE_COPAY</label>
-        <input type="text" name="PERCENTAGE_COPAY" value="<%=benefit.PERCENTAGE_COPAY%>">
-        <button type="submit">OK</button>
+      <label for="Full Name">Full Name</label>
+      <input type="text" name="Full Name" value="<%=name%>" readonly />
+      <label for="Deductable">Deductable</label>
+      <input
+        type="text"
+        name="deductable"
+        value="<%=benefit.DEDUCTABLE%>"
+        readonly
+      />
+      <label for="copay">PERCENTAGE_COPAY</label>
+      <input
+        type="text"
+        name="PERCENTAGE_COPAY"
+        value="<%=benefit.PERCENTAGE_COPAY%>"
+        readonly
+      />
+      <button type="submit">OK</button>
     </form>
-</body>
+  </body>
 </html>

@@ -58,18 +58,8 @@ const getAccessControl = (req, res) => {
     return res.render('access_control.ejs');
 }
 
-const getChangeBenefitPlan = async(req, res) => {
-    const personal = await getPersonalById(req.params.id)
-    const fullName = `${personal.CURRENT_FIRST_NAME} ${personal.CURRENT_MIDDLE_NAME} ${personal.CURRENT_LAST_NAME}`
-    const benefitPlan = await getBenefitPlanById(personal.BENEFIT_PLAN_ID)
-
-    return res.render('change_benefit_plan.ejs',{
-        name: fullName,
-        benefit: benefitPlan
-    });
-}
 
 module.exports = {
     getDashBoard, getTotalEarnings, getVacationDays, getAverageBenefitPaid,
-    getAnnouncementOne, getAnnouncementTwo, getAccessControl, getChangeBenefitPlan
+    getAnnouncementOne, getAnnouncementTwo, getAccessControl
 }
