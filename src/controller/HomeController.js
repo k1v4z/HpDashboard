@@ -1,4 +1,4 @@
-const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEmployeeInfor, DeleletePersonal } = require("../service/CRUD.service");
+const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEmployeeInfor, DeleletePersonal, getPersonalById, getBenefitPlanById } = require("../service/CRUD.service");
 const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
 const bodyParser = require('body-parser');
 const { getListEmployee } = require("../service/Dashboard.service");
@@ -58,8 +58,15 @@ const getAccessControl = (req, res) => {
     return res.render('access_control.ejs');
 }
 
-const getChangeBenefitPlan = (req, res) => {
-    return res.render('change_benefit_plan.ejs')
+const getChangeBenefitPlan = async(req, res) => {
+    const personal = await getPersonalById(req.params.id)
+    const fullName = `${personal.CURRENT_FIRST_NAME} ${personal.CURRENT_MIDDLE_NAME} ${personal.CURRENT_LAST_NAME}`
+    const benefitPlan = await getBenefitPlanById(personal.BENEFIT_PLAN_ID)
+
+    return res.render('change_benefit_plan.ejs',{
+        name: fullName,
+        benefit: benefitPlan
+    });
 }
 
 module.exports = {

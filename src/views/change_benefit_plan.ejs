@@ -6,15 +6,13 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="/change">
-        <label for="personal_id">Personal_Id</label>
-        <input type="text" name="personal_id">
-        <label for="Plan name">Plan name</label>
-        <input type="text" name="plan name">
+    <form action="/change/:id">
+        <label for="Full Name">Full Name</label>
+        <input type="text" name="Full Name" value="<%=name%>" readonly>
         <label for="Deductable">Deductable</label>
-        <input type="text" name="deductable">
+        <input type="text" name="deductable" value="<%=benefit.DEDUCTABLE%>">
         <label for="copay">PERCENTAGE_COPAY</label>
-        <input type="text" name="PERCENTAGE_COPAY">
+        <input type="text" name="PERCENTAGE_COPAY" value="<%=benefit.PERCENTAGE_COPAY%>">
         <button type="submit">OK</button>
     </form>
 </body>

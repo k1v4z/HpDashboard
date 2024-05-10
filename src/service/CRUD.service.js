@@ -11,6 +11,7 @@ const { query } = require("express");
 const Employment_Working_Time = require("../model/human/Employment_Working_Time");
 const formatDate = require("../helper/FormatDate");
 const isEmployee = require("../helper/IsEmployee");
+const Benefit_Plans = require("../model/human/Benefit_Plans");
 defineAssociation();
 
 const getAllDepartment = async () => {
@@ -390,6 +391,7 @@ const handleInsertEmployment = async (dataPersonal, dataEmployment) => {
         return false;
     }
 }
+
 const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
     try {
         if (dataEmployment.pay_rate !== undefined) {
@@ -443,8 +445,18 @@ const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
     }
 }
 
+const getBenefitPlanById = async(id) => {
+    const benefitPlan = await Benefit_Plans.findOne({
+        where: { BENEFIT_PLANS_ID: id}
+    })
+    .then(res => res.toJSON())
+    .catch(err => console.log(err))
+
+    return benefitPlan
+}
 
 module.exports = {
     getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
-    deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage
+    deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage,
+    getBenefitPlanById
 }

@@ -21,7 +21,6 @@ routerManage.post('/update', postInsertOrUpdatePersonalPage)
 routerManage.get('/employment/edit/:id', setEditDataToFormEmploymentEdit);
 routerManage.post('/update', postUpdateEmploymentPage)
 
-
 routerManage.get('/employee-add', getEmployeeAdd);
 
 module.exports = routerManage;

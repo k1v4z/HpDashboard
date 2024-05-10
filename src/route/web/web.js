@@ -12,6 +12,6 @@ router.get('/average-benefit-paid', getAverageBenefitPaid);
 router.get('/detail_announcement_1', getAnnouncementOne);
 router.get('/detail_announcement_2', getAnnouncementTwo);
 router.get('/access_control', getAccessControl);
-router.get('/change_benefit_plan/:id', getChangeBenefitPlan)
+router.get('/benefit_plan/:id', getChangeBenefitPlan)
 
 module.exports = router;
