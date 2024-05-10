@@ -754,6 +754,23 @@ thead {
   background-color: #555555;
   color: white;
 }
+.btn-benefit {
+  width: 60px;
+  height: 30px;
+  background-color: #54b749;
+  border-radius: 10px;
+  border: none;
+  color: rgb(255, 255, 255);
+}
+.btn-benefit:hover {
+  background-color: #008cba;
+  color: white;
+}
+.btn-edit,
+.btn-delete,
+.btn-benefit {
+  font-weight: 600;
+}
 .editing {
   background-color: #ffffcc;
 }
@@ -853,8 +870,8 @@ thead {
   color: #4ed4de;
 }
 
-
-.employee-title.none, .employee-title_update.none {
+.employee-title.none,
+.employee-title_update.none {
   padding-top: 30px;
   display: none;
 }
@@ -865,7 +882,8 @@ thead {
   gap: 10px;
   margin: 20px;
 }
-.employee-infor, .employee-infor_update {
+.employee-infor,
+.employee-infor_update {
   display: flex;
   gap: 10px;
 }
@@ -916,7 +934,8 @@ thead {
 .employee-infor_update {
   display: none;
 }
-.checkbox-employee, .checkbox-employee_update{
+.checkbox-employee,
+.checkbox-employee_update {
   width: 300px;
   gap: 10px;
   font-size: 16px;
