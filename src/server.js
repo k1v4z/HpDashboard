@@ -15,7 +15,8 @@ const session = require('express-session');
 const redis = require('redis')
 const connectRedis = require('./model/message/Redis');
 
-const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment')
+const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment');
+const init_API_Changed_Benefit_Plan = require('./route/api/API_ChangedBenefitPlan');
 //const cookieParser = require('cookie-parser');
 const app = express()
 const port = process.env.PORT;
@@ -44,6 +45,7 @@ init_API_Vacation_Days(app);
 init_API_Notification(app);
 init_API_BenefitPlan(app);
 init_API_DataEmployment(app);
+init_API_Changed_Benefit_Plan(app)
 
 //config redis
 //connectRedis();

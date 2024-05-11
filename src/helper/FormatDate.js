@@ -9,4 +9,20 @@ const formatDate = (dateString) => {
     return date.toISOString().split('T')[0]; // Chuyển đổi ngày thành dạng 'YYYY-MM-DD'
 };
 
-module.exports = formatDate;
+
+const getCurrentDateTime = () => {
+    const now = new Date();
+    const options = {
+        hour: '2-digit',
+        minute: '2-digit',
+        second: '2-digit',
+        month: '2-digit',
+        day: '2-digit',
+        year: 'numeric',
+        hour12: true
+    };
+    const formatter = new Intl.DateTimeFormat('en-US', options);
+    return formatter.format(now);
+};
+
+module.exports = { getCurrentDateTime, formatDate };

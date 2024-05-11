@@ -1,7 +1,10 @@
 function getAllNotification() {
-    getExceededNotification();
+    const list = document.querySelector('.box');
+    list.innerHTML = '';
     getBirthdaysNotification();
     getCertainDayAniversary();
+    getExceededNotification();
+    getChangedDataMessage();
 }
 
 const getExceededNotification = async () => {

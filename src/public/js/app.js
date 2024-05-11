@@ -340,6 +340,20 @@ editButtons.forEach(function (button) {
 });
 // END Employee Management VIEW-EDIT
 
+// START Employee Management VIEW-BENEFIT
+
+var editButtons = document.querySelectorAll('.btn-benefit');
+editButtons.forEach(function (button) {
+
+    button.addEventListener('click', function (e) {
+        e.preventDefault();
+        
+        showUI7.classList.add('active');
+    });
+});
+// END Employee Management VIEW-BENEFIT
+
+
 // START Employee Management ADD
 document.addEventListener("DOMContentLoaded", function () {
     var checkbox = document.getElementById("employee-showInfo");
