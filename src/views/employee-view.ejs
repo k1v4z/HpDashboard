@@ -146,7 +146,7 @@
                   <td><%=dataEmployee.EMPLOYMENT_CODE%></td>
                   <td><%=dataEmployee.EMPLOYMENT_STATUS%></td>
                   <td>
-                    <%=dataEmployee[' First Name']+' '+ dataEmployee[' Last Name']%>
+                    <%=dataEmployee['First Name']+' '+ dataEmployee['Last Name']%>
                   </td>
                   <td>
                     <%=dataEmployee.SSN%>
@@ -166,7 +166,7 @@
                       Delete
                     </button>
                     <button class="btn-benefit"
-                      onclick="window.location.href =`/change_benefit_plan/<%= dataEmployee.PERSONAL_ID %>`">
+                      onclick="window.location.href =`/benefit_plan/<%= dataEmployee.PERSONAL_ID %>`">
                       Benefit
                     </button>
                   </td>
