@@ -12,7 +12,7 @@
 6) Employees make a change to their benefits plan that affects their payroll
 7) All employees who have birthdays within the current month
 
-## Technolgy
+## Technology
 - Nodejs
 - Express.js
 - ORM with Sequelize
