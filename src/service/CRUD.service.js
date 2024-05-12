@@ -5,14 +5,22 @@ const defineAssociation = require("../model/association/Association");
 const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
 const Employment = require("../model/human/Employment");
-const Employee = require("../model/payroll/Employees");
-const { where } = require("sequelize");
-const { query } = require("express");
-const Employment_Working_Time = require("../model/human/Employment_Working_Time");
-const formatDate = require("../helper/FormatDate");
+const { formatDate, getCurrentDateTime } = require("../helper/FormatDate");
 const isEmployee = require("../helper/IsEmployee");
 const Benefit_Plans = require("../model/human/Benefit_Plans");
+const path = require('path');
+const { writeJSONFile, readJSONFile } = require("../helper/HandleJSON");
 defineAssociation();
+let oldBenefitPlanID;
+
+const setOldBenefitPlanID = (id) => {
+    oldBenefitPlanID = id;
+}
+
+const getOldBenefitPlanID = () => {
+    return oldBenefitPlanID;
+}
+
 
 const getAllDepartment = async () => {
     const department = await Job_History.findAll({
@@ -31,7 +39,7 @@ const getAllEthnicity = async () => {
 
     return ethnicity;
 }
-const getAllPersonalImfomations = async () => {
+const getAllPersonalInfomations = async () => {
     const data = await Personal.findAll({
         include: [{
             model: Employment,
@@ -303,6 +311,28 @@ const getDataEmploymentByPage = async (data) => {
     return dataEmployment;
 }
 
+const checkDifferenceData = (dataPersonal) => {
+    let oldID = getOldBenefitPlanID();
+    console.log("ID cũ =============", oldID);
+    console.log("ID mới =============", dataPersonal.benefit_plan_id);
+    if (oldID != dataPersonal.benefit_plan_id) {
+        const newData = {
+            "name": dataPersonal.first_name,
+            "gender": dataPersonal.gender,
+            "benefit_plan_id": dataPersonal.benefit_plan_id,
+            "date_created_at": getCurrentDateTime()
+        }
+        const filepath = path.join(__dirname, 'message.json');
+        const oldMessages = readJSONFile(filepath);
+        oldMessages.push(newData);
+        writeJSONFile(filepath, oldMessages);
+        console.log("======= ĐÃ THAY ĐỔI =======")
+    } else {
+        console.log("======= KHÔNG THAY ĐỔI =======")
+    }
+    
+}
+
 const handleUpdatePersonal = async (dataPersonal) => {
 
     try {
@@ -330,7 +360,8 @@ const handleUpdatePersonal = async (dataPersonal) => {
                 PERSONAL_ID: dataPersonal.id_personal
             }
         });
-        return true; // Successful update
+        console.log("======= ĐANG GỌI ĐẾN CHECK DIFFERENCE DATA =======")
+        checkDifferenceData(dataPersonal);
     } catch (err) {
         console.log('sqlserver: ->>>>>>>>>>>', err);
         return false; // Update failed
@@ -445,18 +476,19 @@ const handleUpdateEmployment = async (dataPersonal, dataEmployment) => {
     }
 }
 
-const getBenefitPlanById = async(id) => {
+const getBenefitPlanById = async (id) => {
     const benefitPlan = await Benefit_Plans.findOne({
-        where: { BENEFIT_PLANS_ID: id}
+        where: { BENEFIT_PLANS_ID: id }
     })
-    .then(res => res.toJSON())
-    .catch(err => console.log(err))
+        .then(res => res.toJSON())
+        .catch(err => console.log(err))
 
     return benefitPlan
 }
 
+
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalImfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
+    getAllDepartment, getAllEthnicity, getAllPersonalInfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
     deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage,
-    getBenefitPlanById
+    getBenefitPlanById, setOldBenefitPlanID
 }

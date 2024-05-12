@@ -2,13 +2,15 @@
 //This file will define a controller of Employee Management 
 
 
-const { add_EP_Information, getPersonalById, getAllPersonalImfomations, getEmployeeInfor, handleUpdateEmployment,
+const { add_EP_Information, getPersonalById, getAllPersonalInfomations, getEmployeeInfor, handleUpdateEmployment,
     handleUpdatePersonal, deletePersonalAndEmployment, getDataPersonalByPage, getDataEmploymentByPage,
-    handleInsertEmployment } = require("../service/CRUD.service");
+    handleInsertEmployment, getBenefitPlanById, setOldBenefitPlanID} = require("../service/CRUD.service");
 const isEmployee = require("../helper/IsEmployee");
 const { getListEmployee } = require("../service/Dashboard.service");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
 let id;
+
+
 
 const getAllEmployee = async (req, res) => {
     const listEmployee = await getListEmployee();
@@ -33,8 +35,9 @@ const getEmployeeAdd = (req, res) => {
 
 const setEditDataToFormEmploymentEdit = async (req, res) => {
     id = req.params.id;
-    let personal = await getPersonalById(id);
-    let employment = await getAllDataEmployment(id);
+    const personal = await getPersonalById(id);
+    const employment = await getAllDataEmployment(id);
+    setOldBenefitPlanID(personal.BENEFIT_PLAN_ID)
     return res.render('employment_edit.ejs', {
         personal: personal,
         employment: employment
@@ -43,7 +46,8 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
     id = req.params.id;
-    let personal = await getPersonalById(id);
+    const personal = await getPersonalById(id);
+    setOldBenefitPlanID(personal.BENEFIT_PLAN_ID)
     return res.render('personal_edit.ejs', {
         personal: personal
     })
@@ -55,7 +59,7 @@ const getId = () => {
 
 
 const getEmployeeView = async (req, res) => {
-    const dataPersonal = await getAllPersonalImfomations();
+    const dataPersonal = await getAllPersonalInfomations();
     const dataEmployee = await getEmployeeInfor();
     return res.render('employee-view.ejs', {
         dataPersonal: dataPersonal,
@@ -118,7 +122,21 @@ const DeletePersonalView = async (req, res) => {
         res.status(500).json({ error: "Error deleting personal data" });
     }
 }
+
+
+const getChangeBenefitPlan = async (req, res) => {
+    const personal = await getPersonalById(req.params.id)
+    const fullName = `${personal.CURRENT_FIRST_NAME} ${personal.CURRENT_MIDDLE_NAME} ${personal.CURRENT_LAST_NAME}`
+    const benefitPlan = await getBenefitPlanById(personal.BENEFIT_PLAN_ID)
+
+    return res.render('change_benefit_plan.ejs', {
+        name: fullName,
+        benefit: benefitPlan
+    });
+}
+
+
 module.exports = {
     getAllEmployee, addEPI, getEmployeeView, getEmployeeAdd, setEditDataToFormEmploymentEdit, DeletePersonalView, postInsertOrUpdatePersonalPage,
-    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId
+    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan
 }

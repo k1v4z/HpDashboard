@@ -4,6 +4,7 @@ function getAllNotification() {
     getBirthdaysNotification();
     getCertainDayAniversary();
     getExceededNotification();
+    getChangedDataMessage();
 }
 
 const getCertainDayAniversary = async () => {

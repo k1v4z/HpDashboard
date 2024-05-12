@@ -17,6 +17,7 @@
     "express": "^4.19.2",
     "express-session": "^1.18.0",
     "fs": "^0.0.1-security",
+    "jsdom": "^24.0.0",
     "mssql": "^10.0.2",
     "mysql2": "^3.9.3",
     "node-fetch": "^3.3.2",

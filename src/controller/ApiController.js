@@ -6,6 +6,7 @@ const showEmployeeInfo = require("../service/CheckExceededLeaveDays");
 const { GetAllShareHolderStatus } = require("../service/GetShareHolder_status");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
 const { getId } = require("./EmController");
+const messages = require("../service/GetMessage");
 
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
@@ -112,8 +113,22 @@ const setDataEmployment = async (req, res) => {
     }
 }
 
+const getAllMessage = (req, res) => {
+
+    try {
+        const data = messages;
+        return res.status(200).json({
+            new_data: data
+        })
+    } catch {
+        return res.status(500).json({
+            error: 'Error'
+        })
+    }
+}
+
 
 module.exports = {
-    getTotalEarning, getAllVacationDays, getAllNotifications,
+    getTotalEarning, getAllVacationDays, getAllNotifications, getAllMessage,
     getAniversaryNotifications, getAllBenefitPlan, setDataEmployment
 }
