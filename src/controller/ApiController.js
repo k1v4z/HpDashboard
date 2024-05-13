@@ -127,8 +127,20 @@ const getAllMessage = (req, res) => {
     }
 }
 
+const logout = (req,res) =>{
+    req.session.destroy((err) =>{
+        if (err) {
+            console.error('Error destroying session:', err);
+            res.status(500).send('Error destroying session');
+        } else {
+            // Optionally clear session-related cookies on the client side
+            res.clearCookie('connect.sid');
+            res.redirect('/login')
+        }
+    })
+}
 
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications, getAllMessage,
-    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment
+    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment,logout
 }

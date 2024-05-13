@@ -30,6 +30,7 @@ const addEPI = async (req, res) => {
 }
 
 const getEmployeeAdd = (req, res) => {
+    console.log(req.session.user)
     return res.render('employee-add.ejs');
 }
 
