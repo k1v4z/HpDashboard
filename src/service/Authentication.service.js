@@ -7,6 +7,14 @@ async function authSignUp(username, password){
     return status
 }
 
+async function authLogin(username,password){
+    const user = new User(null,username,password)
+    const status = await user.login()
+    
+    return status
+}
+
 module.exports = {
-    authSignUp
+    authSignUp,
+    authLogin
 }
