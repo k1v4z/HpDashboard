@@ -10,9 +10,9 @@ class User {
 
     async signUp() {
         let message = ''
-        console.log()
+
         const isExist = await sequelize_sqlserver_user.query(`
-            SELECT USER_NAME from USERS where USER_NAME = '${this.USER_NAME}'
+            SELECT USER_NAME from dbo.[USER] where USER_NAME = '${this.USER_NAME}'
         `, { type: QueryTypes.SELECT })
             .then((res) => {
                 if (res[0].USER_NAME == []) {
@@ -31,7 +31,7 @@ class User {
 
         if (!isExist) {
             await sequelize_sqlserver_user.query(`
-                INSERT INTO USERS VALUES('${this.USER_NAME}','${this.PASSWORD}')
+                INSERT INTO dbo.[USER] VALUES('${this.USER_NAME}','${this.PASSWORD}')
             `, { type: QueryTypes.INSERT })
                 .then(res => message = 'Sign Up Successful')
                 .catch((err) => {
@@ -39,6 +39,25 @@ class User {
                     console.log(err)
                 })
         }
+
+        return message
+    }
+
+    async login(){
+        let message = ''
+
+        message = await sequelize_sqlserver_user.query(`
+            SELECT USER_NAME,PASSWORD FROM dbo.[USER] WHERE USER_NAME = '${this.USER_NAME}' AND PASSWORD = '${this.PASSWORD}'
+        `,{type: QueryTypes.SELECT})
+        .then((res) =>{
+            if(res[0] == undefined)
+                return 'Login fail'
+            return 'Login success'
+        })
+        .catch((err) =>{
+            console.log(err)
+            message = 'Login Fail'
+        })
 
         return message
     }
