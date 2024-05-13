@@ -68,10 +68,15 @@ document.getElementById('logout').onclick = () => {
 
 let btnYes = overlay.querySelector('.option.yes');
 let btnNo = overlay.querySelector('.option.no');
-btnYes.addEventListener('click', () => {
-
-    window.location.href = "index.html";
+btnYes.addEventListener('click', async () => {
+    overlay.style.display = 'none';
+    await fetch('http://localhost:4080/api/v1/logout')
+        .then(res => console.log(res))
+        .catch(err => console.log(err))
+    
+    window.location.href='/login'
 });
+
 btnNo.addEventListener('click', () => {
     overlay.style.display = 'none';
     BtnN5.classList.remove('active');
@@ -347,7 +352,7 @@ editButtons.forEach(function (button) {
 
     button.addEventListener('click', function (e) {
         e.preventDefault();
-        
+
         showUI7.classList.add('active');
     });
 });

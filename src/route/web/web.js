@@ -2,9 +2,10 @@ const express = require('express')
 const router = express.Router();
 const { getEmployeeViewEdit, getEmployeeAdd, getEmployeeView,
     getDashBoard, getTotalEarnings, getVacationDays,
-    getAverageBenefitPaid, getAnnouncementOne, getAnnouncementTwo, getAccessControl} = require('../../controller/HomeController')
+    getAverageBenefitPaid, getAnnouncementOne, getAnnouncementTwo, getAccessControl } = require('../../controller/HomeController');
+const { requireLogin } = require('../../middleware/login_middleware');
 
-router.get('/', getDashBoard);
+router.get('/', requireLogin, getDashBoard);
 router.get('/total-earnings', getTotalEarnings);
 router.get('/vacation-days', getVacationDays);
 router.get('/average-benefit-paid', getAverageBenefitPaid);
