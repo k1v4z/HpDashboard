@@ -1,0 +1,91 @@
+.wrapper {
+  max-width: 100%;
+  margin: 0 auto;
+  height: 400px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.form-title {
+  display: block;
+  font-size: 26px;
+  margin-bottom: 10px;
+}
+#dropdown-select {
+  width: 100%;
+  padding: 8px;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  height: 50px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.enter-function,
+.enter-group,
+.enter-module {
+  width: calc(100% - 17px);
+  padding: 10px;
+  margin-top: 40px;
+  height: 40px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.enter-function,
+.enter-group,
+.enter-module {
+  display: none;
+}
+
+.enter-function.active {
+  display: block;
+}
+.enter-group.active {
+  display: block;
+}
+.enter-module.active {
+  display: block;
+}
+
+#dropdown-select:focus,
+.enter-function:focus,
+.enter-group:focus,
+.enter-module:focus {
+  outline: none;
+  border-color: #3498db; /* Màu border khi input được focus */
+}
+
+.btn-active {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 40px;
+  margin-top: 60px;
+  width: 100%;
+}
+.btn-add,
+.btn-back {
+  padding: 10px 20px;
+  background-color: #3498db;
+  color: #fff;
+  width: 100px;
+  height: 40px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+}
+.btn-back {
+  background-color: #e74c3c;
+}
+.btn-add:hover {
+  background-color: #2980b9;
+}
+.btn-back:hover {
+  background-color: #c0392b;
+}

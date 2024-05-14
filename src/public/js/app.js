@@ -1,18 +1,3 @@
-document.addEventListener("DOMContentLoaded", () => {
-    let btnLogin = document.getElementById('login');
-    let dashboardWindow;
-    btnLogin.addEventListener('click', () => {
-        let username = document.getElementById("username").value;
-        let password = document.getElementById("password").value;
-        if (username == 'admin' && password == '123') {
-            window.close();
-            dashboardWindow = window.open("dashboard.html", "_blank");
-        }
-        else {
-            alert("Username or Password incorrect");
-        }
-    });
-});
 
 let menus = document.querySelectorAll('.content');
 let box = document.querySelector(".container-box");
@@ -73,8 +58,8 @@ btnYes.addEventListener('click', async () => {
     await fetch('http://localhost:4080/api/v1/logout')
         .then(res => console.log(res))
         .catch(err => console.log(err))
-    
-    window.location.href='/login'
+
+    window.location.href = '/login'
 });
 
 btnNo.addEventListener('click', () => {
@@ -414,21 +399,24 @@ document.addEventListener("DOMContentLoaded", function () {
 
 // END Employee Management ADD
 
-// END Employee Management ADD
-
 let personalManage = document.querySelector('.personal-manage');
 let employeeManage = document.querySelector('.employee-manage');
 
+document.addEventListener("DOMContentLoaded", () => {
+    personalManage.addEventListener('click', () => {
+        personalManage.classList.add('active');
+        employeeManage.classList.remove('active');
+        showUI5.classList.add('active');
+        showUI8.classList.remove('active');
+    })
+})
+document.addEventListener("DOMContentLoaded", () => {
+    employeeManage.addEventListener('click', () => {
+        personalManage.classList.remove('active');
+        employeeManage.classList.add('active');
+        showUI8.classList.add('active');
+        showUI5.classList.remove('active');
+    })
+})
 
-personalManage.addEventListener('click', () => {
-    personalManage.classList.add('active');
-    employeeManage.classList.remove('active');
-    showUI5.classList.add('active');
-    showUI8.classList.remove('active');
-})
-employeeManage.addEventListener('click', () => {
-    personalManage.classList.remove('active');
-    employeeManage.classList.add('active');
-    showUI8.classList.add('active');
-    showUI5.classList.remove('active');
-})
+
