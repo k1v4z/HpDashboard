@@ -1,13 +1,3 @@
-// ADD ACCESS CONTROL
-const addAccessControl = document.querySelector('.btn-add_ac');
-console.log(addAccessControl);
-document.addEventListener("DOMContentLoaded", () => {
-    addAccessControl.addEventListener('click', () => {
-        window.location.href = "/add_access-control";
-    });
-})
-
-// END ACCESS CONTROL 
 
 const functions = document.querySelector('.enter-function');
 const group = document.querySelector('.enter-group');
@@ -42,9 +32,11 @@ dropdownSelect.addEventListener('change', function (e) {
 // BACK
 
 const back = document.querySelector('.btn-back');
-console.log(back);
+// console.log(back);
 back.addEventListener('click', () => {
-    window.location.href = "/access_control";
+    // alert('Back');
+    window.location.href = '/access_control';
+
 })
 
 // END BACK

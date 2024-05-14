@@ -420,3 +420,13 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 
+// ADD ACCESS CONTROL
+const addAccessControl = document.querySelector('.btn-add_ac');
+console.log(addAccessControl);
+document.addEventListener("DOMContentLoaded", () => {
+    addAccessControl.addEventListener('click', () => {
+        window.location.href = "/add_access-control";
+    });
+})
+
+// END ACCESS CONTROL 
