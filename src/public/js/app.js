@@ -296,7 +296,7 @@ yesDelete.addEventListener('click', () => {
 
     // Tiếp theo, thực hiện cuộc gọi AJAX để xóa thông tin từ bảng EMPLOYMENT
     $.ajax({
-        url: `http://localhost:4080/employee-view/${Id}`, // Endpoint để xóa thông tin nhân viên
+        url: `http://localhost:4080/employee-delete/${Id}`, // Endpoint để xóa thông tin nhân viên
         method: 'DELETE',
         success: function (response) {
             console.log('Delete successful');
@@ -407,6 +407,7 @@ let employeeManage = document.querySelector('.employee-manage');
 
 document.addEventListener("DOMContentLoaded", () => {
     personalManage.addEventListener('click', () => {
+        window.location.href = "/employee-view/"
         personalManage.classList.add('active');
         employeeManage.classList.remove('active');
         showUI5.classList.add('active');
@@ -415,6 +416,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 document.addEventListener("DOMContentLoaded", () => {
     employeeManage.addEventListener('click', () => {
+        window.location.href = "/employee-delete/"
         personalManage.classList.remove('active');
         employeeManage.classList.add('active');
         showUI8.classList.add('active');

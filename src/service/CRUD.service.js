@@ -88,12 +88,33 @@ const getEmployeeCode = async (id) => {
     })
     return codeEmployee.EMPLOYMENT_CODE;
 }
+const DeleteEmployeDelete = async (Id) => {
+    const code = await getEmployeeCode(Id);
+    await sequelize_sqlserver.transaction(async (t) => {
+        await sequelize_sqlserver.query(`
+        DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID = ${Id};
+        `, { transaction: t });
 
+        // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+        await sequelize_sqlserver.query(`
+        DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID  = ${Id};
+        `, { transaction: t });
+
+        // Xóa thông tin từ bảng Employment
+        await sequelize_sqlserver.query(`
+            DELETE FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id};
+        `, { transaction: t });
+        // delete employee
+         await sequelize_mysql.query(
+        `DELETE FROM employee WHERE \`Employee Number\` = '${code}';`,
+        { type: QueryTypes.DELETE }
+    );
+    });
+}
 const deletePersonalAndEmployment = async (Id) => {
     try {
-        const code = await getEmployeeCode(Id);
+        
         await sequelize_sqlserver.transaction(async (t) => {
-            if (isEmployee(Id)) {
                 // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
                 await sequelize_sqlserver.query(`
                 DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
@@ -113,20 +134,11 @@ const deletePersonalAndEmployment = async (Id) => {
                 await sequelize_sqlserver.query(`
                     DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
                 `, { transaction: t });
-            }
-            else {
-                await sequelize_sqlserver.query(`
-                    DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
-                `, { transaction: t });
-            }
-
-        });
+            } 
+        );
 
         //Xóa thông tin từ bảng Employee
-        await sequelize_mysql.query(
-            `DELETE FROM employee WHERE \`Employee Number\` = '${code}';`,
-            { type: QueryTypes.DELETE }
-        );
+       
     } catch (error) {
         console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
     }
@@ -490,5 +502,5 @@ const getBenefitPlanById = async (id) => {
 module.exports = {
     getAllDepartment, getAllEthnicity, getAllPersonalInfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
     deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage,
-    getBenefitPlanById, setOldBenefitPlanID
+    getBenefitPlanById, setOldBenefitPlanID,DeleteEmployeDelete
 }
