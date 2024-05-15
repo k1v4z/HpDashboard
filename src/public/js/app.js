@@ -89,6 +89,7 @@ for (let i = 0; i < dynamicBtns.length; i++) {
         dynamicBoxes[i].classList.add('active');
     });
 }
+
 let Derpartmentbtn = document.getElementsByClassName('btn1');
 for (let i = 0; i < Derpartmentbtn.length; i++) {
     Derpartmentbtn[i].addEventListener('click', removeActiveClasses)
@@ -228,6 +229,8 @@ BtnN6.addEventListener('click', () => {
         logoutBtn.classList.remove("activeLogout");
         checkClick = false;
     }
+
+    window.location.href='/management'
 })
 let btnAdd = document.querySelector('.btn-add');
 btnAdd.addEventListener('click', (e) => {
