@@ -1026,14 +1026,18 @@ thead {
 .function {
   margin: 40px;
 }
-.btn-save {
-  margin-top: 50px;
+
+.btn-active {
   display: flex;
   justify-content: end;
   align-items: center;
-  margin-right: 70px;
+  gap: 20px;
+  margin-top: 50px;
+  margin-right: 100px;
 }
-.btn-save button {
+
+.btn-save_ac button,
+.btn-add_ac button {
   width: 150px;
   height: 40px;
   border-radius: 10px;
@@ -1043,7 +1047,8 @@ thead {
   font-size: 20px;
   font-weight: 700;
 }
-.btn-save button:hover {
+.btn-save_ac button:hover,
+.btn-add_ac button:hover {
   background-color: #12ce5a;
 }
 
