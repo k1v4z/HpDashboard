@@ -44,22 +44,44 @@ class User {
     }
 
     async login(){
-        let message = ''
-
-        message = await sequelize_sqlserver_user.query(`
-            SELECT USER_NAME,PASSWORD FROM dbo.[USER] WHERE USER_NAME = '${this.USER_NAME}' AND PASSWORD = '${this.PASSWORD}'
+        let status = await sequelize_sqlserver_user.query(`
+            SELECT USER_ID,USER_NAME,PASSWORD FROM dbo.[USER] WHERE USER_NAME = '${this.USER_NAME}' AND PASSWORD = '${this.PASSWORD}'
         `,{type: QueryTypes.SELECT})
         .then((res) =>{
             if(res[0] == undefined)
-                return 'Login fail'
-            return 'Login success'
+                return false
+            this.USER_ID = res[0].USER_ID
+
+            return res[0].USER_ID //success
         })
         .catch((err) =>{
             console.log(err)
-            message = 'Login Fail'
+            return false
         })
 
-        return message
+        return status
+    }
+
+    async getGroup() {
+        let group = await sequelize_sqlserver_user.query(`
+            SELECT GROUP_ID,GROUP_NAME FROM  USER_GROUP WHERE USER_ID = ${this.USER_ID}
+       `).then(res => res[0])
+        .catch(err => console.log(err))
+
+        return group
+    }
+
+    async getFunction(){
+
+        const func = await sequelize_sqlserver_user.query(`
+            SELECT FUNCTION_ID,FUNCTION_NAME FROM USER_FUNCTION WHERE USER_ID = ${this.USER_ID}
+        `, { type: QueryTypes.SELECT })
+            .then((res) => {
+                return res
+            })
+            .catch(err => console.log(err))
+
+        return func
     }
 }
 

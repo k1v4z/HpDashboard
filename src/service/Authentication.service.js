@@ -7,10 +7,8 @@ async function authSignUp(username, password){
     return status
 }
 
-async function authLogin(username,password){
-    const user = new User(null,username,password)
+async function authLogin(user){
     const status = await user.login()
-    
     return status
 }
 
