@@ -27,8 +27,8 @@ const loginAuth = async (req, res) => {
     const moduleOfGroup = await group.getModule(groupOfUser)
     const module = new Module(null,null)
     const func = await user.getFunction()
-
-    console.log(moduleOfGroup)
+    console.log(func)
+    
     if (status) {
         req.session.user = username
         req.session.userid = status

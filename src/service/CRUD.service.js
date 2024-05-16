@@ -86,6 +86,7 @@ const getEmployeeCode = async (id) => {
             }
         }]
     })
+    
     return codeEmployee.EMPLOYMENT_CODE;
 }
 

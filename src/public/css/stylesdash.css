@@ -730,6 +730,21 @@ thead {
   border: 1px solid #ddd;
   text-align: center;
 }
+
+.btn-em {
+  margin-top: 23px;
+}
+.btn-view , .btn-add {
+  width: 100px;
+  height: 40px;
+  background-color: #102939;
+  border-radius: 10px;
+  border: none;
+  color: white;
+}
+.btn-add {
+  background-color: #5286a6;
+}
 .btn-edit {
   width: 60px;
   height: 30px;
@@ -738,7 +753,7 @@ thead {
   border: none;
   color: white;
 }
-.btn-edit:hover {
+.btn-edit:hover , .btn-view:hover{
   background-color: #008cba;
   color: white;
 }
@@ -750,7 +765,7 @@ thead {
   border: none;
   color: white;
 }
-.btn-delete:hover {
+.btn-delete:hover, .btn-add:hover {
   background-color: #555555;
   color: white;
 }

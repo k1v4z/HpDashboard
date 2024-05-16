@@ -286,6 +286,7 @@ yesDelete.addEventListener('click', () => {
             if (rowToDeletePersonal) {
                 rowToDeletePersonal.remove();
             }
+            
             overlayDelete.style.display = 'none';
         },
         error: function (xhr, status, error) {
@@ -296,7 +297,7 @@ yesDelete.addEventListener('click', () => {
 
     // Tiếp theo, thực hiện cuộc gọi AJAX để xóa thông tin từ bảng EMPLOYMENT
     $.ajax({
-        url: `http://localhost:4080/employee-view/${Id}`, // Endpoint để xóa thông tin nhân viên
+        url: `http://localhost:4080/delete/${Id}`, // Endpoint để xóa thông tin nhân viên
         method: 'DELETE',
         success: function (response) {
             console.log('Delete successful');
@@ -304,11 +305,14 @@ yesDelete.addEventListener('click', () => {
             if (rowToDeleteEmployee) {
                 rowToDeleteEmployee.remove();
             }
+            console.log(response)
             overlayDelete.style.display = 'none';
         },
         error: function (xhr, status, error) {
             console.error('Error deleting employee:', error);
-            alert('Error deleting employee');
+            if (error == 'Forbidden'){
+                alert(`You don't have permission to use this function`)
+            }
         }
     });
 });

@@ -47,6 +47,7 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
     id = req.params.id;
+    
     const personal = await getPersonalById(id);
     setOldBenefitPlanID(personal.BENEFIT_PLAN_ID)
     return res.render('personal_edit.ejs', {
