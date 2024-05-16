@@ -24,7 +24,7 @@ routerManage.post('/update', postUpdateEmploymentPage)
 routerManage.get('/benefit_plan/:id',getChangeBenefitPlan)
 
 routerManage.delete('/employee-view/:id', DeletePersonalView);
-routerManage.delete('/employee-delete/:id', DeleteEmployedelete);
+routerManage.delete('/employee-delete/:id',requireFunctionPermission,DeleteEmployedelete);
 
 module.exports = routerManage;
 //temporary for FE test UIz

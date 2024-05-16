@@ -41,10 +41,8 @@ function requireFunctionPermission(req, res, next) {
         }
     }
     
-
-    console.log(urlFormat)
     //user access endpoint delete
-    if(urlFormat == '/delete'){
+    if (urlFormat == '/employee-delete'){
         if (containFunction(func, 'Delete')) {
             return next()
         } else {

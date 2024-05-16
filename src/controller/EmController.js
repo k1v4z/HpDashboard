@@ -4,7 +4,7 @@
 
 const { add_EP_Information, getPersonalById, getAllPersonalInfomations, getEmployeeInfor, handleUpdateEmployment,
     handleUpdatePersonal, deletePersonalAndEmployment, getDataPersonalByPage, getDataEmploymentByPage,
-    handleInsertEmployment, getBenefitPlanById, setOldBenefitPlanID,DeleteEmployeDelete} = require("../service/CRUD.service");
+    handleInsertEmployment, getBenefitPlanById, setOldBenefitPlanID, DeleteEmployeDelete } = require("../service/CRUD.service");
 const isEmployee = require("../helper/IsEmployee");
 const { getListEmployee } = require("../service/Dashboard.service");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
@@ -47,7 +47,7 @@ const setEditDataToFormEmploymentEdit = async (req, res) => {
 
 const setEditDataToFormPersonalEdit = async (req, res) => {
     id = req.params.id;
-    
+
     const personal = await getPersonalById(id);
     setOldBenefitPlanID(personal.BENEFIT_PLAN_ID)
     return res.render('personal_edit.ejs', {
@@ -69,13 +69,13 @@ const getEmployeeView = async (req, res) => {
 
     });
 }
-const getEmployeePm= async (req, res) => {
+const getEmployeePm = async (req, res) => {
     const dataPersonal = await getAllPersonalInfomations();
     const dataEmployee = await getEmployeeInfor();
+
     return res.render('employee-PM.ejs', {
         dataPersonal: dataPersonal,
         dataEmployee: dataEmployee
-
     });
 }
 
@@ -99,7 +99,6 @@ const postInsertOrUpdatePersonalPage = async (req, res) => {
                 await handleUpdateEmployment(dataPersonal, dataEmployment);
             }
         }
-
         return res.redirect("/employee-view");
     } catch (error) {
         console.error("Error updating user:", error);
@@ -122,16 +121,17 @@ const postUpdateEmploymentPage = async (req, res) => {
     }
 }
 
-const DeleteEmployedelete=async(req,res)=>{
-    const idemployee  = req.params.id;
-console.log(idemployee);
-try {
-    await DeleteEmployeDelete(idemployee);
-    res.status(200).json({ status: "Success!" });
-} catch (error) {
-    res.status(500).json({ error: "Error deleting personal data" });
-}
-    
+const DeleteEmployedelete = async (req, res) => {
+    const idemployee = req.params.id;
+
+    try {
+        await DeleteEmployeDelete(idemployee);
+        res.status(200).json({ status: "Success!" });
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({ error: "Error deleting personal data" });
+    }
+
 }
 
 
@@ -162,5 +162,5 @@ const getChangeBenefitPlan = async (req, res) => {
 
 module.exports = {
     getAllEmployee, addEPI, getEmployeeView, getEmployeeAdd, setEditDataToFormEmploymentEdit, DeletePersonalView, postInsertOrUpdatePersonalPage,
-    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan,DeleteEmployedelete,getEmployeePm
+    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan, DeleteEmployedelete, getEmployeePm
 }

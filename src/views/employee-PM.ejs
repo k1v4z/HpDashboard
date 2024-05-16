@@ -99,29 +99,29 @@
                 </tr>
               </thead>
               <tbody class="view-table-data">
-                <%dataPersonal.forEach((dataPersonal)=> {%>
-                <tr data-employee-id="<%= dataPersonal.PERSONAL_ID %>">
+                <%dataPersonal.forEach((data)=> {%>
+                <tr data-employee-id="<%= data.PERSONAL_ID %>">
                   <td>
-                    <%=dataPersonal.CURRENT_FIRST_NAME + ' '
-                    +dataPersonal.CURRENT_MIDDLE_NAME+' ' +
-                    dataPersonal.CURRENT_LAST_NAME%>
+                    <%=data.CURRENT_FIRST_NAME + ' '
+                    +data.CURRENT_MIDDLE_NAME+' ' +
+                    data.CURRENT_LAST_NAME%>
                   </td>
-                  <td><%=dataPersonal.CURRENT_ADDRESS_1%></td>
-                  <td><%=dataPersonal.CURRENT_CITY%></td>
-                  <td><%=dataPersonal.CURRENT_COUNTRY%></td>
-                  <td><%=dataPersonal.CURRENT_GENDER%></td>
-                  <td><%=dataPersonal.CURRENT_PERSONAL_EMAIL%></td>
-                  <td><%=dataPersonal.CURRENT_PHONE_NUMBER%></td>
+                  <td><%=data.CURRENT_ADDRESS_1%></td>
+                  <td><%=data.CURRENT_CITY%></td>
+                  <td><%=data.CURRENT_COUNTRY%></td>
+                  <td><%=data.CURRENT_GENDER%></td>
+                  <td><%=data.CURRENT_PERSONAL_EMAIL%></td>
+                  <td><%=data.CURRENT_PHONE_NUMBER%></td>
                   <td>
                     <button
                       class="btn-edit"
-                      onclick="window.location.href = `/personal/edit/<%= dataPersonal.PERSONAL_ID %>`"
+                      onclick="window.location.href = `/personal/edit/<%= data.PERSONAL_ID %>`"
                     >
                       Edit
                     </button>
                     <button
                       class="btn-delete"
-                      data-id="<%= dataPersonal.PERSONAL_ID %>"
+                      data-id="<%= data.PERSONAL_ID %>"
                     >
                       Delete
                     </button>
