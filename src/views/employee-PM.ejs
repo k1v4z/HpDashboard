@@ -79,11 +79,11 @@
         <!-- Employee-VIEW -->
 
         <div class="manage-infor">
-          <button class="personal-manage active" >PERSONAL MANAGE</button>
-          <button class="employee-manage" >EMPLOYEE MANAGE</button>
+          <button class="personal-manage " >PERSONAL MANAGE</button>
+          <button class="employee-manage active" >EMPLOYEE MANAGE</button>
         </div>
         <!-- Personal Management -->
-        <div class="content ui5 active">
+        <div class="content ui5 ">
           <form class="frm-view" action="" method="get">
             <table class="tb-view" border="1">
               <thead>
@@ -134,7 +134,7 @@
         </div>
 
         <!-- Employee Management -->
-        <div class="content ui8">
+        <div class="content ui8 active">
           <form class="frm-view" action="" method="get">
             <table class="tb-view" border="1">
               <thead>
@@ -168,12 +168,11 @@
                     </button>
                     <button
                       class="btn-delete"
-                      onclick="window.location.href = `employee-delete/<%= dataEmployee.EMPLOYMENT_ID %>`"
-                    >
+                      data-id="<%= dataEmployee.EMPLOYMENT_ID %>">
                       Delete
                     </button>
                     <button class="btn-benefit"
-                      onclick="window.location.href =`/benefit_plan/<%= dataEmployee.PERSONAL_ID %>`">
+                      onclick="window.location.href =`/change_benefit_plan/<%= dataEmployee.PERSONAL_ID %>`">
                       Benefit
                     </button>
                   </td>

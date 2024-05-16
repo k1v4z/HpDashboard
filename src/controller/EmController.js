@@ -4,7 +4,7 @@
 
 const { add_EP_Information, getPersonalById, getAllPersonalInfomations, getEmployeeInfor, handleUpdateEmployment,
     handleUpdatePersonal, deletePersonalAndEmployment, getDataPersonalByPage, getDataEmploymentByPage,
-    handleInsertEmployment, getBenefitPlanById, setOldBenefitPlanID} = require("../service/CRUD.service");
+    handleInsertEmployment, getBenefitPlanById, setOldBenefitPlanID,DeleteEmployeDelete} = require("../service/CRUD.service");
 const isEmployee = require("../helper/IsEmployee");
 const { getListEmployee } = require("../service/Dashboard.service");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
@@ -69,6 +69,15 @@ const getEmployeeView = async (req, res) => {
 
     });
 }
+const getEmployeePm= async (req, res) => {
+    const dataPersonal = await getAllPersonalInfomations();
+    const dataEmployee = await getEmployeeInfor();
+    return res.render('employee-PM.ejs', {
+        dataPersonal: dataPersonal,
+        dataEmployee: dataEmployee
+
+    });
+}
 
 const postInsertOrUpdatePersonalPage = async (req, res) => {
     const data = req.body;
@@ -113,6 +122,19 @@ const postUpdateEmploymentPage = async (req, res) => {
     }
 }
 
+const DeleteEmployedelete=async(req,res)=>{
+    const idemployee  = req.params.id;
+console.log(idemployee);
+try {
+    await DeleteEmployeDelete(idemployee);
+    res.status(200).json({ status: "Success!" });
+} catch (error) {
+    res.status(500).json({ error: "Error deleting personal data" });
+}
+    
+}
+
+
 const DeletePersonalView = async (req, res) => {
     const idpersonal = req.params.id;
     console.log(idpersonal);
@@ -140,5 +162,5 @@ const getChangeBenefitPlan = async (req, res) => {
 
 module.exports = {
     getAllEmployee, addEPI, getEmployeeView, getEmployeeAdd, setEditDataToFormEmploymentEdit, DeletePersonalView, postInsertOrUpdatePersonalPage,
-    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan
+    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan,DeleteEmployedelete,getEmployeePm
 }
