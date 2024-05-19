@@ -42,7 +42,7 @@ function requireFunctionPermission(req, res, next) {
     }
     
     //user access endpoint delete
-    if (urlFormat == '/employee-delete'){
+    if (urlFormat == '/employee-ManagerView'){
         if (containFunction(func, 'Delete')) {
             return next()
         } else {

@@ -123,6 +123,7 @@ const postUpdateEmploymentPage = async (req, res) => {
 
 const DeleteEmployedelete = async (req, res) => {
     const idemployee = req.params.id;
+    console.log(idemployee);
 
     try {
         await DeleteEmployeDelete(idemployee);

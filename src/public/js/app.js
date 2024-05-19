@@ -276,45 +276,47 @@ deleteButtons.forEach(function (button) {
 let yesDelete = overlayDelete.querySelector('.option-delete.yes');
 let noDelete = overlayDelete.querySelector('.option-delete.no');
 yesDelete.addEventListener('click', () => {
-    console.log('PERSONAL_ID để xóa:', Id);
-    $.ajax({
-        url: `http://localhost:4080/personal-view/${Id}`, // Endpoint để xóa thông tin cá nhân
-        method: 'DELETE',
-        success: function (response) {
-            console.log('Delete successful');
-            const rowToDeletePersonal = document.querySelector(`tr[data-employee-id="${Id}"]`);
-            if (rowToDeletePersonal) {
-                rowToDeletePersonal.remove();
-            }
-            
-            overlayDelete.style.display = 'none';
-        },
-        error: function (xhr, status, error) {
-            console.error('Error deleting personal:', error);
-            alert('Error deleting personal');
-        }
-    });
+    let currentPath = window.location.pathname;
 
-    // Tiếp theo, thực hiện cuộc gọi AJAX để xóa thông tin từ bảng EMPLOYMENT
-    $.ajax({
-        url: `http://localhost:4080/employee-delete/${Id}`, // Endpoint để xóa thông tin nhân viên
-        method: 'DELETE',
-        success: function (response) {
-            console.log('Delete successful');
-            const rowToDeleteEmployee = document.querySelector(`tr[data-employee-id="${Id}"]`);
-            if (rowToDeleteEmployee) {
-                rowToDeleteEmployee.remove();
+    if (currentPath.includes('/employee-view')) {
+        console.log('Deleting personal with ID:', Id);
+        $.ajax({
+            url: `http://localhost:4080/personal-view/${Id}`, // Endpoint để xóa thông tin cá nhân
+            method: 'DELETE',
+            success: function (response) {
+                console.log('Delete successful');
+                const rowToDeletePersonal = document.querySelector(`tr[data-personal-id="${Id}"]`);
+                if (rowToDeletePersonal) {
+                    rowToDeletePersonal.remove();
+                }
+                overlayDelete.style.display = 'none';
+            },
+            error: function (xhr, status, error) {
+                console.error('Error deleting personal:', error);
+                alert('Error deleting personal');
             }
-            console.log(response)
-            overlayDelete.style.display = 'none';
-        },
-        error: function (xhr, status, error) {
-            console.error('Error deleting employee:', error);
-            if (error == 'Forbidden'){
-                alert(`You don't have permission to use this function`)
+        });
+    } else if (currentPath.includes('/employee-ManagerView')) {
+        console.log('Deleting employee with ID:', Id);
+        $.ajax({
+            url: `http://localhost:4080/employee-ManagerView/${Id}`, // Endpoint để xóa thông tin nhân viên
+            method: 'DELETE',
+            success: function (response) {
+                console.log('Delete successful');
+                const rowToDeleteEmployee = document.querySelector(`tr[data-employee-id="${Id}"]`);
+                if (rowToDeleteEmployee) {
+                    rowToDeleteEmployee.remove();
+                }
+                overlayDelete.style.display = 'none';
+            },
+            error: function (xhr, status, error) {
+                console.error('Error deleting employee:', error);
+                if (error == 'Forbidden') {
+                    alert(`You don't have permission to use this function`);
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 noDelete.addEventListener('click', () => {
@@ -325,6 +327,7 @@ noDelete.addEventListener('click', () => {
 // END Employee Management VIEW-DELETE
 
 // START Employee Management VIEW-EDIT
+
 
 var editButtons = document.querySelectorAll('.btn-edit');
 editButtons.forEach(function (button) {
@@ -420,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 document.addEventListener("DOMContentLoaded", () => {
     employeeManage.addEventListener('click', () => {
-        window.location.href = "/employee-delete/"
+        window.location.href = "/employee-ManagerView/"
         personalManage.classList.remove('active');
         employeeManage.classList.add('active');
         showUI8.classList.add('active');
@@ -439,3 +442,4 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 
 // END ACCESS CONTROL 
+
