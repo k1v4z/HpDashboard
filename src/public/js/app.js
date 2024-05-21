@@ -296,10 +296,10 @@ yesDelete.addEventListener('click', () => {
                 alert('Error deleting personal');
             }
         });
-    } else if (currentPath.includes('/employee-ManagerView')) {
+    } else if (currentPath.includes('/delete-employee')) {
         console.log('Deleting employee with ID:', Id);
         $.ajax({
-            url: `http://localhost:4080/employee-ManagerView/${Id}`, // Endpoint để xóa thông tin nhân viên
+            url: `http://localhost:4080/delete-employee/${Id}`, // Endpoint để xóa thông tin nhân viên
             method: 'DELETE',
             success: function (response) {
                 console.log('Delete successful');
@@ -423,7 +423,7 @@ document.addEventListener("DOMContentLoaded", () => {
 })
 document.addEventListener("DOMContentLoaded", () => {
     employeeManage.addEventListener('click', () => {
-        window.location.href = "/employee-ManagerView/"
+        window.location.href = "/delete-employee/"
         personalManage.classList.remove('active');
         employeeManage.classList.add('active');
         showUI8.classList.add('active');
