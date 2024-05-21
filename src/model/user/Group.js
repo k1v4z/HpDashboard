@@ -30,6 +30,19 @@ class Group {
         return module
     }
 
+    async addGroup(){
+        const state = await sequelize_sqlserver_user.query(`
+            INSERT INTO dbo.[GROUP] (GROUP_NAME) VALUES ('${this.GROUP_NAME}')
+        `,{type: QueryTypes.INSERT})
+        .then((res) => 1) //1 is true: add group successful
+        .catch((err) => {
+            console.log(err);
+            return 0 //0 is false: add group fail
+        })
+
+        return state
+    }
+
 }
 
 module.exports = Group

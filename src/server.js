@@ -18,6 +18,7 @@ const connectRedis = require('./model/message/Redis');
 const init_API_DataEmployment = require('./route/api/API_SetDataIntoEmployment');
 const init_API_Changed_Benefit_Plan = require('./route/api/API_ChangedBenefitPlan');
 const init_API_Logout = require('./route/api/API_Logout');
+const initAuthorization = require('./route/web/authorization');
 //const cookieParser = require('cookie-parser');
 const app = express()
 const port = process.env.PORT;
@@ -52,6 +53,7 @@ init_API_BenefitPlan(app);
 init_API_DataEmployment(app);
 init_API_Changed_Benefit_Plan(app)
 init_API_Logout(app)
+initAuthorization(app)
 
 //config redis
 //connectRedis();
