@@ -1,10 +1,12 @@
 
 const functions = document.querySelector('.enter-function');
+const modeuleFunction = document.querySelector('.enter-module_function');
 const group = document.querySelector('.enter-group');
 const moduleInput = document.querySelector('.enter-module');
 const dropdownSelect = document.getElementById('dropdown-select');
 
 functions.classList.add('active');
+modeuleFunction.classList.add('active');
 
 dropdownSelect.addEventListener('change', function (e) {
     let selectedValue = e.target.value;
@@ -14,6 +16,7 @@ dropdownSelect.addEventListener('change', function (e) {
 
     if (selectedValue === 'function') {
         functions.classList.add('active');
+        modeuleFunction.classList.add('active');
     } else if (selectedValue === 'group') {
         document.querySelectorAll('.active').forEach((element) => {
             element.classList.remove('active');

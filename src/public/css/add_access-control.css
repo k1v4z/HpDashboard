@@ -1,7 +1,7 @@
 .wrapper {
   max-width: 100%;
   margin: 0 auto;
-  height: 400px;
+  height: 500px;
   padding: 20px;
   border: 1px solid #ccc;
   border-radius: 5px;
@@ -25,7 +25,8 @@
 
 .enter-function,
 .enter-group,
-.enter-module {
+.enter-module,
+.enter-module_function {
   width: calc(100% - 17px);
   padding: 10px;
   margin-top: 40px;
@@ -38,7 +39,8 @@
 
 .enter-function,
 .enter-group,
-.enter-module {
+.enter-module,
+.enter-module_function {
   display: none;
 }
 
@@ -49,6 +51,9 @@
   display: block;
 }
 .enter-module.active {
+  display: block;
+}
+.enter-module_function.active {
   display: block;
 }
 
