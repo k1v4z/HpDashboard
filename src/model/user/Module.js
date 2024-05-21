@@ -7,6 +7,18 @@ class Module {
         this.MODULE_NAME = MODULE_NAME
     }
     
+    async addModule(){
+        const state = await sequelize_sqlserver_user.query(`
+            INSERT INTO dbo.[MODULE] (MODULE_NAME) VALUES ('${this.MODULE_NAME}')
+        `, { type: QueryTypes.INSERT })
+            .then((res) => 1) //1 is true: add group successful
+            .catch((err) => {
+                console.log(err);
+                return 0 //0 is false: add group fail
+            })
+
+        return state
+    }
     
 }
 
