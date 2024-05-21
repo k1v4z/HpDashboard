@@ -15,7 +15,7 @@ routerManage.post('/add', [valid.validBenefitPlanId, valid.validIdPayRate], addE
 routerManage.get('/employee-add',requireFunctionPermission,getEmployeeAdd);
 
 routerManage.get('/employee-view', getEmployeeView);
-routerManage.get('/employee-ManagerView', getEmployeePm);
+routerManage.get('/delete-employee', getEmployeePm);
 
 routerManage.get('/personal/edit/:id', requireFunctionPermission,setEditDataToFormPersonalEdit);
 routerManage.post('/update', postInsertOrUpdatePersonalPage)
@@ -24,7 +24,7 @@ routerManage.post('/update', postUpdateEmploymentPage)
 routerManage.get('/benefit_plan/:id',getChangeBenefitPlan)
 
 routerManage.delete('/personal-view/:id', DeletePersonalView);
-routerManage.delete('/employee-ManagerView/:id',DeleteEmployedelete);
+routerManage.delete('/delete-employee/:id',DeleteEmployedelete);
 
 module.exports = routerManage;
 //temporary for FE test UIz
