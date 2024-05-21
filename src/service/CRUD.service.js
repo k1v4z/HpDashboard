@@ -223,6 +223,7 @@ const addEmployee = async (data) => {
             CURRENT_MARITAL_STATUS: data.CURRENT_MARITAL_STATUS,
             ETHNICITY: data.ETHNICITY,
             SHAREHOLDER_STATUS: SHAREHOLDER_STATUS_CONVERTED,
+            BENEFIT_PLAN_ID: data.BENEFIT_PLAN_ID
         }, { transaction: t })
 
         await Employment.create({
