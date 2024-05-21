@@ -14,6 +14,7 @@ dropdownSelect.addEventListener('change', function (e) {
 
     if (selectedValue === 'function') {
         functions.classList.add('active');
+        
     } else if (selectedValue === 'group') {
         document.querySelectorAll('.active').forEach((element) => {
             element.classList.remove('active');
