@@ -1,6 +1,6 @@
 
 const functions = document.querySelector('.enter-function');
-const modeuleFunction = document.querySelector('.enter-module_function');
+const modeuleFunction = document.getElementById('module-function');
 const group = document.querySelector('.enter-group');
 const moduleInput = document.querySelector('.enter-module');
 const dropdownSelect = document.getElementById('dropdown-select');

@@ -12,7 +12,8 @@
   font-size: 26px;
   margin-bottom: 10px;
 }
-#dropdown-select {
+#dropdown-select,
+#module-function {
   width: 100%;
   padding: 8px;
   margin-bottom: 10px;
@@ -25,8 +26,7 @@
 
 .enter-function,
 .enter-group,
-.enter-module,
-.enter-module_function {
+.enter-module {
   width: calc(100% - 17px);
   padding: 10px;
   margin-top: 40px;
@@ -40,7 +40,7 @@
 .enter-function,
 .enter-group,
 .enter-module,
-.enter-module_function {
+#module-function {
   display: none;
 }
 
@@ -53,7 +53,7 @@
 .enter-module.active {
   display: block;
 }
-.enter-module_function.active {
+#module-function.active {
   display: block;
 }
 
