@@ -50,6 +50,8 @@ function requireModulePermission(req, res, next) {
             res.send(`You don't have permission to module `)
         }
     }
+    
+    next()
 }
 
 module.exports = requireModulePermission
