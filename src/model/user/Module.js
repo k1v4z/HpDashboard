@@ -30,6 +30,17 @@ class Module {
         
         return modules
     }
+
+    async getGroupFollowModule() {
+        const modules = await sequelize_sqlserver_user.query(`
+            SELECT GROUP_ID,GROUP_NAME FROM GROUP_MODULE WHERE MODULE_ID IN (${this.MODULE_ID})
+        `, { type: QueryTypes.SELECT })
+            .then(res => JSON.stringify(res))
+            .then(JSONString => JSON.parse(JSONString))
+            .catch(err => console.log(err))
+
+        return modules
+    }
     
 }
 

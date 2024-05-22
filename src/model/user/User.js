@@ -83,6 +83,19 @@ class User {
 
         return func
     }
+
+    async findAll(){
+        const users = await sequelize_sqlserver_user.query(`
+            SELECT USER_ID,USER_NAME FROM dbo.[USER] WHERE USER_NAME NOT LIKE '%admin%'
+        `,{type: QueryTypes.SELECT})
+        .then(res => JSON.stringify(res))
+        .then(JSONString => JSON.parse(JSONString))
+        .catch(err => console.log(err))
+
+        return users
+    }
+
+    
 }
 
 module.exports = {

@@ -10,11 +10,11 @@ class Group {
     //get module belongs to group
     async getModule(groupList) {
         let conditionPrams = '('
-        
+
         for (let i = 0; i < groupList.length; i++) {
             if (i != groupList.length - 1) {
                 conditionPrams += `${groupList[i].GROUP_ID},`
-            }else{
+            } else {
                 conditionPrams += `${groupList[i].GROUP_ID});`
             }
         }
@@ -22,25 +22,36 @@ class Group {
         const module = await sequelize_sqlserver_user.query(`
             SELECT DISTINCT MODULE_ID,MODULE_NAME FROM GROUP_MODULE WHERE GROUP_ID IN ${conditionPrams}
         `, { type: QueryTypes.SELECT })
-            .then((res) =>{
+            .then((res) => {
                 return res
-            })  
+            })
             .catch(err => console.log(err))
 
         return module
     }
 
-    async addGroup(){
+    async addGroup() {
         const state = await sequelize_sqlserver_user.query(`
             INSERT INTO dbo.[GROUP] (GROUP_NAME) VALUES ('${this.GROUP_NAME}')
-        `,{type: QueryTypes.INSERT})
-        .then((res) => 1) //1 is true: add group successful
-        .catch((err) => {
-            console.log(err);
-            return 0 //0 is false: add group fail
-        })
+        `, { type: QueryTypes.INSERT })
+            .then((res) => 1) //1 is true: add group successful
+            .catch((err) => {
+                console.log(err);
+                return 0 //0 is false: add group fail
+            })
 
         return state
+    }
+
+    async findAll() {
+        const groups = await sequelize_sqlserver_user.query(`
+            SELECT * FROM dbo.[GROUP]
+        `, { type: QueryTypes.SELECT })
+            .then(res => JSON.stringify(res))
+            .then(JSONString => JSON.parse(JSONString))
+            .catch(err => console.log(err))
+
+        return groups
     }
 
 }

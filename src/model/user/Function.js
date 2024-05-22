@@ -20,6 +20,17 @@ class Function{
 
         return state
     }
+
+    async findAll(){
+        const functions = await sequelize_sqlserver_user.query(`
+            SELECT FUNCTION_ID,FUNCTION_NAME FROM dbo.[FUNCTION]
+        `, { type: QueryTypes.SELECT })
+            .then(res => JSON.stringify(res))
+            .then(JSONString => JSON.parse(JSONString))
+            .catch(err => console.log(err))
+
+        return functions
+    }
 }
 
 module.exports = Function
