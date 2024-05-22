@@ -67,6 +67,10 @@ const getManagementForm = (req, res) => {
     return res.render('employee_management.ejs')
 }
 
+const getAuthorization = (req,res)=>{
+    return res.render('access-control_edit.ejs')
+}
+
 module.exports = {
     getDashBoard,
     getTotalEarnings,
@@ -76,5 +80,6 @@ module.exports = {
     getAddAccessControl,
     getAnnouncementTwo,
     getAccessControl,
-    getManagementForm
+    getManagementForm,
+    getAuthorization
 }
