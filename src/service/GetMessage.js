@@ -3,21 +3,21 @@ const path = require('path');
 
 function readJSONFile(filepath) {
     try {
-        // Đọc nội dung của file JSON
+        // Read content of JSON file
         const data = fs.readFileSync(filepath, 'utf8');
         
-        // Parse JSON thành mảng các đối tượng
+        // Parse JSON to array of objects
         const jsonArray = JSON.parse(data);
         
-        // Trả về mảng các đối tượng
+        // Returns array of objects
         return jsonArray;
     } catch (error) {
         console.error('Error reading JSON file:', error);
-        return []; // Trả về một mảng rỗng trong trường hợp có lỗi xảy ra
+        return []; // Returns an empty array in case an error occurs
     }
 }
 
-// Sử dụng hàm để đọc file và lấy mảng các đối tượng
+// Use the function to read the file and get the array of objects
 const messages = readJSONFile(path.join(__dirname, 'message.json'));
 
 

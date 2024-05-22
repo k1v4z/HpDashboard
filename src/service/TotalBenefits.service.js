@@ -55,7 +55,7 @@ const mapping = (humans, payrolls, choice_year) => {
     humans.forEach((human) => {
         payrolls.forEach((payroll) => {
             if (human.PERSONAL_ID == payroll['idEmployee']) {
-                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + + human.BENEFIT_PLAN.DEDUCTABLE;
+                human.benefit = payroll['Pay Amount'] * payroll[choice_year] + human.BENEFIT_PLAN.DEDUCTABLE;
                 benefit_each_person.push(human);
             }
         })
@@ -63,6 +63,8 @@ const mapping = (humans, payrolls, choice_year) => {
 
     return benefit_each_person;
 }
+
+
 
 module.exports = {
     getBenefitEachPersonal

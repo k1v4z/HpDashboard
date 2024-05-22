@@ -1,10 +1,6 @@
-const { sequelize_mysql } = require("../config/Sequelize");
-const { sequelize_sqlserver } = require('../config/Sequelize');
 const Personal = require("../model/human/Personal");
 const BenefitPlan = require("../model/human/Benefit_Plans");
-const { QueryTypes } = require('sequelize');
 const defineAssociation = require("../model/association/Association");
-const { Getdropdownlist } = require('../helper/GetDropdowlistStatusHolder');
 
 defineAssociation();
 

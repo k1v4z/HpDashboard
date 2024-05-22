@@ -1,6 +1,6 @@
 const express = require('express')
 const router = express.Router();
-const { getEmployeeViewEdit, getEmployeeAdd, getEmployeeView,
+const { 
     getDashBoard, getTotalEarnings, getVacationDays,
     getAverageBenefitPaid, getAddAccessControl, getAnnouncementOne, getAnnouncementTwo, getAccessControl,
     getManagementForm,

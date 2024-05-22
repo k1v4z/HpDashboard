@@ -27,4 +27,3 @@ routerManage.delete('/personal-view/:id', DeletePersonalView);
 routerManage.delete('/delete-employee/:id',DeleteEmployedelete);
 
 module.exports = routerManage;
-//temporary for FE test UIz

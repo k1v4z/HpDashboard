@@ -22,7 +22,7 @@ const getChangedDataMessage = async () => {
 }
 
 
-// Hàm xử lý thông báo khi dữ liệu thay đổi
+// Handle function notification when have changed data
 function renderMessage(data) {
     data.new_data.forEach(notify => {
         const list = document.querySelector('.box');
@@ -32,10 +32,10 @@ function renderMessage(data) {
         const benefit_plan_id = notify.benefit_plan_id;
         const date_created_at = notify.date_created_at;
 
-        // Tạo một thẻ li mới cho mỗi thông báo
+        // Create a new li tag for each notify
         const newListItem = document.createElement('li');
 
-        // Đặt nội dung văn bản của thẻ li
+        // Set content for li tag
         if (gender == "Female") {
             newListItem.textContent = `
                 ${name} changed her benefit plan on ${date_created_at}, with the new benefit plan ID being ${benefit_plan_id}.
@@ -46,7 +46,7 @@ function renderMessage(data) {
             `;
         }
 
-        // Thêm thẻ li mới vào danh sách
+        // Append the new list item to the list
         list.appendChild(newListItem);
     });
 }

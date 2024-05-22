@@ -149,46 +149,53 @@ function hideAllContent() {
         navbar.classList.remove('active');
     });
 }
+fetch('/api/v1/average')
+    .then(response => response.json())
+    .then(data => {
+        const { shareholderAverage, nonShareholderAverage } = data;
+        const newData = [shareholderAverage, nonShareholderAverage];
+        const total = newData.reduce((acc, val) => acc + val, 0);
+        const percentages = newData.map(value => ((value / total) * 100).toFixed(2) + "%");
 
-const data = [80, 20];
-const total = data.reduce((acc, val) => acc + val, 0);
-const percentages = data.map(value => ((value / total) * 100).toFixed(2) + "%");
-
-new Chart(document.getElementById('pie-chart'), {
-    type: 'pie',
-    data: {
-        labels: ["Shareholder (" + percentages[0] + ")", "Non-Shareholder (" + percentages[1] + ")"],
-        datasets: [{
-            backgroundColor: ["#e63946", "#254BDD"],
-            data: data
-        }]
-    },
-    options: {
-        title: {
-            display: true,
-            text: 'Pie Chart for admin panel'
-        },
-        plugins: {
-            legend: {
-                position: 'bottom',
-                labels: {
-                    font: {
-                        size: 14
-                    },
-                    color: 'black',
-                    padding: 30,
-                    magin: 30
+        new Chart(document.getElementById('pie-chart'), {
+            type: 'pie',
+            data: {
+                labels: ["Shareholder (" + percentages[0] + ")", "Non-Shareholder (" + percentages[1] + ")"],
+                datasets: [{
+                    backgroundColor: ["#e63946", "#254BDD"],
+                    data: newData
+                }]
+            },
+            options: {
+                title: {
+                    display: true,
+                    text: 'Pie Chart for admin panel'
+                },
+                plugins: {
+                    legend: {
+                        position: 'bottom',
+                        labels: {
+                            font: {
+                                size: 14
+                            },
+                            color: 'black',
+                            padding: 30,
+                            magin: 30
+                        }
+                    }
+                },
+                layout: {
+                    padding: {
+                        top: 10,
+                    }
                 }
             }
-        },
-        layout: {
-            padding: {
-                top: 10,
-            }
-        }
-
-    }
-});
+        });
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        // Xử lý lỗi nếu cần
+    });
 
 // ShowAlert
 function showAlert1() {
@@ -230,7 +237,7 @@ BtnN6.addEventListener('click', () => {
         checkClick = false;
     }
 
-    window.location.href='/management'
+    window.location.href = '/management'
 })
 let btnAdd = document.querySelector('.btn-add');
 btnAdd.addEventListener('click', (e) => {
@@ -356,7 +363,7 @@ editButtons.forEach(function (button) {
 
 // START Employee Management ADD
 document.addEventListener("DOMContentLoaded", function () {
-    try{
+    try {
         var checkbox = document.getElementById("employee-showInfo");
         var employeeInfo = document.querySelector(".employee-infor");
         var employeeTilte = document.querySelector(".employee-title");
@@ -406,8 +413,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 employeeTilte.style.display = "none";
             }
         });
-    }catch(err){
-        
+    } catch (err) {
+
     }
 });
 
@@ -417,7 +424,7 @@ let personalManage = document.querySelector('.personal-manage');
 let employeeManage = document.querySelector('.employee-manage');
 
 document.addEventListener("DOMContentLoaded", () => {
-    try{
+    try {
         personalManage.addEventListener('click', () => {
             window.location.href = "/employee-view/"
             personalManage.classList.add('active');
@@ -425,12 +432,12 @@ document.addEventListener("DOMContentLoaded", () => {
             showUI5.classList.add('active');
             showUI8.classList.remove('active');
         })
-    }catch(err){
+    } catch (err) {
 
     }
 })
 document.addEventListener("DOMContentLoaded", () => {
-    try{
+    try {
         employeeManage.addEventListener('click', () => {
             window.location.href = "/delete-employee/"
             personalManage.classList.remove('active');
@@ -438,7 +445,7 @@ document.addEventListener("DOMContentLoaded", () => {
             showUI8.classList.add('active');
             showUI5.classList.remove('active');
         })
-    }catch(err){
+    } catch (err) {
 
     }
 })
@@ -451,7 +458,7 @@ addAccessControl.addEventListener('click', () => {
     window.location.href = "/add_authorization";
 });
 document.addEventListener("DOMContentLoaded", () => {
-    
+
 })
 
 // END ACCESS CONTROL 

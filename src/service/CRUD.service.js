@@ -6,10 +6,10 @@ const Job_History = require("../model/human/Job_History");
 const Personal = require("../model/human/Personal");
 const Employment = require("../model/human/Employment");
 const { formatDate, getCurrentDateTime } = require("../helper/FormatDate");
-const isEmployee = require("../helper/IsEmployee");
 const Benefit_Plans = require("../model/human/Benefit_Plans");
 const path = require('path');
 const { writeJSONFile, readJSONFile } = require("../helper/HandleJSON");
+const Employee = require("../model/payroll/Employees");
 defineAssociation();
 let oldBenefitPlanID;
 
@@ -89,19 +89,19 @@ const DeleteEmployeDelete = async (Id) => {
         DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID = ${Id};
         `, { type: QueryTypes.DELETE, transaction: t });
 
-        // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+        // Delete information from the Employment Working Time table first to avoid errors
         await sequelize_sqlserver.query(`
         DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID  = ${Id};
         `, { type: QueryTypes.DELETE, transaction: t });
 
-        // Xóa thông tin từ bảng Employment
+        // Delete information from the Employment table
         await sequelize_sqlserver.query(`
             DELETE FROM EMPLOYMENT WHERE EMPLOYMENT_ID = ${Id};
         `, { type: QueryTypes.DELETE, transaction: t });
-        // delete employee
+        // Delete employee
 
     }).then(res => console.log(res))
-    .catch(err => console.log(err));
+        .catch(err => console.log(err));
 
     await sequelize_mysql.query(
         `DELETE FROM employee WHERE \`Employee Number\` = '${code}';`,
@@ -112,29 +112,29 @@ const DeleteEmployeDelete = async (Id) => {
 const deletePersonalAndEmployment = async (Id) => {
     try {
         await sequelize_sqlserver.transaction(async (t) => {
-            // Xóa thông tin từ bảng Employment, Job History và Employment Working Time
+            // Delete information from the Employment, Job History, and Employment Working Time tables
             await sequelize_sqlserver.query(`
                 DELETE FROM EMPLOYMENT_WORKING_TIME WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
                 `, { transaction: t });
 
-            // Xóa thông tin từ bảng Employment Working Time trước để tránh lỗi
+            // Delete information from the Employment Working Time table first to avoid errors
             await sequelize_sqlserver.query(`
                 DELETE FROM JOB_HISTORY WHERE EMPLOYMENT_ID IN (SELECT EMPLOYMENT_ID FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id});
                 `, { transaction: t });
 
-            // Xóa thông tin từ bảng Employment
+            // Delete information from the Employment table
             await sequelize_sqlserver.query(`
                     DELETE FROM EMPLOYMENT WHERE PERSONAL_ID = ${Id};
                 `, { transaction: t });
 
-            // Xóa thông tin từ bảng Personal
+            // Delete information from the Personal table
             await sequelize_sqlserver.query(`
                     DELETE FROM PERSONAL WHERE PERSONAL_ID = ${Id};
                 `, { transaction: t });
         }
         );
 
-        //Xóa thông tin từ bảng Employee
+        // Delete information from the Employee table
 
     } catch (error) {
         console.error('Lỗi khi xóa thông tin Personal và Employment:', error);
@@ -323,8 +323,6 @@ const getDataEmploymentByPage = async (data) => {
 
 const checkDifferenceData = (dataPersonal) => {
     let oldID = getOldBenefitPlanID();
-    console.log("ID cũ =============", oldID);
-    console.log("ID mới =============", dataPersonal.benefit_plan_id);
     if (oldID != dataPersonal.benefit_plan_id) {
         const newData = {
             "name": dataPersonal.first_name,
@@ -496,9 +494,19 @@ const getBenefitPlanById = async (id) => {
     return benefitPlan
 }
 
+const getAverageVacationDays = async () => {
+    const data = await Employee.findAll();
+    let vacationDays = 0, count = 0;
+    data.forEach((item) => {
+        vacationDays += item['Vacation Days'];
+        count++;
+    })
+    return parseInt(vacationDays / count);
+}
+
 
 module.exports = {
     getAllDepartment, getAllEthnicity, getAllPersonalInfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
     deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage,
-    getBenefitPlanById, setOldBenefitPlanID, DeleteEmployeDelete
+    getBenefitPlanById, setOldBenefitPlanID, DeleteEmployeDelete, getAverageVacationDays
 }

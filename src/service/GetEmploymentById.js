@@ -23,7 +23,6 @@ const getEmploymentById = async (id) => {
 const getEmployeeByCode = async (id) => {
     const getAnEmployment = await getEmploymentById(id);
     let employeeNumber = getAnEmployment.EMPLOYMENT_CODE;
-    // console.log(employeeNumber);
     const EmployeeByID = await Employee.findOne({
         where: {
             'Employee Number': employeeNumber

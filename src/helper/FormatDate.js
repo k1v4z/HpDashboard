@@ -1,12 +1,12 @@
 const formatDate = (dateString) => {
     if (!dateString || dateString.toLowerCase() === 'invalid date') {
-        return null; // Trả về null nếu ngày không hợp lệ
+        return null; // Return null value if the date is invalid
     }
     const date = new Date(dateString);
     if (isNaN(date.getTime())) {
-        return null; // Trả về null nếu ngày không hợp lệ
+        return null; // Return null value if the date is invalid
     }
-    return date.toISOString().split('T')[0]; // Chuyển đổi ngày thành dạng 'YYYY-MM-DD'
+    return date.toISOString().split('T')[0]; // Convert to 'YYYY-MM-DD' format
 };
 
 
