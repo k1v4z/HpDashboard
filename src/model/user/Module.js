@@ -19,6 +19,17 @@ class Module {
 
         return state
     }
+
+    async findAll(){ //get module id and module name
+        const modules = await sequelize_sqlserver_user.query(`
+            SELECT * FROM dbo.[MODULE]
+        `,{type: QueryTypes.SELECT})
+        .then(res => JSON.stringify(res))
+        .then(JSONString => JSON.parse(JSONString))
+        .catch(err => console.log(err))
+        
+        return modules
+    }
     
 }
 
