@@ -3,7 +3,7 @@ const Module = require("../model/user/Module")
 const { User } = require("../model/user/User")
 const md5 = require('md5');
 const { auth, authSignUp, authLogin } = require("../service/Authentication.service")
-const pwd = null;
+let pwd = null;
 
 const getFormLogin = (req, res) => {
     return res.render('login.ejs')
