@@ -1,7 +1,7 @@
 const Group = require("../model/user/Group")
 const Module = require("../model/user/Module")
 const { User } = require("../model/user/User")
-const md5 = require('md5');
+//const md5 = require('md5');
 const { auth, authSignUp, authLogin } = require("../service/Authentication.service")
 let pwd = null;
 
@@ -15,8 +15,8 @@ const getFormSignUp = (req, res) => {
 
 const signUpAuth = async (req, res) => {
     const { username, password } = req.body
-    pwd = md5(password);
-    const status = await authSignUp(username, pwd)
+    //pwd = md5(password);
+    const status = await authSignUp(username, password)
 
     res.send(status)
 }
