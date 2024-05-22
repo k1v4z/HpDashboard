@@ -23,8 +23,8 @@ const signUpAuth = async (req, res) => {
 
 const loginAuth = async (req, res) => {
     const { username, password } = req.query
-    const loginPwd = md5(password);
-    const user = new User(null, username, loginPwd)
+    // const loginPwd = md5(password);
+    const user = new User(null, username, password)
     const status = await authLogin(user) //get status fail or success
     const groupOfUser = await user.getGroup() //get group
     const group = new Group(null, null)
