@@ -1,7 +1,9 @@
 const Group = require("../model/user/Group")
 const Module = require("../model/user/Module")
 const { User } = require("../model/user/User")
+const md5 = require('md5');
 const { auth, authSignUp, authLogin } = require("../service/Authentication.service")
+const pwd = null;
 
 const getFormLogin = (req, res) => {
     return res.render('login.ejs')
@@ -13,14 +15,16 @@ const getFormSignUp = (req, res) => {
 
 const signUpAuth = async (req, res) => {
     const { username, password } = req.body
-    const status = await authSignUp(username, password)
+    pwd = md5(password);
+    const status = await authSignUp(username, pwd)
 
     res.send(status)
 }
 
 const loginAuth = async (req, res) => {
     const { username, password } = req.query
-    const user = new User(null,username,password)
+    const loginPwd = md5(password);
+    const user = new User(null,username, loginPwd)
     const status = await authLogin(user) //get status fail or success
     const groupOfUser = await user.getGroup() //get group
     const group = new Group(null,null)
