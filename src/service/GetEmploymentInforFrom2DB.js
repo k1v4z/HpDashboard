@@ -13,7 +13,7 @@ const getEmployment = async (id) => {
         attributes: ['EMPLOYMENT_ID', 'EMPLOYMENT_CODE', 'EMPLOYMENT_STATUS', 'HIRE_DATE_FOR_WORKING', 'WORKERS_COMP_CODE', 'TERMINATION_DATE', 'REHIRE_DATE_FOR_WORKING', 'LAST_REVIEW_DATE', 'NUMBER_DAYS_REQUIREMENT_OF_WORKING_PER_MONTH', 'PERSONAL_ID']
     }).catch(err => {
         console.log(err);
-        return null; // Trả về null nếu có lỗi
+        return null; // Returns null if there is an error
     });
 
     return employmentData;
@@ -30,7 +30,7 @@ const getEmployee = async (id) => {
         { type: QueryTypes.SELECT }
     ).catch(err => {
         console.log(err);
-        return null; // Trả về null nếu có lỗi
+        return null; // Returns null if there is an error
     });
 
     return employeeData;

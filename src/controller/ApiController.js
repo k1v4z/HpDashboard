@@ -7,6 +7,7 @@ const { GetAllShareHolderStatus } = require("../service/GetShareHolder_status");
 const getAllDataEmployment = require("../service/GetEmploymentInforFrom2DB");
 const { getId } = require("./EmController");
 const messages = require("../service/GetMessage");
+const getAverage = require("../service/GetAverageBenefitByType");
 
 const getTotalEarning = async (req, res) => {
     const { department, choice_year, choice, choice_value } = req.query;
@@ -51,7 +52,17 @@ const getAllBenefitPlan = async (req, res) => {
     }
 };
 
-
+const getValuesAverageBenefit = async (req, res) => {
+    try {
+        const { shareholderAverage, nonShareholderAverage } = await getAverage();
+        res.status(200).json({ shareholderAverage, nonShareholderAverage });
+    } catch (error) {
+        console.error('Error:', error);
+        return res.status(500).json({
+            error: 'Error'
+        });
+    }
+}
 
 const getAllNotifications = async (req, res) => {
     try {
@@ -61,7 +72,6 @@ const getAllNotifications = async (req, res) => {
         return res.status(200).json({
             birthday: birthdaysCurrentMonth,
             exceeded: employeesOverDays
-            // ...
         })
     } catch {
         return res.status(500).json({
@@ -79,18 +89,6 @@ const getAniversaryNotifications = async (req, res) => {
             CertainDay: employee.certainDay,
             Sex: employee.CURRENT_GENDER,
             HiringDay: employee.EMPLOYMENTs[0].HIRE_DATE_FOR_WORKING
-        })
-    } catch {
-        return res.status(500).json({
-            error: 'Error'
-        })
-    }
-}
-const getAllPersonalImformationdata = async (req, res, next) => {
-    try {
-        const result = await getAllPersonalImfomations();
-        return res.status(200).json({
-            result: result
         })
     } catch {
         return res.status(500).json({
@@ -140,7 +138,10 @@ const logout = (req,res) =>{
     })
 }
 
+
+
 module.exports = {
     getTotalEarning, getAllVacationDays, getAllNotifications, getAllMessage,
-    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment,logout
+    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment, logout,
+    getValuesAverageBenefit
 }

@@ -1,15 +1,19 @@
-const { getAllDepartment, getAllEthnicity, getAllPersonalImfomations, getEmployeeInfor, DeleletePersonal, getPersonalById, getBenefitPlanById } = require("../service/CRUD.service");
-const { GetAllShareHolderStatus } = require('../service/GetShareHolder_status');
-const bodyParser = require('body-parser');
+const { getAllDepartment, getAllEthnicity, getAverageVacationDays } = require("../service/CRUD.service");
 const { getListEmployee } = require("../service/Dashboard.service");
-const { getAllBenefitPlan } = require("./ApiController");
-// const { getAllPersonalImfomations } = require("../service/GetAllPersonalData");
+const getAverage = require("../service/GetAverageBenefitByType");
+const { getTotalEarningByCurrentYear } = require("../service/GetTotalEarningByDate");
 
 const getDashBoard = async (req, res) => {
     const listEmployee = await getListEmployee();
-
+    const { shareholderAverage, nonShareholderAverage } = await getAverage();
+    const averageVacationDays = await getAverageVacationDays();
+    const averageBenefit = (shareholderAverage + nonShareholderAverage) / 2;
+    const totalE = await getTotalEarningByCurrentYear();
     return res.render('dashboard.ejs', {
-        listEmployee: listEmployee
+        listEmployee: listEmployee,
+        averageBenefit: averageBenefit,
+        avgDays: averageVacationDays,
+        totalE: totalE
     });
 }
 
@@ -33,8 +37,8 @@ const getVacationDays = async (req, res) => {
 
 const getAverageBenefitPaid = async (req, res) => {
     try {
-        //const Benefit = await getAllBenefitPlan();
-        res.render('average_benefit_paid.ejs');
+        const { shareholderAverage, nonShareholderAverage } = await getAverage();
+        res.render('average_benefit_paid.ejs', { shareholderAverage, nonShareholderAverage });
     } catch (error) {
         console.error('Error:', error);
         res.status(500).send('Internal Server Error');
@@ -67,7 +71,7 @@ const getManagementForm = (req, res) => {
     return res.render('employee_management.ejs')
 }
 
-const getAuthorization = (req,res)=>{
+const getAuthorization = (req, res) => {
     return res.render('access-control_edit.ejs')
 }
 

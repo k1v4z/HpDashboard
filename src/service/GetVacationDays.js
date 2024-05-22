@@ -84,6 +84,4 @@ const getVacationDays = async (choiceYear, choice, choiceValue) => {
     return filterObjects(AllVacationDaysEmployees, choiceYear, choice, choiceValue);
 }
 
-// getVacationDays();
-
 module.exports = { getVacationDays };
