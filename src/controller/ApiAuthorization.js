@@ -1,5 +1,5 @@
 const Group = require("../model/user/Group")
-const { addGroupService, addModuleService, getAllModule, addFunctionService, getAllUserService, getAllGroupService, getGroupByUserIdService, getFunctionByUserIdService, getAllFunctionService } = require("../service/Authorization.service")
+const { addGroupService, addModuleService, getAllModule, addFunctionService, getAllUserService, getAllGroupService, getGroupByUserIdService, getFunctionByUserIdService, getAllFunctionService, getGroupFollowModuleService } = require("../service/Authorization.service")
 
 const addGroup = async (req, res) => {
     const groupName = req.query.groupName
@@ -133,7 +133,20 @@ const getFunctionByUserId = async (req, res) => {
     }
 }
 
+const getGroupFollowModule = async (req, res) => {
+    const moduleId = req.query.moduleId
+    const groups = await getGroupFollowModuleService(moduleId)
 
+    try {
+        return res.status(200).json({
+            groupArray: groups
+        })
+    } catch (err) {
+        return res.status(500).json({
+            message: err
+        })
+    }
+}
 
 module.exports = {
     addGroup,
@@ -144,5 +157,6 @@ module.exports = {
     getAllGroup,
     getAllFunction,
     getGroupByUserId,
-    getFunctionByUserId
+    getFunctionByUserId,
+    getGroupFollowModule
 }
