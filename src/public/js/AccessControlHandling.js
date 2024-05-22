@@ -94,6 +94,12 @@ const getFunctionByUserId = async (id) => {
     return functions.functionsArray
 }
 
+listUser.addEventListener('change', fillGroup, fillFunction)
+
 fillListUserIntoSelectTag()
-fillGroup()
-fillFunction()
+    .then(() => {
+        fillGroup()
+    })
+    .then(() => {
+        fillFunction()
+    })
