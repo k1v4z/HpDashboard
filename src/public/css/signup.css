@@ -7,7 +7,7 @@ body {
   align-items: center;
   height: 500px;
   margin: 0;
-  background-color: #a9a3a3;
+  background-color: #dbcfcf;
 }
 
 form {
@@ -18,7 +18,7 @@ form {
   width: 300px;
   box-sizing: border-box;
   width: 500px;
-  height: 370px;
+  height: 400px;
   margin-top: 200px;
   backdrop-filter: blur(10px);
 }
@@ -55,8 +55,22 @@ button[type="submit"] {
   font-size: 16px;
   cursor: pointer;
   margin-top: 20px;
+  margin-bottom: 25px;
 }
 
 button[type="submit"]:hover {
   background-color: #4cae4c;
+}
+a {
+  text-align: center;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 17px;
+  color: #333;
+  font-weight: 700;
+  display: flex;
+  justify-content: center;
+}
+a:hover {
+  color: #4cae4c;
 }
