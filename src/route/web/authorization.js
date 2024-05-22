@@ -1,5 +1,5 @@
 const express = require('express')
-const { addGroup, addModule, addFunction, getAllModules, getAllUser, getAllGroup, getGroupByUserId, getFunctionByUserId, getAllFunction } = require('../../controller/ApiAuthorization')
+const { addGroup, addModule, addFunction, getAllModules, getAllUser, getAllGroup, getGroupByUserId, getFunctionByUserId, getAllFunction, getGroupFollowModule } = require('../../controller/ApiAuthorization')
 const { requireLogin } = require('../../middleware/login_middleware')
 const requireFunctionPermission = require('../../middleware/function_middleware')
 const routerAuth = express.Router()
@@ -16,7 +16,8 @@ const initAuthorization = (app) => {
     routerAuth.get('/groups/findGroup',getGroupByUserId)
     routerAuth.get('/functions/findFunction',getFunctionByUserId)
     routerAuth.get('/functions/findAll',getAllFunction)
-    routerAuth.get('/modules/getGroup',)
+    routerAuth.get('/modules/getGroup',getGroupFollowModule)
+
     app.use('/api/v1/', routerAuth)
 }
 
