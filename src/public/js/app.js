@@ -356,15 +356,16 @@ editButtons.forEach(function (button) {
 
 // START Employee Management ADD
 document.addEventListener("DOMContentLoaded", function () {
-    var checkbox = document.getElementById("employee-showInfo");
-    var employeeInfo = document.querySelector(".employee-infor");
-    var employeeTilte = document.querySelector(".employee-title");
+    try{
+        var checkbox = document.getElementById("employee-showInfo");
+        var employeeInfo = document.querySelector(".employee-infor");
+        var employeeTilte = document.querySelector(".employee-title");
 
-    checkbox.addEventListener("change", function () {
-        if (checkbox.checked) {
-            employeeInfo.style.display = "flex";
-            employeeTilte.style.display = "block";
-            document.querySelector('.employee-infor').innerHTML = `
+        checkbox.addEventListener("change", function () {
+            if (checkbox.checked) {
+                employeeInfo.style.display = "flex";
+                employeeTilte.style.display = "block";
+                document.querySelector('.employee-infor').innerHTML = `
             <div class="employee-infor_left">
   <label for="">hire date for working:</label>
   <input type="date" name="HIRE_DATE" id="HIRE_DATE" required>
@@ -398,13 +399,16 @@ document.addEventListener("DOMContentLoaded", function () {
   <input type="number" name="NUMBER_DAY_REQUIREMENT" required>
 </div>
 `
-        }
-        else {
-            document.querySelector('.employee-infor').innerHTML = ``
-            employeeInfo.style.display = "none";
-            employeeTilte.style.display = "none";
-        }
-    });
+            }
+            else {
+                document.querySelector('.employee-infor').innerHTML = ``
+                employeeInfo.style.display = "none";
+                employeeTilte.style.display = "none";
+            }
+        });
+    }catch(err){
+        
+    }
 });
 
 // END Employee Management ADD
@@ -413,22 +417,30 @@ let personalManage = document.querySelector('.personal-manage');
 let employeeManage = document.querySelector('.employee-manage');
 
 document.addEventListener("DOMContentLoaded", () => {
-    personalManage.addEventListener('click', () => {
-        window.location.href = "/employee-view/"
-        personalManage.classList.add('active');
-        employeeManage.classList.remove('active');
-        showUI5.classList.add('active');
-        showUI8.classList.remove('active');
-    })
+    try{
+        personalManage.addEventListener('click', () => {
+            window.location.href = "/employee-view/"
+            personalManage.classList.add('active');
+            employeeManage.classList.remove('active');
+            showUI5.classList.add('active');
+            showUI8.classList.remove('active');
+        })
+    }catch(err){
+
+    }
 })
 document.addEventListener("DOMContentLoaded", () => {
-    employeeManage.addEventListener('click', () => {
-        window.location.href = "/delete-employee/"
-        personalManage.classList.remove('active');
-        employeeManage.classList.add('active');
-        showUI8.classList.add('active');
-        showUI5.classList.remove('active');
-    })
+    try{
+        employeeManage.addEventListener('click', () => {
+            window.location.href = "/delete-employee/"
+            personalManage.classList.remove('active');
+            employeeManage.classList.add('active');
+            showUI8.classList.add('active');
+            showUI5.classList.remove('active');
+        })
+    }catch(err){
+
+    }
 })
 
 
