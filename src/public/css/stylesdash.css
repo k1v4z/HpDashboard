@@ -562,14 +562,15 @@ thead {
 
 #employee-table th,
 #employee-table td {
-  border: 1px solid rgb(121, 119, 119);
+  border: 1px solid rgb(89, 99, 165);
   padding: 8px;
   text-align: left;
 }
 
 #employee-table th {
-  background-color: #f2f2f2;
+  background-color: #6c90b4;
   font-weight: bold;
+  color: white;
 }
 
 #employee-table tr:nth-child(even) {
@@ -577,7 +578,7 @@ thead {
 }
 
 .info-vacationdays {
-  border: 1px solid rgb(121, 119, 119);
+  border: 1px solid rgb(89, 99, 165);
   width: 500px;
   height: 364px;
   overflow-y: auto;
@@ -606,14 +607,15 @@ thead {
 
 #vacationdays th,
 #vacationdays td {
-  border: 1px solid #ccc;
+  border: 1px solid rgb(89, 99, 165);
   padding: 8px;
   text-align: left;
 }
 
 #vacationdays th {
-  background-color: #f2f2f2;
+  background-color: #6c90b4;
   font-weight: bold;
+  color: white;
 }
 
 #vacationdays tr:nth-child(even) {
@@ -1075,7 +1077,8 @@ thead {
 }
 
 .btn-save_ac button,
-.btn-add_ac button {
+.btn-add_ac button,
+.btn-authorize button {
   width: 150px;
   height: 40px;
   border-radius: 10px;
@@ -1084,9 +1087,11 @@ thead {
   color: white;
   font-size: 20px;
   font-weight: 700;
+  text-transform: uppercase;
 }
 .btn-save_ac button:hover,
-.btn-add_ac button:hover {
+.btn-add_ac button:hover,
+.btn-authorize button:hover {
   background-color: #12ce5a;
 }
 

@@ -36,6 +36,9 @@
   border: 1px solid #ccc;
   border-radius: 5px;
 }
+#module-function {
+  height: 67px;
+}
 
 .enter-function,
 .enter-group,
