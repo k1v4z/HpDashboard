@@ -36,5 +36,6 @@ const getEmployeeByCode = async (id) => {
 
 
 module.exports = {
-    getEmploymentById, getEmployeeByCode
+    getEmploymentById,
+    getEmployeeByCode
 }

@@ -141,7 +141,13 @@ const logout = (req,res) =>{
 
 
 module.exports = {
-    getTotalEarning, getAllVacationDays, getAllNotifications, getAllMessage,
-    getAniversaryNotifications, getAllBenefitPlan, setDataEmployment, logout,
+    getTotalEarning,
+    getAllVacationDays,
+    getAllNotifications,
+    getAllMessage,
+    getAniversaryNotifications,
+    getAllBenefitPlan,
+    setDataEmployment,
+    logout,
     getValuesAverageBenefit
 }

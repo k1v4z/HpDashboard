@@ -506,7 +506,20 @@ const getAverageVacationDays = async () => {
 
 
 module.exports = {
-    getAllDepartment, getAllEthnicity, getAllPersonalInfomations, add_EP_Information, getEmployeeInfor, getDataPersonalByPage,
-    deletePersonalAndEmployment, getPersonalById, handleUpdateEmployment, handleUpdatePersonal, handleInsertEmployment, getDataEmploymentByPage,
-    getBenefitPlanById, setOldBenefitPlanID, DeleteEmployeDelete, getAverageVacationDays
+    getAllDepartment,
+    getAllEthnicity,
+    getAllPersonalInfomations,
+    add_EP_Information,
+    getEmployeeInfor,
+    getDataPersonalByPage,
+    deletePersonalAndEmployment,
+    getPersonalById,
+    handleUpdateEmployment,
+    handleUpdatePersonal,
+    handleInsertEmployment,
+    getDataEmploymentByPage,
+    getBenefitPlanById,
+    setOldBenefitPlanID,
+    DeleteEmployeDelete,
+    getAverageVacationDays
 }

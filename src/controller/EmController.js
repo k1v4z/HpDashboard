@@ -162,6 +162,17 @@ const getChangeBenefitPlan = async (req, res) => {
 
 
 module.exports = {
-    getAllEmployee, addEPI, getEmployeeView, getEmployeeAdd, setEditDataToFormEmploymentEdit, DeletePersonalView, postInsertOrUpdatePersonalPage,
-    postUpdateEmploymentPage, setEditDataToFormPersonalEdit, getId, getChangeBenefitPlan, DeleteEmployedelete, getEmployeePm
+    getAllEmployee,
+    addEPI,
+    getEmployeeView,
+    getEmployeeAdd,
+    setEditDataToFormEmploymentEdit,
+    DeletePersonalView,
+    postInsertOrUpdatePersonalPage,
+    postUpdateEmploymentPage,
+    setEditDataToFormPersonalEdit,
+    getId,
+    getChangeBenefitPlan,
+    DeleteEmployedelete,
+    getEmployeePm
 }
