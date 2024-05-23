@@ -21,9 +21,9 @@ routerManage.get('/personal/edit/:id', requireFunctionPermission, setEditDataToF
 routerManage.post('/update', postInsertOrUpdatePersonalPage)
 routerManage.get('/employment/edit/:id', requireFunctionPermission, setEditDataToFormEmploymentEdit);
 routerManage.post('/update', postUpdateEmploymentPage)
-routerManage.get('/benefit_plan/:id', getChangeBenefitPlan)
+routerManage.get('/benefit_plan/:id', requireFunctionPermission, getChangeBenefitPlan)
 
-routerManage.delete('/personal-view/:id', DeletePersonalView);
-routerManage.delete('/delete-employee/:id',DeleteEmployedelete);
+routerManage.delete('/personal-view/:id',requireFunctionPermission,DeletePersonalView);
+routerManage.delete('/delete-employee/:id',requireFunctionPermission,DeleteEmployedelete);
 
 module.exports = routerManage;

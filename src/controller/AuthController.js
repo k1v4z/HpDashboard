@@ -17,7 +17,7 @@ const signUpAuth = async (req, res) => {
     const { username, password } = req.body
     //pwd = md5(password);
     const status = await authSignUp(username, password)
-
+    
     res.send(status)
 }
 

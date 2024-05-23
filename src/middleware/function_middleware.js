@@ -22,9 +22,9 @@ function requireFunctionPermission(req, res, next) {
             res.send(`You don't have permission to use this function`)
         }
     }
-
+    
     //user access endpoint add 
-    if (urlFormat == '/benefit_plan/') {
+    if (urlFormat == '/benefit_plan') {
         if (containFunction(func, 'Benefit')) {
             return next()
         } else {
@@ -42,7 +42,17 @@ function requireFunctionPermission(req, res, next) {
     }
     
     //user access endpoint delete
-    if (urlFormat == '/employee-ManagerView'){
+    if (urlFormat == '/employee-delete'){
+        if (containFunction(func, 'Delete')) {
+            return next()
+        } else {
+            return res.status(403).json({
+                error: "You don't have permission to use this function"
+            })
+        }
+    }
+
+    if (urlFormat == '/personal-view'){
         if (containFunction(func, 'Delete')) {
             return next()
         } else {

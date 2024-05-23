@@ -43,7 +43,7 @@ const fillFunction = async () => {
 
     functions.forEach((func) => {
         let isChecked = functionOfUser.some(item => func.FUNCTION_ID === item.FUNCTION_ID);
-
+        console.log("FuncId: ",func.FUNCTION_ID)
         functionHTML += `
         <div class="function-left_item">
             <input type="checkbox" name="" ${isChecked ? 'checked' : ''} id=${func.FUNCTION_ID}>
@@ -94,7 +94,10 @@ const getFunctionByUserId = async (id) => {
     return functions.functionsArray
 }
 
-listUser.addEventListener('change', fillGroup, fillFunction)
+listUser.addEventListener('change',async function(){
+    await fillGroup()
+    await fillFunction()
+})
 
 fillListUserIntoSelectTag()
     .then(() => {
