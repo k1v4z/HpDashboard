@@ -1,5 +1,7 @@
 const moduleElement = document.getElementById('modules');
 const groupElement = document.querySelector('.groups');
+const groups = document.querySelectorAll('.group input')
+
 
 const getAllModules = async () => {
     try {
@@ -57,7 +59,7 @@ const loadGroup = async () => {
             let isChecked = groups.groupArray.some(item => group.GROUP_ID === item.GROUP_ID);
             groupHTML += `
                 <div class="group">
-                    <input type="checkbox" ${isChecked ? 'checked' : ''} id=${group.GROUP_ID}>
+                    <input type="checkbox" ${isChecked ? 'checked' : ''} value=${group.GROUP_ID}>
                     <label for="group1">${group.GROUP_NAME}</label>
                 </div>
             `;
@@ -70,6 +72,13 @@ const loadGroup = async () => {
 };
 
 moduleElement.addEventListener('change', loadGroup);
+
+groups.forEach((group) => {
+    group.addEventListener('change', () => {
+        console.log("val",module.value)
+        console.log("gr",groups.value)
+    })
+})
 
 // Ensure modules are loaded first
 loadModule().then(() => {

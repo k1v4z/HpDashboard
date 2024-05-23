@@ -51,7 +51,6 @@ function requireModulePermission(req, res, next) {
         }
     }
     
-    next()
 }
 
 module.exports = requireModulePermission
